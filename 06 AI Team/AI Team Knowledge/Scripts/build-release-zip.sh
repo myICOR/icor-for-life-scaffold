@@ -428,6 +428,11 @@ declare -a RESIDUE_PATHS=(
   # this script runs on every push, it names the same internals, and a
   # workflow file inside a member's vault would do nothing but confuse.
   ".github/workflows/release.yml"
+  # GitHub shows this file as the contribution rules (it overrides the org
+  # default, which invites pull requests; this repository takes none). It is
+  # about the repository, not the folder, and myPKA ships its own root
+  # CONTRIBUTING.md into the same vault, so it lives under .github/.
+  ".github/CONTRIBUTING.md"
 )
 
 # The self-test hook can only ever ADD a reason to fail. There is no value of
