@@ -4,7 +4,7 @@ This repository does not take pull requests. Bugs and ideas go to the ICOR for L
 
 ## License
 
-ICOR for Life is licensed as `LICENSE.md` lists: MIT for the scripts under `06 AI Team/AI Team Knowledge/Scripts/` and for the ICOR for Life plugins, the ICOR for Life Source-Available License (Content) v1.0 for the folder structure, documents, templates and prose, and CC BY-NC-ND 4.0 for the INKLINE theme. You may use and adapt ICOR for Life in your own folder on those terms.
+Since 2.2.0 (myPKA 7.0.0) this folder is MIT, as `LICENSE.md` says; the INKLINE theme keeps CC BY-NC-ND 4.0 and the libraries some plugins bundle keep their own licences. You may use, change and share it on those terms.
 
 ## Security problems
 

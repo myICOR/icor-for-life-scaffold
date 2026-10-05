@@ -1,221 +1,199 @@
-# ICOR for Life Scaffold
+# myPKA
+
+> **ICOR for Life continues as myPKA 7.** Since October 2026 this folder and
+> the AI team ship again as one download, under the name it started with:
+> myPKA. Get the whole folder from the myPKA releases:
+> https://github.com/myICOR/myPKA/releases/latest (or from Tom's Tool Lab
+> on myICOR). This repository keeps the rooms, templates, guidelines, life
+> scripts and the Obsidian setup that go into it.
 
 ## Start here: the tour
 
-A walkthrough of this vault: what each room is for, how the AI Team
-works with you, and how to get your first session running.
+A walkthrough of the folder: what each room is for, how the AI team works
+with you, and how to get your first session running.
 
-![Watch the ICOR for Life Obsidian Edition tour](https://youtu.be/GLO1voinujQ)
+![Watch the tour](https://youtu.be/GLO1voinujQ)
 
-If the player does not appear, open it here:
-https://youtu.be/GLO1voinujQ
+If the player does not appear, open it here: https://youtu.be/GLO1voinujQ
 
-The ICOR for Life Scaffold is the folder half of **ICOR for Life**, the
-implementation layer of the ICOR Journey. It is a plain markdown vault:
-open it in Obsidian for the interface, point your AI (Claude Code or any
-LLM CLI) at the folder root, and the AI Team inside `06 AI Team/` operates it
-with you.
+Learn it properly in the free **myPKA course**:
+https://app.myicor.com/courses/mypka-system
 
-It is also where your work gets done, not only where your knowledge
-lives. Your projects and tasks, business and personal, live in this
-vault, and the AI Team executes them with you: `03 WiP/` is the
-workbench where active work happens, `02 Planner/` syncs your real
-task list (Todoist, ClickUp, flagged email, calendar) so the team
-always knows what needs to get done, and the rooms connect to the
-outer world through tool connections (email, calendar, social
-schedulers, YouTube, and more). Knowledge management keeps the work
-flowing; getting the work done is the point.
+## What myPKA is
 
-**Beta release.** This vault works and is in daily use, but you will
-find rough edges. If something looks off, post it in the myICOR
-community and it gets fixed fast.
+myPKA stands for My Personal Knowledge Assistance. It is your life and your
+work in **one folder of plain markdown files**, organised by ICOR (Input,
+Control, Output, Refine), with an **AI team** that works in that folder with
+you.
 
-## ICOR for Life and myPKA
+- **Your files stay yours.** Plain text in a folder on your own computer. No
+  account, no database, no lock-in. Any editor opens it, any backup keeps it.
+- **One place for everything.** Notes, journal, contacts, goals, projects,
+  tasks, work in progress and the data your notes cannot hold. Business and
+  personal side by side.
+- **An AI team, not a chatbot.** Larry, the orchestrator, listens to you and
+  hands each job to the specialist who owns it. Every agent has a written
+  contract, every routine a written procedure (SOP), so the team behaves the
+  same way tomorrow as today, with any AI model.
+- **Works with any AI, and without one.** Claude Code, Codex, Gemini CLI,
+  Cursor, or any AI chat that can read and write files. Everything also
+  works by hand.
 
-Since 2.0.0 this download is the folder only: the rooms, the templates,
-the Guidelines, the life scripts and the Obsidian setup. The AI Team
-(Larry and the specialists, `AGENTS.md`, the hooks and the team scripts)
-is **myPKA**, its own download: https://github.com/myICOR/myPKA. The
-steps below that talk to your AI need myPKA.
+## Your AI team
 
-- **Mode A: myPKA inside this folder.** Unpack myPKA into this folder and
-  one folder holds both. The two share no file names, so neither
-  overwrites the other.
-- **Mode B: myPKA beside this folder.** myPKA lives in its own folder, and
-  its `.mypka/sources.yaml` points at this one.
+You talk to **Larry**. He decides who does the work and never does a
+specialist's job himself.
 
-Coming from 1.34 or earlier, where the team came in this download? Read
-"Coming from ICOR for Life 1.34 or earlier" in myPKA's `README-myPKA.md`.
-
-## The rooms
-
-Six knowledge rooms plus two machine-facing surfaces: the Planner,
-machine-tended, and the Databases room, the shelf for the data notes
-cannot hold.
-
-| Room | Concept |
+| Agent | What they do |
 | --- | --- |
-| `01 Inbox/` | The hand-over point. Anything you give to the AI Team lands here and gets processed out. Outer-world captures (web clips, scans, voice memos) arrive in `Outer World/` and survive, stamped, in its `archive/`. |
-| `02 Planner/` | Your real task list, synced. One note per open item from Todoist, ClickUp, flagged email, and calendar, machine-tended by the ICOR Planner plugin. The team plans and executes from here. |
+| Larry | The orchestrator: your one entry point; routes, plans with you, sums up |
+| Penn | Knowledge processor: scratchpads, inbox captures, journal entries, filing into your Inner World |
+| Nolan | HR: hires a new specialist when a job has no owner |
+| Pax | Researcher: outside facts, web research, checks before action |
+| Mack | Automation: tool connections (MCP, API, webhooks), automations, imports from a service |
+| Silas | Structure and databases: properties, Bases, the vault health checks, the shape of an import |
+| Iris | Design system: creates and guards your visual style |
+| Charta | Structured visuals: infographics, tables, diagrams, one-pagers, PDFs |
+| Flint | Obsidian platform: plugins, themes, what the Obsidian API allows |
+| Ada | Planning and audit: written plans for bigger jobs, drift checks of the team's own machinery |
+| Mason | Plugin contributor: turns a plugin bug or wish into a fix and a pull request |
+| **Vex** | Security reviewer: reviews anything you did not write before it runs (an MCP server, a plugin, a script, a pack, a new dependency) and audits your app's security; proves, never applies the fix |
+| **Felix** | Frontend developer: builds, fixes and audits web UI in your own code projects; code stays outside the folder |
+| **Vera** | Quality gate: checks a visual or a web UI against your design system, WCAG 2.2 AA and the reader's needs; APPROVED, CONDITIONAL or BLOCKED |
+| **Pixel** | Image maker: thumbnails, social images, covers, illustrations, agent avatars in your own look, or a ready image brief when no image generator is connected |
+
+Vex, Felix, Vera and Pixel were separate agent packs until myPKA 7. They are
+part of the team now. The full roster, with when to route to whom, is in
+`06 AI Team/Agents/agent-index.md`. Need a role nobody covers? Ask Larry:
+Nolan hires them.
+
+## Use it with any AI. Obsidian is optional
+
+The folder is the product. Nothing in it needs Obsidian.
+
+- **With an AI tool:** open the folder in Claude Code, Codex, Gemini CLI or
+  Cursor (the folder that holds `AGENTS.md`) and say hello to Larry.
+  `AGENTS.md` is the one entry file every tool reads; the host files in
+  `.claude/`, `.codex/` and `.gemini/` give each tool the team's agents and
+  skills.
+- **With an AI chat:** any assistant that can read and write the files of a
+  folder can work here. Point it at `AGENTS.md` first.
+- **With no AI at all:** the folder works fully by hand. Its scripts need
+  Python 3.9 or newer and nothing else (on Windows, type `py -3` where a
+  command says `python3`).
+
+**If you like Obsidian**, open the folder as a vault and click "Trust author
+and enable plugins". Twelve ICOR for Life plugins are **pre-installed** and
+switch on: Planner, Focus, Connect, AI Chat, Interface, Scaffold Check,
+SQLite Viewer, Terminal, Outliner, PDF Annotation, Canvases and Scratchpad.
+The folder opens in the INKLINE theme. You can switch any plugin off, or
+ignore Obsidian completely: the plugins only add an interface on top of the
+same files.
+
+## What is inside
+
+| Room | What it holds |
+| --- | --- |
 | `00 Daily Scratchpad/` | Your post-it. One note per day, written by you, deliberately messy. Never deleted. The team extracts from it on your command. |
+| `01 Inbox/` | The hand-over point. Anything you give to the AI team lands here and gets processed out. Outer-world captures (web clips, scans, voice memos) arrive in `Outer World/` and survive, stamped, in its `archive/`. |
+| `02 Planner/` | Your real task list, synced. One note per open item from Todoist, ClickUp, flagged email and calendar, tended by the Planner plugin. The team plans and executes from here. |
+| `03 WiP/` | The workbench. Work goes into one of four topic folders (Workstreams, AI Team, Projects, Operations), dated inside it; finished work retires to `_archive/`. |
+| `04 Inner World/` | Everything that went through you: Contacts, Journal, Notes, and My Life (Goals, Key Elements, Topics, Projects, Habits). |
 | `05 Assets/` | The binary shelf: images, audio, documents. Notes embed them; no knowledge lives here. |
-| `04 Inner World/` | Everything that went through you: Contacts, Journal, Notes (outlines, references, meeting notes, documents), and My Life (Goals, Key Elements, Topics, Projects, Habits). |
-| `03 WiP/` | The workbench. Work goes into one of four topic folders (Workstreams, AI Team, Projects, Operations) and is dated inside it; finished work retires to `_archive/` under the same folder. |
-| `06 AI Team/` | The staff quarters: agent contracts, shared knowledge (SOPs, Workstreams, Guidelines, Scripts), task tracking, and session logs. |
-| `07 Databases/` | The data shelf. SQLite databases with no markdown source (health archives, logs, analytics stores). Opened read-only by the ICOR for Life - SQLite Viewer plugin: browse, query, and build dashboards, on every device. Ships empty. |
+| `06 AI Team/` | The team: agent contracts, shared knowledge (SOPs, Workstreams, Guidelines, Scripts), tasks, session logs and Expansions. |
+| `07 Databases/` | The data shelf. SQLite databases with no markdown source. Ships empty. |
 
-## First steps
+## Expansions
 
-1. Open this folder as a vault in Obsidian, and click "Trust author
-   and enable plugins" so the bundled plugins activate: the ICOR for
-   Life suite, every one of them our own plugin (Planner, Focus,
-   Connect, AI Chat, Interface, Scaffold Check, SQLite Viewer,
-   Terminal, Outliner, PDF Annotation, Canvases, Scratchpad; see
-   `LICENSE.md`). Then run Settings ->
-   Community plugins -> Check for updates to get their latest
-   versions. It opens in the ICOR for Life - INKLINE theme, which
-   draws the rooms with icons and colors (the 00-06 prefixes only
-   exist for sort order) and the banner above the folder tree.
-2. Open a terminal here. The shell inside the app is the
-   **ICOR for Life - Terminal** plugin: run "New terminal" from the
-   command palette for a plain shell in the vault folder, or "Run
-   Claude Code here" to open a Claude Code session in the same place.
-   The pane runs on macOS and Linux and needs Python 3 there (from the
-   Xcode Command Line Tools, `xcode-select --install`, or Homebrew).
-   Windows has no terminal pane in this version: the pane shows one
-   button, "Open in external terminal", that opens your own terminal
-   (Windows Terminal by default) in the vault folder.
-   This folder brings no AI team of its own. Larry and the
-   specialists, `AGENTS.md` and the team scripts come with **myPKA**,
-   a separate download: https://github.com/myICOR/myPKA. Put it inside
-   this folder (mode A) or beside it (mode B), as "ICOR for Life and
-   myPKA" above explains. Then open the folder that holds `AGENTS.md`
-   in Claude Code, Codex, Gemini CLI or Cursor and say hello to Larry.
-   myPKA's own README has every step.
-   No AI yet? This vault works fully without one. Its scripts need
-   Python 3.9 or newer and nothing else: no install step, no packages
-   (on Windows, type `py -3` where a command says `python3`). The
-   steps below show every move by hand.
-3. Write into today's Daily Scratchpad, then tell Larry:
-   "process my scratchpad". No AI at hand? Carry the pieces into
-   their homes yourself and tick `processed` on the scratchpad (step 4
-   shows the moves).
-4. File your first note by hand: right-click `04 Inner World/Notes/`
-   in the file explorer, choose New note, then Cmd+P (Ctrl+P on
-   Windows), "Templates: Insert template", pick `note`. Fill the
-   properties at the top and
-   link the note to a Project, Key Element or Topic with `[[`. The
-   whole walkthrough, for every kind of note, is one section:
-   `06 AI Team/AI Team Knowledge/Guidelines/GL-1007-capture-and-where-things-go.md`,
+`06 AI Team/Expansions/` holds optional add-ons that are not switched on.
+Its `README.md` lists them. Ask Larry: "I want the Designer Pack. Inspect it,
+explain what it adds and install it." Your AI explains each step and asks
+before it copies anything. Some of these packs were written for the older
+folder layout (myPKA 5, ICOR for Life 1.x); their note says so, and your AI
+adapts them to this folder with you before it installs anything.
+
+## Start in five minutes
+
+1. Unzip the download into a folder of your own, for example
+   `Documents/myPKA`.
+2. Open that folder in your AI tool and say: "Hello Larry, show me around."
+   Or open it in Obsidian as a vault and trust the author.
+3. Write into today's Daily Scratchpad, then tell Larry: "process my
+   scratchpad". No AI at hand? Carry the pieces into their homes yourself;
+   the walkthrough is `06 AI Team/AI Team Knowledge/Guidelines/GL-1007-capture-and-where-things-go.md`,
    "Doing it by hand, step by step".
-5. Something someone else made? Clip it into `01 Inbox/Outer World/`
-   with one line of why. The Web Clipper template in
+4. Something someone else made? Clip it into `01 Inbox/Outer World/` with
+   one line of why. The Web Clipper template in
    `06 AI Team/AI Team Knowledge/Templates/web-clipper-outer-world.json`
-   does it in one click: install the Obsidian Web Clipper extension,
-   import the template, fill in `my_thought` in the popup. If
-   `published` or `captured` already exist in the extension with
-   another type, change them under Settings > Properties. Two doors,
-   nothing else to decide at capture time; where everything goes
-   afterwards is one page:
-   `06 AI Team/AI Team Knowledge/Guidelines/GL-1007-capture-and-where-things-go.md`.
-6. **Learn the five ways of taking a note**, which key each one uses and
-   why the vault ships the plugin that makes it work:
+   does it in one click.
+5. Learn the five ways of taking a note:
    `06 AI Team/AI Team Knowledge/Guidelines/GL-1010-the-five-capture-workflows.md`.
-   Start there if the rest of this list felt like a lot; it is the one
-   page with the diagrams.
 
-## Updating from an earlier download
+## Updating
 
-**If your vault has `icor-rooms.css`, `icor-logo.css` or `icor-ribbon.css`
-in `.obsidian/snippets/`, delete those three files.**
+**From myPKA 6 with ICOR for Life 2 in one folder (mode A):** download
+`mypka-7.0.0.zip`, check it (below), then from your folder run, first as a
+dry run, then with `--live`:
 
-They moved into the theme in INKLINE 1.4.0. Copying a newer download over an
-older vault adds files but never removes them, so the old copies stay behind
-and keep applying on top of the theme's own. Two of the three are harmless
-duplicates. `icor-ribbon.css` is not: it hides the ribbon with `!important`
-and no setting can outrank it, so the theme's "Hide the left ribbon" switch
-will look broken until the file is gone.
+```
+python3 "06 AI Team/AI Team Knowledge/Scripts/mypka-update.py" --release mypka-7.0.0.zip
+python3 "06 AI Team/AI Team Knowledge/Scripts/mypka-update.py" --release mypka-7.0.0.zip --product icor
+```
 
-Everything those three did still happens. The theme does it now, and the
-ICOR for Life - Interface plugin (which the new download brings) turns on the
-two pieces the theme leaves off by default, and gives you switches for all of
-it under Settings, ICOR for Life - Interface. If you downloaded a copy between
-2026-08-31 and 2026-09-01 you may also have `icor-scaffold.css`; delete that
-too, the plugin replaced it.
+The first brings the team (Vex, Felix, Vera and Pixel included), the second
+the rooms and guidelines. Nothing you edited is overwritten: where a file
+you changed has a newer version, it lands next to yours as `<file>.update`.
+Nothing is ever deleted.
 
-From 1.5.0 you do not have to know any of that by heart. The vault carries
-its own version in `.icor-for-life/` (a `VERSION`, a `CHANGELOG.md` that
-names every file a version removed or moved and where it went, and a
-`manifest.json` for machines), and the **ICOR for Life - Scaffold Check**
-plugin reads the latest manifest and tells you what is missing, what changed
-upstream since your download, what you edited yourself, and which files a
-release after your installed version removed that are still sitting in your
-vault, each with the changelog line that explains it. It is read-only: it
-writes a report, and you or your AI make the changes.
+**Vex, Felix, Vera or Pixel already installed as a pack?** Before the
+update, ask your AI to remove the pack the way its README says
+(`expansion-pack.py remove <name> --approved`): it deletes only files you
+never edited, and your journal and `AGENT.local.md` stay. The update then
+brings the team version.
 
-Once you have installed the version that removed a file, the check no longer
-lists that file. An old `CLAUDE.md` still in your vault after you update to
-2.0.0 is one example: the report does not mention it. A file like that is
-harmless, and you can delete it by hand; this version's section of
-`.icor-for-life/CHANGELOG.md` names every file it removed.
+**From myPKA 5 or ICOR for Life 1.x:** start a fresh folder from this
+download and move your notes over with Larry. `MIGRATING-FROM-5.md` in the
+myPKA repository has the steps.
+
+The **Scaffold Check** plugin (in Obsidian) compares your folder with the
+latest release and reports what is missing, what changed upstream and what
+you edited yourself. It only looks; it never changes anything.
 
 ### Check that a download is genuine
 
-Every release zip carries a build-provenance attestation: a signed record
-that says which workflow built these exact bytes, from which tag. Before you
-unpack a download, check it with the GitHub CLI (`gh`). Put the version you
-downloaded in place of `<version>`, as one line:
+Every release zip carries a build-provenance attestation. Before you unpack
+a download, check it with the GitHub CLI (`gh`), as one line:
 
 ```
-gh attestation verify icor-for-life-obsidian-edition-<version>.zip --repo myICOR/icor-for-life-scaffold --signer-workflow myICOR/icor-for-life-scaffold/.github/workflows/release.yml --source-ref refs/tags/<version> --deny-self-hosted-runners
+gh attestation verify mypka-<version>.zip --repo myICOR/myPKA --signer-workflow myICOR/myPKA/.github/workflows/release-mypka.yml --source-ref refs/tags/v<version> --deny-self-hosted-runners
 ```
 
-Use the download only if it prints that verification succeeded. The
-unversioned `icor-for-life-obsidian-edition.zip` is the same bytes and checks
-with the same command.
+Use the download only if it prints that verification succeeded.
 
-Releases up to and including 2.0.0 were built before the repository moved
-from `TomSolid` to `myICOR`, so their record carries the old name. Check them
-with `--owner TomSolid` in place of `--repo ...` and
-`--signer-workflow TomSolid/icor-for-life-scaffold/.github/workflows/release.yml`.
+## Learn the concepts
 
-## Extending it
+- [The myPKA course](https://app.myicor.com/courses/mypka-system): how the
+  team works with your files, and how to build your own system.
+- [The ICOR Journey](https://app.myicor.com/icor-journey): the courses this
+  folder puts into practice.
+- [Inner World and Outer World](https://app.myicor.com/lessons/inner-world-and-outer-world-697):
+  the one lesson that explains this folder's deepest split.
 
-The rooms are the core. Add your own collections (quotes, recipes,
-anything) as Topics or your own folders. AI Team expansion packs come
-with myPKA (see "ICOR for Life and myPKA" above). When you need a
-specialist the team does not have, ask Larry (with myPKA): Nolan hires
-them from the `Agent 01` template.
+## An experiment from Tom's Tool Lab
 
-Found a bug in one of the plugins, or want one to do something new?
-With myPKA, ask Larry for Mason. He makes the fix in that plugin's repository on
-GitHub, explains it in plain words, and opens the pull request for you,
-so the fix reaches every member with the next release instead of
-staying on your machine.
+myPKA is something Tom (Thomas Roedl) builds and uses himself, and shares as
+a starting point and as inspiration, not as a finished product.
 
-## Learn the concepts: the ICOR Journey
-
-This scaffold is the implementation layer of the ICOR methodology. Each
-room's README links the exact lessons teaching its concepts; the full
-journey lives here:
-
-- [The ICOR Journey](https://app.myicor.com/icor-journey) - the five
-  courses this folder puts into practice
-- [The ICOR Framework](https://app.myicor.com/icor-framework) - the
-  thinking behind all of it
-- [Inner World and Outer World](https://app.myicor.com/lessons/inner-world-and-outer-world-697) -
-  the one lesson that explains this folder's deepest split
+- It may change from one release to the next. There is no support schedule,
+  no promise of bug fixes and no feature release cycle.
+- **You are responsible** for what you install and run, for its security,
+  and for how you use it in your own systems. Back up your files first. If
+  you are not sure what a step does, ask your AI to explain it, or do not
+  run it.
+- Questions and ideas: under the myPKA videos on myICOR.
 
 ## License
 
-> Please note that while this vault can be browsed, adapted, and extended
-> for your personal use without limit, it is not open source. The scaffold
-> content is licensed under the ICOR for Life Source-Available License
-> (Content) - see the root [[LICENSE]] file for the full terms and for the
-> per-part summary (the INKLINE theme is CC BY-NC-ND 4.0, with its embedded
-> fonts under SIL OFL 1.1; the ICOR plugins and the AI Team scripts are open
-> source under MIT, and the open-source libraries some plugins bundle keep
-> their own notices, listed in [[THIRD-PARTY-NOTICES]]). Every plugin in this
-> vault is an ICOR for Life plugin; none is a third-party community install.
-> Plugin contributions are welcome as pull requests under MIT with a DCO
-> sign-off; see each plugin's CONTRIBUTING.md.
+MIT. See `LICENSE.md`. The INKLINE theme, the libraries some plugins bundle
+and our names and logos keep their own terms, listed there and in
+`THIRD-PARTY-NOTICES.md`.

@@ -17,6 +17,25 @@ called `Unreleased`: the manifest builder matches removal lines by version
 section, so a removal under any other heading is a removal it cannot
 explain.
 
+## 2.2.0
+
+**myPKA again: one folder.** ICOR for Life continues as myPKA 7. From now
+on this content ships inside one download with the AI team, `mypka-7.0.0.zip`
+from the myPKA releases, under the name it started with. Nothing is removed
+or moved. Pairs with myPKA 7.0.0.
+
+- Changed: `README.md` is the myPKA README: what the folder and the team are,
+  that it works with any AI and without Obsidian, that the twelve ICOR for
+  Life plugins and the INKLINE theme come pre-installed for Obsidian users,
+  the myPKA course, updating from myPKA 6 and ICOR for Life 2, and the Tool
+  Lab note (a starting point, not a product; no support schedule; you are
+  responsible for what you run).
+- Changed: `LICENSE.md`. The folder is MIT from this version: the content
+  (rooms, templates, guidelines, prose) as well as the scripts and plugins.
+  The INKLINE theme keeps CC BY-NC-ND 4.0, bundled libraries keep their own
+  licences, and no trademark is licensed. Earlier versions keep the licence
+  they came with.
+
 ## 2.1.0
 
 A quick capture made with Cmd+Alt+N lands in this month's folder, the

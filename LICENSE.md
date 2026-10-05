@@ -1,103 +1,57 @@
-# ICOR for Life - What you may do with each part
+# myPKA: what you may do with each part
 
-Two licences live here. **The code is MIT**: every ICOR for Life plugin
-and the Python scripts under `06 AI Team/AI Team Knowledge/Scripts/` are
-open source under the MIT licence, forward from the versions named below.
-Install them, run them, read them, change them, sell them, ship them in your
-own product; keep the copyright and licence notice. Each plugin repository
-carries the verbatim MIT text in its own `LICENSE`, a `TRADEMARK.md`, and a
-`CONTRIBUTING.md` that asks for a DCO sign-off on every commit; the scripts
-carry theirs in `06 AI Team/AI Team Knowledge/Scripts/LICENSE`. Machine-readable
-identifier in every plugin's `package.json`: `MIT`. Plugin releases published
-before the version named in the table stay under the ICOR for Life
-Source-Available License (Code) v1.0 they were published with.
+**This folder is MIT.** From myPKA 7.0.0 (ICOR for Life content 2.2.0,
+October 2026) the rooms, templates, guidelines, life scripts, the Obsidian
+settings, the ICOR for Life plugins, the AI team and everything else in this
+folder are open source under the MIT licence below, unless the short list
+under "Parts with their own terms" names it. Use it, change it, share it,
+build on it, including commercially. Keep the copyright line and the
+licence text.
 
-**The content is not.** The folder structure, documents, templates, agent
-contracts, guidelines and prose stay under the ICOR for Life Source-Available
-License (Content) v1.0 below: yours to use and adapt without limit, not yours
-to publish. The INKLINE theme stays CC BY-NC-ND 4.0. Bundled third-party
-components keep their own licences; see THIRD-PARTY-NOTICES.md. Trademarks
-are never licensed by any of these; see the note under the table.
+Earlier versions keep the licence they were published with (the ICOR for
+Life Source-Available License for the content up to 2.1.0, CC BY-SA 4.0 for
+myPKA 6.x prose). This release adds a licence; it takes nothing away from a
+copy you already have.
 
-| Artifact | License | You MAY | You may NOT |
-|---|---|---|---|
-| INKLINE theme (`ICOR for Life - INKLINE`) | CC BY-NC-ND 4.0 (embedded fonts: SIL OFL 1.1, separately) | Use in your own vaults (incl. via the community theme store), modify your own copy for personal use, share unchanged copies noncommercially with attribution | Sell it or bundle it into any paid product or service, publish modified or derivative versions, redistribute the embedded font files by themselves |
-| ICOR Planner plugin (`icor-for-life-planner`) | MIT from 0.16.0 | Install and run in your own vaults, read the source, change it, sell it, ship it in your own product; keep the copyright and licence notice | Use the ICOR, ICOR for Life, myICOR or Paperless Movement marks or logos for a fork or product, or list a fork under the plugin's id or name (see each repo's TRADEMARK.md) |
-| ICOR Focus plugin (`icor-for-life-focus`) | MIT from 0.7.0 | Same as above | Same as above |
-| ICOR Interface plugin (`icor-for-life-interface`) | MIT from 0.8.0 | Same as above | Same as above |
-| ICOR Scaffold Check plugin (`icor-for-life-scaffold-check`) | MIT from 0.6.0 | Same as above | Same as above |
-| ICOR AI Chat plugin (`icor-for-life-chat`) | MIT from 0.16.0 (the built main.js also carries @anthropic-ai/claude-agent-sdk, Copyright (c) Anthropic PBC, not MIT; Claude Code access: your own Anthropic account, under Anthropic's own terms) | Same as above | Same as above; Claude usage outside your own agreement with Anthropic |
-| myICOR Connect plugin (`icor-for-life-connect`) | MIT from 0.16.0 (platform access: myICOR Terms of Service) | Same as above | Same as above; platform API use outside the membership ToS |
-| ICOR SQLite Viewer plugin (`icor-for-life-sqlite-viewer`) | MIT from 0.6.0 (bundles sql.js under MIT, listed in its own THIRD-PARTY-NOTICES.md) | Same as above | Same as above |
-| ICOR Terminal plugin (`icor-for-life-terminal`) | MIT from 0.2.0 (bundles xterm.js and its addons under MIT, listed in its own THIRD-PARTY-NOTICES.md) | Same as above | Same as above |
-| ICOR Outliner plugin (`icor-for-life-outliner`) | MIT from 0.2.0 (bundles no third-party code) | Same as above | Same as above |
-| ICOR PDF Annotation plugin (`icor-for-life-pdf-annotation`) | MIT from 0.2.0 (bundles no third-party code) | Same as above | Same as above |
-| ICOR Canvases plugin (`icor-for-life-canvases`) | MIT from 0.4.0 (bundles no third-party code) | Same as above | Same as above |
-| AI Team scripts (`06 AI Team/AI Team Knowledge/Scripts/*.py`, `*.sh`) | MIT (own `LICENSE` in that folder) | Same as above | Same as above |
-| Scaffold content (structure, templates, AI-team files, prose) | ICOR for Life Source-Available License (Content) v1.0 | Use as your personal vault, adapt and extend your own copy without limit, quote brief excerpts with attribution, apply the ICOR Journey method freely | Publish or share the vault, adapted versions, or substantial parts; build commercial products, courses, or templates from the files |
+## Parts with their own terms
 
-"Personal use" means use by you, for you, in vaults you control. Your license
-survives the end of your membership for versions you obtained while it was
-active; updates require an active membership. Trademarks ("myICOR", "ICOR",
-"ICOR Journey", "ICOR for Life") are never licensed.
+| Part | Terms |
+|---|---|
+| INKLINE theme (`.obsidian/themes/ICOR`) | CC BY-NC-ND 4.0; its embedded fonts SIL OFL 1.1. Use it in your own vaults, share unchanged copies noncommercially with attribution; do not sell or publish modified versions. |
+| ICOR AI Chat plugin, built `main.js` | The plugin is MIT; the bundled `@anthropic-ai/claude-agent-sdk` is Copyright (c) Anthropic PBC, under Anthropic's terms. Claude access runs on your own Anthropic account. |
+| myICOR Connect plugin | The plugin is MIT; using the myICOR platform through it follows the myICOR Terms of Service. |
+| Libraries some plugins bundle (sql.js, xterm.js and its addons) | Their own licences, listed in `THIRD-PARTY-NOTICES.md` and in each plugin's own notices. |
+| Names and logos | "myICOR", "ICOR", "ICOR Journey", "ICOR for Life", "myPKA" and "Paperless Movement" are trademarks. No licence here grants trademark rights: a fork or product of yours needs its own name. |
 
-## The scaffold content license
-
-Everything in this vault outside `.obsidian/` is covered by the license
-below. The theme and the ICOR plugins live in their own repositories
-and each carries its own `LICENSE` file (summarized in the table above).
-Third-party components bundled inside those plugins are listed in
-`THIRD-PARTY-NOTICES.md`.
+## The licence
 
 ```
-ICOR for Life Source-Available License (Content), Version 1.0
+MIT License
 
-Copyright (c) 2026 Paperless Movement, S.L. (myICOR) (the "Licensor")
+Copyright (c) 2026 Thomas Roedl (Tom), Paperless Movement, S.L.
 
-This vault - its folder structure, documents, templates, agent contracts,
-guidelines, prose, and sample content (the "Content") - may be browsed and
-modified for your personal use. It is not open source and it is not under a
-Creative Commons license.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-1. License grant. If you obtained the Content through an active ICOR for Life
-   / myICOR Inner Circle membership, the Licensor grants you a personal,
-   worldwide, non-exclusive, non-transferable, perpetual license to:
-   a. use the Content as your personal knowledge vault, on devices you
-      control;
-   b. adapt, modify, extend, and reorganize your own copy without limit -
-      making it yours is the point; and
-   c. quote brief excerpts with attribution to "ICOR for Life (myICOR)" in
-      reviews, posts, or discussions.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-2. What you may not do. You may not:
-   a. publish, share, sell, sublicense, or otherwise make the Content, an
-      adapted version of it, or any substantial part of it available to any
-      third party, in any form;
-   b. use the Content to create, market, or deliver any commercial product,
-      course, template, or service, including one that competes with ICOR
-      for Life; or
-   c. remove or alter copyright, trademark, or license notices.
-
-3. Your copy stays yours. This license continues after your membership ends
-   for the version you lawfully obtained while it was active. Access to new
-   versions and updates requires an active membership.
-
-4. Ideas are free; the files are not. This license covers the text, structure,
-   and expression in these files. It does not restrict you from applying the
-   ICOR Journey methodology in your own life and work - ideas and methods are
-   not owned by anyone. Statutory limits on copyright (including quotation and
-   private-copy rights under Sections 44a-63a UrhG and equivalent laws)
-   remain untouched, as do your statutory consumer rights.
-
-5. No trademark rights. "myICOR", "ICOR", "ICOR Journey", and "ICOR for Life"
-   are trademarks of the Licensor. This license grants no trademark rights.
-
-6. Contributions. By submitting a contribution (for example, a pull request)
-   you grant the Licensor a perpetual, worldwide, exclusive, transferable,
-   sublicensable, royalty-free license to use, modify, and distribute your
-   contribution for any purpose, including under this license; you retain the
-   right to use your own contribution for personal purposes.
-
-7. Termination. This license terminates if you materially breach it and do
-   not cure the breach within 30 days of notice.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
+
+## An experiment, not a product
+
+myPKA comes from Tom's Tool Lab: a starting point and inspiration. There is
+no support schedule, no promise of fixes and no release cycle. You are
+responsible for what you install and run, for its security, and for how you
+use it in your own systems.
