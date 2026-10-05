@@ -1,6 +1,6 @@
 # myPKA: what you may do with each part
 
-**This folder is MIT.** From myPKA 7.0.0 (ICOR for Life content 2.2.0,
+**This folder is MIT.** From myPKA 7 (ICOR for Life content 2.2.0,
 October 2026) the rooms, templates, guidelines, life scripts, the Obsidian
 settings, the ICOR for Life plugins, the AI team and everything else in this
 folder are open source under the MIT licence below, unless the short list

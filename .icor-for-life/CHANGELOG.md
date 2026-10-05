@@ -17,6 +17,17 @@ called `Unreleased`: the manifest builder matches removal lines by version
 section, so a removal under any other heading is a removal it cannot
 explain.
 
+## 2.2.1
+
+The README names the download as it is published. Nothing is removed or
+moved. Pairs with myPKA 7.0.1.
+
+- Fixed: `README.md`, "Updating", names `mypka-<version>.zip` (7.0.1 or
+  later). 2.2.0 said `mypka-7.0.0.zip`: myPKA 7.0.0 was tagged but never
+  released (its release build refused its own zip), so its first release is
+  7.0.1.
+- Changed: `LICENSE.md` says "From myPKA 7" instead of naming 7.0.0.
+
 ## 2.2.0
 
 **myPKA again: one folder.** ICOR for Life continues as myPKA 7. From now

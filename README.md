@@ -132,12 +132,13 @@ adapts them to this folder with you before it installs anything.
 ## Updating
 
 **From myPKA 6 with ICOR for Life 2 in one folder (mode A):** download
-`mypka-7.0.0.zip`, check it (below), then from your folder run, first as a
-dry run, then with `--live`:
+`mypka-<version>.zip` (7.0.1 or later), check it (below), then from your
+folder run, first as a dry run, then with `--live`, with your version in
+place of `<version>`:
 
 ```
-python3 "06 AI Team/AI Team Knowledge/Scripts/mypka-update.py" --release mypka-7.0.0.zip
-python3 "06 AI Team/AI Team Knowledge/Scripts/mypka-update.py" --release mypka-7.0.0.zip --product icor
+python3 "06 AI Team/AI Team Knowledge/Scripts/mypka-update.py" --release mypka-<version>.zip
+python3 "06 AI Team/AI Team Knowledge/Scripts/mypka-update.py" --release mypka-<version>.zip --product icor
 ```
 
 The first brings the team (Vex, Felix, Vera and Pixel included), the second
