@@ -18,7 +18,7 @@ AI, and for anyone who wants to run a check by hand.
 Every script prints `OK ...` and exits 0 when it is happy, and `FAIL ...`
 with exit 1 when it is not. The fixture suites beside them
 (`test-life-snapshot.py`, `test-link-dates-to-daily-notes.py`,
-`test-build-scaffold-manifest.py`) feed each one
+`test-note-scripts.py`, `test-build-scaffold-manifest.py`) feed each one
 what it must reject, and myPKA's `run-red-tests.py` runs on a folder that
 holds both products.
 
@@ -42,6 +42,7 @@ holds both products.
 | `new-journal-entry.py` | Creates a journal entry in `YYYY/MM/` with the right name, and the user's words verbatim under `## Original Text` | `new-journal-entry.py --date ... --slug ... --journal-type thought --original "..."` |
 | `open-in-obsidian.py` | Opens a vault file in Obsidian, in a new tab (the guided tour and the diagram rule use it) | `open-in-obsidian.py "<vault relative path>"` |
 | `test-link-dates-to-daily-notes.py` | The fixture suite behind `link-dates-to-daily-notes.py`: one case per rule it claims, every IGNORE case a date it must not touch | `test-link-dates-to-daily-notes.py` |
+| `test-note-scripts.py` | The fixture suite behind the scripts that write a note's frontmatter and the reader that judges it: wikilink values, dates in names, `concept:` captures, inline comments, frontmatter arrays | `test-note-scripts.py` |
 | `stamp-processed.py` | Stamps a scratchpad, a capture or a document wrapper note as processed, and moves the original where it belongs | `stamp-processed.py <note> --summary "..." --into "[[x]]"` |
 | `validate-scaffold.py` | Validates the structure: the rooms, the names, the date nesting, the file-tree styling, the templates and the property types | `validate-scaffold.py` |
 | `noteio-icor.py` | A byte-identical copy of myPKA's `noteio.py`, pinned by sha256 in the manifest's `vendored` list: the life scripts read and write a note through it without rewriting a byte they never meant to touch. A fix lands in myPKA and comes back in the next release | (the life scripts import it) |
