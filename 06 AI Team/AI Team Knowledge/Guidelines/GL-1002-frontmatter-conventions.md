@@ -36,7 +36,7 @@ step: [[GL-1007-capture-and-where-things-go|GL-1007]] "Doing it by hand".
 | type | required fields | optional fields | template |
 | --- | --- | --- | --- |
 | journal | date, journal_type (interaction/note/thought/milestone) | format (text/voice/photo/meeting-notes/other; absent = text), key_element (wikilink), mood, linked_people, linked_topics, linked_projects, source | `[[Templates/journal]]` |
-| scratchpad | date | processed, processed_summary, processed_into | none: the daily note is blank by design |
+| scratchpad | date | processed, processed_summary, processed_into, source (text, what wrote the note: `icor-chat` on a note saved from Chat), session_ids (the Chat sessions the note came from; Chat's resume reads it) | none: the daily note is blank by design |
 | capture | source_url, captured (ISO datetime) | author, published, my_thought (the user's one-or-two-sentence thought, filled in the Web Clipper popup), processed, processed_summary, processed_into | `Templates/web-clipper-outer-world.json` (the Web Clipper, not Obsidian's Templates) |
 | person | name | role, relation, companies, aliases, email, birthday, last_contact, next_action | `[[Templates/person]]` |
 | company | name | industry, people, website | `[[Templates/company]]` |
