@@ -35,6 +35,7 @@ line says which guard refused and what to do instead.
 """
 import argparse
 import importlib.util
+import json
 import re
 import sys
 from pathlib import Path
@@ -100,6 +101,21 @@ class _NoteIOFallback:
 
 
 noteio = _load_noteio() or _NoteIOFallback
+
+# A frontmatter value that is one wikilink goes in as a double-quoted string.
+# Bare, `[[X]]` is a list holding a list, not a link, and Obsidian's Properties
+# panel shows it as such. Only a WHOLE value that is a wikilink is quoted; every
+# other value is written byte for byte. JSON is used because a JSON string is a
+# valid YAML double-quoted scalar, escapes and all.
+# new-entity.py carries the same four lines and the fixture suite
+# (test-note-scripts.py) asserts the two agree. It cannot live in
+# noteio-icor.py: that file is a pinned byte-identical copy of myPKA's noteio.py.
+WHOLE_WIKILINK = re.compile(r"^!?\[\[.*\]\]$")
+
+
+def yaml_scalar(value):
+    return json.dumps(value, ensure_ascii=False) if WHOLE_WIKILINK.match(value) else value
+
 
 # Closed sets the guideline states in prose that its table parser cannot
 # express as an enum (the parser reads `field (a/b/c)`, so a numeric set
@@ -209,6 +225,8 @@ def set_field(text, field, value, eol):
     front, _, close = split_front(text)
     if front is None:
         return None
+    if value is not None:
+        value = yaml_scalar(value)
     start = text.index("\n") + 1
     lines = front.splitlines(keepends=True)
     out, hit = [], False
@@ -310,7 +328,10 @@ def main():
               file=sys.stderr)
 
     was = read_field(front, field)
-    if not a.unset and was is not None and unquote(was) == unquote(value):
+    # A bare `[[X]]` left by an older version says the same thing and is still
+    # broken, so it is rewritten rather than called done.
+    bare = not a.unset and was == value and yaml_scalar(value) != value
+    if not a.unset and was is not None and unquote(was) == unquote(value) and not bare:
         print("OK %s already %s in %s" % (field, value, path.name))
         return 0
     if a.unset and was is None:

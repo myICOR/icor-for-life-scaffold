@@ -41,7 +41,7 @@ Guards (GL-1005: a rule a machine can check is a check, not a sentence):
   - the room for every type is asserted against validate-scaffold.py's
     own required-folder list, so the two can never drift apart
 """
-import argparse, ast, datetime, importlib.util, re, subprocess, sys
+import argparse, ast, datetime, importlib.util, json, re, subprocess, sys
 from pathlib import Path
 
 # NO BYTECODE IN THE TREE WE ARE POINTED AT. This script importlib-loads a
@@ -246,6 +246,21 @@ UNANSWERED = {"", "[]", "false"}
 ONLY_FOR = re.compile(r"#\s*(?P<types>[a-z][a-z ,/]*?)\s+only\b")
 
 
+# A frontmatter value that is one wikilink goes in as a double-quoted string.
+# Bare, `[[X]]` is a list holding a list, not a link, and Obsidian's Properties
+# panel shows it as such. Only a WHOLE value that is a wikilink is quoted; every
+# other value is written byte for byte. JSON is used because a JSON string is a
+# valid YAML double-quoted scalar, escapes and all.
+# set-property.py carries the same four lines and the fixture suite
+# (test-note-scripts.py) asserts the two agree. It cannot live in
+# noteio-icor.py: that file is a pinned byte-identical copy of myPKA's noteio.py.
+WHOLE_WIKILINK = re.compile(r"^!?\[\[.*\]\]$")
+
+
+def yaml_scalar(value):
+    return json.dumps(value, ensure_ascii=False) if WHOLE_WIKILINK.match(value) else value
+
+
 def template_line(text, field):
     """The whole template line for one field, or None."""
     for m in TEMPLATE_LINE.finditer(text):
@@ -271,7 +286,7 @@ def render_set(field, line, value):
     m = TEMPLATE_LINE.fullmatch(line)
     if m.group("value").strip() == "[]":
         return '%s: ["%s"]' % (field, value)
-    return "%s: %s" % (field, value)
+    return "%s: %s" % (field, yaml_scalar(value))
 
 
 def prune_by_note_type(text, note_type):
