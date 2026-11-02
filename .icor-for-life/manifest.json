@@ -2,8 +2,8 @@
   "schema": 2,
   "name": "ICOR for Life Scaffold",
   "version": "2.2.2",
-  "built": "2026-11-02T15:38:33Z",
-  "commit": "289b05d",
+  "built": "2026-11-02T21:14:18Z",
+  "commit": "13de340",
   "lab": false,
   "source_commit": "f7dd5f0",
   "implements": "icor-concepts/1",
@@ -210,7 +210,7 @@
   },
   "repo_only": {
     ".github/CONTRIBUTING.md": "1636e016658088d50651444180d517e8c107b74076dd88ef52bfa3c6903f4501",
-    ".github/workflows/release.yml": "937aa6192169b4d162cae9da3647a7db5af0a3bee4c1fa3fef2210e180391d43",
+    ".github/workflows/release.yml": "24366676c3e748549340b68f6668985d7fa9207e49f8fe164382295c5385ff2c",
     ".gitignore": "104d6b05131c4f7768d27ba57741283a3daf343f508a0f153508a4a597ec3c66",
     "06 AI Team/AI Team Knowledge/Scripts/build-release-zip.sh": "21851ae06349fbdb0881d8e9c7a3cb43f40dddeba53810197660cd0ac849fbdd"
   },
