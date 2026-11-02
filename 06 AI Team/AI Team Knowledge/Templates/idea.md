@@ -1,12 +1,15 @@
 ---
 type: note
-title: Video on why I switched to Obsidian
 note_type: idea
-idea_status: open                          # open | promoted | parked | dropped
-key_elements:                              # the link rule: at least one of projects / key_elements / topics
-  - "[[youtube-channel]]"
-projects: []                               # fill when idea_status becomes promoted and it became a Project
-topics: []                                 # fill when idea_status becomes promoted and it became a Topic
+# idea_status: open | promoted | parked | dropped
+idea_status: open
+# the link rule: at least one of projects / key_elements / topics
+key_elements:
+  - "[[Health]]"
+# projects: fill when idea_status becomes promoted and it became a Project
+projects: []
+# topics: fill when idea_status becomes promoted and it became a Topic
+topics: []
 people: []
 companies: []
 tags: []
