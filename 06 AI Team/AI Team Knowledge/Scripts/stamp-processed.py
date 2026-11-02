@@ -12,6 +12,9 @@ Usage:
   stamp-processed.py <wrapper-note.md> --summary "scanned invoice filed" \
       --into "[[Acme Corp]]" --capture "01 Inbox/Scanner Inbox/thing.pdf"
 
+  --capture also takes a concept ref, the form SOP-1002 passes:
+      --capture "concept:inbox/scanner/thing.pdf"
+
 Rules enforced here, not in prose:
   - creates the frontmatter block when the note has none (the daily note
     ships blank by design), carrying only what GL-1002 requires for it
@@ -33,7 +36,7 @@ Rules enforced here, not in prose:
     and no capture is both
 Every refusal is a FAIL line and exit 1, never a traceback.
 """
-import argparse, hashlib, importlib.util, json, re, sys
+import argparse, datetime, hashlib, importlib.util, json, re, sys
 from pathlib import Path
 
 # NO BYTECODE IN THE TREE WE ARE POINTED AT. This script importlib-loads a
@@ -62,12 +65,19 @@ _spec = importlib.util.spec_from_file_location("noteio", _nio_path)
 noteio = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(noteio)
 
+HERE = Path(__file__).resolve().parent
+# The icor-concepts/1 inbox, for a folder that holds no resolve.py. The room and
+# its slots are the ones in myPKA's .mypka/icor-concepts-1.json.
+INBOX_ROOM = "01 Inbox"
+INBOX_SLOTS = {"outer_world": "Outer World", "outer_world_archive": "Outer World/archive",
+               "scanner": "Scanner Inbox"}
+
 ap = argparse.ArgumentParser()
 ap.add_argument("note")
 ap.add_argument("--summary", required=True)
 ap.add_argument("--into", action="append", default=[])
 ap.add_argument("--archive", action="store_true")
-ap.add_argument("--capture", help="binary capture inside 01 Inbox/ whose wrapper note is <note>")
+ap.add_argument("--capture", help="binary capture inside 01 Inbox/ whose wrapper note is <note>: a path, or a concept:inbox/... ref")
 a = ap.parse_args()
 
 if a.archive and a.capture:
@@ -100,22 +110,40 @@ except UnicodeDecodeError:
 # host whose model reaches past a dead end it is what sent an agent at the
 # protected path directly (pilot A, F3). The created block carries only what
 # GL-1002 requires for the note's type; the body is not touched.
-DATE_IN_NAME = re.compile(r"(\d{4}-\d{2}-\d{2})")
+#
+# Two name shapes carry a date: `YYYY-MM-DD` anywhere in the name, and the
+# `YYYYMMDDHHmm` the scratchpad and Chat plugins start a quick capture with (a
+# same-minute ` 2` or a ` - title` may follow; the legacy shape adds seconds).
+# Scaffold Check accepts the same shapes.
+DATE_IN_NAME = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
+CAPTURE_NAME = re.compile(r"^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})?(?!\d)")
+
+
+def date_in_name(stem):
+    """The ISO date a note's name carries, or None. A name that only looks like
+    a date (`202613451215`, month 13) carries none."""
+    m = DATE_IN_NAME.search(stem) or CAPTURE_NAME.match(stem)
+    if not m:
+        return None
+    try:
+        return datetime.datetime(*(int(g) for g in m.groups(default="0"))).date().isoformat()
+    except ValueError:
+        return None
 
 
 def created_block(note):
     """The minimum frontmatter a note with none must carry to hold a stamp."""
     lines = []
     in_scratchpad = any(p.name == "00 Daily Scratchpad" for p in note.parents)
-    m = DATE_IN_NAME.search(note.stem)
+    date = date_in_name(note.stem)
     if in_scratchpad:
-        if not m:
+        if not date:
             sys.exit(f"FAIL {note.name} is in 00 Daily Scratchpad/ but its name carries "
-                     "no YYYY-MM-DD, so the `date` GL-1002 requires cannot be derived; "
-                     "add a frontmatter block by hand and run this again")
+                     "no valid YYYY-MM-DD or YYYYMMDDHHmm, so the `date` GL-1002 requires "
+                     "cannot be derived; add a frontmatter block by hand and run this again")
         lines.append("type: scratchpad")
-    if m:
-        lines.append(f"date: {m.group(1)}")
+    if date:
+        lines.append(f"date: {date}")
     return lines
 
 
@@ -165,10 +193,38 @@ def sha256(p):
     return h.hexdigest()
 
 
+def capture_path(ref):
+    """--capture as a path. A `concept:` ref goes through resolve.py when myPKA
+    shares this folder, so a member's own homes are honoured (GL-1013 2.4). An
+    ICOR folder must run without myPKA, so resolve.py is only ever looked for
+    here, never required, and without it the inbox is read from the same
+    table the schema holds."""
+    if not ref.startswith("concept:"):
+        return Path(ref).resolve()
+    if (HERE / "resolve.py").is_file():
+        try:
+            spec = importlib.util.spec_from_file_location("mypka_resolve", HERE / "resolve.py")
+            resolver = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(resolver)
+            return Path(resolver.resolve_ref(ref, bindings=resolver.load(HERE.parents[2]))).resolve()
+        except Exception as exc:
+            sys.exit(f"FAIL cannot resolve --capture {ref}: {exc}; pass the file's vault path instead")
+    parts = [p for p in ref[len("concept:"):].split("/") if p]
+    if not parts or parts[0] != "inbox":
+        sys.exit(f"FAIL unknown concept in --capture {ref}: a capture lives in concept:inbox")
+    rest = parts[1:]
+    if any(p in (".", "..") for p in rest):
+        sys.exit(f"FAIL --capture {ref}: a concept ref may not step with . or ..")
+    if rest and rest[0] in INBOX_SLOTS:
+        rest[0] = INBOX_SLOTS[rest[0]]
+    vault = next((p for p in note.parents if (p / INBOX_ROOM).is_dir()), HERE.parents[2])
+    return vault.joinpath(INBOX_ROOM, *rest).resolve()
+
+
 # BINARY route: every check runs before anything is written or removed.
 shelf = root = None
 if a.capture:
-    cap = Path(a.capture).resolve()
+    cap = capture_path(a.capture)
     if not cap.is_file():
         sys.exit(f"FAIL no such capture: {cap}")
     if cap.suffix.lower() == ".md":
