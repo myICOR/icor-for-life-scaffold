@@ -172,6 +172,41 @@ def split_front(text):
     return text[4:end], text[end + 5:]
 
 
+def strip_comment(rest):
+    """A frontmatter value without its trailing `# comment`, by the YAML rule:
+    a `#` starts a comment after whitespace and outside a quoted scalar. A quote
+    only opens one at the start of a value, so the apostrophe in `it's # x`
+    opens nothing."""
+    quote, opens, i = None, True, 0
+    while i < len(rest):
+        ch = rest[i]
+        if quote == '"' and ch == "\\":
+            i += 1
+        elif quote == "'" and rest[i:i + 2] == "''":
+            i += 1
+        elif quote:
+            quote = None if ch == quote else quote
+        elif ch in "\"'" and opens:
+            quote = ch
+        elif ch == "#" and i and rest[i - 1].isspace():
+            return rest[:i]
+        opens = ch in "[," or (ch.isspace() and opens)
+        i += 1
+    return rest
+
+
+# A quoted string in the frontmatter. A wikilink is only a link there when it
+# is one: `rects: [[72.5, 400, 300, 520]]` on a PDF highlight is numbers, and
+# an unquoted `[[X]]` is a list in YAML and no link in Obsidian.
+QUOTED = re.compile(r'"(?:[^"\\\n]|\\.)*"|\'(?:[^\'\n]|\'\')*\'')
+
+
+def front_links(front):
+    """Everything in a frontmatter block a link scan may read."""
+    return "\n".join(s for line in front.splitlines()
+                     for s in QUOTED.findall(strip_comment(line)))
+
+
 def parse_front(front):
     """{key: value} for a frontmatter block, values kept as written.
 
@@ -187,7 +222,7 @@ def parse_front(front):
         if not m:
             i += 1
             continue
-        key, rest = m.group(1), m.group(2).strip()
+        key, rest = m.group(1), strip_comment(m.group(2)).strip()
         if rest.startswith("[") and rest.endswith("]"):
             out[key] = [unquote(v) for v in split_items(rest[1:-1]) if v.strip()]
         elif rest:
@@ -195,7 +230,7 @@ def parse_front(front):
         else:
             items, j = [], i + 1
             while j < len(lines) and re.match(r"^\s+-\s*", lines[j]):
-                items.append(unquote(re.sub(r"^\s+-\s*", "", lines[j])))
+                items.append(unquote(strip_comment(re.sub(r"^\s+-", "", lines[j]))))
                 j += 1
             out[key] = items if items else ""
             i = j - 1
@@ -286,10 +321,11 @@ def collect(root):
             text = p.read_text(encoding="utf-8", errors="ignore")
             front, body = split_front(text)
             # `text` is what the note says; `prose` is the same note with code
-            # blanked, and is what the link scans read. The frontmatter is
-            # kept in both: a wikilink in a `topics:` list is a real link.
+            # blanked, and is what the link scans read. Of the frontmatter it
+            # keeps the quoted strings: a wikilink in a `topics:` list is a
+            # real link, a numeric `rects:` array is not.
             notes[rel] = {"front": parse_front(front), "text": text,
-                          "body": body, "prose": front + blank_code(body)}
+                          "body": body, "prose": front_links(front) + "\n" + blank_code(body)}
     return files, notes
 
 

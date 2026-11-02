@@ -264,6 +264,27 @@ def _fb_split_items(s):
     return parts
 
 
+def _fb_strip_comment(rest):
+    """A frontmatter value without its trailing `# comment`: check-quality.py's
+    strip_comment, for a folder without it."""
+    quote, opens, i = None, True, 0
+    while i < len(rest):
+        ch = rest[i]
+        if quote == '"' and ch == "\\":
+            i += 1
+        elif quote == "'" and rest[i:i + 2] == "''":
+            i += 1
+        elif quote:
+            quote = None if ch == quote else quote
+        elif ch in "\"'" and opens:
+            quote = ch
+        elif ch == "#" and i and rest[i - 1].isspace():
+            return rest[:i]
+        opens = ch in "[," or (ch.isspace() and opens)
+        i += 1
+    return rest
+
+
 def _fb_parse_front(front):
     """{key: value} for a flat frontmatter block, values kept as written."""
     out = {}
@@ -274,7 +295,7 @@ def _fb_parse_front(front):
         if not m:
             i += 1
             continue
-        key, rest = m.group(1), m.group(2).strip()
+        key, rest = m.group(1), _fb_strip_comment(m.group(2)).strip()
         if rest.startswith("[") and rest.endswith("]"):
             out[key] = [_fb_unquote(v) for v in _fb_split_items(rest[1:-1])
                         if v.strip()]
@@ -283,7 +304,7 @@ def _fb_parse_front(front):
         else:
             items, j = [], i + 1
             while j < len(lines) and re.match(r"^\s+-\s*", lines[j]):
-                items.append(_fb_unquote(re.sub(r"^\s+-\s*", "", lines[j])))
+                items.append(_fb_unquote(_fb_strip_comment(re.sub(r"^\s+-", "", lines[j]))))
                 j += 1
             out[key] = items if items else ""
             i = j - 1
