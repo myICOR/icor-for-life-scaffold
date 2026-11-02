@@ -17,6 +17,41 @@ called `Unreleased`: the manifest builder matches removal lines by version
 section, so a removal under any other heading is a removal it cannot
 explain.
 
+## 2.2.2
+
+Fixes from a member's run through the whole Implementation Journey on a fresh
+vault. Nothing is removed or moved. Pairs with myPKA 7.0.2.
+
+- Fixed: `set-property.py` and `new-entity.py --set` write a value that is one
+  wikilink as a double-quoted string. Bare, `[[X]]` is a list holding a list,
+  not a link. Running `set-property.py` again with the same value repairs a
+  bare link an older version wrote.
+- Fixed: `new-journal-entry.py` takes `created:` from `--date`. It was always
+  today, so an imported journal entry carried the wrong date.
+- Fixed: `stamp-processed.py` reads the date from a `YYYYMMDDHHmm` quick capture
+  name, the name the scratchpad and Chat plugins give it. A name that only looks
+  like a date (month 13) is refused, in the `YYYY-MM-DD` shape too.
+- Fixed: `stamp-processed.py --capture` takes a `concept:` ref, the form SOP-1002
+  passes. With myPKA in the folder it goes through `resolve.py`; without it the
+  script reads the inbox and its slots itself.
+- Fixed: `check-quality.py` reads the frontmatter for links from quoted strings
+  only, so the `rects: [[72.5, 400, 300, 520]]` of a PDF highlight is no longer a
+  dangling link. An unquoted `[[X]]` in frontmatter, which is no link in
+  Obsidian either, no longer counts as one.
+- Fixed: `check-quality.py` drops a trailing `# comment` from a frontmatter
+  value by the YAML rule, so `idea_status: open   # x` is `open`, and a comment
+  after `key_elements:` no longer hides its list. `life-snapshot.py`'s fallback
+  reader does the same.
+- Fixed: `Templates/idea.md` has no `title:`, which GL-1002 does not declare for
+  a note, its comments sit on their own lines, and its sample link is `[[Health]]`,
+  a Key Element the folder ships, so a note made from it has no findings.
+- Changed: GL-1002 lists `source` and `session_ids` as optional on a scratchpad,
+  the fields Chat writes when it saves a reply as a note.
+- Changed, repository only: `.gitignore` ignores `.mypka/state/`, myPKA's
+  per-device session state. It reaches a folder with a new download; the updater
+  does not install `.gitignore`.
+- Added: `test-note-scripts.py`, the fixture suite behind these fixes.
+
 ## 2.2.1
 
 The README names the download as it is published. Nothing is removed or
