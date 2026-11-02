@@ -82,7 +82,7 @@ noteio.write_note(dest, f"""---
 type: journal
 date: {d}
 journal_type: {a.journal_type}
-{format_line}created: {datetime.date.today()}
+{format_line}created: {d}
 linked_people: []
 linked_topics: []
 linked_projects: []
