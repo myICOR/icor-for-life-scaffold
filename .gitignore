@@ -57,6 +57,9 @@
 # belongs to one session on one device and is never a note (GL-1008).
 .icor-for-life/scripts/receipts/
 .icor-for-life/scripts/session.json
+# The same for the team half: myPKA's session-start hook writes
+# .mypka/state/session.json when myPKA shares this folder.
+.mypka/state/
 
 # The host link layer, written by scaffold-init.py apply: `.agents/skills/<name>`
 # is a link (or, where the platform has no symlinks, a copy) into the canonical
