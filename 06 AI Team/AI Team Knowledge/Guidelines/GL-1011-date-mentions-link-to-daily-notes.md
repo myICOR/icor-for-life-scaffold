@@ -45,20 +45,36 @@ would be buried under it. A daily note should show you the journal entry,
 the meeting, the contact and the brief, not the eleven times an agent
 recorded that it ran a script.
 
-**IN, the three rooms you write in**
+**IN, the two rooms you write in and the script may write to**
 
 | Room | Which files |
 | --- | --- |
-| `04 Inner World/` | all of it |
-| `03 WiP/` | all of it |
-| `01 Inbox/` | all of it |
+| `04 Inner World/` | all of it, except the protected text listed below |
+| `03 WiP/` | all of it, except the protected text listed below |
+| `01 Inbox/` | none: captures and the capture archive are out (since 2.3.0) |
 
 **OUT: all of `06 AI Team/`, without exception.** Session logs, specialist
 journals, Team Knowledge, SOPs, Guidelines, Workstreams, Tasks, Templates,
-Scripts, AI Sessions. Also `00 Daily Scratchpad/` itself, `02 Planner/`,
+Scripts, AI Sessions. Also `00 Daily Scratchpad/` itself, `01 Inbox/`
+(every capture, and `01 Inbox/Outer World/archive/`), `02 Planner/`,
 `05 Assets/` and `07 Databases/`.
 
-**OUT inside the three rooms, never touched**
+**Why the inbox is out.** Hard rule 1: what you wrote in a capture is never
+edited, and two pairs of brackets are an edit. A capture's dates get their
+links when it is processed: the note, journal entry or task it becomes
+lives in one of the two rooms above. Before 2.3.0 the inbox was in scope
+and a checkpoint's `--fix` rewrote captures and the archive.
+
+**OUT inside the two rooms, never touched**
+
+- **Your Original Text.** The `## Original Text` section of a journal entry
+  ([[GL-1003-journal-entry-anatomy|GL-1003]]), from its heading down to the
+  next heading of the same or a higher level, or to the end of the note.
+  Hard rule 1 makes it sacred, so a date in it stays as you typed it. The
+  `## Expansion` below it is linked as usual.
+- **Blockquotes.** A line starting with `>`, and the lines that run on from
+  it up to the next blank line. A quoted passage is someone's words, kept
+  as they were.
 
 - **YAML frontmatter.** A typed date there is data, not prose: `created`,
   `date`, `due`, `processed`. It is read by Bases and by every script, and
@@ -96,6 +112,7 @@ Scripts/link-dates-to-daily-notes.py [<vault-root>]
     --dry-run          what --fix would do, with counts, no writes
     --fix              write the links, create the missing daily notes
     --since YYYY-MM-DD only dates on or after this day
+    --path PATH        only this file or folder; repeatable
     --json             machine-readable
 ```
 
@@ -111,7 +128,9 @@ as [[GL-1007-capture-and-where-things-go|GL-1007]] requires. Running
 ## When it runs
 
 - **Any agent may run `--fix` on the files it touched**, at any point, without
-  asking. It is additive and idempotent.
+  asking. It is additive and idempotent, and it never reaches a capture, an
+  Original Text section or a blockquote, so there is nothing protected for
+  it to change.
 - **Before the session log is written**, as part of the checkpoint. That is
   where the rule actually holds: the session's own notes get their links
   while the session still remembers what it wrote.

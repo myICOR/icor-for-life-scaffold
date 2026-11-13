@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """test-note-scripts.py: the fixture suite behind the scripts that write a
 note's frontmatter (set-property, new-entity, new-journal-entry,
-stamp-processed) and the reader that judges it (check-quality).
+stamp-processed), the readers that judge it (check-quality,
+validate-scaffold) and the Reading queue in Notes.base.
 
 Copies this folder into a throwaway vault, runs each script from that copy
 and asserts what lands on disk. GL-1005 rule 4: a guard nobody has watched go
@@ -328,6 +329,84 @@ def quality_cases(tmp):
           str(findings_for(v, plant)))
 
 
+def all_findings(vault):
+    r = run(vault, "check-quality.py", vault, "--json")
+    return json.loads(r.stdout)
+
+
+def reading_queue_cases(tmp):
+    """Member report on 2.2.1, item 3: a reference with no `consumed` field
+    was counted as unread and left out of the Reading queue."""
+    print("Reading queue vs unconsumed_references")
+    v = fresh(tmp, "rq")
+    NB = load("nb_rq", v / SCRIPTS / "new-base.py")
+    views = {x["name"]: x for x in NB.REGISTRY["note"]["extra_views"]}
+    queue = views["Reading queue"]["filters"]
+    check("new-base's Reading queue keeps a reference unless consumed is true",
+          "note.consumed != true" in queue and not any("== false" in f for f in queue),
+          str(queue))
+    base = (v / "04 Inner World/Notes/Notes.base").read_text(encoding="utf-8")
+    check("the shipped Notes.base says the same", "- note.consumed != true\n" in base
+          and "note.consumed == false" not in base)
+    ref = "04 Inner World/Notes/Test Reference.md"
+    write(v, ref, '---\ntype: note\nnote_type: reference\n'
+                  'topics: ["[[Knowledge Management]]"]\n---\n\nbody\n')
+    unread = lambda rel: [f for f in findings_for(v, rel)
+                          if f.get("metric") == "unconsumed_references"]
+    check("a reference with no consumed field counts as unread", unread(ref),
+          str(findings_for(v, ref)))
+    for value, want_unread in (("true", False), ("True", False), ("false", True),
+                               ("yes", True), ("1", True)):
+        rel = "04 Inner World/Notes/Ref %s.md" % value
+        write(v, rel, '---\ntype: note\nnote_type: reference\nconsumed: %s\n'
+                      'topics: ["[[Knowledge Management]]"]\n---\n' % value)
+        check("consumed: %s is %s, as the queue's `!= true` reads it"
+              % (value, "unread" if want_unread else "read"),
+              bool(unread(rel)) == want_unread, str(unread(rel)))
+
+
+def subfolder_cases(tmp):
+    """Member report on 2.2.1, items 4 and 6: the orphan and duplicate checks
+    and validate-scaffold's project and goal checks looked at the top level
+    of an entity folder only."""
+    print("subfolders of an entity folder")
+    v = fresh(tmp, "sub")
+    lonely = "04 Inner World/Notes/Sub/Lonely.md"
+    write(v, lonely, '---\ntype: note\nnote_type: idea\n'
+                     'topics: ["[[Knowledge Management]]"]\n---\n\nNobody links here.\n')
+    alex = "04 Inner World/Contacts/People/Sub/Alex.md"
+    write(v, alex, "---\ntype: person\nname: Alex Rivera\n---\n")
+    hl = "04 Inner World/Notes/Highlights/h1.md"
+    write(v, "05 Assets/Documents/paper.pdf", "pdf")
+    write(v, hl, '---\ntype: pdf-highlight\nhighlight_id: h1\nsource_file: "[[paper.pdf]]"\n'
+                 "page: 1\nanchor: rect\nrects: [[1, 2, 3, 4]]\ncolor: yellow\n"
+                 "created: 2026-11-02\ncanvases: []\nlinked_notes: []\n"
+                 "cssclasses: [icor-pdf-highlight]\n---\n")
+    arch = "04 Inner World/Notes/archive/Old.md"
+    write(v, arch, '---\ntype: note\nnote_type: idea\ntopics: ["[[Health]]"]\n---\n')
+    rep = all_findings(v)
+    orphans = {f["path"] for f in rep["findings"] if f["metric"] == "orphans"}
+    dupes = [f for f in rep["findings"] if f["metric"] == "duplicate_entities"]
+    check("a note one subfolder down is an orphan", lonely in orphans, str(sorted(orphans)))
+    check("a second Alex Rivera one subfolder down is a duplicate",
+          any(alex in (f["path"] + f["message"]) for f in dupes), str(dupes))
+    check("a pdf-highlight in Notes/Highlights/ is not an orphan", hl not in orphans,
+          str(sorted(orphans)))
+    check("a note in an archive/ subfolder is not an orphan", arch not in orphans,
+          str(sorted(orphans)))
+
+    w = fresh(tmp, "vs")
+    write(w, "04 Inner World/My Life/Projects/Sub/No Goal.md", "---\ntype: project\n---\n")
+    write(w, "04 Inner World/My Life/Goals/Sub/Bad Status.md",
+          "---\ntype: goal\nstatus: maybe\n---\n")
+    r = run(w, "validate-scaffold.py", w, "--json")
+    fails_ = json.loads(r.stdout)["fails"] if r.stdout.strip() else [r.stderr]
+    check("validate-scaffold: a project in a subfolder still needs a goal",
+          any("Sub/No Goal.md" in f and "goal wikilink" in f for f in fails_), str(fails_))
+    check("validate-scaffold: a goal in a subfolder still has a checked status",
+          any("Sub/Bad Status.md" in f and "goal status" in f for f in fails_), str(fails_))
+
+
 def gitignore_case(tmp):
     print(".gitignore")
     repo = Path(tmp) / "ignore"
@@ -347,6 +426,8 @@ def main():
         stamp_name_cases(tmp)
         stamp_capture_cases(tmp)
         quality_cases(tmp)
+        reading_queue_cases(tmp)
+        subfolder_cases(tmp)
         gitignore_case(tmp)
     if BREAK:
         check("--break-me: this assertion is wrong on purpose", False, "as planned")

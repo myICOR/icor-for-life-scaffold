@@ -178,22 +178,24 @@ def fm(path):
 
 projects = ROOT / "04 Inner World/My Life/Projects"
 if projects.is_dir():
-    for f in projects.glob("*.md"):
-        if f.name == "README.md":
+    # rglob, as check 10 walks Notes/: a project in a subfolder of Projects/
+    # escaped this rule until 2.3.0 (member report on 2.2.1, item 6).
+    for f in projects.rglob("*.md"):
+        if f.name in ("README.md", "_template.md"):
             continue
         front = fm(f)
         m = re.search(r"^goal:\s*(.+)$", front, re.M)
         if not m or "[[" not in m.group(1):
-            fails.append(f"project without a goal wikilink (GL-1002: no project without a goal): {f.name}")
+            fails.append(f"project without a goal wikilink (GL-1002: no project without a goal): {f.relative_to(projects).as_posix()}")
 
 goals_dir = ROOT / "04 Inner World/My Life/Goals"
 if goals_dir.is_dir():
-    for f in goals_dir.glob("*.md"):
-        if f.name == "README.md":
+    for f in goals_dir.rglob("*.md"):           # subfolders too, as above
+        if f.name in ("README.md", "_template.md"):
             continue
         m = re.search(r"^status:\s*(\S+)", fm(f), re.M)
         if m and m.group(1) not in ("not-achieved", "achieved"):
-            fails.append(f"goal status must be not-achieved|achieved: {f.name} has '{m.group(1)}'")
+            fails.append(f"goal status must be not-achieved|achieved: {f.relative_to(goals_dir).as_posix()} has '{m.group(1)}'")
 
 # --- 7 and 8. planner-habit and planner-routine frontmatter shape (GL-1002) -
 DAY_CODES = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")

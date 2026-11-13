@@ -18,17 +18,26 @@ operating records stay bare, and the daily notes never fill up with the
 team's housekeeping.
 
   IN   the body (after the closing frontmatter ---) of .md files under
-       04 Inner World/, 03 WiP/ and 01 Inbox/. Nothing else.
+       04 Inner World/ and 03 WiP/. Nothing else.
   OUT  all of 06 AI Team/ without exception: session logs, specialist
        journals, Team Knowledge, SOPs, Guidelines, Workstreams, Tasks,
        Templates, Scripts, AI Sessions. Also 00 Daily Scratchpad/ itself,
-       02 Planner/, 05 Assets/ and 07 Databases/.
-  Inside the three rooms, still OUT: YAML frontmatter (typed dates are
+       01 Inbox/ (captures and their archive), 02 Planner/, 05 Assets/ and
+       07 Databases/.
+  Inside the two rooms, still OUT: YAML frontmatter (typed dates are
        data, GL-1002); fenced and inline code; anything already inside
-       [[...]]; markdown link targets and URLs; a date that is part of a
-       longer token (2026-09-11-slug, tsk-2026-09-09-020,
-       2026-09-11T14:12, 2026-09-11.md); any path segment starting with _
-       (archives, snapshots, _files); INDEX.md; .obsidian/; node_modules/.
+       [[...]]; markdown link targets and URLs; blockquotes (a quoted
+       passage is someone's words, kept as they were); the `## Original
+       Text` section of a journal entry, down to the next heading of the
+       same or a higher level; a date that is part of a longer token
+       (2026-09-11-slug, tsk-2026-09-09-020, 2026-09-11T14:12,
+       2026-09-11.md); any path segment starting with _ (archives,
+       snapshots, _files); INDEX.md; .obsidian/; node_modules/.
+
+Hard rule 1 is why 01 Inbox/, blockquotes and Original Text are out: what
+the user wrote in a capture or in the Original Text section is never
+edited, not even by two pairs of brackets (member report, myPKA 7.0.1 /
+ICOR for Life 2.2.1, item 1).
 
 The second half of that matters as much as the first. About 114k raw
 YYYY-MM-DD strings live in a lived-in vault and almost none of them are
@@ -92,15 +101,26 @@ DAILY_LINK = re.compile(r"\[\[(\d{4}-\d{2}-\d{2})(?:\\?\|[^\]\n]*)?\]\]")
 
 FRONTMATTER = re.compile(r"^---\r?\n.*?^(?:---|\.\.\.)[ \t]*\r?\n", re.S | re.M)
 INLINE_CODE = re.compile(r"`[^`\n]*`")
+FENCE = re.compile(r"[ \t]{0,3}(`{3,}|~{3,})")
+HEADING = re.compile(r"[ \t]{0,3}(#{1,6})[ \t]+(.*?)[ \t#]*\r?\n?$")
+BLOCKQUOTE = re.compile(r"[ \t]{0,3}>")
+# The journal section that hard rule 1 protects (GL-1003). Matched on the
+# heading's words, any level, any case, so `### original text` in an older
+# entry is protected too.
+PROTECTED_HEADING = "original text"
 WIKILINK = re.compile(r"!?\[\[[^\]\n]*\]\]")
 MD_LINK = re.compile(r"!?\[[^\]\n]*\]\([^)\n]*\)")
 LINK_TARGET = re.compile(r"\]\([^)\n]*\)")
 URL = re.compile(r"(?:https?://|www\.)\S+")
 
-# The three rooms the user writes in. The daily note is a timeline of the
-# user's life and work, so this list IS the rule, not an optimisation of
-# it: 06 AI Team/ is the team's operating record and never links in.
-USER_ROOMS = ("04 Inner World", "03 WiP", "01 Inbox")
+# The rooms the user writes in and the script may write to. The daily note
+# is a timeline of the user's life and work, so this list IS the rule, not
+# an optimisation of it: 06 AI Team/ is the team's operating record and
+# never links in. 01 Inbox/ is the user's too, but every file in it is a
+# capture or an archived capture, and hard rule 1 says a capture is never
+# edited, so the inbox is out (2.3.0). A capture's dates get their links
+# when it is processed into a note in one of these two rooms.
+USER_ROOMS = ("04 Inner World", "03 WiP")
 # Folders that are never prose, wherever they sit inside those rooms.
 EXCLUDED_SEGMENTS = {".obsidian", ".git", ".trash", "node_modules",
                      "__pycache__", "Templates"}
@@ -227,8 +247,9 @@ def body_offset(text: str) -> int:
 
 
 def masked(body: str) -> bytearray:
-    """Mark every span that is not prose. Cheap, and the only thing standing
-    between this script and rewriting a code sample."""
+    """Mark every span that is not prose, or is prose the script may not
+    edit. Cheap, and the only thing standing between this script and
+    rewriting a code sample, a quotation or the user's Original Text."""
     mask = bytearray(len(body))
 
     def mark(lo, hi):
@@ -236,18 +257,47 @@ def masked(body: str) -> bytearray:
             mask[i] = 1
 
     pos, open_at, fence = 0, None, None
+    protected_at, protected_level = None, None
+    in_quote = False
     for line in body.splitlines(keepends=True):
-        m = re.match(r"[ \t]{0,3}(`{3,}|~{3,})", line)
+        end = pos + len(line)
+        m = FENCE.match(line)
         if m:
             mark_char = m.group(1)[0]
             if open_at is None:
                 open_at, fence = pos, mark_char
             elif mark_char == fence:
-                mark(open_at, pos + len(line))
+                mark(open_at, end)
                 open_at, fence = None, None
-        pos += len(line)
+            in_quote = False
+            pos = end
+            continue
+        if open_at is None:
+            # A heading inside a code fence is code, so only headings
+            # outside one open or close the protected section.
+            h = HEADING.match(line)
+            if h:
+                level = len(h.group(1))
+                if protected_at is not None and level <= protected_level:
+                    mark(protected_at, pos)
+                    protected_at, protected_level = None, None
+                if (protected_at is None
+                        and h.group(2).strip().lower() == PROTECTED_HEADING):
+                    protected_at, protected_level = pos, level
+            # A blockquote runs from its first `>` line to the next blank
+            # line. A line after a `>` line with no `>` of its own is still
+            # the quote (markdown's lazy continuation), so it is kept too.
+            if BLOCKQUOTE.match(line):
+                in_quote = True
+            elif not line.strip():
+                in_quote = False
+            if in_quote:
+                mark(pos, end)
+        pos = end
     if open_at is not None:          # unclosed fence: treat the rest as code
         mark(open_at, len(body))
+    if protected_at is not None:     # Original Text runs to the end of the note
+        mark(protected_at, len(body))
 
     for rx in (INLINE_CODE, WIKILINK, MD_LINK, LINK_TARGET, URL):
         for m in rx.finditer(body):
@@ -350,8 +400,9 @@ if a.path:
                if not any(f == w or w in f.parents for f in files)]
     if skipped:
         # Said out loud rather than passed over: a path that is simply out of
-        # the linker's scope (all of 06 AI Team/, 00 Daily Scratchpad/ itself)
-        # would otherwise look like a clean run on a note nobody looked at.
+        # the linker's scope (all of 06 AI Team/, 00 Daily Scratchpad/ itself,
+        # 01 Inbox/, whose captures hard rule 1 protects) would otherwise look
+        # like a clean run on a note nobody looked at.
         print("NOTE out of the linker's scope, nothing to do there: "
               + ", ".join(sorted(skipped)), file=sys.stderr)
     files = scoped

@@ -54,7 +54,7 @@ views:
     filters:
       and:
         - note.note_type == "reference"
-        - note.consumed == false
+        - note.consumed != true
     order:
       - file.name
       - note.source_url

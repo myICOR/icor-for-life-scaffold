@@ -238,8 +238,12 @@ REGISTRY = {
              "order": ["source_url", "consumed", "topics", "key_elements"],
              "sort": ("note.consumed", "ASC")},
             # The reading queue. Unconsumed sources only, so the list supports
-            # action when you turn to the subject instead of nagging.
-            {"name": "Reading queue", "filters": ['note.note_type == "reference"', "note.consumed == false"],
+            # action when you turn to the subject instead of nagging. `!= true`
+            # and not `== false`: in Bases a missing property is not equal to
+            # false, so a reference with no `consumed` field fell out of the
+            # queue while check-quality.py counted it as unread (member report
+            # on 2.2.1, item 3). Both now say: unread unless it is `true`.
+            {"name": "Reading queue", "filters": ['note.note_type == "reference"', "note.consumed != true"],
              "order": ["source_url", "topics", "key_elements"],
              "sort": ("file.name", "ASC")},
             # Ideas you have not decided on yet. An idea with no status is

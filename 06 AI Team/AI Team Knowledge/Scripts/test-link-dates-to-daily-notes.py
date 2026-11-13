@@ -80,9 +80,32 @@ def build(root: Path):
           "Template date 2026-09-11.\n")
     write(root, "06 AI Team/Agents/Silas/journal/entry.md",
           "Shipped on 2026-08-01.\n")
-    # In scope: the third user room.
+    # Out of scope: 01 Inbox/. Every file there is a capture or an archived
+    # capture, and hard rule 1 says a capture is never edited (member report
+    # on 2.2.1, item 1).
     write(root, "01 Inbox/Outer World/clip.md",
           "Kept because of the talk on 2026-08-01.\n")
+    write(root, "01 Inbox/Outer World/archive/2026-08-27-obsidian-video-clip.md",
+          "---\ntype: capture\n---\nReleased 2026-08-20.\n")
+
+    # Protected text inside a room that IS in scope. The Original Text
+    # section of a journal entry and every blockquote stay as written; the
+    # Expansion after it, and prose around a quote, still get their links.
+    write(root, "04 Inner World/Journal/2026/08/2026-08-27_entry.md",
+          "---\ntype: journal\n---\n\n## Original Text\n\n"
+          "Call the bank on 2026-12-01.\n\n"
+          "### A sub-heading the user typed\n\nStill mine: 2026-12-02.\n\n"
+          "## Expansion\n\nThe call is on 2026-12-03.\n")
+    write(root, "04 Inner World/Journal/2026/08/2026-08-28_tail.md",
+          "## Expansion\n\nLinked: 2026-12-04.\n\n"
+          "## original text\n\nTo the end of the note: 2026-12-05.\n")
+    write(root, "04 Inner World/Notes/quote.md",
+          "Before the quote, 2026-12-06.\n\n"
+          "> Released 2026-12-07.\n"
+          "lazy continuation of the quote, 2026-12-08.\n"
+          "  > indented quote, 2026-12-09.\n\n"
+          "After the quote, 2026-12-10.\n\n"
+          "```\n## Original Text\n```\n\nAfter a fenced heading, 2026-12-11.\n")
 
     # A date already written as a link whose daily note is missing: no
     # rewrite to do, but the note behind it still has to be created.
@@ -157,8 +180,23 @@ with tempfile.TemporaryDirectory() as td:
     check("all of 06 AI Team/ is out of scope (session log, template, agent journal)",
           not any(f.startswith("06 AI Team/") for f, _d in found),
           str(sorted(f for f, _d in found if f.startswith("06 AI Team/"))))
-    check("01 Inbox is in scope",
-          ("01 Inbox/Outer World/clip.md", "2026-08-01") in found)
+    check("01 Inbox is out of scope, archive included (hard rule 1)",
+          not any(f.startswith("01 Inbox/") for f, _d in found),
+          str(sorted(f for f, _d in found if f.startswith("01 Inbox/"))))
+    found_dates = {d for _f, d in found}
+    check("the Original Text section is never touched, sub-headings included",
+          not {"2026-12-01", "2026-12-02"} & found_dates, str(sorted(found_dates)))
+    check("the Expansion after Original Text is still linked",
+          ("04 Inner World/Journal/2026/08/2026-08-27_entry.md", "2026-12-03") in found)
+    check("an Original Text section runs to the end of the note, any case",
+          "2026-12-05" not in found_dates
+          and ("04 Inner World/Journal/2026/08/2026-08-28_tail.md", "2026-12-04") in found)
+    check("blockquotes are never touched (lazy continuation and indent too)",
+          not {"2026-12-07", "2026-12-08", "2026-12-09"} & found_dates,
+          str(sorted(found_dates)))
+    check("prose around a quote, and after a fenced heading, is still linked",
+          {("04 Inner World/Notes/quote.md", d)
+           for d in ("2026-12-06", "2026-12-10", "2026-12-11")} <= found)
 
     print("since filter")
     _r, rep_since = run_json(V, "--check", "--since", "2026-09-01")
@@ -184,7 +222,7 @@ with tempfile.TemporaryDirectory() as td:
           "created: 2026-01-05\n" in body and "[[2026-01-05]]" not in body)
     check("fix created the missing daily note with its folders",
           (V / "00 Daily Scratchpad/2026/09/2026-09-12.md").is_file()
-          and (V / "00 Daily Scratchpad/2026/08/2026-08-01.md").is_file())
+          and (V / "00 Daily Scratchpad/2026/12/2026-12-03.md").is_file())
     check("fix did not touch the agent journal",
           (V / "06 AI Team/Agents/Silas/journal/entry.md")
           .read_text(encoding="utf-8") == "Shipped on 2026-08-01.\n")
@@ -199,6 +237,22 @@ with tempfile.TemporaryDirectory() as td:
     check("fix did not touch the out-of-scope session log",
           (V / "06 AI Team/AI Team Knowledge/Session Logs/2026/09/log.md")
           .read_text(encoding="utf-8") == "Session on 2026-09-11.\n")
+    check("fix did not touch the inbox capture or its archive",
+          (V / "01 Inbox/Outer World/clip.md").read_text(encoding="utf-8")
+          == "Kept because of the talk on 2026-08-01.\n"
+          and "[[" not in (V / "01 Inbox/Outer World/archive/"
+                                "2026-08-27-obsidian-video-clip.md")
+                          .read_text(encoding="utf-8"))
+    journal = (V / "04 Inner World/Journal/2026/08/2026-08-27_entry.md"
+               ).read_text(encoding="utf-8")
+    check("fix left Original Text verbatim and linked the Expansion",
+          "Call the bank on 2026-12-01.\n" in journal
+          and "Still mine: 2026-12-02.\n" in journal
+          and "The call is on [[2026-12-03]].\n" in journal, journal)
+    quote = (V / "04 Inner World/Notes/quote.md").read_text(encoding="utf-8")
+    check("fix left the blockquote verbatim",
+          "> Released 2026-12-07.\nlazy continuation of the quote, 2026-12-08.\n"
+          in quote and "Before the quote, [[2026-12-06]]." in quote, quote)
     check("fix did not touch the code fence",
           "[[2026-03-04]]" not in
           (V / "04 Inner World/Notes/code.md").read_text(encoding="utf-8"))
@@ -232,6 +286,11 @@ with tempfile.TemporaryDirectory() as td:
     check("--path created only its own daily note",
           (V4 / "00 Daily Scratchpad/2026/05/2026-05-01.md").is_file()
           and not (V4 / "00 Daily Scratchpad/2026/05/2026-05-02.md").exists())
+    r_inbox = run(V4, "--fix", "--path", "01 Inbox/Outer World/clip.md")
+    check("--path on an inbox capture says it is out of scope and writes nothing",
+          r_inbox.returncode == 0 and "out of the linker's scope" in r_inbox.stderr
+          and b"[[" not in (V4 / "01 Inbox/Outer World/clip.md").read_bytes(),
+          r_inbox.stdout + r_inbox.stderr)
     r_bad = run(V4, "--check", "--path", "nowhere/at/all.md")
     check("--path refuses a path that is not there", r_bad.returncode == 2,
           f"exit {r_bad.returncode}")

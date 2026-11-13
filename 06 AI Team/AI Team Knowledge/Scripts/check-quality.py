@@ -137,6 +137,25 @@ ENTITY_FOLDERS = {
     "document": "04 Inner World/Notes",
 }
 SKIP_NAMES = {"README.md", "_template.md"}
+# The types the orphan check reads: what lives in an entity folder and is
+# meant to be linked to, and a note that declares no type at all.
+ORPHAN_TYPES = set(ENTITY_FOLDERS) | {""}
+
+
+def entity_folder(rel):
+    """The entity folder a note sits ANYWHERE under, or None.
+
+    `04 Inner World/Notes/Books/x.md` is under `04 Inner World/Notes`, just as
+    `04 Inner World/Notes/x.md` is. The orphan and duplicate checks used to
+    compare the note's parent folder with these folders exactly, so a note one
+    subfolder down was never checked and nothing said so, while the counts in
+    the same report include it (member report on 2.2.1, item 4). GL-1004
+    allows such a subfolder."""
+    posix = rel.as_posix()
+    for folder in sorted(set(ENTITY_FOLDERS.values()), key=len, reverse=True):
+        if posix.startswith(folder + "/"):
+            return folder
+    return None
 WIKILINK = re.compile(r"!?\[\[([^\]\n]+)\]\]")
 # The captured group is everything between the brackets, escaped alias pipe
 # included; `link_name` below is what turns it into a target.
@@ -299,6 +318,16 @@ def norm(s):
 
 def truthy(v):
     return str(v).strip().strip("\"'").lower() in ("true", "yes", "1")
+
+
+def is_yaml_true(v):
+    """A frontmatter value Obsidian reads as the boolean true: `true` in any
+    case, never a `yes` or a `1`, which YAML 1.2 reads as text and a number.
+    The Reading queue in Notes.base keeps a reference unless
+    `note.consumed == true`, so the unread count here uses the same rule;
+    with `truthy()` a `consumed: yes` was read here and still queued there
+    (member report on 2.2.1, item 3)."""
+    return str(v).strip().lower() == "true"
 
 
 # --- the run ---------------------------------------------------------------
@@ -591,7 +620,9 @@ def run(root):
 
         # --- unconsumed references ------------------------------------------------
         if t == "note" and str(front.get("note_type", "")).strip() == "reference" \
-                and not truthy(front.get("consumed", "")):
+                and not is_yaml_true(front.get("consumed", "")):
+            # Unread unless `consumed: true`, a missing field included: the
+            # same rule as the Reading queue's `note.consumed != true`.
             values["unconsumed_references"] += 1
             add("unconsumed_references", posix,
                 "A reference you have not read or watched yet.",
@@ -599,8 +630,10 @@ def run(root):
                 "lists it either way.")
 
         # --- duplicates ------------------------------------------------------------
-        folder = rel.parent.as_posix()
-        if folder in ENTITY_FOLDERS.values() and not archived:
+        # Keyed on the entity folder, not the parent, so People/Family/Alex.md
+        # and People/Alex.md are the same identity space.
+        folder = entity_folder(rel)
+        if folder is not None and not archived:
             keys = {norm(rel.stem)}
             for field in ("name", "title"):
                 if front.get(field):
@@ -647,11 +680,18 @@ def run(root):
     # Only things that are MEANT to be linked to: entities and Notes. A
     # journal entry nobody links to is a normal journal entry. `example`
     # notes are excluded: the scaffold ships them unlinked on purpose.
-    orphan_folders = set(ENTITY_FOLDERS.values())
+    # Anywhere under an entity folder, subfolders included; an archive/
+    # subfolder is out, as it is for the duplicates and the counts. Reaching
+    # into subfolders brought in notes nobody links to by design, the
+    # `pdf-highlight` notes the PDF Annotation plugin writes to
+    # Notes/Highlights/, so the type has to be one that is meant to be linked
+    # (or none, which is its own finding).
     for rel in sorted(in_scan):
-        if rel.parent.as_posix() not in orphan_folders:
+        if entity_folder(rel) is None or "archive" in rel.parts:
             continue
         front = notes[rel]["front"]
+        if note_type(rel, front, known_types) not in ORPHAN_TYPES:
+            continue
         if "example" in [norm(t) for t in as_list(front.get("tags", ""))]:
             continue
         if rel in linked_to:
