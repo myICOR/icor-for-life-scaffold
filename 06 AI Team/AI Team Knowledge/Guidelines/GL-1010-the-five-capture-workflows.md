@@ -103,7 +103,7 @@ Read the picture once and the shape is obvious: **capture is many, homes
 are few, and the doors sit in between only for the cases where you cannot
 go straight home.**
 
-## Why this vault ships plugins at all
+## Why the ICOR for Life plugins exist
 
 Obsidian out of the box does workflows 3 and 5 reasonably and the other
 three badly. Each plugin exists to close one specific hole, and none of
@@ -111,8 +111,8 @@ them is decoration.
 
 | Plugin | Closes | Without it |
 | --- | --- | --- |
-| Scratchpad | workflow 2 | quick capture means finding the Obsidian window first, which is the whole friction. **Ships today** |
-| Handwriting | workflow 1 | ink lives in another app, and it is not searchable. **Not shipped: too buggy** |
+| Scratchpad | workflow 2 | quick capture means finding the Obsidian window first, which is the whole friction. **Available today** |
+| Handwriting | workflow 1 | ink lives in another app, and it is not searchable. **Not released: too buggy** |
 | Canvases | workflows 1 and 3 | thinking visually means leaving the vault |
 | PDF Annotation | workflows 1 and 5 | highlights live inside the PDF, where nothing can query them |
 | Outliner | workflow 3 | a bullet does not move with its children, so restructuring a thought is retyping it |
@@ -120,9 +120,12 @@ them is decoration.
 | Planner | the handover to workflow 6 | notes never become tasks |
 | Scaffold Check | all of them | drift is invisible until something breaks |
 
-**Shipping status, stated plainly.** Scratchpad, Canvases, PDF Annotation,
-Outliner, Planner and Scaffold Check ship today, so **workflow 2 is complete
-in the download**. Handwriting is built and **not shipped**: it is too buggy
+**Status, stated plainly.** Since 2.3.0 the download carries no plugin: you
+install them from Obsidian's community directory (Settings, Community
+plugins, Browse, search "ICOR for Life"). Scratchpad, Canvases, PDF
+Annotation, Outliner, Planner and Scaffold Check are all there, so
+**workflow 2 is complete once Scratchpad is installed**. Handwriting is built
+and **not released**: it is too buggy
 to hand anyone, and shipping it would cost more trust than it buys, so
 workflow 1 currently rests on Canvases and PDF Annotation, which is most of
 it. **Workflow 4 has no plugin and never will**: you bring your own
@@ -161,7 +164,7 @@ three seconds instead of capturing it and processing it twice.
 you are sketching a shape rather than writing a sentence, or you are
 marking up something somebody else wrote.
 
-**Ships today:** Canvases, PDF Annotation. **Not shipped:** Handwriting,
+**Available today:** Canvases, PDF Annotation. **Not released:** Handwriting,
 which is built and too buggy to hand anyone. Until it is good enough, ink
 that starts on paper or on an iPad comes in as a scan or a photo through
 workflow 5, and ink that starts on a canvas is already covered.
@@ -201,7 +204,7 @@ avoid.
 car, mid-meeting, walking. The test is not what the thought is about; it
 is whether you have time to decide anything.
 
-**Ships today:** the Scratchpad plugin, plus `Cmd+Alt+N` inside Obsidian.
+**Available today:** the Scratchpad plugin, plus `Cmd+Alt+N` inside Obsidian.
 
 ```mermaid
 flowchart TD
@@ -250,7 +253,7 @@ die, which is why this is the one plugin to turn on first.
 outline, a strategy, an argument, a video script. You will come back to it
 many times.
 
-**Ships today:** Outliner, Canvases, the Journal.
+**Available today:** Outliner, Canvases, the Journal.
 
 ```mermaid
 flowchart TD
@@ -298,7 +301,7 @@ the difference between an outline you edit and an outline you abandon.
 Two different things are being produced at once and they must not be stored
 in the same place: **what was said**, and **what you concluded**.
 
-**Ships today:** nothing, and that is the design.
+**Available today:** nothing, and that is the design.
 
 **The Scaffold does not record meetings and will not.** You already have a
 transcriber, or your company does: Wispr Flow, Granola, Otter, Fireflies,
@@ -388,7 +391,7 @@ them.
 **You are doing this when** somebody else wrote it: an article, a video, a
 paper, a PDF, a post.
 
-**Ships today:** the Obsidian Web Clipper with the template this Scaffold
+**Available today:** the Obsidian Web Clipper with the template this Scaffold
 provides, plus PDF Annotation.
 
 ```mermaid

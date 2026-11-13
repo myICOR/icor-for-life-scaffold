@@ -151,6 +151,13 @@ with tempfile.TemporaryDirectory(prefix="icor-manifest-") as td:
           repr(pr.get(K)) + " " + repr((man.get("previous") or {}).get(K)))
     check("nothing else is listed", sorted(pr) == sorted([X, R_OLD]), repr(sorted(pr)))
 
+    print("seed")
+    # 2.3.0: the plugins stopped shipping and the download enables none. An
+    # untouched copy of an older enabled list must not be overwritten by the
+    # updater with `[]`, or every plugin a member installed switches off.
+    check("the enabled-plugin list is a seed, the member's after the first install",
+          ".obsidian/community-plugins.json" in (man.get("seed") or []), repr(man.get("seed")))
+
     print("check")
     # The manifest was untracked on the first build; once tracked it lists
     # itself, so build once more, as the release order does (build, amend).

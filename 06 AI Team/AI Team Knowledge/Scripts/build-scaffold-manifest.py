@@ -22,8 +22,10 @@ changed here, and why:
   - `repo_only` holds the tracked files that never reach a member (the zip's
     RESIDUE_PATHS plus .gitignore, placement row 9), with their hashes.
   - `seed` lists shipped files that are the member's after the first install
-    (.obsidian/workspace.json, which Obsidian rewrites): the updater adds
-    them when missing and never overwrites them. Formerly EXCLUDE.
+    (.obsidian/workspace.json, which Obsidian rewrites, and since 2.3.0
+    .obsidian/community-plugins.json, the member's own list of enabled
+    plugins): the updater adds them when missing and never overwrites them.
+    Formerly EXCLUDE.
   - `previous` maps a path to the sha256 of every older byte-state it had at
     an earlier tag: the updater overwrites only bytes a release shipped.
   - `previous_removed` (idea: Brian Carroll, @brijcarroll) is the same for
@@ -164,7 +166,12 @@ theme = appearance.get("cssTheme") or ""
 # workspace), so it is listed, and marked SEED: the member's after the first
 # install, never overwritten by the updater. .gitignore guards the repo and a
 # mode A folder alike, and is never installed (placement row 9).
-SEED = {".obsidian/workspace.json"}
+# community-plugins.json joined in 2.3.0, when the plugins stopped shipping:
+# the download enables none (`[]`), and a member who updates keeps the
+# plugins they installed and enabled. As a plain shipped file, an untouched
+# copy of the 2.2.x list would have been overwritten with `[]`, switching
+# every installed plugin off on the next open.
+SEED = {".obsidian/workspace.json", ".obsidian/community-plugins.json"}
 REPO_ONLY_ALWAYS = {".gitignore"}
 
 # Files the zip builder's residue gate strips from the download never reach a

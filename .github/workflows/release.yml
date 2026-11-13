@@ -9,8 +9,9 @@
 #   https://github.com/<this repo>/releases/latest/download/icor-for-life-obsidian-edition.zip
 # (or the versioned copy beside it) with no deploy, no store and no pointer
 # anywhere else. Nothing here holds a secret: the run token can write this
-# repository's releases and read the public plugin repositories the zip is
-# built from, and that is all it needs.
+# repository's releases, and that is all it needs. Since 2.3.0 the zip holds
+# no plugin and no theme; members install those from Obsidian's community
+# directory.
 #
 # Order matters and is deliberate:
 #   1. every gate runs BEFORE anything is published: the tag equals VERSION
@@ -323,7 +324,7 @@ jobs:
             exit 1
           fi
           sha="$(sha256sum "$zip" | cut -d' ' -f1)"
-          # Same tag, same plugin releases, same bytes as the dry run minutes
+          # Same tag, same bytes as the dry run minutes
           # ago. A difference means something moved under this run.
           if [ "$sha" != "$DRY_SHA" ]; then
             echo "::error::the zip built from the tag ($sha) differs from the dry run ($DRY_SHA)"

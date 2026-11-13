@@ -1,9 +1,11 @@
 # Third-party notices
 
-Every plugin the ICOR for Life Scaffold bundles is an ICOR for Life
-plugin, our own work. None of them is a third-party community install,
-and this file bundles no community plugin's own license or catalog
-listing any more. From 1.7.0 the shell inside the app has been **ICOR
+Since ICOR for Life 2.3.0 this folder bundles no Obsidian plugin and no
+theme. You install the ICOR for Life plugins, our own work, from Obsidian's
+community directory, and each brings its own notices from its repository.
+This file keeps their notices for reference. Before 2.3.0 every bundled
+plugin was an ICOR for Life plugin; none was a third-party community
+install. From 1.7.0 the shell inside the app has been **ICOR
 for Life - Terminal**, our own plugin, replacing the third-party
 Terminal plugin by polyipseity (AGPL-3.0); from 1.10.0 the outliner
 inside the app is **ICOR for Life - Outliner**, our own plugin,

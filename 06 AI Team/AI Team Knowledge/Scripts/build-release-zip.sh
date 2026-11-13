@@ -6,18 +6,20 @@
 # How safety is guaranteed:
 #   1. The vault is never zipped directly. The scaffold content comes from
 #      `git archive` of the scaffold repo: only tracked files ship, and
-#      .env / workspace.json / our plugin folders (whose data.json holds
+#      .env / workspace.json / plugin folders (whose data.json holds
 #      tokens) are gitignored, so they cannot be tracked.
-#   2. The ICOR plugins and the INKLINE theme are added from their own
-#      repos via `git archive` too, BY PATH: a plugin folder gets main.js,
-#      manifest.json and styles.css, the theme gets manifest.json and
-#      theme.css, and nothing else in those repos (sources, tests, their
-#      own release workflows) can reach the zip. Those repos gitignore
-#      data.json, and the shape is asserted again in the residue gate.
+#   2. NO PLUGIN AND NO THEME SHIPS (2.3.0). The twelve ICOR for Life
+#      plugins and the INKLINE theme are installed by the member from
+#      Obsidian's community directory (Settings, Community plugins, Browse,
+#      search "ICOR for Life"), and update there. The zip carries the vault
+#      only. Until 2.2.2 this script staged them from their own repos and
+#      releases and compared every byte with the published assets; all of
+#      that went with the bundling.
 #   3. A secret scan runs over the staged tree and aborts on any hit.
-#   4. THE ARTIFACT GATE: every bundled plugin and the theme is compared,
-#      byte for byte, against the assets of its latest published GitHub
-#      release. A version number is not evidence; the digest is.
+#   4. THE NO-BUNDLE GATE: the staged tree holds no .obsidian/plugins/ or
+#      .obsidian/themes/ content and community-plugins.json enables
+#      nothing, so a plugin folder committed by mistake, or a list that
+#      enables a plugin the zip does not carry, blocks the build.
 #   5. THE RESIDUE GATE: this script and the release workflow that runs it
 #      are our build tooling. They name our local mirror paths, our output
 #      directory and our GitHub org, so they are a map of our internals and
@@ -29,7 +31,7 @@
 #      The zip is only written after every gate passes.
 #   6. THE ZIP IS REPRODUCIBLE: every entry carries the staged commit's
 #      timestamp and the entries are written in one fixed order, so the same
-#      tag with the same plugin releases gives the same bytes. The release
+#      tag gives the same bytes. The release
 #      workflow relies on this: a re-run compares its zip with the asset
 #      already published under that version instead of overwriting it.
 #      The zip itself is written by zip-staged-tree.sh, which is a separate
@@ -47,17 +49,11 @@
 #      /usr/bin/python3 redirects the bytecode cache to
 #      ~/Library/Caches/com.apple.python and nothing ever reached the tree.
 #
-# Why gate 4 exists. Three times a correct version number sat on top of the
-# wrong bytes, and each time a person caught it, not a check:
-#   - a plugin's manifest read 0.6.1 while its newest release was 0.4.2.
-#   - the theme shipped tag 1.2.4 and a main that differed by 2,037 bytes
-#     of CSS, both called 1.2.4, while it was live in the community
-#     directory. Every version number agreed. Only the bytes disagreed.
-#   - a test vault held a folder labelled 0.1.0 whose bytes were not 0.1.0.
-# This script stages seven of the nine artifacts with `git archive main`
-# (by path), so without gate 4 the next unbumped commit to any of them
-# silently re-creates that defect inside the zip, where nobody is looking
-# at git.
+# Why gate 4 exists. A member who opens the folder in Obsidian and finds a
+# plugin enabled that the folder does not hold sees a "failed to load"
+# notice on the first open; one who finds a stray plugin folder runs code
+# nobody released. The plugins now reach a vault one way only, through the
+# community directory, and this gate keeps it that way.
 #
 # Usage: bash build-release-zip.sh [output-dir]   (default: ~/Desktop)
 #
@@ -75,7 +71,7 @@
 #                         tag must exist on the remote and its VERSION must
 #                         equal the tag name.
 #   ICOR_SCAFFOLD_GIT     the scaffold's bare mirror (default: the mirror
-#                         beside the plugin mirrors). Created if missing.
+#                         ~/.icor-git/scaffold.git). Created if missing.
 #   ICOR_SCAFFOLD_REMOTE  where that mirror fetches from (default: the public
 #                         scaffold repository). A local dry run points both of
 #                         these at a throwaway clone; CI never sets either.
@@ -167,10 +163,9 @@ ensure_mirror() {  # $1 bare mirror path  $2 remote url
   fi
 }
 
-# The scaffold's own mirror gets the same treatment the five plugin mirrors
-# get below. Staging the vault from a mirror that sits behind origin ships
-# yesterday's scaffold under today's date, and nothing downstream would
-# notice, because every artifact gate below inspects the PLUGINS.
+# The scaffold's mirror is refreshed and compared with the remote before
+# anything is staged. Staging the vault from a mirror that sits behind origin
+# ships yesterday's scaffold under today's date.
 echo "==> refreshing the scaffold mirror"
 ensure_mirror "$SCAFFOLD_GIT" "$SCAFFOLD_REMOTE"
 if ! git --git-dir "$SCAFFOLD_GIT" fetch --quiet --tags --force origin \
@@ -216,117 +211,9 @@ fi
 echo "==> staging scaffold from git ($scaffold_label, tracked files only)"
 git --git-dir "$SCAFFOLD_GIT" archive "$scaffold_staged" | tar -x -C "$STAGE"
 
-# local repo name | github remote | destination in the vault | kind
-declare -a SPECS=(
-  "icor-for-life-planner|icor-for-life-planner|.obsidian/plugins/icor-for-life-planner|plugin"
-  "icor-for-life-focus|icor-for-life-focus|.obsidian/plugins/icor-for-life-focus|plugin"
-  "icor-for-life-connect|icor-for-life-connect|.obsidian/plugins/icor-for-life-connect|plugin"
-  "icor-for-life-interface|icor-for-life-interface|.obsidian/plugins/icor-for-life-interface|plugin"
-  "icor-for-life-scaffold-check|icor-for-life-scaffold-check|.obsidian/plugins/icor-for-life-scaffold-check|plugin"
-  "icor-for-life-sqlite-viewer|icor-for-life-sqlite-viewer|.obsidian/plugins/icor-for-life-sqlite-viewer|plugin"
-  "icor-for-life-inkline|icor-for-life-inkline|.obsidian/themes/ICOR for Life - INKLINE|theme"
-)
-
-echo "==> adding first-party plugins and theme from their repos"
-# Fetch first. These local mirrors are a copy, and a copy silently behind the
-# truth is the same defect this script exists to catch, one layer earlier: on
-# 2026-08-30 all five sat behind origin/main while the zip staged from them.
-# A mirror that cannot be refreshed blocks the build rather than shipping
-# whatever it happens to hold.
-# What a staged plugin or theme folder holds, and all it holds. A member's
-# vault loads exactly these files; everything else in a plugin repo is the
-# repo, not the artifact. On 2026-09-07 every plugin repo gained a
-# `.github/workflows/release.yml` and a whole-repo archive carried six of
-# them into the staged tree, where the residue scan's `runs-on:` pattern
-# rightly refused them. Archiving by path means a new file in a plugin repo
-# can never ride into the zip, and a path that is missing fails `git
-# archive` and blocks, which is right: the artifact gate would refuse that
-# folder anyway.
-shipped_files() {  # $1 kind -> the space-separated file list
-  case "$1" in
-    theme) echo "manifest.json theme.css" ;;
-    *)     echo "main.js manifest.json styles.css" ;;
-  esac
-}
-declare -a STAGED_SHAPES=()   # "dest|files", asserted in the residue gate
-
-for spec in "${SPECS[@]}"; do
-  IFS='|' read -r repo remote dest kind <<< "$spec"
-  ensure_mirror "$MIRRORS/$repo.git" "https://github.com/myICOR/$remote.git"
-  if ! git --git-dir "$HOME/.icor-git/$repo.git" fetch --quiet --tags --force origin \
-       "+refs/heads/main:refs/remotes/origin/main"; then
-    echo "BLOCKED: cannot refresh $repo from origin; refusing to stage a stale mirror" >&2
-    exit 1
-  fi
-  # Stage from origin/main, never the local branch: the local branch is a
-  # convenience ref that can sit behind, and what ships must be what the
-  # remote actually holds.
-  staged_sha="$(git --git-dir "$HOME/.icor-git/$repo.git" rev-parse origin/main)"
-  remote_sha="$(git ls-remote "https://github.com/myICOR/$remote.git" refs/heads/main | cut -f1)"
-  if [ "$staged_sha" != "$remote_sha" ]; then
-    echo "BLOCKED: $repo origin/main is $staged_sha but the remote reports $remote_sha" >&2
-    exit 1
-  fi
-  mkdir -p "$STAGE/$dest"
-  ship="$(shipped_files "$kind")"
-  # shellcheck disable=SC2086
-  if ! git --git-dir "$HOME/.icor-git/$repo.git" archive origin/main -- $ship | tar -x -C "$STAGE/$dest"; then
-    echo "BLOCKED: $repo origin/main does not carry every shipped file ($ship); nothing else is staged from it" >&2
-    exit 1
-  fi
-  STAGED_SHAPES+=("$dest|$ship")
-done
-
-# The chat and terminal plugins are full source repos that do NOT track their
-# build output, and their dev worktrees may hold an in-flight build that never
-# shipped. The zip therefore stages each entirely from its LATEST GitHub
-# release: docs from the release tag, bundle from the release assets - the
-# certified artifact by construction, independent of any dev state.
-#
-# The mirror fetch is a hard block, not a `|| true`. A soft fetch means a
-# mirror that cannot reach origin stages whatever it happens to hold, under
-# the name of a tag it may not have; that is the stale-mirror defect the
-# specs above already refuse, and these artifacts are no different.
-#
-# remote | the docs staged from the release tag (the bundle comes from the assets)
-declare -a RELEASE_SPECS=(
-  "icor-for-life-chat|manifest.json LICENSE README.md THIRD-PARTY-NOTICES.md docs/provenance.md SECURITY.md"
-  "icor-for-life-terminal|manifest.json LICENSE README.md THIRD-PARTY-NOTICES.md docs/handoff.md SECURITY.md"
-  "icor-for-life-canvases|manifest.json LICENSE README.md THIRD-PARTY-NOTICES.md SECURITY.md docs/canvas-format.md docs/architecture.md"
-  "icor-for-life-scratchpad|manifest.json LICENSE README.md THIRD-PARTY-NOTICES.md SECURITY.md docs/architecture.md"
-)
-declare -a RELEASE_REMOTES=()
-for rspec in "${RELEASE_SPECS[@]}"; do
-  IFS='|' read -r R_REMOTE R_DOCS <<< "$rspec"
-  RELEASE_REMOTES+=("$R_REMOTE")
-  echo "==> adding the $R_REMOTE plugin (from its latest GitHub release)"
-  R_DEST="$STAGE/.obsidian/plugins/$R_REMOTE"
-  mkdir -p "$R_DEST"
-  R_TAG="$(gh release view --repo "myICOR/$R_REMOTE" --json tagName --jq .tagName)"
-  if [ -z "$R_TAG" ]; then
-    echo "BLOCKED: myICOR/$R_REMOTE has no published release to stage from" >&2
-    exit 1
-  fi
-  ensure_mirror "$MIRRORS/$R_REMOTE.git" "https://github.com/myICOR/$R_REMOTE.git"
-  if ! git --git-dir "$HOME/.icor-git/$R_REMOTE.git" fetch --quiet --tags --force origin \
-       "+refs/heads/main:refs/remotes/origin/main"; then
-    echo "BLOCKED: cannot refresh the $R_REMOTE mirror from origin" >&2
-    exit 1
-  fi
-  # The tag has to exist in the mirror after that fetch. Without this check a
-  # missing tag reaches `git archive` as an unresolved rev, and the failure
-  # reads like a build error rather than what it is: staging a release the
-  # mirror has never seen.
-  if ! git --git-dir "$HOME/.icor-git/$R_REMOTE.git" rev-parse -q --verify "refs/tags/$R_TAG" >/dev/null; then
-    echo "BLOCKED: the $R_REMOTE mirror has no tag $R_TAG after fetching origin" >&2
-    exit 1
-  fi
-  # shellcheck disable=SC2086
-  git --git-dir "$HOME/.icor-git/$R_REMOTE.git" archive "$R_TAG" -- $R_DOCS \
-    | tar -x -C "$R_DEST"
-  gh release download "$R_TAG" --repo "myICOR/$R_REMOTE" \
-    --pattern main.js --pattern styles.css --dir "$R_DEST" --clobber
-done
+# No plugin and no theme is staged (2.3.0). They were added here from their
+# own repos and latest releases until 2.2.2; members now install them from
+# Obsidian's community directory, which also keeps them up to date.
 
 snapshot "01-after-staging"
 
@@ -409,8 +296,8 @@ fi
 # fingerprints survive anywhere in the tree, under any name.
 #
 # The patterns below are deliberately narrow. `github.com/myICOR` is NOT one
-# of them, because the bundled plugin READMEs link to their own repos and
-# that is legitimate. A gate that goes red on correct content gets switched
+# of them, because the README links to the plugin repos and that is
+# legitimate. A gate that goes red on correct content gets switched
 # off, and a switched-off gate is worse than no gate at all.
 # ---------------------------------------------------------------------------
 echo "==> residue gate (our build tooling out of the member download)"
@@ -456,30 +343,15 @@ case "${ICOR_ZIP_SELFTEST:-}" in
     ;;
   plugin-workflow)
     # The 2026-09-07 shape: a plugin repo's own release workflow inside a
-    # staged plugin folder. Three gates below must each refuse it: the
-    # folder shape, the .github directory scan, and the `runs-on:` pattern.
-    echo "    SELFTEST: planting a plugin repo's release workflow in a staged plugin folder; this build must fail"
+    # plugin folder. Three gates below must each refuse it: the .github
+    # directory scan, the `runs-on:` pattern, and the no-bundle gate (no
+    # plugin folder may be staged at all since 2.3.0).
+    echo "    SELFTEST: planting a plugin repo's release workflow in a plugin folder; this build must fail"
     mkdir -p "$STAGE/.obsidian/plugins/icor-for-life-planner/.github/workflows"
     printf 'jobs:\n  release:\n    runs-on: ubuntu-latest\n' \
       > "$STAGE/.obsidian/plugins/icor-for-life-planner/.github/workflows/release.yml"
     ;;
 esac
-
-# The first-party plugin and theme folders were staged by path above. Here
-# each one is asserted to hold exactly those files, so a loosened archive
-# line, or anything else that lands a file in one of them, goes red on its
-# own, before the content scan below gets its turn.
-for shape in "${STAGED_SHAPES[@]}"; do
-  IFS='|' read -r dest ship <<< "$shape"
-  # shellcheck disable=SC2086
-  want="$(printf '%s\n' $ship | LC_ALL=C sort)"
-  have="$(cd "$STAGE/$dest" && find . -type f | sed 's|^\./||' | LC_ALL=C sort)"
-  if [ "$have" != "$want" ]; then
-    echo "BLOCKED residue: $dest must hold exactly [$ship] and holds:"
-    while IFS= read -r f; do echo "                 $f"; done <<< "$have"
-    fail=1
-  fi
-done
 
 for rp in "${RESIDUE_PATHS[@]}"; do
   if [ ! -e "$STAGE/$rp" ]; then
@@ -496,8 +368,8 @@ done
 # inside a vault is an invitation to put something in it.
 [ -d "$STAGE/.github" ] && find "$STAGE/.github" -depth -type d -empty -delete
 # And no .github directory anywhere in the member download, whatever is in
-# it: the scaffold's own is emptied and gone above, and a plugin's never
-# reaches the stage now that plugins are archived by path. The release
+# it: the scaffold's own is emptied and gone above, and no plugin folder is
+# staged at all. The release
 # workflow refuses `.github/` inside the finished zip as well; this is the
 # same rule one step earlier, where the folder is named.
 while IFS= read -r d; do
@@ -643,10 +515,8 @@ PYCHK
     echo "BLOCKED workspace carries state that is not the shipped README: ${f#$STAGE/}"; fail=1
   fi
 done < <(find "$STAGE" -name "workspace.json" -type f)
-# 2. data.json never ships. Every plugin in the vault is first-party now and
-#    keeps its own settings out of the vault's tracked history (the same rule
-#    every other ICOR plugin already followed); there is no bundled
-#    community plugin left to carve an exception for.
+# 2. data.json never ships. No plugin ships at all since 2.3.0, and a
+#    plugin's settings file is the member's own.
 while IFS= read -r f; do
   echo "BLOCKED data.json: $f"; fail=1
 done < <(find "$STAGE" -name "data.json" -type f)
@@ -665,136 +535,52 @@ while IFS= read -r f; do
 done < <(find "$STAGE" -name ".npmrc" -type f)
 # 3. Content patterns that look like live credentials
 if grep -rInE "(pk_[0-9]+_[A-Z0-9]{20,}|xoxb-|BEGIN [A-Z ]*PRIVATE KEY|LEXOFFICE_API_KEY=|app_password|smtp_pass)" "$STAGE" 2>/dev/null \
-     | grep -v "Scripts/run-red-tests.py" \
-     | grep -v "plugins/icor-for-life-chat/main.js"; then
+     | grep -v "Scripts/run-red-tests.py"; then
   echo "BLOCKED: credential-like content found (see matches above)"; fail=1
 fi
 
-# ---------------------------------------------------------------------------
-# 4. THE ARTIFACT GATE
-#
-# For every bundled artifact: the staged manifest version must equal the tag
-# of that repo's latest published release, and every required asset must be
-# byte-identical to the asset published under that tag.
-#
-# This is the clause that catches the theme shape. Comparing version
-# NUMBERS passes when a repo re-uses a number over changed bytes; only the
-# digest comparison fails. Note that four of these are staged from `git
-# archive main`, so this compares main's bytes against what the world can
-# actually download.
-#
-# A check that cannot run must go RED, never green. Missing digest, missing
-# asset, missing release: all block.
-# ---------------------------------------------------------------------------
-echo "==> artifact gate (staged bytes vs published release assets)"
-
 sha_of() { shasum -a 256 "$1" | cut -d' ' -f1; }
 
-verify_artifact() {  # $1 label  $2 remote  $3 staged dir  $4 space-separated asset list
-  local label="$1" remote="$2" dir="$3" assets="$4"
-  local rel tag ver a want got
-
-  if ! rel="$(gh api "repos/myICOR/$remote/releases/latest" 2>/dev/null)"; then
-    echo "BLOCKED $label: no published release found on myICOR/$remote"; fail=1; return
-  fi
-  tag="$(printf '%s' "$rel" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("tag_name",""))')"
-  if [ -z "$tag" ]; then
-    echo "BLOCKED $label: latest release has no tag name"; fail=1; return
-  fi
-
-  if [ ! -f "$dir/manifest.json" ]; then
-    echo "BLOCKED $label: no manifest.json staged at $dir"; fail=1; return
-  fi
-  ver="$(python3 -c "import json;print(json.load(open('$dir/manifest.json')).get('version',''))")"
-  if [ "$ver" != "$tag" ]; then
-    echo "BLOCKED $label: staged manifest version ($ver) != latest release tag ($tag)"
-    fail=1
-  fi
-
-  for a in $assets; do
-    if [ ! -s "$dir/$a" ]; then
-      echo "BLOCKED $label: staged asset $a is missing or empty"; fail=1; continue
-    fi
-    want="$(printf '%s' "$rel" | python3 -c "
-import sys,json
-d=json.load(sys.stdin)
-for x in d.get('assets',[]):
-    if x['name']=='$a':
-        print((x.get('digest') or '').replace('sha256:',''))
-        break
-")"
-    if [ -z "$want" ]; then
-      echo "BLOCKED $label: release $tag publishes no digest for $a (cannot verify, so this is a failure, not a pass)"
-      fail=1; continue
-    fi
-    got="$(sha_of "$dir/$a")"
-    if [ "$want" != "$got" ]; then
-      echo "BLOCKED $label: $a staged ${got:0:12} != release $tag ${want:0:12} - the zip would ship different bytes than the world downloads"
-      fail=1
-    else
-      echo "    $label $a ${got:0:12} matches release $tag"
-    fi
-  done
-}
-
-for spec in "${SPECS[@]}"; do
-  IFS='|' read -r _repo remote dest kind <<< "$spec"
-  if [ "$kind" = "theme" ]; then
-    verify_artifact "$remote" "$remote" "$STAGE/$dest" "manifest.json theme.css"
-  else
-    verify_artifact "$remote" "$remote" "$STAGE/$dest" "main.js manifest.json styles.css"
+# ---------------------------------------------------------------------------
+# 4. THE NO-BUNDLE GATE (2.3.0)
+#
+# The zip carries no Obsidian plugin and no theme. Members install the ICOR
+# for Life plugins and the INKLINE theme from Obsidian's community directory,
+# so a folder under .obsidian/plugins/ or .obsidian/themes/ in the staged
+# tree is either a mistake that would ship code nobody released, or a
+# leftover that would shadow the copy the member installs. And
+# community-plugins.json enables nothing: enabling a plugin the zip does not
+# hold is a "failed to load" notice on the member's first open.
+#
+# A check that cannot run goes RED: a missing or unreadable list blocks.
+# ---------------------------------------------------------------------------
+echo "==> no-bundle gate (no plugin or theme in the zip, nothing enabled)"
+for d in ".obsidian/plugins" ".obsidian/themes"; do
+  if [ -e "$STAGE/$d" ]; then
+    while IFS= read -r f; do
+      [ -n "$f" ] || continue
+      echo "BLOCKED no-bundle: ${f#$STAGE/} is staged; plugins and themes come from Obsidian's community directory"; fail=1
+    done < <(find "$STAGE/$d" -mindepth 1 -maxdepth 1 2>/dev/null)
   fi
 done
-for R_REMOTE in "${RELEASE_REMOTES[@]}"; do
-  verify_artifact "$R_REMOTE" "$R_REMOTE" "$STAGE/.obsidian/plugins/$R_REMOTE" "main.js manifest.json styles.css"
-done
-
-# 5. The enabled-plugin list and the staged plugin folders must agree.
-#    Enabling a plugin the zip does not ship, or shipping one the vault does
-#    not enable, is a silent broken install for whoever unzips this.
-echo "==> enabled-plugin coherence"
 CPJ="$STAGE/.obsidian/community-plugins.json"
 if [ ! -f "$CPJ" ]; then
-  echo "BLOCKED: .obsidian/community-plugins.json is missing from the staged vault"; fail=1
+  echo "BLOCKED no-bundle: .obsidian/community-plugins.json is missing from the staged vault"; fail=1
+elif ! ENABLED="$(python3 -c '
+import json, sys
+v = json.load(open(sys.argv[1], encoding="utf-8"))
+if not isinstance(v, list):
+    sys.exit("community-plugins.json is not a list")
+for p in v:
+    print(p)
+' "$CPJ")"; then
+  echo "BLOCKED no-bundle: .obsidian/community-plugins.json cannot be read as a list"; fail=1
+elif [ -n "$ENABLED" ]; then
+  while IFS= read -r p; do
+    echo "BLOCKED no-bundle: community-plugins.json enables '$p', which the zip does not carry"; fail=1
+  done <<< "$ENABLED"
 else
-  COHERENCE="$(python3 - "$CPJ" "$STAGE/.obsidian/plugins" <<'PY'
-import json, os, sys
-enabled = set(json.load(open(sys.argv[1])))
-present = {d for d in os.listdir(sys.argv[2])
-           if os.path.isfile(os.path.join(sys.argv[2], d, "manifest.json"))}
-# Every plugin in the vault is first-party now; there is no third-party
-# plugin left to carve out of the coherence rule.
-ours = {"icor-for-life-planner", "icor-for-life-focus",
-        "icor-for-life-connect", "icor-for-life-chat", "icor-for-life-interface",
-        "icor-for-life-scaffold-check", "icor-for-life-sqlite-viewer",
-        "icor-for-life-terminal", "icor-for-life-outliner",
-        "icor-for-life-pdf-annotation", "icor-for-life-canvases",
-        "icor-for-life-scratchpad"}
-for p in sorted((enabled & ours) - present):
-    print(f"community-plugins.json enables {p!r} but the zip stages no such plugin folder")
-for p in sorted((present & ours) - enabled):
-    print(f"the zip stages {p!r} but community-plugins.json does not enable it")
-
-# THE INVENTORY ASSERTION. The two rules above are set differences over the
-# first-party set, so a plugin folder under a name that is not in `ours` is
-# invisible to them: a folder left behind by a rename ships, enabled or not,
-# and every check above stays green. This one names the complete expected
-# tree instead, so anything extra or missing is a failure by construction
-# rather than by remembering to add it to a list.
-expected = ours
-for p in sorted(present - expected):
-    print(f"the zip stages an unexpected plugin folder {p!r}")
-for p in sorted(expected - present):
-    print(f"the zip is missing the plugin folder {p!r}")
-PY
-)"
-  if [ -n "$COHERENCE" ]; then
-    while IFS= read -r line; do
-      echo "BLOCKED: $line"; fail=1
-    done <<< "$COHERENCE"
-  else
-    echo "    enabled plugins and staged plugin folders agree"
-  fi
+  echo "    no plugin or theme staged, community-plugins.json enables nothing"
 fi
 
 if [ "$fail" -ne 0 ]; then
@@ -812,8 +598,7 @@ NAME="ICOR-for-Life-Scaffold-$STAMP.zip"
 # and none of them looks inside the zip. The archive is therefore removed
 # first, so the zip is always a fresh copy of the tree the gates passed.
 rm -f "$OUT_DIR/$NAME"
-# REPRODUCIBLE. Two builds of the same tag with the same plugin releases must
-# be the same bytes, or the release workflow could never tell "already
+# REPRODUCIBLE. Two builds of the same tag must be the same bytes, or the release workflow could never tell "already
 # published" from "different bytes under the same version". Two things make
 # a zip differ for no reason: file times (git archive stamps the commit
 # time, but the release downloads carry the moment they were fetched) and

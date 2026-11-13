@@ -2,8 +2,7 @@
 
 **This folder is MIT.** From myPKA 7 (ICOR for Life content 2.2.0,
 October 2026) the rooms, templates, guidelines, life scripts, the Obsidian
-settings, the ICOR for Life plugins, the AI team and everything else in this
-folder are open source under the MIT licence below, unless the short list
+settings, the AI team and everything else in this folder are open source under the MIT licence below, unless the short list
 under "Parts with their own terms" names it. Use it, change it, share it,
 build on it, including commercially. Keep the copyright line and the
 licence text.
@@ -17,10 +16,7 @@ copy you already have.
 
 | Part | Terms |
 |---|---|
-| INKLINE theme (`.obsidian/themes/ICOR`) | CC BY-NC-ND 4.0; its embedded fonts SIL OFL 1.1. Use it in your own vaults, share unchanged copies noncommercially with attribution; do not sell or publish modified versions. |
-| ICOR AI Chat plugin, built `main.js` | The plugin is MIT; the bundled `@anthropic-ai/claude-agent-sdk` is Copyright (c) Anthropic PBC, under Anthropic's terms. Claude access runs on your own Anthropic account. |
-| myICOR Connect plugin | The plugin is MIT; using the myICOR platform through it follows the myICOR Terms of Service. |
-| Libraries some plugins bundle (sql.js, xterm.js and its addons) | Their own licences, listed in `THIRD-PARTY-NOTICES.md` and in each plugin's own notices. |
+| The ICOR for Life plugins and the INKLINE theme | Not in this folder since ICOR for Life 2.3.0: you install them from Obsidian's community directory, and each comes with its own licence and notices from its repository. For reference: the plugins are MIT (AI Chat bundles Anthropic's `@anthropic-ai/claude-agent-sdk` under Anthropic's terms; using the myICOR platform through Connect follows the myICOR Terms of Service), and the theme is CC BY-NC-ND 4.0 with SIL OFL 1.1 fonts. |
 | Names and logos | "myICOR", "ICOR", "ICOR Journey", "ICOR for Life", "myPKA" and "Paperless Movement" are trademarks. No licence here grants trademark rights: a fork or product of yours needs its own name. |
 
 ## The licence

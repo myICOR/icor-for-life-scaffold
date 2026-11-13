@@ -50,18 +50,18 @@ A useful report has:
 
 **The shipped Obsidian setup** (`.obsidian/`). Any setting in the zip that turns on something you didn't choose, loads a plugin, theme or snippet that isn't ours, or carries leftover state from our machines (a `data.json`, a token, a workspace).
 
-**The bundled plugins and the theme, as shipped.** The twelve plugins and the INKLINE theme are built in their own repositories. In scope here: bytes in the zip that differ from the release that plugin's or theme's repository published, or any file in a plugin or theme folder beyond the ones listed above. A bug in the plugin or theme code itself goes to its repository (below).
+**No bundled plugins or theme.** Since 2.3.0 the zip carries no plugin and no theme, and its `community-plugins.json` enables none: you install the ICOR for Life plugins and the INKLINE theme from Obsidian's community directory. In scope here: a zip that carries a plugin or theme folder, or enables a plugin. A bug in the plugin or theme code itself goes to its repository (below).
 
 **The release workflow** (`.github/workflows/release.yml`). Any way to get a release out without every gate passing, to build it from anything but its tag, to replace a published file, to use a myPKA checkout other than the pinned commit, or to reach the workflow's token.
 
-**The attestations and the zip.** A zip or a `manifest.json` that passes the check below without being built by `release.yml` from its tag on a GitHub-hosted runner. A zip that carries anything not in that tag and the bundled plugin and theme releases: build tooling, personal data, a repository-only file or any secret.
+**The attestations and the zip.** A zip or a `manifest.json` that passes the check below without being built by `release.yml` from its tag on a GitHub-hosted runner. A zip that carries anything not in that tag: build tooling, personal data, a repository-only file, a plugin, a theme or any secret.
 
 ## What's out of scope
 
 These aren't vulnerabilities in ICOR for Life, and we close them as such:
 
 - **The AI team: report to myPKA.** The write guard, the hooks, `session-start.py`, the updater, the resolver, `add-mcp-server.py`, `scaffold-init.py`, the expansion-pack installer and the shipped `.mcp.json` are myPKA's. Its policy: [SECURITY-myPKA.md](https://github.com/myICOR/myPKA/blob/main/SECURITY-myPKA.md). Its form: https://github.com/myICOR/myPKA/security/advisories/new.
-- **Plugin and theme code.** Each has its own repository and its own `SECURITY.md`:
+- **Plugin and theme code.** You install them from Obsidian's community directory. Each has its own repository and its own `SECURITY.md`:
   [Planner](https://github.com/myICOR/icor-for-life-planner),
   [Focus](https://github.com/myICOR/icor-for-life-focus),
   [Connect](https://github.com/myICOR/icor-for-life-connect),
@@ -75,7 +75,6 @@ These aren't vulnerabilities in ICOR for Life, and we close them as such:
   [Canvases](https://github.com/myICOR/icor-for-life-canvases),
   [Scratchpad](https://github.com/myICOR/icor-for-life-scratchpad),
   [INKLINE theme](https://github.com/myICOR/icor-for-life-inkline).
-  Whether the zip carries exactly what those repositories published is in scope here.
 - **Obsidian itself.** Report to [Obsidian](https://github.com/obsidianmd/obsidian-releases/issues).
 - **Your AI host and its model.** ICOR for Life is not a sandbox and can't stop a model you gave file access from using it.
 - **Your own notes, keys and setup.** What you put in your folder, a plugin's settings, where you sync it and who uses your computer. Anything in ICOR for Life that moves a key or a note out of your folder, or into a file you didn't choose, is in scope.

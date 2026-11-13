@@ -82,13 +82,33 @@ The folder is the product. Nothing in it needs Obsidian.
   Python 3.9 or newer and nothing else (on Windows, type `py -3` where a
   command says `python3`).
 
-**If you like Obsidian**, open the folder as a vault and click "Trust author
-and enable plugins". Twelve ICOR for Life plugins are **pre-installed** and
-switch on: Planner, Focus, Connect, AI Chat, Interface, Scaffold Check,
-SQLite Viewer, Terminal, Outliner, PDF Annotation, Canvases and Scratchpad.
-The folder opens in the INKLINE theme. You can switch any plugin off, or
-ignore Obsidian completely: the plugins only add an interface on top of the
-same files.
+**If you like Obsidian**, open the folder as a vault. The folder ships no
+plugins: you pick the ones you want from Obsidian's community directory,
+and Obsidian keeps them up to date.
+
+### Install the ICOR for Life plugins
+
+1. Open Obsidian, then **Settings** (the gear, bottom left).
+2. Go to **Community plugins**. If Obsidian asks, choose **Turn on community
+   plugins**.
+3. Click **Browse** and search for **ICOR for Life**.
+4. Open each plugin you want, click **Install**, then **Enable**.
+
+The plugins are Planner, Focus, Connect, AI Chat, Scaffold Check, Terminal,
+Outliner, PDF Annotation, Canvases and Scratchpad. Interface and SQLite
+Viewer are not in the directory yet; until they are, take `main.js`,
+`manifest.json` and `styles.css` from the latest release on
+[github.com/myICOR/icor-for-life-interface](https://github.com/myICOR/icor-for-life-interface/releases/latest)
+or
+[github.com/myICOR/icor-for-life-sqlite-viewer](https://github.com/myICOR/icor-for-life-sqlite-viewer/releases/latest)
+and put them in `.obsidian/plugins/icor-for-life-interface/` or
+`.obsidian/plugins/icor-for-life-sqlite-viewer/`.
+
+For the look: **Settings**, **Appearance**, **Themes**, **Manage**, search
+for **INKLINE**, then **Install and use**.
+
+Every plugin is optional. The folder works without any of them, and without
+Obsidian: the plugins only add an interface on top of the same files.
 
 ## What is inside
 
@@ -117,7 +137,10 @@ adapts them to this folder with you before it installs anything.
 1. Unzip the download into a folder of your own, for example
    `Documents/myPKA`.
 2. Open that folder in your AI tool and say: "Hello Larry, show me around."
-   Or open it in Obsidian as a vault and trust the author.
+   Or open it in Obsidian as a vault, then add the plugins you want:
+   **Settings**, **Community plugins**, **Browse**, search **ICOR for
+   Life**, **Install**, **Enable** (see "Install the ICOR for Life
+   plugins" above).
 3. Write into today's Daily Scratchpad, then tell Larry: "process my
    scratchpad". No AI at hand? Carry the pieces into their homes yourself;
    the walkthrough is `06 AI Team/AI Team Knowledge/Guidelines/GL-1007-capture-and-where-things-go.md`,
@@ -146,6 +169,11 @@ the rooms and guidelines. Nothing you edited is overwritten: where a file
 you changed has a newer version, it lands next to yours as `<file>.update`.
 Nothing is ever deleted.
 
+**Plugins you already have** stay where they are and stay switched on: the
+update leaves `.obsidian/plugins/` and your list of enabled plugins alone.
+From ICOR for Life 2.3.0 they update from Obsidian's community directory
+(Settings, Community plugins, Check for updates), not from the download.
+
 **Vex, Felix, Vera or Pixel already installed as a pack?** Before the
 update, ask your AI to remove the pack the way its README says
 (`expansion-pack.py remove <name> --approved`): it deletes only files you
@@ -156,7 +184,8 @@ brings the team version.
 download and move your notes over with Larry. `MIGRATING-FROM-5.md` in the
 myPKA repository has the steps.
 
-The **Scaffold Check** plugin (in Obsidian) compares your folder with the
+The **Scaffold Check** plugin (in Obsidian, from the community directory)
+compares your folder with the
 latest release and reports what is missing, what changed upstream and what
 you edited yourself. It only looks; it never changes anything.
 
@@ -195,6 +224,6 @@ a starting point and as inspiration, not as a finished product.
 
 ## License
 
-MIT. See `LICENSE.md`. The INKLINE theme, the libraries some plugins bundle
-and our names and logos keep their own terms, listed there and in
-`THIRD-PARTY-NOTICES.md`.
+MIT. See `LICENSE.md`. Our names and logos keep their own terms, listed
+there. The plugins and the INKLINE theme are not part of this download; each
+carries its own license and notices in its repository.

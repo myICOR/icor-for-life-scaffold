@@ -4,20 +4,13 @@
 .DS_Store
 
 
-# ICOR Planner is its own git repository (and its data.json holds API keys)
-.obsidian/plugins/icor-for-life-planner/
-
-# Plugin and theme code lives in its own repos on the myICOR org
-# (Connect also keeps its OAuth token store out of git there)
-.obsidian/plugins/icor-for-life-connect/
-.obsidian/plugins/icor-for-life-interface/
-.obsidian/themes/ICOR for Life - INKLINE/
-
-# myICOR Connect token store (hard rule 9: secrets never reach git)
-.obsidian/plugins/icor-for-life-connect/data.json
-
-# ICOR Focus is its own git repository (data.json holds the local opens log)
-.obsidian/plugins/icor-for-life-focus/
+# Obsidian plugins and themes are installed from Obsidian's community
+# directory (search "ICOR for Life"), never tracked and never shipped (2.3.0).
+# Their data.json can hold API keys, OAuth tokens and shell environments
+# (hard rule 9: secrets never reach git). The release builder blocks a zip
+# that carries either folder.
+.obsidian/plugins/
+.obsidian/themes/
 
 
 # Live personal data syncs into these paths - never tracked, never shipped
@@ -30,19 +23,6 @@
 # personal data that must never reach the zip.
 00 Daily Scratchpad/[0-9][0-9][0-9][0-9]/
 
-# ICOR AI Chat is its own git repository (data.json holds chat/session state)
-.obsidian/plugins/icor-for-life-chat/
-
-# ICOR Scaffold Check is its own git repository (data.json may hold a GitHub token)
-.obsidian/plugins/icor-for-life-scaffold-check/
-
-# ICOR Terminal is its own git repository (data.json holds shell profiles and their environment)
-.obsidian/plugins/icor-for-life-terminal/
-
-# ICOR Canvases is its own git repository (its main.js is untracked there too;
-# the zip stages it from the plugin's latest GitHub release, like Chat and Terminal)
-.obsidian/plugins/icor-for-life-canvases/
-.obsidian/plugins/icor-for-life-scratchpad/
 
 # The machine layer (GL-1008): what plugins and scripts write for each other,
 # per device and regenerated, never tracked and never shipped. Only the four

@@ -24,8 +24,9 @@ backup tool and a poor one for git.
 
 ## The plugin that opens this room
 
-The **ICOR for Life - SQLite Viewer** plugin (install it from
-Settings -> Community plugins) opens any `.db`, `.sqlite` or
+The **ICOR for Life - SQLite Viewer** plugin (not in Obsidian's community
+directory yet; the root `README.md`, "Install the ICOR for Life plugins",
+says how to install it) opens any `.db`, `.sqlite` or
 `.sqlite3` file in the vault, and this room is its home:
 
 - **Browse.** Click a database and see every table with its row count,
