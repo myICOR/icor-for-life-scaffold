@@ -17,6 +17,85 @@ called `Unreleased`: the manifest builder matches removal lines by version
 section, so a removal under any other heading is a removal it cannot
 explain.
 
+## 2.3.0
+
+**The plugins come from Obsidian's community directory now**, and four
+defects from a member's report on myPKA 7.0.1 / ICOR for Life 2.2.1 are
+fixed (Intercom 215476812219754, items 1, 3, 4 and 6; the other six items
+are myPKA's). Pairs with myPKA 7.0.1 or later.
+
+### The plugins and the theme no longer ship
+
+The download carries no Obsidian plugin and no theme. To add them: open
+Obsidian, **Settings**, **Community plugins**, **Browse**, search for
+**ICOR for Life**, then **Install** and **Enable** the ones you want. The
+INKLINE theme is under **Settings**, **Appearance**, **Themes**, **Manage**.
+Obsidian keeps them up to date from there. Interface and SQLite Viewer are
+not in the community directory yet; `README.md` says how to install them
+from their GitHub releases until they are.
+
+- Removed: `.obsidian/plugins/icor-for-life-outliner/main.js`, the bundled Outliner plugin; install ICOR for Life - Outliner from the community directory.
+- Removed: `.obsidian/plugins/icor-for-life-outliner/manifest.json`, the bundled Outliner plugin; install ICOR for Life - Outliner from the community directory.
+- Removed: `.obsidian/plugins/icor-for-life-outliner/styles.css`, the bundled Outliner plugin; install ICOR for Life - Outliner from the community directory.
+- Removed: `.obsidian/plugins/icor-for-life-pdf-annotation/main.js`, the bundled PDF Annotation plugin; install ICOR for Life - PDF Annotation from the community directory.
+- Removed: `.obsidian/plugins/icor-for-life-pdf-annotation/manifest.json`, the bundled PDF Annotation plugin; install ICOR for Life - PDF Annotation from the community directory.
+- Removed: `.obsidian/plugins/icor-for-life-pdf-annotation/styles.css`, the bundled PDF Annotation plugin; install ICOR for Life - PDF Annotation from the community directory.
+- Removed from the download, never tracked here: the other ten plugin folders
+  (Planner, Focus, Connect, AI Chat, Interface, Scaffold Check, SQLite
+  Viewer, Terminal, Canvases, Scratchpad) and the INKLINE theme folder,
+  which the release builder used to add from their own releases.
+- Changed: `.obsidian/community-plugins.json` enables nothing (`[]`). It is
+  a `seed` in the manifest now, like `.obsidian/workspace.json`: yours after
+  the first install, never overwritten by the updater. **If you update an
+  existing folder, your installed plugins stay installed and switched on**;
+  the updater may leave the new empty list beside yours as
+  `.obsidian/community-plugins.json.update`, which you can delete.
+- Unchanged on purpose: `.obsidian/appearance.json` still names the INKLINE
+  theme, so it is in use as soon as you install it; until then Obsidian
+  shows its default theme. `.obsidian/hotkeys.json` keeps the PDF Annotation
+  and Canvases keys, which work once those plugins are installed.
+- Changed: `06 AI Team/AI Team Knowledge/Scripts/build-release-zip.sh`
+  stages no plugin and no theme, and its artifact and coherence gates are
+  replaced by a no-bundle gate: a zip with anything under
+  `.obsidian/plugins/` or `.obsidian/themes/`, or an enabled plugin, is
+  blocked.
+- Changed: `06 AI Team/AI Team Knowledge/Scripts/build-scaffold-manifest.py`
+  lists `.obsidian/community-plugins.json` as a seed;
+  `test-build-scaffold-manifest.py` holds it.
+- Changed: `.gitignore` ignores all of `.obsidian/plugins/` and
+  `.obsidian/themes/`, in place of one line per plugin.
+- Changed: `README.md` ("Install the ICOR for Life plugins", "Start in five
+  minutes" step 2, "Updating"), `SECURITY.md`, `LICENSE.md`,
+  `THIRD-PARTY-NOTICES.md`, `07 Databases/README.md` and GL-1010 say the
+  plugins come from the community directory.
+
+### Fixes from the member report
+
+- Fixed (item 1, high): `link-dates-to-daily-notes.py` no longer edits text
+  that hard rule 1 protects. `01 Inbox/` is out of its scope, captures and
+  `Outer World/archive/` included; a capture's dates get their links when
+  it is processed into a note. Inside `04 Inner World/` and `03 WiP/` it
+  leaves the `## Original Text` section of a journal entry (down to the
+  next heading of the same or a higher level) and every blockquote as
+  written. GL-1011's scope table says so. myPKA's WS-1005 still calls the
+  checkpoint's `--fix` "nothing to rule on"; with these exclusions that is
+  true again, and the wording there is myPKA's to change.
+- Fixed (item 3): the Reading queue in `04 Inner World/Notes/Notes.base`,
+  and the view `new-base.py` writes, filter `note.consumed != true` instead
+  of `== false`, so a reference note with no `consumed` field shows in the
+  queue. `check-quality.py` counts a reference as read only when `consumed`
+  is `true`, the same rule, so `consumed: yes` is unread in both.
+- Fixed (item 4): `check-quality.py`'s orphan and duplicate checks look at
+  every note anywhere under an entity folder, subfolders included, as its
+  counts already did. Notes in an `archive/` subfolder stay out, and the
+  orphan check reads only entity and note types, so the `pdf-highlight`
+  notes PDF Annotation writes to `Notes/Highlights/` are not orphans.
+- Fixed (item 6): `validate-scaffold.py`'s project-goal and goal-status
+  checks walk subfolders (`rglob`), as its note check does, and name the
+  file by its path under the folder.
+- Added: tests for each fix in `test-link-dates-to-daily-notes.py` and
+  `test-note-scripts.py`.
+
 ## 2.2.2
 
 Fixes from a member's run through the whole Implementation Journey on a fresh

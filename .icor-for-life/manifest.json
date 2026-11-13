@@ -1,9 +1,9 @@
 {
   "schema": 2,
   "name": "ICOR for Life Scaffold",
-  "version": "2.2.2",
-  "built": "2026-11-02T21:14:18Z",
-  "commit": "13de340",
+  "version": "2.3.0",
+  "built": "2026-11-13T23:23:56Z",
+  "commit": "6472772",
   "lab": false,
   "source_commit": "f7dd5f0",
   "implements": "icor-concepts/1",
@@ -68,39 +68,20 @@
     "03 WiP/Operations",
     "07 Databases"
   ],
-  "plugins": [
-    "icor-for-life-canvases",
-    "icor-for-life-chat",
-    "icor-for-life-connect",
-    "icor-for-life-focus",
-    "icor-for-life-interface",
-    "icor-for-life-outliner",
-    "icor-for-life-pdf-annotation",
-    "icor-for-life-planner",
-    "icor-for-life-scaffold-check",
-    "icor-for-life-scratchpad",
-    "icor-for-life-sqlite-viewer",
-    "icor-for-life-terminal"
-  ],
+  "plugins": [],
   "snippets": [],
   "files": {
-    ".icor-for-life/CHANGELOG.md": "98986639704fcbf4b1e056bc52b9864f49957ff911c94a43891f9dfcdb9c5ce9",
+    ".icor-for-life/CHANGELOG.md": "c68592c76267053a56779daddcc4bef7b841cf6e7cb0243de869f3a5cd380632",
     ".icor-for-life/README.md": "c0ba4d491917950a639f365fe02ab9b26221c231fd0c4f18668e8d02856a32a4",
-    ".icor-for-life/VERSION": "91930425f31d5132e78e0ad7195620e435121a2fdf87cf655f8323aa45ae0468",
+    ".icor-for-life/VERSION": "a42caf4a54bbbe27aa45b6efbc6356c5e299b19763e728b6cdb7201b02ebbe36",
     ".icor-for-life/manifest.json": "self",
     ".obsidian/app.json": "4ba774add05d021eedf038c4f9cbf97e9de3bc646ec210d4e6974af0115d5470",
     ".obsidian/appearance.json": "a3cf5c14b0eb792c0fb669694e42d8e95c92f9a4a48243a4a16b10195aea608d",
-    ".obsidian/community-plugins.json": "47e5f1e33b98cc329249cdc8151a17b76105b8e95621cf37dfe4d4275242a8e9",
+    ".obsidian/community-plugins.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
     ".obsidian/core-plugins.json": "4fe85af92fdee0ef231b8260500c3ed6d713108ea1a68cb48402353282600621",
     ".obsidian/daily-notes.json": "b924282e7d0484f4a80ba70062de30a8afa9cc75c4c56d0e0b031f5318f7c884",
     ".obsidian/graph.json": "8109c19cfc016a96eef05f99d873fd7180f0b37f48345a90bb02593375bc1913",
     ".obsidian/hotkeys.json": "85209b1654b51297fed9559eebcb1acfb88058d1cf090c2b91a4b8a374ed2063",
-    ".obsidian/plugins/icor-for-life-outliner/main.js": "3ec8a8fa52de10c013566d6cc3b869b0078bc496e11d34348e42fe32a4aeede3",
-    ".obsidian/plugins/icor-for-life-outliner/manifest.json": "04f48a66984536c5b3624f412b48e100bedeb726995920ed20f769b0352fc800",
-    ".obsidian/plugins/icor-for-life-outliner/styles.css": "87240ff7ddba80af9e643b8912e2274454bc3e5d974262573a0c533018c792a6",
-    ".obsidian/plugins/icor-for-life-pdf-annotation/main.js": "dc2bf55c9d3540324dad707a3b3ed2f2caec6b54497314a8a89bf5ea17eb9647",
-    ".obsidian/plugins/icor-for-life-pdf-annotation/manifest.json": "a5f9948e105670728ed6a3ba7b2476b03ecbec8f5c6a88c3fceae6f8902fbf93",
-    ".obsidian/plugins/icor-for-life-pdf-annotation/styles.css": "7cb2ad3a3d7c630657c439c0a525f53178f0405bc14d15070ad9391c5b182fd2",
     ".obsidian/templates.json": "c60ed788d6220f636a882114d69b70aded11c927e31bd47e701a1f6d543f1437",
     ".obsidian/types.json": "54bae287b9df7dd0496b800ff22a68f36d85fab3a37b2a4bb640501d44072557",
     ".obsidian/webviewer.json": "26e457f53a584f007c6c647043857e94b10589d121f3ed67842d44a0009aaa37",
@@ -143,7 +124,7 @@
     "04 Inner World/Notes/Documents.base": "ddfea0e15cb7f2989af54dd5b42b181bfb64ea904787f30af5a8134de4ab801f",
     "04 Inner World/Notes/Example Invoice.md": "51e948ac2f8019fdf19a980c3be83b384821dfa27416fcf22a8ab06ac5acd55f",
     "04 Inner World/Notes/Highlights/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "04 Inner World/Notes/Notes.base": "87a3790645a695bb92ba9e561b4033393c6364027a3ec179ae8eec10322e962c",
+    "04 Inner World/Notes/Notes.base": "219b54861ac9ec2b9254053f84c03d1d4b524caa14b3f72c112658adc4ae3d3d",
     "04 Inner World/Notes/README.md": "28cd1c938bb7ae208ce20cfbfd8d12bc162229717778feb2dc8a3e8bb66368e7",
     "04 Inner World/Notes/Why I keep a Daily Scratchpad.md": "a1dd47b047c86f52524e77a4c233b5fba8a77fc30fe72e336b783cb1f82bd018",
     "04 Inner World/README.md": "f6ba26dbf338e9b2c3760113e819164e92fd880d13ffa9efaec7fe86e0fb8105",
@@ -165,17 +146,17 @@
     "06 AI Team/AI Team Knowledge/Guidelines/GL-1003-journal-entry-anatomy.md": "aca196784683c710d550e606f6df84c31140604dc5fcc55b78adc9bc14f6d109",
     "06 AI Team/AI Team Knowledge/Guidelines/GL-1006-bases-and-live-views.md": "11397283273b8e5b88bcc65583d09e20cd88ca6279a2db826afc614974eb0296",
     "06 AI Team/AI Team Knowledge/Guidelines/GL-1007-capture-and-where-things-go.md": "aca462b702dfc5014219fd493e8083fb08021ef19b9d145a5946cef8c98cf843",
-    "06 AI Team/AI Team Knowledge/Guidelines/GL-1010-the-five-capture-workflows.md": "37e627b4ffeef3795ae3bc6122cc4cfecc6e6318cdff787b66aa7b125d58c413",
-    "06 AI Team/AI Team Knowledge/Guidelines/GL-1011-date-mentions-link-to-daily-notes.md": "13ff3e4d8d6cfd164ad2b9b1115880e8c7daec271694b9e234e01801d44146cd",
+    "06 AI Team/AI Team Knowledge/Guidelines/GL-1010-the-five-capture-workflows.md": "14d58947a297efa75189f055135a524a03bdf02a939ded00292842124e3a7ebd",
+    "06 AI Team/AI Team Knowledge/Guidelines/GL-1011-date-mentions-link-to-daily-notes.md": "505f734f175388f14ec077d6ca0ed504141e6e84dd3791cfafeb6ee343d4a1cc",
     "06 AI Team/AI Team Knowledge/Scripts/LICENSE": "77a6575ec003398ce17d644b60058039b4747e0ae1e2988c0e282775412110b9",
     "06 AI Team/AI Team Knowledge/Scripts/README.md": "8c79706a1cb1278cca3c17ed00f0e604056d4dd900d6a331d97d866b07c52bce",
-    "06 AI Team/AI Team Knowledge/Scripts/build-scaffold-manifest.py": "ffcea163df25430fabcd9fd0ab3a19119b38dc7a15511ce166c04913111c5257",
+    "06 AI Team/AI Team Knowledge/Scripts/build-scaffold-manifest.py": "6c2dc3532338cd52c2a778e316d2afbf9d43993d4446cb0f559600a3e7826b15",
     "06 AI Team/AI Team Knowledge/Scripts/check-bases.py": "bd3571dcb8fe219285afb10d7f22e4a4528a313756a8d0d58edd2560c2ce7fda",
-    "06 AI Team/AI Team Knowledge/Scripts/check-quality.py": "848f7ec812569731901395d83f8f81560cab9f189efa24311fe3032b02dfc6f3",
+    "06 AI Team/AI Team Knowledge/Scripts/check-quality.py": "84e8099bc1ac1fc388d8f5e4cbe99affacd7c0d96b9245030f9019397c4a418b",
     "06 AI Team/AI Team Knowledge/Scripts/find-entity.py": "a5525cc83234b85e1aaaf323ccdaa4b4747a2c1e9c59a99b0613e82fcfc99ebc",
     "06 AI Team/AI Team Knowledge/Scripts/life-snapshot.py": "b78d4acab8fb41bc13bc2b6a5fce568c728300ac734754747bc6ee2f9276c90b",
-    "06 AI Team/AI Team Knowledge/Scripts/link-dates-to-daily-notes.py": "67ed23e22d491d58a02b9768cea2bd5fc0dcf5ced4ab7c6c51adec2f1a52b19c",
-    "06 AI Team/AI Team Knowledge/Scripts/new-base.py": "38969858bebedf4494656827ddb5cadfe7c3dc45d0f3e7952ec6509a98f7c321",
+    "06 AI Team/AI Team Knowledge/Scripts/link-dates-to-daily-notes.py": "d1523fac2f6601e92b4afdc84413709c7a79094390c4c2eca5a8c7b0750b0120",
+    "06 AI Team/AI Team Knowledge/Scripts/new-base.py": "26c6c18aa1e9633ecc68ccb340cf9dd43cdaa866cf2fcb0d03b41a3bf40b65d3",
     "06 AI Team/AI Team Knowledge/Scripts/new-entity.py": "9066fd78bcc1114055ecf39f3c6307121b24907487cb5249f7301aa31672403a",
     "06 AI Team/AI Team Knowledge/Scripts/new-journal-entry.py": "c7a2dd1ef33356c55e03c027336eb01c36570a71b42024a69322eb849cefcc77",
     "06 AI Team/AI Team Knowledge/Scripts/noteio-icor.py": "8adf62965c7a646d9e567eaed2d809164796c75f81c6cb6626a8fbf0e3bd7f22",
@@ -183,11 +164,11 @@
     "06 AI Team/AI Team Knowledge/Scripts/planner-week.py": "2f844a2418fdd0ec9c94eb2d47791f8eea22a85e5946d691738988e4e2ffeb9b",
     "06 AI Team/AI Team Knowledge/Scripts/set-property.py": "1325fc748803f17920f67ff83d4d7a034251b42e50ac87ba8713b9f481052e71",
     "06 AI Team/AI Team Knowledge/Scripts/stamp-processed.py": "1e97ea8184f4a117044d11eef2d58360619e6c24bc7c5fabb8478f3c773e1462",
-    "06 AI Team/AI Team Knowledge/Scripts/test-build-scaffold-manifest.py": "bcba4b90c47d803677fc11720de36e7915dd75ab87f4fb5c384706112b053cb8",
+    "06 AI Team/AI Team Knowledge/Scripts/test-build-scaffold-manifest.py": "a0362a8b3b6bc4c9c28c55f01030f3d99587424b670547abebcf00443c61a99a",
     "06 AI Team/AI Team Knowledge/Scripts/test-life-snapshot.py": "af5cc5a8e0fa4b3ba4f9233c0eb047de7f847fc844c7884c2f4be20177ae4f18",
-    "06 AI Team/AI Team Knowledge/Scripts/test-link-dates-to-daily-notes.py": "69dd2e31f3b4aba6bb0b7368a4cd88b8432b5b962e22f6547c282f5f1018cbb4",
-    "06 AI Team/AI Team Knowledge/Scripts/test-note-scripts.py": "50036cfce9ae160f29ce996fd41b1eee2099ceb3a65181091cc13fbc9f1082b1",
-    "06 AI Team/AI Team Knowledge/Scripts/validate-scaffold.py": "cd6a064d047391c9e4715c23d0e97dd131887773f7b8b1532b42f379069c8161",
+    "06 AI Team/AI Team Knowledge/Scripts/test-link-dates-to-daily-notes.py": "b3e94799c93bcc36b2f301f9935bbb027292f2e6a4c9e3f692c0e223d6dd9235",
+    "06 AI Team/AI Team Knowledge/Scripts/test-note-scripts.py": "079a371f12e36a6f3758edab0bbf6ed497ca074427cee33d3329d2ab949a52fa",
+    "06 AI Team/AI Team Knowledge/Scripts/validate-scaffold.py": "c978e2fa4876539b3f5d232ee6c52d6f74ce2e63ec19d40fd47a25b01d67a49f",
     "06 AI Team/AI Team Knowledge/Templates/company.md": "19b9f579b8ac664b586e86d393fdfd93a7bdeacd3ed8a250548c243aa961e0b6",
     "06 AI Team/AI Team Knowledge/Templates/document.md": "81fca36e566a4369dc6b2fee8221a3ce9c4ee3eea050d01956ad2056929b4701",
     "06 AI Team/AI Team Knowledge/Templates/goal.md": "6b834e923925170d75bdfddde66e607ddef169c6166c7a6cb499bac6665c7873",
@@ -202,19 +183,20 @@
     "06 AI Team/AI Team Knowledge/Templates/web-clipper-outer-world.json": "60bd5bc540be08d407528f564657330f0a49bad08be6b87ef144f9dd53d7597e",
     "06 AI Team/AI Team Knowledge/Workstreams/WS-1001-daily-processing-run.md": "4640ce19b8e3df1b6b16f67f2bb0589d78361eea45fb413df821f6846767c5ea",
     "06 AI Team/AI Team Knowledge/Workstreams/WS-1002-weekly-review.md": "57eb24c224ba0444b3c0acfe23999fc8efd41a5b389a29835447cfe7c20ce86e",
-    "07 Databases/README.md": "7db2c398bc5fb511f27c3e86aad289c7681cd03d7545b5062ed1a1e502a2c1d5",
-    "LICENSE.md": "6b8e30fe038fb0b08259a626816502693b938ebe107e4384f07924a750a11eb5",
-    "README.md": "754f7941cbe417c8621c7d7222e484e4a0038fd6d5c1a369276a4c75e7ed030e",
-    "SECURITY.md": "3ac7f0f7e3adc66877c787351e3b8b88c8706f8e8424c4dfba80c8b39ee5d951",
-    "THIRD-PARTY-NOTICES.md": "ab06d2d6e97344768af779185fd7b7e31fc4657d334484edf9ba4d0613da6575"
+    "07 Databases/README.md": "44e359f6763e1a2b28a27818d1564a35f946be1c7ccb71e767143d19e61e1170",
+    "LICENSE.md": "3c45bc8559ec1f259784ffe5478094ea465b8621016a1576861d2c6d7ca3b1af",
+    "README.md": "148a1c91c73be08df1736e46a77fae9fc0d0d10a3dc0111778c012877c2dae13",
+    "SECURITY.md": "7bb9cffb457fadfffb5363cae7e071159bc1e94b981352943acb3a338ce680a7",
+    "THIRD-PARTY-NOTICES.md": "76071f1a7429a4dad671ba86ddc0017146582bff1cbae92c301d2b5d7a5bc519"
   },
   "repo_only": {
     ".github/CONTRIBUTING.md": "1636e016658088d50651444180d517e8c107b74076dd88ef52bfa3c6903f4501",
-    ".github/workflows/release.yml": "24366676c3e748549340b68f6668985d7fa9207e49f8fe164382295c5385ff2c",
-    ".gitignore": "104d6b05131c4f7768d27ba57741283a3daf343f508a0f153508a4a597ec3c66",
-    "06 AI Team/AI Team Knowledge/Scripts/build-release-zip.sh": "21851ae06349fbdb0881d8e9c7a3cb43f40dddeba53810197660cd0ac849fbdd"
+    ".github/workflows/release.yml": "535826871747ec876bdcbd432ddc6fa5afe3c4a88d65be55902423a8e959dbe8",
+    ".gitignore": "b8686238238b91e4221722fa80fba23d0dcd78bb90cc3229c10eb2c58df9934e",
+    "06 AI Team/AI Team Knowledge/Scripts/build-release-zip.sh": "9c4ed1948c81ab5870caa6ae7ff55a1e1c294ee5a6f41a399c7d10d61be4a23d"
   },
   "seed": [
+    ".obsidian/community-plugins.json",
     ".obsidian/workspace.json"
   ],
   "examples": [
@@ -289,6 +271,44 @@
     }
   ],
   "history": [
+    {
+      "version": "2.3.0",
+      "date": "2026-11-14",
+      "removed": [
+        {
+          "path": ".obsidian/plugins/icor-for-life-outliner/main.js",
+          "sha256": "3ec8a8fa52de10c013566d6cc3b869b0078bc496e11d34348e42fe32a4aeede3",
+          "note": "Removed: `.obsidian/plugins/icor-for-life-outliner/main.js`, the bundled Outliner plugin; install ICOR for Life - Outliner from the community directory."
+        },
+        {
+          "path": ".obsidian/plugins/icor-for-life-outliner/manifest.json",
+          "sha256": "04f48a66984536c5b3624f412b48e100bedeb726995920ed20f769b0352fc800",
+          "note": "Removed: `.obsidian/plugins/icor-for-life-outliner/manifest.json`, the bundled Outliner plugin; install ICOR for Life - Outliner from the community directory."
+        },
+        {
+          "path": ".obsidian/plugins/icor-for-life-outliner/styles.css",
+          "sha256": "87240ff7ddba80af9e643b8912e2274454bc3e5d974262573a0c533018c792a6",
+          "note": "Removed: `.obsidian/plugins/icor-for-life-outliner/styles.css`, the bundled Outliner plugin; install ICOR for Life - Outliner from the community directory."
+        },
+        {
+          "path": ".obsidian/plugins/icor-for-life-pdf-annotation/main.js",
+          "sha256": "dc2bf55c9d3540324dad707a3b3ed2f2caec6b54497314a8a89bf5ea17eb9647",
+          "note": "Removed: `.obsidian/plugins/icor-for-life-pdf-annotation/main.js`, the bundled PDF Annotation plugin; install ICOR for Life - PDF Annotation from the community directory."
+        },
+        {
+          "path": ".obsidian/plugins/icor-for-life-pdf-annotation/manifest.json",
+          "sha256": "a5f9948e105670728ed6a3ba7b2476b03ecbec8f5c6a88c3fceae6f8902fbf93",
+          "note": "Removed: `.obsidian/plugins/icor-for-life-pdf-annotation/manifest.json`, the bundled PDF Annotation plugin; install ICOR for Life - PDF Annotation from the community directory."
+        },
+        {
+          "path": ".obsidian/plugins/icor-for-life-pdf-annotation/styles.css",
+          "sha256": "7cb2ad3a3d7c630657c439c0a525f53178f0405bc14d15070ad9391c5b182fd2",
+          "note": "Removed: `.obsidian/plugins/icor-for-life-pdf-annotation/styles.css`, the bundled PDF Annotation plugin; install ICOR for Life - PDF Annotation from the community directory."
+        }
+      ],
+      "renamed": [],
+      "added": []
+    },
     {
       "version": "2.2.2",
       "date": "2026-11-02",
@@ -2183,6 +2203,7 @@
       "8c0d8ff5d0eb1acbdbcab1b6efe37d434b90b0ebd0a2cd4dc441de9ec0e34ce2",
       "8cf85f8349f6ec666cf077e1caf3c376736491fd38a1717b763c8f4628635c2b",
       "8de8922b0907f065afe02e06873c92bd29d8a1b65513e13271120b18d92ef6bc",
+      "98986639704fcbf4b1e056bc52b9864f49957ff911c94a43891f9dfcdb9c5ce9",
       "9b6967a336fdfaf4aa9854d4a6d3fa45dd57cf1a0d90909f295d957b5d08a9a6",
       "a242fe97895da19afabc8d273b729a21cbdf5ca3d3a8a071a7d27066822f5a22",
       "a324572719e3e5202d6bf8caabe95d0ad5d1b674592aded624ee208289827cc5",
@@ -2240,6 +2261,7 @@
       "79ea1b5b251f3bf7e847a39e5723f6606ce22c8edef3115d9368d267382ae7e1",
       "7ef1ea58fece676ff7345f6edac427e671daf20f0d7499ef2e42ada241d4fe24",
       "8fc21140add9202a29f2eec0793eaa9dcf4065a756d9d91775190096d44a62aa",
+      "91930425f31d5132e78e0ad7195620e435121a2fdf87cf655f8323aa45ae0468",
       "a482aec6f30758f5ba391b686d1f33d8ef1ab78ac649da44307ae41eb5ecad43",
       "acb57a7135b2d7d6e665f67f056e21353023b93835f54def1ae523bf76f1bfb3",
       "acef448c3973160e815171b20f8788735d99b01e7bf551b3619bbde1ae1db7a8",
@@ -2272,6 +2294,7 @@
     ".obsidian/community-plugins.json": [
       "08c5eb18f23b708c13590e183c985b8a53a77dfb9755f634ec979f03664712a4",
       "466fd4fbb7961e2be1d89225702ea59c7eb6a9f9efa9d0e1ecdca58b91e9a301",
+      "47e5f1e33b98cc329249cdc8151a17b76105b8e95621cf37dfe4d4275242a8e9",
       "4b8e4e5b2d04a7b86e8f7c92a84ee2e2dfdf3884d1e29935383515dd676a12c2",
       "5d745b5ae984b06e31372778a8000952ad180275dd2d379a6792c59dec725f51",
       "b794098e44e6b86a1ea00fc80371f5b26fb170bf944116f66b7489191a740f5b",
@@ -2287,16 +2310,6 @@
     ],
     ".obsidian/hotkeys.json": [
       "d88a0ef1b42c6361eca0a95a84e91f9c4d72260f94670e3aa00078f977daaec7"
-    ],
-    ".obsidian/plugins/icor-for-life-outliner/manifest.json": [
-      "c2a6f2169fc61e6299bc3ffba85accb2d9d77183eee51e50b9ed785cd4daf2ff"
-    ],
-    ".obsidian/plugins/icor-for-life-pdf-annotation/main.js": [
-      "206fe0c7682bceae707f4e061e834b26433ce7df52d526f39cde34c8b346ddff"
-    ],
-    ".obsidian/plugins/icor-for-life-pdf-annotation/manifest.json": [
-      "9095b58db4805148d0976f87e22e370b5ced880b634be561542733d7aeb87cce",
-      "fc5c774ae29001d9bce846cd1d6ed8dfcec7d1933d4a3a6c1fd396ebe7ab5543"
     ],
     ".obsidian/types.json": [
       "5cfb9cb1109f0bbf090ddb2105792f8a35e7588775c5a384dde2982ee771c630",
@@ -2378,7 +2391,8 @@
       "c7a1a7e7f3922028cc1b96c4e0a0046306616be0e4df79b0ea2d4a744b5c7c1c"
     ],
     "04 Inner World/Notes/Notes.base": [
-      "3fb3ea1583a7d96feac2f376d29ffcc7b271a8b7905575ca87f8199bfee89ec0"
+      "3fb3ea1583a7d96feac2f376d29ffcc7b271a8b7905575ca87f8199bfee89ec0",
+      "87a3790645a695bb92ba9e561b4033393c6364027a3ec179ae8eec10322e962c"
     ],
     "04 Inner World/Notes/README.md": [
       "5162410ec153f5da1ce8fe05082d91cf82b9ffd91a9c3b1b592d58624ed2fffd"
@@ -2434,7 +2448,11 @@
       "d201a1aec7b65512c263bd447f0c73ebdd802a50bcd8e7e9a350b4e776929e1a"
     ],
     "06 AI Team/AI Team Knowledge/Guidelines/GL-1010-the-five-capture-workflows.md": [
-      "14f3c13f39f115c431f37a685ff6314b762de5825cb417a51e1ffbc2b2c658fe"
+      "14f3c13f39f115c431f37a685ff6314b762de5825cb417a51e1ffbc2b2c658fe",
+      "37e627b4ffeef3795ae3bc6122cc4cfecc6e6318cdff787b66aa7b125d58c413"
+    ],
+    "06 AI Team/AI Team Knowledge/Guidelines/GL-1011-date-mentions-link-to-daily-notes.md": [
+      "13ff3e4d8d6cfd164ad2b9b1115880e8c7daec271694b9e234e01801d44146cd"
     ],
     "06 AI Team/AI Team Knowledge/Scripts/README.md": [
       "108633ed45ee9d13ff92e2d61ed3008fa3044ad630c672465007916e4a9601c1",
@@ -2455,7 +2473,8 @@
       "681ddebc5fbaa53411905f2eb71129e20f4d8fac364925ce82f71111bc6e3cd2",
       "818e8ff794f023d265c84c590d8171bf0e94a9248efa7fc27c59bd0e3ca87564",
       "c394470e057a997d6ca461f5a0f6b06c6ca2d5ce311e1bbc7c9bd8f68851750a",
-      "f8e6b5ba8b77ccd6dcd5579f5de9e6e4d565b1d3c5193b080624ca868cf4c0ad"
+      "f8e6b5ba8b77ccd6dcd5579f5de9e6e4d565b1d3c5193b080624ca868cf4c0ad",
+      "ffcea163df25430fabcd9fd0ab3a19119b38dc7a15511ce166c04913111c5257"
     ],
     "06 AI Team/AI Team Knowledge/Scripts/check-bases.py": [
       "8b63fa0e50930e9b300aa9b37d3f975fea8c3894effbb96096d26c20db70a284",
@@ -2466,6 +2485,7 @@
     "06 AI Team/AI Team Knowledge/Scripts/check-quality.py": [
       "2dc2d483b029c4fd92a3e022f7ef3a1655f779043b555ea8c9661264cfc028cb",
       "61b14541733b7a43f12c334820e6769601340f31f3161c0865c33f213120be70",
+      "848f7ec812569731901395d83f8f81560cab9f189efa24311fe3032b02dfc6f3",
       "8a3175f9b2f88e89fb7e3712adf1a493968103f440d39ed23e87b46ba02c9dc0",
       "a67959f48a3515973f8b06084140b9bcfc72a53e0bb670e1b8c956a2bd11ca80",
       "f0011dd5b5d1f6355c9627f3d0997771c82c0ff34bfd3376d863e8717088449b",
@@ -2482,12 +2502,14 @@
     "06 AI Team/AI Team Knowledge/Scripts/link-dates-to-daily-notes.py": [
       "0b9042d8e9329e55536489ae959e5afded4d3c42aaf714c94b754e0bcc94cde5",
       "5f37098ca8a55ed22e7c20196c524282d5e5babfc45fbf231d375c4f14fd3769",
+      "67ed23e22d491d58a02b9768cea2bd5fc0dcf5ced4ab7c6c51adec2f1a52b19c",
       "89e9b3e3eb1ac2b9498a5ed4f04d2ba4cfe7ab1b309f25525c06de4f769d88e0",
       "da7cce9ff4bb5ad56e38c9e2c01783f65a72d8c36ef672bfd95f19eaa93307be",
       "f423bfa69f8a9a7f911c434d23250b41636cfad903ed6cb18057be7254810fcb"
     ],
     "06 AI Team/AI Team Knowledge/Scripts/new-base.py": [
       "0a7b96c1492035648649b01bbfd20c96cb8703ee34af4e57d438609fc3947596",
+      "38969858bebedf4494656827ddb5cadfe7c3dc45d0f3e7952ec6509a98f7c321",
       "4eb3446a605e2d92133834b9e05c4b8ba5ef35d5c062ddf6f0a304a98b727271",
       "64173fce25f4eceec82bfbb6f805c184dd3e84547c1e2f95aabbcd9156469c0d",
       "65af538d898734d1da066fa7c93cbca5092aadb21acd80f1be6372139f3f9632",
@@ -2540,13 +2562,20 @@
       "f0b0a07772ede11933d0afc8dd3439ab981dea6c91d804b220206481032129d7",
       "f800fc82f9dcfe5e87c924fe164d5ffcc2bcdf3bdfc3f7f163b481a0399bb456"
     ],
+    "06 AI Team/AI Team Knowledge/Scripts/test-build-scaffold-manifest.py": [
+      "bcba4b90c47d803677fc11720de36e7915dd75ab87f4fb5c384706112b053cb8"
+    ],
     "06 AI Team/AI Team Knowledge/Scripts/test-life-snapshot.py": [
       "32d07801ca938a73ea582f6d6d9330923bd9b752cee87e504b42365871dcc69f",
       "f055c0def6abe27ad8823c456f659a15ba1fdd9ef4e5b5ad82c101ebfc6b7300",
       "fbe4a2d72a875d4d1052418709f9d089d496fc2f77c112f16f9c82d650f8f9f3"
     ],
     "06 AI Team/AI Team Knowledge/Scripts/test-link-dates-to-daily-notes.py": [
+      "69dd2e31f3b4aba6bb0b7368a4cd88b8432b5b962e22f6547c282f5f1018cbb4",
       "e3d50ec336b220456ebba132e711b5241f0591f9047fe16574e806a864ff4415"
+    ],
+    "06 AI Team/AI Team Knowledge/Scripts/test-note-scripts.py": [
+      "50036cfce9ae160f29ce996fd41b1eee2099ceb3a65181091cc13fbc9f1082b1"
     ],
     "06 AI Team/AI Team Knowledge/Scripts/validate-scaffold.py": [
       "1ff050137d4d07166f6b16fa7056aa9d3065c163f7334c25466de9d4aab1a191",
@@ -2566,6 +2595,7 @@
       "abd821da0a65e33785c1b33a0407ca15faebc04529b2ce9becc25d8ae8d6eefb",
       "c9e0d42ba6c4fe7d946a2f9c53d71a5b67e23ee7e1f53d3ab323b682c8a39eac",
       "cbdcb92aa38914f63b3bf2cfa10ccd81a128e7a7d469f2f4df113bc7d12ab7e1",
+      "cd6a064d047391c9e4715c23d0e97dd131887773f7b8b1532b42f379069c8161",
       "de9f9401eaa25c559f82e593dbbeecffcdf6e0658f8f3466c7845975ec8e2bf9",
       "f2fcf8185109621775988f6abf0cd7daa8be2117dfada3a300a8e6f025cdcc7c",
       "f81f3aab6d4e5cc89acd93483d493a0de9f1ccbbdac54455d475353b49644c8c"
@@ -2590,10 +2620,14 @@
       "9535792c3301b605629313cdc382caa20c602551dcd5eec0064683768f14b38c",
       "cfc35874677eb80943b66644bfa75aa2b77827a03bd2ef0136f4ebd82766148f"
     ],
+    "07 Databases/README.md": [
+      "7db2c398bc5fb511f27c3e86aad289c7681cd03d7545b5062ed1a1e502a2c1d5"
+    ],
     "LICENSE.md": [
       "31123658a359a454d2e771805eaed2943f9542ee114f4b95e9da7362253b2585",
       "32ea76a8598d8f246b48d9510d0c5c1512bfc76508df908c6267f5585d4f43e2",
       "66de51e7a5354a6e865cda2ea3b0aa5823754baf7b17913f532f038ad8916057",
+      "6b8e30fe038fb0b08259a626816502693b938ebe107e4384f07924a750a11eb5",
       "6c55c9d98773a1597e300c8283654aafa4deeb414c4d9219698a851fbb2483c3",
       "77a4297669904336177b2a56731f3d550d86076238a921eb6cb82b0804adeee9",
       "786a2a0f52b982ea10d55766e45579f73554571e1c6cb2259e9e0d767293bc17",
@@ -2617,6 +2651,7 @@
       "687d8b56545b96a759dcff71dacbee8fad91f63949c06e33024d4a853bdeecb8",
       "6c5232ff90cc23e0acb5d764ab9830eb94c358130bfa094f72cc422fd5dcc875",
       "74c389e6fda968d52ea5008ef321f9ad1dadace0dce6f9f367534567960fe6df",
+      "754f7941cbe417c8621c7d7222e484e4a0038fd6d5c1a369276a4c75e7ed030e",
       "8c7c1a82a789bde8dbd3869311bcf704bd502ec942cade036a30dc249d516915",
       "8cf416fb4224ec1c1e49b4e0dde252b5e6b43ec7251830953bcd25f20e12bb30",
       "9377447087ec0ef87ec21cc6c79644b58c30ddd1148f8c4c7095edaefa8c288f",
@@ -2629,12 +2664,14 @@
       "fb98debaaee4ca70996e4a305b223ed1b38c53e6d78af98a6cf19b1b0bea275e"
     ],
     "SECURITY.md": [
+      "3ac7f0f7e3adc66877c787351e3b8b88c8706f8e8424c4dfba80c8b39ee5d951",
       "b740e29095a963a268def592a95234991358eec67df427382205ba8319e1f728",
       "de7e4433e0994124570c7184114cbb4ae2ce514f27e6103902d19cab4609f4cb"
     ],
     "THIRD-PARTY-NOTICES.md": [
       "4449fac3d2c0b08718664c9e12afe6a7f3280bb75d7c3a70596ed5814695f081",
       "a47f989b5c0550c6897f935bc2fc3b025491b76aabfceed2f4cab08529ddfeb4",
+      "ab06d2d6e97344768af779185fd7b7e31fc4657d334484edf9ba4d0613da6575",
       "c8ded3d9e3dcb0148bbc634c4b85b079fe39f19dbe3ed1eccb9ac958d68d95aa",
       "dc263ce28bab20f746a508df60db1731c627603c407aa3546ac0a2a2219fd550",
       "f261113197f623ad2773c3b92563af85bbfbedacb9489e55c4cd71c9d156fd79"
@@ -2643,6 +2680,16 @@
   "previous_removed": {
     ".claude/commands/checkpoint.md": [
       "36cdf9c1a63ddc05a2b977c2feaae40c5547d20dbbd881199cdb11d4ca4a518f"
+    ],
+    ".obsidian/plugins/icor-for-life-outliner/manifest.json": [
+      "c2a6f2169fc61e6299bc3ffba85accb2d9d77183eee51e50b9ed785cd4daf2ff"
+    ],
+    ".obsidian/plugins/icor-for-life-pdf-annotation/main.js": [
+      "206fe0c7682bceae707f4e061e834b26433ce7df52d526f39cde34c8b346ddff"
+    ],
+    ".obsidian/plugins/icor-for-life-pdf-annotation/manifest.json": [
+      "9095b58db4805148d0976f87e22e370b5ced880b634be561542733d7aeb87cce",
+      "fc5c774ae29001d9bce846cd1d6ed8dfcec7d1933d4a3a6c1fd396ebe7ab5543"
     ],
     ".obsidian/plugins/terminal/data.json": [
       "bef316d71112fdddeec0d4b20806eba9e4b0de3243cb96943fa3cb948304a3ee"
