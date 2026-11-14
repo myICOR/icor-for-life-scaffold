@@ -2,8 +2,8 @@
   "schema": 2,
   "name": "ICOR for Life Scaffold",
   "version": "2.3.0",
-  "built": "2026-11-13T23:23:56Z",
-  "commit": "6472772",
+  "built": "2026-11-14T00:12:22Z",
+  "commit": "1d71e46",
   "lab": false,
   "source_commit": "f7dd5f0",
   "implements": "icor-concepts/1",
@@ -71,7 +71,7 @@
   "plugins": [],
   "snippets": [],
   "files": {
-    ".icor-for-life/CHANGELOG.md": "c68592c76267053a56779daddcc4bef7b841cf6e7cb0243de869f3a5cd380632",
+    ".icor-for-life/CHANGELOG.md": "5fef1093cd14e51a1a1d1a427a6255a5c93cee90e22fcfd85df2eeabdd6ff41d",
     ".icor-for-life/README.md": "c0ba4d491917950a639f365fe02ab9b26221c231fd0c4f18668e8d02856a32a4",
     ".icor-for-life/VERSION": "a42caf4a54bbbe27aa45b6efbc6356c5e299b19763e728b6cdb7201b02ebbe36",
     ".icor-for-life/manifest.json": "self",
@@ -184,16 +184,18 @@
     "06 AI Team/AI Team Knowledge/Workstreams/WS-1001-daily-processing-run.md": "4640ce19b8e3df1b6b16f67f2bb0589d78361eea45fb413df821f6846767c5ea",
     "06 AI Team/AI Team Knowledge/Workstreams/WS-1002-weekly-review.md": "57eb24c224ba0444b3c0acfe23999fc8efd41a5b389a29835447cfe7c20ce86e",
     "07 Databases/README.md": "44e359f6763e1a2b28a27818d1564a35f946be1c7ccb71e767143d19e61e1170",
-    "LICENSE.md": "3c45bc8559ec1f259784ffe5478094ea465b8621016a1576861d2c6d7ca3b1af",
-    "README.md": "148a1c91c73be08df1736e46a77fae9fc0d0d10a3dc0111778c012877c2dae13",
-    "SECURITY.md": "7bb9cffb457fadfffb5363cae7e071159bc1e94b981352943acb3a338ce680a7",
+    "LICENSE.md": "15553765c63521f790ee0aa82c87fc300022383a0db90ec53d623f85ef9e4010",
+    "README.md": "ba27e3da6605e417212bac7e938c5051818798811e44cd50a401b2db0cc3f5cd",
+    "SECURITY.md": "dce3b79a71a10e70d023b9239aa0d8d522ff7d88210d85b26ecd677f6dc2fdbb",
     "THIRD-PARTY-NOTICES.md": "76071f1a7429a4dad671ba86ddc0017146582bff1cbae92c301d2b5d7a5bc519"
   },
   "repo_only": {
     ".github/CONTRIBUTING.md": "1636e016658088d50651444180d517e8c107b74076dd88ef52bfa3c6903f4501",
-    ".github/workflows/release.yml": "535826871747ec876bdcbd432ddc6fa5afe3c4a88d65be55902423a8e959dbe8",
+    ".github/workflows/release.yml": "e53e13da25876741cfe7a48f6a999d114fe9a89fbbd4d1ca0e0718df48a907fc",
     ".gitignore": "b8686238238b91e4221722fa80fba23d0dcd78bb90cc3229c10eb2c58df9934e",
-    "06 AI Team/AI Team Knowledge/Scripts/build-release-zip.sh": "9c4ed1948c81ab5870caa6ae7ff55a1e1c294ee5a6f41a399c7d10d61be4a23d"
+    "06 AI Team/AI Team Knowledge/Scripts/build-release-zip.sh": "48aa33a3edbcc066ea3547d6c3a407780478cc8164bfabc19da7f70f0cea5054",
+    "06 AI Team/AI Team Knowledge/Scripts/check-version-bump.py": "ad2e6bcd7f9831eb5a2f4dafa2c92e5d83caabaeadd7713d09e1df168b3b9dbc",
+    "06 AI Team/AI Team Knowledge/Scripts/zip-staged-tree.sh": "5c732a7e070e0196ea58530f9c5ceb1c1f42796db604322a5b2314932186f4f0"
   },
   "seed": [
     ".obsidian/community-plugins.json",
@@ -307,7 +309,10 @@
         }
       ],
       "renamed": [],
-      "added": []
+      "added": [
+        "06 AI Team/AI Team Knowledge/Scripts/check-version-bump.py",
+        "06 AI Team/AI Team Knowledge/Scripts/zip-staged-tree.sh"
+      ]
     },
     {
       "version": "2.2.2",

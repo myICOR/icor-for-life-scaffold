@@ -1,8 +1,8 @@
 # ICOR for Life security policy
 
-ICOR for Life is the content half of your folder: the rooms, the entity templates, the concept Guidelines and the Obsidian setup. It is mostly markdown, and markdown doesn't attack anybody. The parts that run are the parts this policy is about: the life scripts, the Obsidian plugins and theme that come in the zip, and the release pipeline that builds that zip.
+ICOR for Life is a content folder: the rooms, the entity templates, the concept Guidelines and the Obsidian setup. It is mostly markdown, and markdown doesn't attack anybody. The parts that run are the parts this policy is about: the life scripts, the Obsidian settings in the zip, and the release pipeline that builds that zip. Since 2.3.0 the zip carries no plugin, no theme and no myPKA file.
 
-The AI team is not part of ICOR for Life. The contracts, the team scripts, the hooks and the write guard they run, the updater, the resolver, `add-mcp-server.py`, the expansion-pack installer and the shipped `.mcp.json` all belong to myPKA, which has its own policy: [SECURITY-myPKA.md](https://github.com/myICOR/myPKA/blob/main/SECURITY-myPKA.md).
+The AI team is not part of ICOR for Life. Agent teams come from myPKA 8, a separate download in its own folder; a myPKA 7 folder that also holds ICOR for Life keeps its team files under myPKA's policy. The contracts, the team scripts, the hooks and the write guard they run, the updater, the resolver, `add-mcp-server.py`, the expansion-pack installer and the shipped `.mcp.json` all belong to myPKA, which has its own policy: [SECURITY-myPKA.md](https://github.com/myICOR/myPKA/blob/main/SECURITY-myPKA.md).
 
 ## The key rule: ICOR for Life never ships or needs a secret
 
@@ -46,13 +46,13 @@ A useful report has:
 
 ## What's in scope
 
-**The life scripts** under `06 AI Team/AI Team Knowledge/Scripts/`: `life-snapshot.py`, `check-quality.py`, `check-bases.py`, `find-entity.py`, `new-entity.py`, `new-journal-entry.py`, `new-base.py`, `set-property.py`, `planner-week.py`, `link-dates-to-daily-notes.py`, `stamp-processed.py`, `open-in-obsidian.py`, `validate-scaffold.py` and their test suites. Any script that writes outside the path it was given or outside your folder, or follows a symbolic link out of it. Any script that runs a string built from note content or a file name, starts a program other than the one it names, loads code from a folder your notes can reach, or opens a network connection. Any script that puts a secret or a private note into a tracked file, a log line, an error message or your terminal. `noteio-icor.py` is a byte-identical copy of myPKA's `noteio.py`: report it here or there, the fix lands in myPKA and ships back in the next ICOR for Life release.
+**The life scripts** under `06 AI Team/AI Team Knowledge/Scripts/`: `life-snapshot.py`, `check-quality.py`, `check-bases.py`, `find-entity.py`, `new-entity.py`, `new-journal-entry.py`, `new-base.py`, `set-property.py`, `planner-week.py`, `link-dates-to-daily-notes.py`, `stamp-processed.py`, `open-in-obsidian.py`, `validate-scaffold.py` and their test suites. Any script that writes outside the path it was given or outside your folder, or follows a symbolic link out of it. Any script that runs a string built from note content or a file name, starts a program other than the one it names, loads code from a folder your notes can reach, or opens a network connection. Any script that puts a secret or a private note into a tracked file, a log line, an error message or your terminal. `noteio-icor.py` began as a copy of myPKA's `noteio.py` and is ICOR for Life's own since 2.3.0: report it here.
 
 **The shipped Obsidian setup** (`.obsidian/`). Any setting in the zip that turns on something you didn't choose, loads a plugin, theme or snippet that isn't ours, or carries leftover state from our machines (a `data.json`, a token, a workspace).
 
 **No bundled plugins or theme.** Since 2.3.0 the zip carries no plugin and no theme, and its `community-plugins.json` enables none: you install the ICOR for Life plugins and the INKLINE theme from Obsidian's community directory. In scope here: a zip that carries a plugin or theme folder, or enables a plugin. A bug in the plugin or theme code itself goes to its repository (below).
 
-**The release workflow** (`.github/workflows/release.yml`). Any way to get a release out without every gate passing, to build it from anything but its tag, to replace a published file, to use a myPKA checkout other than the pinned commit, or to reach the workflow's token.
+**The release workflow** (`.github/workflows/release.yml`). Any way to get a release out without every gate passing, to build it from anything but its tag, to replace a published file, or to reach the workflow's token.
 
 **The attestations and the zip.** A zip or a `manifest.json` that passes the check below without being built by `release.yml` from its tag on a GitHub-hosted runner. A zip that carries anything not in that tag: build tooling, personal data, a repository-only file, a plugin, a theme or any secret.
 

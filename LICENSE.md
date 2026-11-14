@@ -1,8 +1,8 @@
-# myPKA: what you may do with each part
+# ICOR for Life: what you may do with each part
 
-**This folder is MIT.** From myPKA 7 (ICOR for Life content 2.2.0,
-October 2026) the rooms, templates, guidelines, life scripts, the Obsidian
-settings, the AI team and everything else in this folder are open source under the MIT licence below, unless the short list
+**This folder is MIT.** From ICOR for Life 2.2.0 (October 2026) the rooms,
+templates, guidelines, life scripts, the Obsidian settings and everything
+else in this folder are open source under the MIT licence below, unless the short list
 under "Parts with their own terms" names it. Use it, change it, share it,
 build on it, including commercially. Keep the copyright line and the
 licence text.
@@ -47,7 +47,7 @@ SOFTWARE.
 
 ## An experiment, not a product
 
-myPKA comes from Tom's Tool Lab: a starting point and inspiration. There is
+ICOR for Life comes from Tom's Tool Lab: a starting point and inspiration. There is
 no support schedule, no promise of fixes and no release cycle. You are
 responsible for what you install and run, for its security, and for how you
 use it in your own systems.

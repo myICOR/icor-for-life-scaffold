@@ -19,10 +19,57 @@ explain.
 
 ## 2.3.0
 
-**The plugins come from Obsidian's community directory now**, and four
-defects from a member's report on myPKA 7.0.1 / ICOR for Life 2.2.1 are
-fixed (Intercom 215476812219754, items 1, 3, 4 and 6; the other six items
-are myPKA's). Pairs with myPKA 7.0.1 or later.
+**ICOR for Life is a content folder again**: no myPKA in it or in its
+release, and no plugins in the download; they come from Obsidian's community
+directory. Four defects from a member's report on myPKA 7.0.1 / ICOR for
+Life 2.2.1 are fixed (Intercom 215476812219754, items 1, 3, 4 and 6; the
+other six items are myPKA's). Pairs with no myPKA version: agent teams are
+myPKA 8, a separate download that keeps its own folder.
+
+### No myPKA in ICOR for Life
+
+ICOR for Life holds your knowledge: rooms, templates, guidelines, Bases,
+life scripts and the Obsidian settings. Agent teams come from **myPKA 8**, a
+separate download in its own folder that does not need this one.
+
+- What was still coupled, and is not any more. This repository's own release
+  zip never carried myPKA files. The coupling ran two ways: myPKA 7's release
+  pinned ICOR for Life 2.2.1 and composed `mypka-7.0.1.zip` from both (that
+  lives in the myPKA repository), and this release's build checked out a
+  pinned myPKA 7.0.1 for its zipper, its red-test gate (on a merge of the two
+  trees), its version-bump and disjoint checks, and the vendored copy of
+  `noteio.py`. None of that is needed now.
+- Changed: `06 AI Team/AI Team Knowledge/Scripts/build-release-zip.sh` needs
+  no myPKA checkout (`MYPKA_TREE` is no longer read). Its test gate runs this
+  folder's own `test-*.py` suites, each of which must pass and must go red
+  under `--break-me`. A new no-myPKA gate blocks a zip that holds a myPKA
+  file by name (`AGENTS.md`, `AGENT.md`, `ADAPTER-PROMPT.md`, `.mypka/`,
+  `.claude/`, `.codex/`, `.gemini/`, `.agents/`, `06 AI Team/Agents/`, the
+  team's SOPs, skills, tasks, session logs, AI sessions and expansions) or any
+  file this release's manifest does not list. `ICOR_ZIP_SELFTEST=mypka`
+  plants one to watch it block.
+- Changed, repository only: `.github/workflows/release.yml` checks out no
+  myPKA and has no pin; Gate 1 checks the manifest alone, Gate 2 runs the
+  version-bump check from this repository, the disjoint check is gone with
+  the shared folder, and Gate 5 runs this folder's suites.
+- Added, repository only: `zip-staged-tree.sh` and `check-version-bump.py`
+  in `06 AI Team/AI Team Knowledge/Scripts/`, taken unchanged from myPKA
+  7.0.1. Neither reaches the download.
+- Changed: `noteio-icor.py` is ICOR for Life's own now; it no longer follows
+  myPKA's `noteio.py`.
+- Changed: `README.md` is the README of a content folder: what is inside,
+  starting by hand, using it with any AI, the plugins, updating, and that
+  agent teams are myPKA 8. `LICENSE.md` and `SECURITY.md` say the same.
+- **Updating a myPKA 7 folder.** myPKA 7's own updater still applies this
+  release (`mypka-update.py --release icor-for-life-obsidian-edition-2.3.0.zip
+  --product icor`). It writes ICOR for Life's files only and deletes
+  nothing, so **every myPKA 7 file stays as it is**: `AGENTS.md`,
+  `README-myPKA.md`, `.mypka/`, `.claude/`, `.codex/`, `.gemini/` and the team
+  in `06 AI Team/`. The root `README.md` is ICOR for Life's and is replaced by
+  the new one; `README-myPKA.md` still describes your team. The six plugin
+  files below are reported as retired and left in place: keep them until you
+  have installed those plugins from the community directory, which replaces
+  them.
 
 ### The plugins and the theme no longer ship
 
@@ -64,8 +111,8 @@ from their GitHub releases until they are.
   `test-build-scaffold-manifest.py` holds it.
 - Changed: `.gitignore` ignores all of `.obsidian/plugins/` and
   `.obsidian/themes/`, in place of one line per plugin.
-- Changed: `README.md` ("Install the ICOR for Life plugins", "Start in five
-  minutes" step 2, "Updating"), `SECURITY.md`, `LICENSE.md`,
+- Changed: `README.md` ("Install the ICOR for Life plugins", "Updating"),
+  `SECURITY.md`, `LICENSE.md`,
   `THIRD-PARTY-NOTICES.md`, `07 Databases/README.md` and GL-1010 say the
   plugins come from the community directory.
 

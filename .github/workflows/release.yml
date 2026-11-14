@@ -35,18 +35,15 @@
 # stripped from the member download by the builder's residue gate, like the
 # builder itself.
 #
-# THE SPLIT (plan step 12, 2026-09-24). The team half now lives in the myPKA
-# repository, and with it the tools this release needs: the red-test suite,
-# the gate that runs it, zip-staged-tree.sh, the disjoint check and the
-# version-bump check. They come from ONE myPKA checkout at a pinned tag,
-# verified against a pinned commit (a tag can be moved; a sha cannot), and
-# that tag must be myPKA's latest release. Bump MYPKA_PIN and MYPKA_PIN_SHA
-# together, in their own commit. Written in the lab, where it cannot run (no
-# remote, g5w); the pins are set at step 18.
-#
-# Step 13: myPKA lives in myICOR/myPKA (Marshall M5) and tags with a leading
-# v (M3), so the pin is v6.0.1; ICOR keeps bare tags. GH_TOKEN is set only on
-# the steps that call gh (Vex F6), never for the whole job.
+# NO myPKA (2.3.0). From the split (2026-09-24) to 2.2.2 this workflow
+# checked out a pinned myPKA release and borrowed its red-test suite, its
+# zipper, its version-bump and disjoint checks, and compared the vendored
+# noteio-icor.py with myPKA's noteio.py. ICOR for Life is a content folder
+# now; agent teams are myPKA 8, a separate download with its own folder. The
+# zipper and the version-bump check are this repository's own (repo-only),
+# the test gate runs this repository's own suites, the disjoint check went
+# with the shared folder, and noteio-icor.py is ours to maintain. GH_TOKEN is
+# set only on the steps that call gh (Vex F6), never for the whole job.
 #
 # Step 18 (Vex P7, Marshall H2): build-provenance attestations. The zip and
 # the manifest are attested after the build and before the draft, verified at
@@ -55,7 +52,7 @@
 # member's own command. Only a TAG build counts (--source-ref refs/tags/...):
 # a workflow_dispatch re-run completes a release only when the tag run of the
 # same bytes got as far as its attestation. The member command (also in the
-# README and in myPKA's mypka-update.py usage text):
+# README):
 #   gh attestation verify icor-for-life-obsidian-edition-<version>.zip \
 #     --repo myICOR/icor-for-life-scaffold \
 #     --signer-workflow myICOR/icor-for-life-scaffold/.github/workflows/release.yml \
@@ -84,9 +81,6 @@ concurrency:
 env:
   ASSET_STEM: icor-for-life-obsidian-edition
   SCRIPTS: 06 AI Team/AI Team Knowledge/Scripts
-  MYPKA_REPO: myICOR/myPKA
-  MYPKA_PIN: 'v7.0.1'
-  MYPKA_PIN_SHA: '9b31da920c2a99269de33e6d64b3c042bc2ec7b8'
 
 defaults:
   run:
@@ -141,26 +135,9 @@ jobs:
           echo "version=$v" >> "$GITHUB_OUTPUT"
           echo "version $v at $GITHUB_SHA, on main (newest existing tag: ${newest:-none})"
 
-      - name: Check out myPKA at the pinned tag, and prove the pin
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          git clone --quiet --depth 1 --branch "$MYPKA_PIN" "https://github.com/$MYPKA_REPO.git" "$RUNNER_TEMP/mypka"
-          got="$(git -C "$RUNNER_TEMP/mypka" rev-parse HEAD)"
-          if [ "$got" != "$MYPKA_PIN_SHA" ]; then
-            echo "::error::myPKA tag $MYPKA_PIN is $got, the pin says $MYPKA_PIN_SHA. A moved tag is not the tree this release is tested against."
-            exit 1
-          fi
-          latest="$(gh api "repos/$MYPKA_REPO/releases/latest" --jq .tag_name)"
-          if [ "$latest" != "$MYPKA_PIN" ]; then
-            echo "::error::myPKA's latest release is $latest, the pin is $MYPKA_PIN. The vendored noteio-icor.py must equal the latest upstream: sync it, bump the pin."
-            exit 1
-          fi
-          echo "myPKA $MYPKA_PIN at $got (latest release)"
-
       # REQUIRED GATES. Each one exits non-zero on its red; none is optional.
-      - name: Gate 1, the manifest describes this tree and the vendored copy equals upstream
-        run: python3 "$SCRIPTS/build-scaffold-manifest.py" --check --upstream "$RUNNER_TEMP/mypka"
+      - name: Gate 1, the manifest describes this tree
+        run: python3 "$SCRIPTS/build-scaffold-manifest.py" --check
 
       - name: Gate 1c, no open decision bracket in a tracked file
         run: |
@@ -184,21 +161,23 @@ jobs:
           echo "OK no open decision bracket in a tracked file"
 
       - name: Gate 2, no shipped file changed without a VERSION bump and a changelog section
-        run: python3 "$RUNNER_TEMP/mypka/$SCRIPTS/check-version-bump.py" --product icor --root . --base auto
-
-      - name: Gate 3, ICOR for Life and myPKA ship disjoint paths
-        run: python3 "$RUNNER_TEMP/mypka/$SCRIPTS/check-disjoint.py" "$RUNNER_TEMP/mypka/.mypka/manifest.json" .icor-for-life/manifest.json
+        run: python3 "$SCRIPTS/check-version-bump.py" --product icor --root . --base auto
 
       - name: Gate 4, the content structure is valid
         run: python3 "$SCRIPTS/validate-scaffold.py"
 
-      - name: Gate 5, every guard goes red, on a mode A merge with the pinned myPKA
+      - name: Gate 5, every suite passes and every suite can go red
         run: |
-          a="$RUNNER_TEMP/modeA"
-          mkdir -p "$a"
-          ( tar -c --exclude=.git . ) | tar -x -C "$a"
-          ( cd "$RUNNER_TEMP/mypka" && tar -c --exclude=.git . ) | tar -x -C "$a"
-          ( cd "$a" && python3 "$SCRIPTS/run-red-tests.py" )
+          n=0
+          for t in "$SCRIPTS"/test-*.py; do
+            n=$((n + 1))
+            python3 -B "$t"
+            if python3 -B "$t" --break-me >/dev/null 2>&1; then
+              echo "::error::$t passed under --break-me, so it cannot go red"
+              exit 1
+            fi
+          done
+          [ "$n" -gt 0 ] || { echo "::error::no test-*.py suite found"; exit 1; }
 
       - name: Release notes are this version's section of the changelog
         env:
@@ -259,7 +238,6 @@ jobs:
           ICOR_SCAFFOLD_TAG: ${{ steps.version.outputs.version }}
           ICOR_SCAFFOLD_GIT: ${{ runner.temp }}/dry/mirror.git
           ICOR_SCAFFOLD_REMOTE: ${{ runner.temp }}/dry/remote.git
-          MYPKA_TREE: ${{ runner.temp }}/mypka
         run: |
           # A throwaway bare clone of the checkout at the pushed sha, carrying
           # the tag this run is about to create. The builder stages from it
@@ -297,7 +275,6 @@ jobs:
           # GitHub, into a fresh mirror, whatever the builder's defaults are.
           ICOR_SCAFFOLD_REMOTE: https://github.com/${{ github.repository }}.git
           ICOR_SCAFFOLD_GIT: ${{ runner.temp }}/scaffold.git
-          MYPKA_TREE: ${{ runner.temp }}/mypka
         run: |
           out="$RUNNER_TEMP/release"
           mkdir -p "$out"

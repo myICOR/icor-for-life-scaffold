@@ -20,6 +20,14 @@
 #      .obsidian/themes/ content and community-plugins.json enables
 #      nothing, so a plugin folder committed by mistake, or a list that
 #      enables a plugin the zip does not carry, blocks the build.
+#   4b. THE NO-myPKA GATE (2.3.0): ICOR for Life is a content folder. The
+#      agent team is myPKA 8, a separate download with its own folder, so
+#      no myPKA file (AGENTS.md, .mypka/, the host folders, the team's
+#      agents, SOPs, skills, tasks or session logs) may reach this zip, and
+#      every staged file must be one this release's manifest describes.
+#      This build needs no myPKA checkout either: the zipper and the
+#      version-bump check sit beside this script, and the test gate runs
+#      ICOR for Life's own suites.
 #   5. THE RESIDUE GATE: this script and the release workflow that runs it
 #      are our build tooling. They name our local mirror paths, our output
 #      directory and our GitHub org, so they are a map of our internals and
@@ -34,9 +42,9 @@
 #      tag gives the same bytes. The release
 #      workflow relies on this: a re-run compares its zip with the asset
 #      already published under that version instead of overwriting it.
-#      The zip itself is written by zip-staged-tree.sh, which is a separate
-#      file so that run-red-tests.py can build a fixture twice under two
-#      locales and two clocks and assert one sha256.
+#      The zip itself is written by zip-staged-tree.sh, beside this script
+#      (from myPKA until 2.3.0), a separate file so a test can build a
+#      fixture twice under two locales and two clocks and assert one sha256.
 #   7. NO GATE WRITES INTO THE BYTES IT IS CHECKING. Every gate that executes
 #      code out of the staged tree runs against a COPY of it, and the staged
 #      tree is hashed either side of that gate; a single changed or added byte
@@ -57,13 +65,9 @@
 #
 # Usage: bash build-release-zip.sh [output-dir]   (default: ~/Desktop)
 #
-# Environment (every one optional except MYPKA_TREE; the defaults are the
-# local maintainer setup):
-#   MYPKA_TREE            REQUIRED since the split (plan step 12): a myPKA
-#                         checkout at the pinned tag. zip-staged-tree.sh and
-#                         the red-test suite live there now. The gate runs on a
-#                         mode A merge (the staged tree, this checkout over it);
-#                         the zip holds the staged ICOR tree only.
+# Environment (every one optional; the defaults are the local maintainer
+# setup). MYPKA_TREE is no longer read (2.3.0): this build depends on no
+# myPKA checkout.
 #   ICOR_SCAFFOLD_TAG     stage this exact tag of the scaffold instead of
 #                         origin/main. The release workflow sets it to the
 #                         version it just tagged, so what ships is the tagged
@@ -91,10 +95,11 @@ set -euo pipefail
 # The helper scripts this one calls live beside it, in the repo checkout, never
 # in the staged tree: what archives the bytes must not be one of the bytes.
 SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
-MYPKA_TREE="${MYPKA_TREE:-}"
-MYPKA_SCRIPTS="$MYPKA_TREE/06 AI Team/AI Team Knowledge/Scripts"
-if [ -z "$MYPKA_TREE" ] || [ ! -f "$MYPKA_SCRIPTS/zip-staged-tree.sh" ] || [ ! -f "$MYPKA_SCRIPTS/release-gate-red-tests.sh" ]; then
-  echo "RELEASE ABORTED: MYPKA_TREE must name a myPKA checkout at the pinned tag (zip-staged-tree.sh and the red-test gate live there since the split)" >&2
+# The zipper is ICOR for Life's own since 2.3.0 (it came from myPKA, where
+# it lived after the split). Repo-only: RESIDUE_PATHS strips it below.
+ZIPPER="$SELF_DIR/zip-staged-tree.sh"
+if [ ! -f "$ZIPPER" ]; then
+  echo "RELEASE ABORTED: zip-staged-tree.sh is missing beside this script" >&2
   exit 1
 fi
 
@@ -220,40 +225,42 @@ snapshot "01-after-staging"
 fail=0
 
 # ---------------------------------------------------------------------------
-# 0a. THE RED-TEST GATE
+# 0a. THE TEST GATE
 #
 # No release while a guard has not been watched go red (GL-1005 rule 4).
+# Every test-*.py suite in Scripts/ must pass, and must FAIL under
+# --break-me, which flips one of its own assertions: a suite that cannot go
+# red proves nothing. Until 2.2.2 this gate ran myPKA's run-red-tests.py on a
+# merge with a pinned myPKA checkout; ICOR for Life is a content folder now
+# and tests its own scripts.
 #
-# Until 2026-09-14 run-red-tests.py was run "on demand", which meant by
-# nobody: two of its gates sat red for three days because check-bases.py
-# could not import PyYAML, and the suite kept being described as green
-# (tsk-2026-09-11-005). A runner nobody runs is a document. This is the one
-# place that has to run it.
-#
-# It runs against $STAGE, the bytes that will ship, not the dev checkout.
-# A staged tree has no .git, so the suite's manifest guards report SKIP with
-# their reason rather than dying, and a skip prints as itself.
-#
-# The gate body lives in its own file so that run-red-tests.py can test the
-# gate: this script needs a git mirror, the gh CLI and the network, and a
-# red test cannot call it.
+# AGAINST A COPY, NEVER THE STAGED TREE. The suites import and run the tree's
+# own scripts, and CPython writes a .pyc beside anything it imports; a .pyc
+# carries the absolute path of its source, which ends in six random mktemp
+# characters, so the zip would change on every build (what 1.23.0 died of).
+# The copy is byte-identical, so the gate still proves these bytes refuse
+# what they must refuse.
 # ---------------------------------------------------------------------------
-echo "==> red-test gate (no release while a guard has not been watched go red)"
-# AGAINST A COPY, NEVER THE STAGED TREE. The suite runs the tree's own scripts,
-# and one of them is imported rather than spawned, so CPython writes a .pyc
-# beside it; a .pyc carries the absolute path of its source, and the staged
-# tree's path ends in six random mktemp characters. Three entries of the zip
-# changed on every build, which is what the release workflow's reproducibility
-# comparison went red on for 1.23.0. The copy is byte-identical, so the gate
-# still proves what it always proved: these bytes refuse what they must refuse.
+echo "==> test gate (every suite passes and every suite can go red)"
 PROBE="$WORK/probe"
 mkdir -p "$PROBE"
 cp -a "$STAGE"/. "$PROBE"/
-# Mode A merge: the pinned myPKA checkout over the copy, so the suite and the
-# guards it tests are there. Never over $STAGE.
-( cd "$MYPKA_TREE" && tar -c --exclude=.git . ) | tar -x -C "$PROBE"
-if ! PYTHONDONTWRITEBYTECODE=1 sh "$PROBE/06 AI Team/AI Team Knowledge/Scripts/release-gate-red-tests.sh" "$PROBE"; then
-  echo "BLOCKED red-tests: the staged tree carries a guard that did not refuse what it must refuse"; fail=1
+suites=0
+for t in "$PROBE/06 AI Team/AI Team Knowledge/Scripts"/test-*.py; do
+  [ -f "$t" ] || continue
+  suites=$((suites + 1))
+  name="$(basename "$t")"
+  if ! out="$(PYTHONDONTWRITEBYTECODE=1 python3 -B "$t" 2>&1)"; then
+    echo "BLOCKED tests: $name failed:"; printf '%s\n' "$out" | tail -15 | sed 's/^/                 /'; fail=1
+  else
+    echo "    $name: $(printf '%s\n' "$out" | tail -1)"
+  fi
+  if PYTHONDONTWRITEBYTECODE=1 python3 -B "$t" --break-me >/dev/null 2>&1; then
+    echo "BLOCKED tests: $name passed under --break-me, so it cannot go red"; fail=1
+  fi
+done
+if [ "$suites" -eq 0 ]; then
+  echo "BLOCKED tests: no test-*.py suite in the staged Scripts/ (a gate with nothing to run is not a pass)"; fail=1
 fi
 rm -rf "$PROBE"
 
@@ -308,8 +315,8 @@ echo "==> residue gate (our build tooling out of the member download)"
 declare -a RESIDUE_PATHS=(
   "06 AI Team/AI Team Knowledge/Scripts/build-release-zip.sh"
   # The red-test gate (release-gate-red-tests.sh) is no longer listed: since
-  # 2.0.0 it lives in myPKA (repo-only there) and this build calls it from
-  # MYPKA_TREE, so this repository does not track it. A listed path that is
+  # 2.0.0 it lived in myPKA, and since 2.3.0 this build runs ICOR for Life's
+  # own suites instead, so this repository does not track it. A listed path that is
   # not tracked blocks the build below and fails build-scaffold-manifest.py.
   # The release workflow is the same kind of thing one level up: it is how
   # this script runs on every push, it names the same internals, and a
@@ -320,6 +327,10 @@ declare -a RESIDUE_PATHS=(
   # about the repository, not the folder, and myPKA ships its own root
   # CONTRIBUTING.md into the same vault, so it lives under .github/.
   ".github/CONTRIBUTING.md"
+  # Release tooling that came over from myPKA in 2.3.0, when this build
+  # stopped needing a myPKA checkout. Ours now; no use to a member.
+  "06 AI Team/AI Team Knowledge/Scripts/zip-staged-tree.sh"
+  "06 AI Team/AI Team Knowledge/Scripts/check-version-bump.py"
 )
 
 # The self-test hook can only ever ADD a reason to fail. There is no value of
@@ -328,6 +339,7 @@ declare -a RESIDUE_PATHS=(
 #   ICOR_ZIP_SELFTEST=residue bash build-release-zip.sh   # expect: BLOCKED
 #   ICOR_ZIP_SELFTEST=rename  bash build-release-zip.sh   # expect: BLOCKED
 #   ICOR_ZIP_SELFTEST=plugin-workflow bash build-release-zip.sh   # expect: BLOCKED
+#   ICOR_ZIP_SELFTEST=mypka   bash build-release-zip.sh   # expect: BLOCKED
 # The fourth case, stage-write, is planted earlier, right after the red-test
 # gate, because that is where the assertion it proves lives.
 case "${ICOR_ZIP_SELFTEST:-}" in
@@ -350,6 +362,15 @@ case "${ICOR_ZIP_SELFTEST:-}" in
     mkdir -p "$STAGE/.obsidian/plugins/icor-for-life-planner/.github/workflows"
     printf 'jobs:\n  release:\n    runs-on: ubuntu-latest\n' \
       > "$STAGE/.obsidian/plugins/icor-for-life-planner/.github/workflows/release.yml"
+    ;;
+  mypka)
+    # The myPKA 7 shape: the team's entry file and an agent folder inside the
+    # content folder. The no-myPKA gate must refuse both, by name and by
+    # inventory.
+    echo "    SELFTEST: planting myPKA files in the staged tree; this build must fail"
+    printf '# AGENTS.md\n' > "$STAGE/AGENTS.md"
+    mkdir -p "$STAGE/06 AI Team/Agents/Larry"
+    printf '# Larry\n' > "$STAGE/06 AI Team/Agents/Larry/AGENT.md"
     ;;
 esac
 
@@ -583,6 +604,54 @@ else
   echo "    no plugin or theme staged, community-plugins.json enables nothing"
 fi
 
+# ---------------------------------------------------------------------------
+# 4b. THE NO-myPKA GATE (2.3.0)
+#
+# ICOR for Life is a content folder. Agent teams come from myPKA 8, a separate
+# download that keeps its own folder, so nothing of myPKA's may ride in this
+# zip. Two locks, the same shape as the residue gate:
+#   - by NAME: the paths myPKA owns (its entry files, its version folder, the
+#     host folders, and the parts of 06 AI Team/ that are the team rather than
+#     ICOR for Life's knowledge: agents, SOPs, skills, tasks, session logs,
+#     AI sessions, expansions). A hit names what it found.
+#   - by INVENTORY: every staged file must be listed in this release's
+#     .icor-for-life/manifest.json `files`. A myPKA file under a name nobody
+#     thought of is still not in the manifest, so it still blocks.
+# ---------------------------------------------------------------------------
+echo "==> no-myPKA gate (ICOR for Life ships its own files only)"
+if ! MYPKA_HITS="$(python3 -c '
+import json, os, sys
+root = sys.argv[1]
+ROOT_FILES = {"AGENTS.md", "AGENT.md", "ADAPTER-PROMPT.md", "CLAUDE.md", "GEMINI.md",
+              ".mcp.json", "LICENSE", "LICENSE-MAP.md", "TRADEMARK.md", "CONTRIBUTING.md"}
+PREFIXES = (".mypka/", ".claude/", ".codex/", ".gemini/", ".agents/", ".cursor/",
+            "06 AI Team/Agents/", "06 AI Team/AI Sessions/", "06 AI Team/Expansions/",
+            "06 AI Team/AI Team Knowledge/SOPs/", "06 AI Team/AI Team Knowledge/Skills/",
+            "06 AI Team/AI Team Knowledge/Tasks/", "06 AI Team/AI Team Knowledge/Session Logs/")
+staged = set()
+for d, dirs, files in os.walk(root):
+    for n in files:
+        staged.add(os.path.relpath(os.path.join(d, n), root).replace(os.sep, "/"))
+for rel in sorted(staged):
+    low = rel.lower()
+    if rel in ROOT_FILES or rel.startswith(PREFIXES) or ("/" not in rel and low.endswith("-mypka.md")):
+        print("%s is a myPKA file" % rel)
+man = json.load(open(os.path.join(root, ".icor-for-life/manifest.json"), encoding="utf-8"))
+# .gitignore reaches a new download but is repo_only, never installed by the
+# updater (placement row 9), so it is the one file outside `files`.
+listed = set(man.get("files") or {}) | {".gitignore"}
+for rel in sorted(staged - listed):
+    print("%s is staged but not in .icor-for-life/manifest.json" % rel)
+' "$STAGE")"; then
+  echo "BLOCKED no-myPKA: the check could not run (manifest unreadable?)"; fail=1
+elif [ -n "$MYPKA_HITS" ]; then
+  while IFS= read -r line; do
+    echo "BLOCKED no-myPKA: $line"; fail=1
+  done <<< "$MYPKA_HITS"
+else
+  echo "    no myPKA file staged; every staged file is in the manifest"
+fi
+
 if [ "$fail" -ne 0 ]; then
   echo "RELEASE ABORTED: the staged tree is not clean." >&2
   exit 1
@@ -609,7 +678,7 @@ rm -f "$OUT_DIR/$NAME"
 snapshot "03-before-zip"
 echo "==> zipping -> $OUT_DIR/$NAME"
 STAGE_EPOCH="$(git --git-dir "$SCAFFOLD_GIT" log -1 --format=%ct "$scaffold_staged")"
-if ! sh "$MYPKA_SCRIPTS/zip-staged-tree.sh" "$STAGE" "$OUT_DIR/$NAME" "$STAGE_EPOCH"; then
+if ! sh "$ZIPPER" "$STAGE" "$OUT_DIR/$NAME" "$STAGE_EPOCH"; then
   echo "RELEASE ABORTED: the staged tree could not be archived reproducibly." >&2
   exit 1
 fi
