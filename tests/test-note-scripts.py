@@ -152,6 +152,27 @@ def new_entity_cases(tmp):
                for s in ("[[A]]", "![[A.png]]", 'x "y"', "[[a]] b", '[[a"b]]', "[[Ü]]", "plain"))
     check("set-property and new-entity carry the same yaml_scalar", same)
 
+    # a type the person added (Objects' New type writes exactly this): the script takes it from the schema
+    import json
+    sp = v / "_System/schema.json"
+    schema = json.loads(sp.read_text(encoding="utf-8"))
+    schema["types"]["tool"] = {"label": "Tool", "description": "Tool, a type you added.", "folder": "06 Outer World/Tools",
+                               "template": "tool.md", "icon": "wrench", "owner": "you", "required": [],
+                               "fields": ["created", "tags", "website", "projects", "key_elements", "topics"], "values": {},
+                               "links": {"projects": {"to": "project", "many": True}, "key_elements": {"to": "key-element", "many": True},
+                                         "topics": {"to": "topic", "many": True}}, "color": "#5fb3d9"}
+    sp.write_text(json.dumps(schema, indent=2), encoding="utf-8")
+    write(v, "_System/Templates/tool.md", "---\ntype: tool\nwebsite: \ncreated: {{date}}\nprojects: []\nkey_elements: []\ntopics: []\ntags: []\n---\n\n# {{title}}\n")
+    r = run(v, "new-entity.py", "tool", "Obsidian", "--set", "website=https://obsidian.md", "--link", "[[Health]]", "--root", v)
+    tool = v / "06 Outer World/Tools/Obsidian.md"
+    check("an added type: new-entity.py files it in its folder, made on first use", tool.is_file(), r.stdout + r.stderr)
+    check("an added type: its link field and its own field are filled",
+          tool.is_file() and '[[Health]]' in frontmatter_line(tool, "key_elements") and frontmatter_line(tool, "website") == "website: https://obsidian.md")
+    r = run(v, "new-entity.py", "tool", "Other", "--set", "colour=red", "--root", v)
+    check("an added type: a field it does not have is refused", r.returncode != 0 and "not a field" in r.stdout + r.stderr, r.stdout + r.stderr)
+    r = run(v, "new-entity.py", "--list", "--root", v)
+    check("an added type: --list shows it", "06 Outer World/Tools" in r.stdout, r.stdout)
+
 
 def journal_cases(tmp):
     print("new-journal-entry.py")

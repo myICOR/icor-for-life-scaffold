@@ -93,6 +93,8 @@ ROOMS = {
     "journal":     "04 Inner World/Journal",   # delegated, see below
 }
 
+BUILT_IN = frozenset(ROOMS)
+
 # Which frontmatter field carries a link to a target of a given type,
 # per GL-1002. {new note's type: {target's type: field}}. A pair missing
 # here is refused rather than guessed: putting a person in `topics` would
@@ -138,6 +140,26 @@ BAD_TITLE_CHARS = set('[]#^|\\/:*?"<>')
 
 def fail(msg):
     sys.exit("FAIL " + msg)
+
+
+def add_schema_types(root):
+    """Types someone added (the Objects plugin's New type, or by hand in _System/schema.json) join ROOMS and
+    LINK_FIELDS from the schema: their folder, and a link field per target type. The built-in types above stay as
+    they are; rooms_check holds them to the schema."""
+    p = Path(root) / "_System/schema.json"
+    if not p.is_file():
+        p = HERE.parent / "schema.json"
+    schema = json.loads(p.read_text(encoding="utf-8"))
+    for t, spec in sorted(schema.get("types", {}).items()):
+        if t in ROOMS or spec.get("owner") != "you" or not spec.get("folder") or t in ("scratchpad", "capture"):
+            continue
+        ROOMS[t] = spec["folder"]
+        fields = {}
+        for field, link in (spec.get("links") or {}).items():
+            fields.setdefault(link.get("to"), field)
+            if not link.get("many", True):
+                SINGLE_FIELDS.add(field)
+        LINK_FIELDS[t] = fields
 
 
 def rooms_check(root):
@@ -337,6 +359,7 @@ def main():
     ap.add_argument("--format", help="journal only: voice|photo|meeting-notes|other")
     a = ap.parse_args()
     root = Path(a.root).resolve() if a.root else DEFAULT_ROOT
+    add_schema_types(root)
 
     if a.list:
         for t, folder in sorted(ROOMS.items()):
@@ -392,7 +415,9 @@ def main():
 
     folder = root / ROOMS[a.type]
     if not folder.is_dir():
-        fail("room missing: %s" % ROOMS[a.type])
+        if a.type in BUILT_IN:
+            fail("room missing: %s" % ROOMS[a.type])
+        folder.mkdir(parents=True)   # an added type's folder appears with its first note
     dest = folder / (title + ".md")
     if dest.exists():
         fail("%s already exists; one thing, one note (open it instead)"

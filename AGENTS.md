@@ -20,7 +20,8 @@ Cursor, Gemini or any other). Everything you need is in three places:
 3. **One fact lives in one note.** Never copy. Find the note that holds it (`find-entity.py`) and link to it.
 4. **The schema is the law.** Every note has a `type`; use only the fields and values the schema gives that type, and
    link only to the type a field points to. If something does not fit, ask the person; never invent a field, a type
-   or a folder.
+   or a folder. The person may add types of their own (a tool, a recipe, a trip): they are in the schema like the
+   rest, with a template and a folder, and `new-entity.py` takes them. Add a type yourself only when the person asks.
 5. **Only what lasts comes in.** Work in progress (drafts, research, an agent's working files) stays where the work
    happens: your harness, your project folder, the tool you work in. When it is done, file the result here as an object
    (a note, a project, a source, a journal entry) with skill **new-object** or **capture**. No temporary folders.
@@ -76,8 +77,9 @@ Python 3.9 or newer, no packages: the scripts in `_System/Tools/` (their `README
 `OK …` or `FAIL …`. Prefer a script to writing a file by hand: they know the schema, the names and the folders.
 Templates for every type: `_System/Templates/`.
 
-In Obsidian, the **ICOR for Life - Objects** plugin enforces the same schema for the person: New object, typed links,
-turning a line of the daily note into an object, and a Connections panel. You and the plugin follow one definition.
+In Obsidian, the **ICOR for Life - Objects** plugin enforces the same schema for the person: New object, `@` to link
+or create while writing, New object type, typed links, turning a line of the daily note into an object, and a
+Connections panel. You and the plugin follow one definition.
 
 ## Never touch
 

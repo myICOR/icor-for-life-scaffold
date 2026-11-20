@@ -4,7 +4,7 @@ The life scripts. Run from the folder's root with `python3 _System/Tools/<script
 
 | Script | What it does |
 | --- | --- |
-| `new-entity.py` | creates one object (project, goal, person, note…) from its template, in its folder, linked: `new-entity.py note "Title" --link "[[Health]]" --set note_type=outline`; `--list` shows the types |
+| `new-entity.py` | creates one object (project, goal, person, note…) from its template, in its folder, linked: `new-entity.py note "Title" --link "[[Health]]" --set note_type=outline`; `--list` shows the types, also the ones you added |
 | `new-journal-entry.py` | creates a journal entry with the person's words verbatim |
 | `find-entity.py` | finds the note a name or alias belongs to, so one thing never gets two notes |
 | `set-property.py` | sets or removes one property on one note, within the schema |

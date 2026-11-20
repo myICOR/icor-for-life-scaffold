@@ -14,6 +14,8 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
   as Codex, Cursor and the others do, so there is no `CLAUDE.md`.
 - `_System/schema.json`: the structure as data. Every type of note, its folder, template, fields, allowed values
   and the type each link points to. The scripts, the skills and the Objects plugin read it.
+- Types of your own: `@tool` (or the command New object type) adds a type, say Tool, with its icon, colour, fields and
+  folder; it lands in the schema with a template, and `new-entity.py` and your AI take it from there.
 - `_System/Skills/`: nine skills (capture, process-scratchpad, process-outer-world, write-journal-entry, new-object,
   find-everything-about, life-snapshot, weekly-review, check-quality), copied to `.agents/skills/` and
   `.claude/skills/` where AI tools look (Claude Code finds skills only in `.claude/skills/`).
