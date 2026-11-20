@@ -113,7 +113,6 @@
     "website": "text",
     "weekdays": "multitext",
     "weekly_goal": "checkbox",
-    "wip_folder": "text",
-    "workstreams": "multitext"
+    "wip_folder": "text"
   }
 }

@@ -7,7 +7,6 @@ start_date: {{date}}
 end_date: 
 external_links: []
 key_elements: []
-workstreams: []
 tags: []
 ---
 

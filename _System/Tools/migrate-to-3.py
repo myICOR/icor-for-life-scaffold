@@ -196,6 +196,9 @@ def main():
         vf.write_text((NEW / ".icor-for-life/VERSION").read_text())
     plan.do(f"version {version} → {(NEW / '.icor-for-life/VERSION').read_text().strip()}", bump)
 
+    if (old / "03 WiP").is_dir():
+        plan.note("03 WiP is not part of 3.0: work in progress stays where you do it, and only results come in. "
+                  "Your 03 WiP is untouched; file what is finished as notes or projects, then delete it when you like.")
     if (old / "06 AI Team").is_dir():
         plan.note("06 AI Team is untouched. " + ("Your myPKA team lives there; keep it." if team else
                   "No AI team lives there: once you are happy with 3.0, you can delete it (its templates and tools are in _System now)."))

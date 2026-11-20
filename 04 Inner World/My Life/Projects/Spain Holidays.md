@@ -14,4 +14,4 @@ tags: [example]
 
 Example project. The note holds the knowledge (why, decisions, links);
 task execution lives in your external PM tool, linked in
-external_links. Working files live in a dated WiP folder.
+external_links. The bookings and notes about it link here.

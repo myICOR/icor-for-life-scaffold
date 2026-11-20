@@ -13,11 +13,12 @@ skills in this folder and knows how to work with you here.
 | `00 Daily Scratchpad` | your post-it: one note a day, deliberately messy |
 | `01 Inbox` | scans and anything not yet sorted |
 | `02 Planner` | your tasks, synced by the Planner plugin |
-| `03 WiP` | work in progress |
 | `04 Inner World` | what went through you: Journal, Notes, Contacts, My Life |
 | `05 Assets` | images, audio and documents |
 | `06 Outer World` | what others made: books, articles, videos, podcasts, with your highlights |
 | `07 Databases` | data your notes cannot hold |
+
+Only what lasts goes in: work in progress stays in the tools where you do it, and the result comes in when it is done.
 
 **My Life** is the map of your life: Key Elements, Goals, Projects, Topics and Habits. Everything you write connects
 to something on it, so you can find it again.

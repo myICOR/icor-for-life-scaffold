@@ -78,13 +78,6 @@
       }
     },
     {
-      "query": "path:\"03 WiP\"",
-      "color": {
-        "a": 1,
-        "rgb": 8034721
-      }
-    },
-    {
       "query": "path:\"04 Inner World\"",
       "color": {
         "a": 1,

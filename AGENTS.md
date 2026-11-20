@@ -21,7 +21,10 @@ Cursor, Gemini or any other). Everything you need is in three places:
 4. **The schema is the law.** Every note has a `type`; use only the fields and values the schema gives that type, and
    link only to the type a field points to. If something does not fit, ask the person; never invent a field, a type
    or a folder.
-5. **Ask before you move, rename or delete** anything the person made. Create freely where a skill says so.
+5. **Only what lasts comes in.** Work in progress (drafts, research, an agent's working files) stays where the work
+   happens: your harness, your project folder, the tool you work in. When it is done, file the result here as an object
+   (a note, a project, a source, a journal entry) with skill **new-object** or **capture**. No temporary folders.
+6. **Ask before you move, rename or delete** anything the person made. Create freely where a skill says so.
 
 ## The rooms
 
@@ -30,7 +33,6 @@ Cursor, Gemini or any other). Everything you need is in three places:
 | `00 Daily Scratchpad/YYYY/MM/` | the person's raw writing, one note a day. **Never edit its text.** Read it, process it, stamp it |
 | `01 Inbox/` | scans (`Scanner Inbox/`) and anything not yet sorted |
 | `02 Planner/` | tasks synced from their task apps by the Planner plugin; not yours to edit |
-| `03 WiP/` | work in progress, dated, in `Workstreams/`, `Projects/<project>/` or `Operations/`; done work goes to `_archive/` |
 | `04 Inner World/` | **what went through the person**: `Journal/`, `Notes/`, `Contacts/`, `My Life/` |
 | `05 Assets/` | files only (`Images/`, `Audio/`, `Documents/`), embedded from notes |
 | `06 Outer World/` | **what others made**: one `source` note per book, article, video, podcast, post or paper, with highlights |

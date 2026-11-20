@@ -9,8 +9,8 @@ Fifteen minutes. Five looks back, one forward. Ask, do not decide for them.
 
 1. **Leftovers**: unprocessed scratchpad days, and new sources in `06 Outer World` that link to nothing yet. Offer skills
    **process-scratchpad** and **process-outer-world**.
-2. **Work in progress**: folders in `03 WiP/` untouched for 30 days or more. For each, the person rules: finish,
-   archive (move to `03 WiP/_archive/`) or keep.
+2. **Finished work**: anything the person finished this week outside the folder (with you, in another tool) that
+   belongs here. Offer to file each result as an object (skill **new-object**): a note, a project update, a source.
 3. **Quality**: skill **check-quality** over the week's notes.
 4. **Reading queue**: sources in `06 Outer World` with `consumed: false`. One line each: read it this week, mark it consumed, or
    let it wait.
