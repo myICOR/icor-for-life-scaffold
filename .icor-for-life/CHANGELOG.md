@@ -16,6 +16,8 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
   and the type each link points to. The scripts, the skills and the Objects plugin read it.
 - Types of your own: `@tool` (or the command New object type) adds a type, say Tool, with its icon, colour, fields and
   folder; it lands in the schema with a template, and `new-entity.py` and your AI take it from there.
+- One way to each thing: Obsidian's own Daily notes opens today (the Connections panel, now in the right sidebar in
+  place of Backlinks and Outgoing links, shows the day's page); the graph colours each type as its links are coloured.
 - `_System/Skills/`: nine skills (capture, process-scratchpad, process-outer-world, write-journal-entry, new-object,
   find-everything-about, life-snapshot, weekly-review, check-quality), copied to `.agents/skills/` and
   `.claude/skills/` where AI tools look (Claude Code finds skills only in `.claude/skills/`).

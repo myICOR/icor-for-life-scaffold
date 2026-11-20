@@ -8,87 +8,87 @@
   "collapse-color-groups": true,
   "colorGroups": [
     {
-      "query": "path:\"04 Inner World/My Life/Goals\"",
+      "query": "[type:project]",
       "color": {
         "a": 1,
-        "rgb": 12744282
+        "rgb": 10521599
       }
     },
     {
-      "query": "path:\"04 Inner World/My Life/Habits\"",
+      "query": "[type:goal]",
       "color": {
         "a": 1,
-        "rgb": 8423334
+        "rgb": 15771458
       }
     },
     {
-      "query": "path:\"04 Inner World/My Life/Key Elements\"",
+      "query": "[type:key-element]",
       "color": {
         "a": 1,
-        "rgb": 11040661
+        "rgb": 4506765
       }
     },
     {
-      "query": "path:\"04 Inner World/My Life/Projects\"",
+      "query": "[type:topic]",
       "color": {
         "a": 1,
-        "rgb": 8034721
+        "rgb": 7050751
       }
     },
     {
-      "query": "path:\"04 Inner World/My Life/Topics\"",
+      "query": "[type:habit]",
       "color": {
         "a": 1,
-        "rgb": 12755804
+        "rgb": 2932656
       }
     },
     {
-      "query": "path:\"04 Inner World/Contacts\"",
+      "query": "[type:person]",
       "color": {
         "a": 1,
-        "rgb": 8034721
+        "rgb": 14977744
       }
     },
     {
-      "query": "path:\"04 Inner World/Journal\"",
+      "query": "[type:company]",
       "color": {
         "a": 1,
-        "rgb": 12755804
+        "rgb": 9674936
       }
     },
     {
-      "query": "path:\"04 Inner World/My Life\"",
+      "query": "[type:journal]",
       "color": {
         "a": 1,
-        "rgb": 8231551
+        "rgb": 14465890
+      }
+    },
+    {
+      "query": "[type:source]",
+      "color": {
+        "a": 1,
+        "rgb": 13609070
+      }
+    },
+    {
+      "query": "[type:note]",
+      "color": {
+        "a": 1,
+        "rgb": 11186879
+      }
+    },
+    {
+      "query": "[type:document]",
+      "color": {
+        "a": 1,
+        "rgb": 11186879
       }
     },
     {
       "query": "path:\"00 Daily Scratchpad\"",
       "color": {
         "a": 1,
-        "rgb": 12755804
-      }
-    },
-    {
-      "query": "path:\"01 Inbox\"",
-      "color": {
-        "a": 1,
-        "rgb": 12744282
-      }
-    },
-    {
-      "query": "path:\"04 Inner World\"",
-      "color": {
-        "a": 1,
-        "rgb": 8231551
-      }
-    },
-    {
-      "query": "path:\"05 Assets\"",
-      "color": {
-        "a": 1,
-        "rgb": 11040661
+        "rgb": 8028042
       }
     }
   ],

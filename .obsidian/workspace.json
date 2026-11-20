@@ -94,36 +94,13 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3d7b3eef360e8fee",
+            "id": "c0ec7105a1f2b3d4",
             "type": "leaf",
             "state": {
-              "type": "backlink",
-              "state": {
-                "file": "README.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Backlinks"
-            }
-          },
-          {
-            "id": "5f2e1fd3e0bdb730",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "README.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links"
+              "type": "icor-for-life-connections",
+              "state": {},
+              "icon": "waypoints",
+              "title": "Connections"
             }
           },
           {
@@ -170,12 +147,13 @@
               "title": "Outline"
             }
           }
-        ]
+        ],
+        "currentTab": 0
       }
     ],
     "direction": "horizontal",
     "width": 300,
-    "collapsed": true
+    "collapsed": false
   },
   "left-ribbon": {
     "hiddenItems": {

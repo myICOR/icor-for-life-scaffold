@@ -7,12 +7,14 @@ Everything is ready in Obsidian, and any AI you point at the folder knows how to
 
 1. **Turn on the plugins.** Obsidian asks once whether you trust this folder's plugins: choose to trust them. They
    are the ICOR for Life plugins, made by myICOR.
-2. **Write today.** Click the calendar icon (Open today) and write whatever is on your mind. Type `@` to link a person,
-   project, topic or book as you write, or create it on the spot: `@person/Paco Cantero`, `@project/Learn Spanish`,
-   `@book/Deep Work`. Type `/journal`, `/project` and the like to turn the whole line into one.
+2. **Write today.** Click the calendar icon (Open today's daily note) and write whatever is on your mind. Type `@` to
+   link a person, project, topic or book as you write, or create it on the spot: `@person/Paco Cantero`,
+   `@project/Learn Spanish`, `@book/Deep Work`. The Connections panel on the right shows the day line by line, each
+   line ready to become a journal entry, a project or a note.
 3. **Open your Journal** with the book icon: your entries as cards, your streak, and a question for today.
 4. **Create something** with the shapes icon (New object): a goal, a project, a person, a book you are reading. You
-   fill in only what it needs, and it lands in the right place.
+   fill in only what it needs, and it lands in the right place. Missing a kind? `@tool` (or any word) adds it as a
+   type of your own.
 5. **Bring in your AI.** Open this folder in Claude, Codex, Cursor, Gemini or another AI that works with files. It
    reads `AGENTS.md` and knows the rooms, the rules and the skills.
 
