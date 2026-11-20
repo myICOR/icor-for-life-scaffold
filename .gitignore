@@ -29,7 +29,7 @@
 # files that describe the scaffold version are kept.
 .icor-for-life/*
 !.icor-for-life/VERSION
-!.icor-for-life/manifest.json
+!.icor-for-life/THIRD-PARTY-NOTICES.md
 !.icor-for-life/CHANGELOG.md
 !.icor-for-life/README.md
 # Named explicitly, though the wildcard above already covers them: per-session
@@ -48,6 +48,11 @@
 # content hash and a link has none, and the release zip lists files only. The
 # source of truth is tracked; this rendering of it is not.
 .agents/skills/
+# the same copies for Claude Code; release/build-zip.py makes both from _System/Skills
+.claude/skills/
+# the release builder's work folders
+release/.cache/
+release/dist/
 
 # Python bytecode, regenerated on every script run
 __pycache__/

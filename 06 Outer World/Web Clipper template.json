@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "ICOR Outer World",
+  "behavior": "create",
+  "noteContentFormat": "# {{title}}\n\n## Highlights\n\n{{highlights}}\n\n## Clipped content\n\n{{content}}",
+  "properties": [
+    {
+      "name": "type",
+      "value": "source",
+      "type": "text"
+    },
+    {
+      "name": "source_type",
+      "value": "article",
+      "type": "text"
+    },
+    {
+      "name": "author",
+      "value": "{{author}}",
+      "type": "text"
+    },
+    {
+      "name": "source_url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "published",
+      "value": "{{published}}",
+      "type": "date"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DDTHH:mm:ss\"}}",
+      "type": "datetime"
+    },
+    {
+      "name": "consumed",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "my_thought",
+      "value": "",
+      "type": "text"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    }
+  ],
+  "triggers": [],
+  "noteNameFormat": "{{title}}",
+  "path": "06 Outer World"
+}

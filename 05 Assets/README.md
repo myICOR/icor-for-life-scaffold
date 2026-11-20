@@ -1,25 +1,3 @@
-# Assets
+# 05 Assets
 
-The binary shelf: `Images/`, `Audio/` and `Documents/`. Notes embed and
-link these files; no knowledge lives here, only files.
-
-`Audio/` is where an exported recording or transcript audio goes if you
-choose to keep a copy in the vault. The Scaffold does not record meetings
-([[GL-1010-the-five-capture-workflows|GL-1010]], workflow 4): you bring
-your own transcriber, and whether its audio ever lands here is your call.
-The meeting note points at it with `transcript` and says so with
-`audio_retained`.
-
-Rule of thumb: if it is a markdown note, it never belongs in Assets. If
-it is a binary file, it never belongs anywhere else. Obsidian files
-pasted attachments here automatically and keeps the links working.
-
-## Learn the concept
-
-From [PKM like a Pro](https://app.myicor.com/courses/pkm) and
-[Automation like a Pro](https://app.myicor.com/courses/automation):
-
-- [The Concept of Single Source Of Truth (SSOT) in ICOR](https://app.myicor.com/lessons/the-concept-of-single-source-of-truth-ssot-in-icor-696) -
-  one file, embedded everywhere, duplicated nowhere
-- [How to perfectly store a note?](https://app.myicor.com/lessons/how-to-perfectly-store-a-note-3) -
-  why binaries and notes live apart
+Files only: `Images/`, `Audio/`, `Documents/`. Notes embed them; no knowledge lives here. A document you keep gets a note in `04 Inner World/Notes/` that points at its file.

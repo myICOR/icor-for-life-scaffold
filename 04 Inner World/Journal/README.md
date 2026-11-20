@@ -1,26 +1,3 @@
 # Journal
 
-Journal entries, nested `YYYY/MM/`, named `YYYY-MM-DD_<slug>.md`. Each
-entry preserves your original text in its own section, untouched forever,
-followed by the AI expansion and the wikilink connections (people,
-topics, key elements, projects).
-
-Anatomy and rules: [[GL-1003-journal-entry-anatomy]]. A journal entry is
-created on purpose (by you or from a scratchpad/capture), never as a
-side effect you did not ask for. By hand: make the month folder if it is
-new, right-click it, New note, insert the `journal` template, your words
-under `## Original Text`; the moves are in
-[[GL-1007-capture-and-where-things-go|GL-1007]] "Doing it by hand".
-
-## Learn the concept
-
-From [Note-Taking like a Pro](https://app.myicor.com/courses/digital-note-taking-like-a-pro):
-
-- [What is Journaling?](https://app.myicor.com/lessons/what-is-journaling-2505) - the journal-entry
-  concept itself
-- [How to perfectly store a note?](https://app.myicor.com/lessons/how-to-perfectly-store-a-note-3) -
-  why entries live where they live
-- [How to link notes?](https://app.myicor.com/lessons/how-to-link-notes-4) - the connections every
-  entry carries
-- [Workflow 4: Write and Connect Information](https://app.myicor.com/lessons/workflow-4-write-and-connect-information-10) -
-  the writing workflow Penn runs with you
+Your entries, in `YYYY/MM/`, named `YYYY-MM-DD_<slug>.md`. Each is one of four types: **interaction** (with another person), **note** (something noticed), **thought** (real thinking) or **milestone** (a threshold crossed). Your words go under `## Original Text` and are never changed; `## Expansion` is for what your AI adds. Open the Journal from the book icon, or write one with its + button.

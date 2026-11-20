@@ -97,13 +97,6 @@
         "a": 1,
         "rgb": 11040661
       }
-    },
-    {
-      "query": "path:\"06 AI Team\"",
-      "color": {
-        "a": 1,
-        "rgb": 8423334
-      }
     }
   ],
   "collapse-display": true,

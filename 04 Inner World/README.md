@@ -1,48 +1,11 @@
-# Inner World
+# 04 Inner World
 
-Everything that went through you and became your own: processed,
-connected knowledge. Four shapes live here:
+What went through you: what you wrote, thought and know, and who you know. Curated, forever. What others made is in `06 Outer World`.
 
-- `Contacts/` - People and Companies. Structured properties in
-  frontmatter; what you WRITE about a person lives in the Journal and
-  links back.
-- `Journal/` - journal entries, date-nested `YYYY/MM/`. Created on
-  purpose, your original text preserved verbatim, expanded by AI.
-- `Notes/` - notes that live on and keep changing: outlines, saved
-  references, meeting notes, drafts (`type: note`), and one wrapper note
-  per important document, the file itself on the shelf in
-  `05 Assets/Documents/` (`type: document`). Every note links to the
-  Project, Key Element or Topic it serves. Browsed through `Notes.base`
-  and `Documents.base`.
-- `My Life/` - the five ICOR life concepts: Goals, Key Elements, Topics,
-  Projects, Habits. One note per entity; frontmatter carries the
-  relations, wikilinks carry the narrative.
-
-Journal or Notes is the fork people trip on. The test: does it have a
-date as its identity, or a subject? A date is a Journal entry and is
-never rewritten; a subject is a Note and gets edited for as long as it
-lives. The whole map of where things go is
-[[GL-1007-capture-and-where-things-go|GL-1007]].
-
-You file here by hand, or the AI does it for you; both land in the same
-shape. By hand: right-click the folder, New note, insert the template,
-fill the properties, link it. The moves, step by step, including how to
-check what you filed: [[GL-1007-capture-and-where-things-go|GL-1007]]
-"Doing it by hand". By the AI: "process my scratchpad", "process my
-inbox", "file this as a note about X", "check my notes". You read,
-link, and edit freely; the structure stays.
-
-## Learn the concept
-
-The Inner World is your Personal Knowledge Management system: connected
-knowledge instead of filed documents.
-From [PKM like a Pro](https://app.myicor.com/courses/pkm):
-
-- [Inner World and Outer World](https://app.myicor.com/lessons/inner-world-and-outer-world-697) -
-  the concept this room is named after
-- [What is PKM and a PKM System?](https://app.myicor.com/lessons/what-is-pkm-and-a-pkm-system-6) -
-  the system you are looking at
-- [What Is a Bucket?](https://app.myicor.com/lessons/what-is-a-bucket-17) - why knowledge lands in
-  defined places
-- [What Is Context?](https://app.myicor.com/lessons/what-is-context-15) - what makes a note worth
-  keeping
+| Folder | Holds |
+| --- | --- |
+| `Journal/` | your entries, by date: interaction, note, thought or milestone |
+| `Notes/` | one note per subject: ideas, outlines, meeting notes, drafts, documents |
+| `Contacts/` | people and companies |
+| `My Life/` | the map of your life: Key Elements, Goals, Projects, Topics, Habits |
+| `ICOR Journey Notes/` | your reflections from myICOR, synced by the Connect plugin |

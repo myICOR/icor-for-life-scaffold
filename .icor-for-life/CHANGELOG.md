@@ -1,21 +1,43 @@
-# ICOR for Life Scaffold: changelog
+# ICOR for Life: changelog
 
-One section per version, newest first. Each section says what was **added**,
-what **changed**, and, most important for anyone updating by hand, what was
-**removed or moved**. A file you still have that a release after your
-installed version removed is a leftover, and the Scaffold Check plugin will
-point at it and at the line here that explains it. Once you have installed
-the version that removed a file, the plugin no longer lists it. Such a file
-is harmless, and you can delete it by hand.
+One section per version, newest first: what was **added**, what **changed**, and what was **removed or moved**, with
+where it went.
 
-The rule for writing an entry: every removed or moved file is named in
-backticks on its own line, with where it went. The manifest builder reads
-those lines and refuses to describe a removal this file does not explain.
+## 3.0.0
 
-A section is opened under the version being cut, never under a heading
-called `Unreleased`: the manifest builder matches removal lines by version
-section, so a removal under any other heading is a removal it cannot
-explain.
+**One folder, ready in Obsidian and readable by any AI.** The ICOR for Life plugins and the INKLINE theme come
+preinstalled and turned on again. The AI team's room is gone: agents live outside the folder and learn it from
+`AGENTS.md`, the skills and the schema.
+
+### Added
+- `AGENTS.md` (and `CLAUDE.md`, which points to it): how the folder works, for any AI.
+- `_System/schema.json`: the structure as data. Every type of note, its folder, template, fields, allowed values
+  and the type each link points to. The scripts, the skills and the Objects plugin read it.
+- `_System/Skills/`: nine skills (capture, process-scratchpad, process-outer-world, write-journal-entry, new-object,
+  find-everything-about, life-snapshot, weekly-review, check-quality), copied to `.agents/skills/` and
+  `.claude/skills/` where AI tools look.
+- `06 Outer World/`: what others made, one `source` note each (book, article, video, podcast, post, paper), with a
+  Web Clipper template, a Readwise setup and `Sources.base`.
+- Plugins, preinstalled and on: Journal (new), Objects (new), AI Chat, Planner, Connect, Focus, Outliner,
+  Canvases, PDF Annotation, Scratchpad, Terminal; the INKLINE theme 1.7.0 with the Gradient look.
+- Example journal entries (tagged `example`) so the Journal is not empty on first open.
+- `_System/Tools/migrate-to-3.py`: moves a 2.x folder to this layout, a dry run first.
+
+### Changed
+- `_System/` holds what every device needs (Obsidian Sync skips hidden folders): the schema, the templates (Obsidian's
+  Templates points here), the skills and the tools. `.icor-for-life/` keeps only this computer's files and `.env`.
+- The shared `.env` for the plugins moved from `06 AI Team/AI Team Knowledge/.env` to `.icor-for-life/.env`.
+- `reference` is no longer a kind of note: what someone else made is a `source` in `06 Outer World`.
+
+### Removed or moved
+- `06 AI Team/`: gone. Its guidelines became `_System/schema.json` and the skills; its templates moved to
+  `_System/Templates/`, its life scripts to `_System/Tools/`; the Brand folder and the workstream notes are gone.
+- `01 Inbox/Outer World/`: gone; clips go to `06 Outer World/`.
+- `03 WiP/AI Team/`: gone.
+- `.icor-for-life/manifest.json`: written by the release builder now, not kept in the repo.
+- `SECURITY.md`: in the repository, not in the download.
+- The Scaffold Check plugin is retired; the quality check (`check-quality.py`, skill check-quality) and the Objects
+  plugin do its work.
 
 ## 2.3.0
 

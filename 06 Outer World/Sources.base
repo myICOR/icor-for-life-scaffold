@@ -1,0 +1,47 @@
+# The Outer World: every source, and what is still waiting to be read or watched.
+filters:
+  and:
+    - file.inFolder("06 Outer World")
+    - file.ext == "md"
+    - note.type == "source"
+properties:
+  file.name:
+    displayName: Name
+  note.source_type:
+    displayName: Kind
+  note.author:
+    displayName: Author
+  note.consumed:
+    displayName: Consumed
+  note.topics:
+    displayName: Topics
+  note.projects:
+    displayName: Projects
+  note.key_elements:
+    displayName: Key Elements
+views:
+  - type: table
+    name: Sources
+    order:
+      - file.name
+      - note.source_type
+      - note.author
+      - note.topics
+      - note.projects
+      - note.consumed
+    sort:
+      - property: file.name
+        direction: ASC
+  - type: table
+    name: Reading queue
+    filters:
+      and:
+        - note.consumed != true
+    order:
+      - file.name
+      - note.source_type
+      - note.author
+      - note.topics
+    sort:
+      - property: file.name
+        direction: ASC
