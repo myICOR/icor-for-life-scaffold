@@ -4,5 +4,8 @@
   "newLinkFormat": "shortest",
   "useMarkdownLinks": false,
   "newFileLocation": "folder",
-  "newFileFolderPath": "00 Daily Scratchpad"
+  "newFileFolderPath": "00 Daily Scratchpad",
+  "userIgnoreFilters": [
+    "_System/"
+  ]
 }

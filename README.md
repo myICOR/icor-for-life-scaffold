@@ -15,6 +15,8 @@ Everything is ready in Obsidian, and any AI you point at the folder knows how to
 4. **Create something** with the shapes icon (New object): a goal, a project, a person, a book you are reading. You
    fill in only what it needs, and it lands in the right place. Missing a kind? `@tool` (or any word) adds it as a
    type of your own.
+6. **Find your objects** in `Objects.base`: all of them in one table, and a view per type (Projects, People, your
+   Tools…). Each type's folder has its own table with all its fields. Delete one with the command Delete this object.
 5. **Bring in your AI.** Open this folder in Claude, Codex, Cursor, Gemini or another AI that works with files. It
    reads `AGENTS.md` and knows the rooms, the rules and the skills.
 
@@ -43,7 +45,7 @@ The notes tagged `example` show how each kind of note looks. Keep them as long a
   like any folder; Obsidian Sync, iCloud and Dropbox all carry it.
 - **The look:** Settings, ICOR for Life - Objects, Look: Gradient or Flat.
 - **`_System`** holds the structure, templates, skills and tools your AI and the plugins use. It is hidden in the file
-  tree; the same settings page shows it.
+  tree and kept out of search and the quick switcher; the same settings page shows it.
 
 ## Learn the method
 

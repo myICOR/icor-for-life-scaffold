@@ -279,6 +279,7 @@ fails = []
 # GL-1002 declares fields per type; a base's columns must live there.
 try:
     DECLARED = new_base.gl002_fields(ROOT)
+    DECLARED_COMMON = set(new_base._schema(ROOT)["common"])
 except OSError as exc:
     sys.exit("FAIL cannot read _System/schema.json: %s" % exc)
 
@@ -314,6 +315,18 @@ for b in bases:
     folders = re.findall(r'file\.inFolder\("([^"]+)"\)', text)
     types = re.findall(r'note\.type\s*==\s*"([^"]+)"', text)
     base_type[rel] = types[0] if types else None
+    if len(set(types)) > 1:
+        # An overview (Objects.base): every object, a view per type. It claims no collection, and its columns
+        # are the fields every note has, so they hold for every type it shows.
+        common = set(DECLARED_COMMON)
+        props = set(re.findall(r"note\.([a-z][a-z0-9_]*)", text))
+        for t in sorted(set(types)):
+            if t not in DECLARED:
+                fails.append("%s: a view filters on note.type %r, which the schema does not declare" % (rel, t))
+        for p_ in sorted(props - common):
+            fails.append("%s: an overview shows many types, so note.%s must be a field every note has (%s)"
+                         % (rel, p_, ", ".join(sorted(common))))
+        continue
     for f in folders:
         key = (f, base_type[rel])
         if key in claimed and claimed[key] != rel:

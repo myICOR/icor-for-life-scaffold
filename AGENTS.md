@@ -8,6 +8,7 @@ Cursor, Gemini or any other). Everything you need is in three places:
 | --- | --- |
 | this page | the principles, the rooms, and where to look |
 | `_System/schema.json` | **the structure**: every type of note, its folder, its fields, the values a field allows, and which type each link points to |
+| `Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
 | `_System/Skills/` (copies in `.agents/skills/` and `.claude/skills/`) | **the skills**: how to do the work here, step by step |
 
 ## The principles

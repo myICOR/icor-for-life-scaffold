@@ -25,7 +25,8 @@ fields, allowed values (`values`) and the types its links point to (`links`). Re
 
 **Types the person added** (a tool, a recipe, a trip) work the same way; `--list` shows them. When the person wants a
 kind that does not exist yet, point them to `@tool` (or New object type) in Obsidian. Add one yourself only when they
-ask: an entry in `_System/schema.json` shaped like the others, and `_System/Templates/<type>.md`.
+ask: an entry in `_System/schema.json` shaped like the others, `_System/Templates/<type>.md`, a `.base` in its
+folder like the others, and a view for it in `Objects.base`.
 
 Set or change one field later, by the note's path:
 `python3 _System/Tools/set-property.py "04 Inner World/My Life/Projects/<Project>.md" <field> <value>` (it checks the schema).
