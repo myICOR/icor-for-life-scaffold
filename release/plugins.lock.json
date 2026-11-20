@@ -7,7 +7,7 @@
       "local": "/Users/tom/projects/icor-for-life-inkline-gradient"
     },
     "files": {
-      "theme.css": "f5f9d9b0857b52c77bf42aa54dd9893e7aa2b63232dfa43dc39e284b7a8f1456",
+      "theme.css": "0f190de9e88e966d7311ff39c8648fe6acca39d966bbb16d5deb981e7a8b1ba7",
       "manifest.json": "053ba983f1102dcec3c75805f1ae08f45b5e87d89b83ac3562e8982795673163"
     }
   },
@@ -69,9 +69,9 @@
         "local": "/Users/tom/projects/icor-for-life-journal"
       },
       "files": {
-        "main.js": "353f86f4f29454f0485771e285e0151f270851a3924a844437e2d6cb6aead334",
+        "main.js": "c20f3f4cf90c55d17120d4ee60f59b24d0e027f95d676064163b13e0729f59f9",
         "manifest.json": "8d9537a7cce9b21c54999f069f3a9c180b82e8b6b3af8fe347271171b18f5528",
-        "styles.css": "37d6616684e87a8ec0b8e82b8a8fcb57176a1e868409facb6cc0870df25bca52"
+        "styles.css": "449c238a719e2d11757dc53451391737ee1703a07926e5eb14a61d5c1d7c3c8b"
       }
     },
     {
@@ -81,9 +81,9 @@
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-objects"
       },
       "files": {
-        "main.js": "43d74fac803eec51e6c88256477099e45ee9c717bbc7e2253593eeaeb635f0fe",
+        "main.js": "1e3fb9e8def7e2f16898756b4b06ec768b831119831ae806036bee766e32410f",
         "manifest.json": "a02d9b14158050bcc10f5cc285c245630849bf138cfec0f7450dbd040766f1a6",
-        "styles.css": "f9b088bf861673756b6d4f497fb16e3f69700540d4cb001230952c9cc5461ecd"
+        "styles.css": "f0ae77a3ae23a2d16cd61dbb71661fc5782053dd6788f6d54a13d953bc4f73de"
       }
     },
     {
