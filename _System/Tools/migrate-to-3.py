@@ -101,8 +101,9 @@ def main():
         plan.do("AGENTS.md (how the folder works, for any AI)", lambda: shutil.copy2(NEW / "AGENTS.md", agents))
     elif not same(NEW / "AGENTS.md", agents):
         plan.do("AGENTS.md.update beside yours", lambda: shutil.copy2(NEW / "AGENTS.md", old / "AGENTS.md.update"))
-    if not (old / "CLAUDE.md").exists() and not team:
-        plan.do("CLAUDE.md (points Claude Code to AGENTS.md)", lambda: shutil.copy2(NEW / "CLAUDE.md", old / "CLAUDE.md"))
+    if (old / "CLAUDE.md").exists() and not team:
+        plan.note("Your folder has a CLAUDE.md. Claude Code reads AGENTS.md only when there is no CLAUDE.md: "
+                  "add the line @AGENTS.md to your CLAUDE.md, or remove it if it holds nothing of yours.")
     for target in (".agents/skills", ".claude/skills"):
         copy_tree(plan, NEW / "_System/Skills", old / target, f"{target} (the skills, where AI tools look)")
 

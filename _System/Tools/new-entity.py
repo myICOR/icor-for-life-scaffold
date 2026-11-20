@@ -441,7 +441,7 @@ def main():
 
     # --set: scalar fields, checked against GL-1002 before anything is
     # written. A field the guideline does not declare for this type is the
-    # invented_fields metric, created on purpose (CLAUDE.md hard rule 4).
+    # invented_fields metric, created on purpose (the schema is the law, AGENTS.md).
     declared = new_base.gl002_fields(root).get(a.type, set())
     enums = new_base.gl002_enums(root).get(a.type, {})
     link_fields = set(LINK_FIELDS.get(a.type, {}).values())

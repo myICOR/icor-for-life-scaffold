@@ -10,12 +10,13 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 `AGENTS.md`, the skills and the schema.
 
 ### Added
-- `AGENTS.md` (and `CLAUDE.md`, which points to it): how the folder works, for any AI.
+- `AGENTS.md`: how the folder works, for any AI. Claude Code reads it directly when the folder has no `CLAUDE.md`,
+  as Codex, Cursor and the others do, so there is no `CLAUDE.md`.
 - `_System/schema.json`: the structure as data. Every type of note, its folder, template, fields, allowed values
   and the type each link points to. The scripts, the skills and the Objects plugin read it.
 - `_System/Skills/`: nine skills (capture, process-scratchpad, process-outer-world, write-journal-entry, new-object,
   find-everything-about, life-snapshot, weekly-review, check-quality), copied to `.agents/skills/` and
-  `.claude/skills/` where AI tools look.
+  `.claude/skills/` where AI tools look (Claude Code finds skills only in `.claude/skills/`).
 - `06 Outer World/`: what others made, one `source` note each (book, article, video, podcast, post, paper), with a
   Web Clipper template, a Readwise setup and `Sources.base`.
 - Plugins, preinstalled and on: Journal (new), Objects (new), AI Chat, Planner, Connect, Focus, Outliner,

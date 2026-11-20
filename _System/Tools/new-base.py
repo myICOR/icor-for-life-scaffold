@@ -529,7 +529,7 @@ def main():
     undeclared = [p for p, _ in e["columns"] if p not in declared]
     if undeclared:
         sys.exit("FAIL registry columns not declared in the schema for %r: %s "
-                 "(update the guideline first, per CLAUDE.md hard rule 4)"
+                 "(update _System/schema.json first)"
                  % (a.entity, ", ".join(undeclared)))
 
     folder = root / e["folder"]
