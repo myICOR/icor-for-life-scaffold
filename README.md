@@ -7,8 +7,9 @@ Everything is ready in Obsidian, and any AI you point at the folder knows how to
 
 1. **Turn on the plugins.** Obsidian asks once whether you trust this folder's plugins: choose to trust them. They
    are the ICOR for Life plugins, made by myICOR.
-2. **Write today.** Click the calendar icon (Open today). Write whatever is on your mind, one thought per line. Beside
-   it, any line becomes a journal entry, a project, a person or a note with one click.
+2. **Write today.** Click the calendar icon (Open today) and write whatever is on your mind. Type `@` to link a person,
+   project, topic or book as you write, or create it on the spot: `@person/Paco Cantero`, `@project/Learn Spanish`,
+   `@book/Deep Work`. Type `/journal`, `/project` and the like to turn the whole line into one.
 3. **Open your Journal** with the book icon: your entries as cards, your streak, and a question for today.
 4. **Create something** with the shapes icon (New object): a goal, a project, a person, a book you are reading. You
    fill in only what it needs, and it lands in the right place.
