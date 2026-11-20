@@ -491,7 +491,7 @@ def run(root):
     team = new_base.team_types(root)
 
     def gl(t):
-        return "GL-1015" if t in team else "GL-1002"
+        return "the schema"
 
     files, notes = collect(root)
     resolve = resolver(files, notes)
@@ -512,7 +512,7 @@ def run(root):
                 linked_to.add(tgt)
 
     in_scan = [rel for rel in notes
-               if (_in_scan(rel) or _is_journal(rel))
+               if _in_scan(rel)  # 3.0: agents' journals live outside the folder, or in a myPKA team that checks its own
                and rel.name not in SKIP_NAMES]
 
     scratchpad_ages, capture_ages = [], []
@@ -529,7 +529,7 @@ def run(root):
         if declared_type and declared_type not in known_types:
             values["enum_violations"] += 1
             add("enum_violations", posix,
-                "`type` is `%s`, which is not one of the types GL-1002 or GL-1015 declares."
+                "`type` is `%s`, which is not one of the types _System/schema.json declares."
                 % declared_type,
                 "Set `type` to one of %s." % ", ".join(sorted(known_types)))
         archived = "/archive/" in "/" + posix

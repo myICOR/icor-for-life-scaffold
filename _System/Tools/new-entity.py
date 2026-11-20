@@ -112,7 +112,8 @@ LINK_FIELDS = {
     "company":     {"person": "people"},
     "habit":       {"planner-habit": "planner_habit"},
     "source":      {"project": "projects", "key-element": "key_elements",
-                    "topic": "topics", "person": "people"},
+                    "topic": "topics", "person": "people",
+                    "company": "companies"},
 }
 # Fields that hold ONE wikilink rather than a list (GL-1002).
 SINGLE_FIELDS = {"goal", "planner_habit"}
@@ -221,7 +222,7 @@ def set_field(text, field, values):
     pat = re.compile(r"^%s:[ \t]*(\[\])?[ \t]*$" % re.escape(field), re.M)
     if not pat.search(text):
         fail("Templates/<type>.md has no empty %r field to fill; template and "
-             "GL-1002 have drifted apart" % field)
+             "the schema have drifted apart" % field)
     return pat.sub(lambda _: new, text, count=1)
 
 

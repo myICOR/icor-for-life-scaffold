@@ -139,7 +139,7 @@ def created_block(note):
     if in_scratchpad:
         if not date:
             sys.exit(f"FAIL {note.name} is in 00 Daily Scratchpad/ but its name carries "
-                     "no valid YYYY-MM-DD or YYYYMMDDHHmm, so the `date` GL-1002 requires "
+                     "no valid YYYY-MM-DD or YYYYMMDDHHmm, so the `date` the schema requires "
                      "cannot be derived; add a frontmatter block by hand and run this again")
         lines.append("type: scratchpad")
     if date:

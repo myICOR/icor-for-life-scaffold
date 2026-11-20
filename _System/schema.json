@@ -703,6 +703,7 @@
       "fields": [
         "author",
         "captured",
+        "companies",
         "consumed",
         "created",
         "key_elements",
@@ -741,6 +742,10 @@
         },
         "people": {
           "to": "person",
+          "many": true
+        },
+        "companies": {
+          "to": "company",
           "many": true
         }
       }

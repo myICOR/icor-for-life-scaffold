@@ -179,7 +179,7 @@ def check_format(cfg):
     last = cfg["format"].replace("\\", "/").split("/")[-1]
     if last != "YYYY-MM-DD":
         fail(f"daily-note format ends in '{last}', not 'YYYY-MM-DD'; a "
-             f"[[YYYY-MM-DD]] link could not resolve to it (GL-1011)")
+             f"[[YYYY-MM-DD]] link could not resolve to it")
     probe = render_format(cfg, datetime.date(2026, 1, 2))
     if re.search(r"[A-Za-z]", probe):
         fail(f"daily-note format '{cfg['format']}' uses tokens this script "
@@ -491,7 +491,7 @@ else:
 if MODE == "check":
     if items:
         print(f"FAIL {len(items)} date mention(s) in scope are not linked to "
-              f"their daily note (GL-1011); run --fix", file=sys.stderr)
+              f"their daily note; run --fix", file=sys.stderr)
         sys.exit(1)
     # Under --json, stdout is the JSON document and nothing else. It used to
     # carry this line too, so every caller's json.loads raised on a CLEAN
