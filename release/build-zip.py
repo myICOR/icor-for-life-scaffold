@@ -151,7 +151,9 @@ def main():
         stamp = tuple(__import__("time").gmtime(when)[:6])
         entries = sorted(set([rel(p) for p in stage.rglob("*") if p.is_file()] + [rel(p) + "/" for p in stage.rglob("*") if p.is_dir()]))
         with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as z:
-            z.writestr(zipfile.ZipInfo(TOP + "/", stamp), b"")
+            top = zipfile.ZipInfo(TOP + "/", stamp)
+            top.external_attr = 0o40755 << 16   # without it, unzip makes the top folder unreadable (mode 000)
+            z.writestr(top, b"")
             for e in entries:
                 zi = zipfile.ZipInfo(f"{TOP}/{e}", stamp)
                 if e.endswith("/"):
