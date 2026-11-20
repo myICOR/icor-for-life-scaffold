@@ -12,6 +12,6 @@ tags: [example]
 
 # Train for the spring marathon
 
-Example project with an external PM link: the scaffold knows the
-project exists, why it exists (its goal), and when it started; the PM
+Example project with a link to a task tool: your vault knows the
+project exists, why it exists (its goal) and when it started; the task
 tool owns its tasks. No project exists without a goal.

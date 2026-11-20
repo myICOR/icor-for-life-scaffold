@@ -7,6 +7,6 @@ tags: [example]
 
 # Knowledge Management
 
-Example topic. A topic collects what you learn about a subject: captures
-processed from the Inbox link here, journal entries connect here, and
-the body grows into your own summary of the subject.
+Example topic. A topic collects what you learn about a subject: sources
+from the Outer World link here, journal entries and notes connect here,
+and the body grows into your own summary of the subject.

@@ -1,10 +1,19 @@
 # ICOR for Life
 
 Your life and your work in one folder of plain markdown files, organised by ICOR (Input, Control, Output, Refine).
+Everything is ready in Obsidian, and any AI you point at the folder knows how to work with you here.
 
-**Open it in Obsidian** (Open folder as vault) and everything is ready: the ICOR for Life plugins, the INKLINE theme
-and your Journal. **Point any AI at it** (Claude, ChatGPT, Codex, Cursor, Gemini): it reads `AGENTS.md` and the
-skills in this folder and knows how to work with you here.
+## Start here
+
+1. **Turn on the plugins.** Obsidian asks once whether you trust this folder's plugins: choose to trust them. They
+   are the ICOR for Life plugins, made by myICOR.
+2. **Write today.** Click the calendar icon (Open today). Write whatever is on your mind, one thought per line. Beside
+   it, any line becomes a journal entry, a project, a person or a note with one click.
+3. **Open your Journal** with the book icon: your entries as cards, your streak, and a question for today.
+4. **Create something** with the shapes icon (New object): a goal, a project, a person, a book you are reading. You
+   fill in only what it needs, and it lands in the right place.
+5. **Bring in your AI.** Open this folder in Claude, Codex, Cursor, Gemini or another AI that works with files. It
+   reads `AGENTS.md` and knows the rooms, the rules and the skills.
 
 ## The rooms
 
@@ -18,17 +27,24 @@ skills in this folder and knows how to work with you here.
 | `06 Outer World` | what others made: books, articles, videos, podcasts, with your highlights |
 | `07 Databases` | data your notes cannot hold |
 
-Only what lasts goes in: work in progress stays in the tools where you do it, and the result comes in when it is done.
+**My Life** (in `04 Inner World`) is the map of your life: Key Elements, Goals, Projects, Topics and Habits.
+Everything you write connects to something on it, so you can find it again.
 
-**My Life** is the map of your life: Key Elements, Goals, Projects, Topics and Habits. Everything you write connects
-to something on it, so you can find it again.
+**Only what lasts goes in.** Work in progress stays in the tools where you do it; the result comes in when it is done.
 
-## Your files stay yours
+The notes tagged `example` show how each kind of note looks. Keep them as long as they help, then delete them.
 
-Plain text in a folder on your computer. No account, no database, no lock-in. Back it up like any folder.
+## Good to know
+
+- **Your files stay yours.** Plain text in a folder on your computer: no account, no database, no lock-in. Back it up
+  like any folder; Obsidian Sync, iCloud and Dropbox all carry it.
+- **The look:** Settings, ICOR for Life - Objects, Look: Gradient or Flat.
+- **`_System`** holds the structure, templates, skills and tools your AI and the plugins use. It is hidden in the file
+  tree; the same settings page shows it.
 
 ## Learn the method
 
 [The ICOR Journey](https://app.myicor.com/journey) on myICOR: the courses this folder puts into practice.
 
-An experiment from Tom's Tool Lab: it may change from one release to the next. MIT licence (`LICENSE.md`).
+ICOR for Life is an experiment from Tom's Tool Lab: it may change from one release to the next. MIT licence, see
+`LICENSE.md`.

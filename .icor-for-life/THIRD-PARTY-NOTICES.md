@@ -1,15 +1,8 @@
 # Third-party notices
 
-Since ICOR for Life 2.3.0 this folder bundles no Obsidian plugin and no
-theme. You install the ICOR for Life plugins, our own work, from Obsidian's
-community directory, and each brings its own notices from its repository.
-This file keeps their notices for reference. Before 2.3.0 every bundled
-plugin was an ICOR for Life plugin; none was a third-party community
-install. From 1.7.0 the shell inside the app has been **ICOR
-for Life - Terminal**, our own plugin, replacing the third-party
-Terminal plugin by polyipseity (AGPL-3.0); from 1.10.0 the outliner
-inside the app is **ICOR for Life - Outliner**, our own plugin,
-replacing the third-party Outliner community plugin (MIT).
+Every plugin and the theme in this folder are ICOR for Life's own work. This file lists the open-source libraries
+some of the plugins use inside their code: MIT and Apache notices that travel with that code under its own licence.
+ICOR for Life - Journal and ICOR for Life - Objects bundle no third-party code.
 
 What follows is not a notice about a bundled tool. It is the licenses of
 the open-source libraries some of our own plugins use inside their code
@@ -130,9 +123,7 @@ installed on the member's machine, which is a prerequisite on macOS and
 Linux (see `README.md`). Lucide icon names are resolved through
 Obsidian's own API at runtime; no icon assets are bundled.
 
-No copyleft-licensed code (GPL, LGPL, AGPL or MPL) is bundled inside any
-ICOR plugin, and from Scaffold 1.7.0 no copyleft component ships in this
-vault at all.
+No copyleft-licensed code (GPL, LGPL, AGPL or MPL) ships in this folder.
 
 Obsidian itself is NOT bundled or redistributed; users install it from
 obsidian.md under Obsidian's own terms.

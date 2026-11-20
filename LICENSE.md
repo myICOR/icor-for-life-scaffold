@@ -1,23 +1,21 @@
 # ICOR for Life: what you may do with each part
 
-**This folder is MIT.** From ICOR for Life 2.2.0 (October 2026) the rooms,
-templates, guidelines, life scripts, the Obsidian settings and everything
-else in this folder are open source under the MIT licence below, unless the short list
-under "Parts with their own terms" names it. Use it, change it, share it,
+**This folder is MIT.** The rooms, the notes, the schema, the templates, the
+skills, the tools, the Obsidian settings and everything else in this folder
+are open source under the MIT licence below, unless the short list under
+"Parts with their own terms" names it. Use it, change it, share it,
 build on it, including commercially. Keep the copyright line and the
 licence text.
 
-Earlier versions keep the licence they were published with (the ICOR for
-Life Source-Available License for the content up to 2.1.0, CC BY-SA 4.0 for
-myPKA 6.x prose). This release adds a licence; it takes nothing away from a
-copy you already have.
+Earlier versions keep the licence they were published with.
 
 ## Parts with their own terms
 
 | Part | Terms |
 |---|---|
-| The ICOR for Life plugins and the INKLINE theme | Not in this folder since ICOR for Life 2.3.0: you install them from Obsidian's community directory, and each comes with its own licence and notices from its repository. For reference: the plugins are MIT (AI Chat bundles Anthropic's `@anthropic-ai/claude-agent-sdk` under Anthropic's terms; using the myICOR platform through Connect follows the myICOR Terms of Service), and the theme is CC BY-NC-ND 4.0 with SIL OFL 1.1 fonts. |
-| Names and logos | "myICOR", "ICOR", "ICOR Journey", "ICOR for Life", "myPKA" and "Paperless Movement" are trademarks. No licence here grants trademark rights: a fork or product of yours needs its own name. |
+| The ICOR for Life plugins (`.obsidian/plugins/`) | MIT, our own work. AI Chat uses Anthropic's `@anthropic-ai/claude-agent-sdk` under Anthropic's terms; using the myICOR platform through Connect follows the myICOR Terms of Service. Each plugin's notices are in `.icor-for-life/THIRD-PARTY-NOTICES.md`. |
+| The INKLINE theme (`.obsidian/themes/`) | CC BY-NC-ND 4.0, with its fonts under the SIL Open Font License 1.1. |
+| Names and logos | "myICOR", "ICOR", "ICOR Journey", "ICOR for Life" and "Paperless Movement" are trademarks. No licence here grants trademark rights: a fork or product of yours needs its own name. |
 
 ## The licence
 

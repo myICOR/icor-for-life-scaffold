@@ -112,7 +112,6 @@
     "url": "text",
     "website": "text",
     "weekdays": "multitext",
-    "weekly_goal": "checkbox",
-    "wip_folder": "text"
+    "weekly_goal": "checkbox"
   }
 }

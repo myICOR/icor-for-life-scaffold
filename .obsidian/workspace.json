@@ -187,8 +187,7 @@
       "command-palette:Open command palette": false,
       "zk-prefixer:Create new unique note": false,
       "bases:Create new base": false,
-      "icor-for-life-terminal:Terminal": false,
-      "icor-for-life-chat:AI Team": false
+      "icor-for-life-terminal:Terminal": false
     }
   },
   "active": "e65376631605d39f",

@@ -88,5 +88,29 @@ check("no shipped note or setting mentions 06 AI Team, a GL, an SOP or Scaffold 
 check("nothing tracked under 06 AI Team", not any(f.startswith("06 AI Team/") for f in tracked))
 check("no .env, data.json or plugin folder tracked", not any(re.search(r"(^|/)\.env$|data\.json$|^\.obsidian/(plugins|themes)/", f) for f in tracked))
 
+# --- words members never see, and links that go somewhere --------------------------------------------------------
+banned = re.compile(r"\bscaffold\b|local folder|full stack", re.I)
+said = []
+for f in shipped:
+    p = ROOT / f
+    if p.suffix in (".md", ".json", ".base") and f not in ("LICENSE.md", ".icor-for-life/THIRD-PARTY-NOTICES.md"):
+        if banned.search(p.read_text(encoding="utf-8", errors="ignore")):
+            said.append(f)
+check('no shipped note says "scaffold", "local folder" or "full stack"', not said, said)
+names = {Path(f).stem for f in tracked} | {Path(f).name for f in tracked}
+broken = []
+rooms = tuple(schema["rooms"])
+for f in shipped:
+    if not f.endswith(".md") or not f.startswith(rooms):
+        continue
+    for link in re.findall(r"\[\[([^\]|#]+)", (ROOT / f).read_text(encoding="utf-8", errors="ignore")):
+        target = link.strip().split("/")[-1]
+        if target and target not in names and not target.startswith("<"):
+            broken.append(f"{f} -> {link}")
+check("every link in the notes goes to a note or file that exists", not broken, broken[:10])
+untagged = [f for f in shipped if f.endswith(".md") and f.startswith(("04 Inner World/", "06 Outer World/"))
+            and not f.endswith("README.md") and "example" not in (ROOT / f).read_text(encoding="utf-8")]
+check("every example note is tagged example, so a member knows what to delete", not untagged, untagged)
+
 print(f"OK {checks} cases held" if not fails else f"FAIL {len(fails)} of {checks} cases")
 sys.exit(1 if fails else 0)

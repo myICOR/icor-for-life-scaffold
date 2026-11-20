@@ -10,5 +10,5 @@ tags: [example]
 
 Example goal note. A goal is a direction with a target and exactly two
 states: not-achieved and achieved. The body holds why it matters and
-links to the projects moving it forward, like [[Train for the spring
-marathon]].
+links to the projects moving it forward, like
+[[Train for the spring marathon]].

@@ -15,8 +15,6 @@ I think this is perfect to build my knowledge system in Obsidian.
 
 ## Expansion
 
-This entry was created while processing the example capture in
-01 Inbox/Outer World (an Obsidian video clip). It demonstrates the full
-loop: the thought above is the user's exact words, the capture survives
-verbatim in the archive with backlinks here, and the [[Knowledge
-Management]] topic gained its first connection.
+The first entry of this example vault. The words above are the person's own, kept exactly as written; this part is
+what an AI adds. It links to [[Knowledge Management]], so the topic page finds it, and the source that started the
+thought, [[How to Take Smart Notes]], is in the Outer World.
