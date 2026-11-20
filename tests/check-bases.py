@@ -260,7 +260,7 @@ def blob(node, out=None):
     return "\n".join(out)
 
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parent.parent / "_System" / "Tools"
 # NO sys.path.insert HERE. new-base.py is loaded BY PATH on the next four
 # lines, so nothing about this import needs Scripts/ on sys.path; the insert
 # was dead code that put Scripts/ at the FRONT of it, which is exactly the F1
@@ -273,14 +273,14 @@ new_base = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(new_base)
 
 argv = [a for a in sys.argv[1:] if a != "--check"]
-ROOT = Path(argv[0]).resolve() if argv else HERE.parents[2]
+ROOT = Path(argv[0]).resolve() if argv else HERE.parents[1]
 fails = []
 
 # GL-1002 declares fields per type; a base's columns must live there.
 try:
     DECLARED = new_base.gl002_fields(ROOT)
 except OSError as exc:
-    sys.exit("FAIL cannot read GL-1002: %s" % exc)
+    sys.exit("FAIL cannot read _System/schema.json: %s" % exc)
 
 # (folder as filtered, note.type as filtered or None) -> the base that claims it
 claimed = {}

@@ -21,8 +21,8 @@ from pathlib import Path
 sys.dont_write_bytecode = True
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
-SCRIPTS = "06 AI Team/AI Team Knowledge/Scripts"
+ROOT = HERE.parent
+SCRIPTS = "_System/Tools"
 PY = sys.executable
 BREAK = "--break-me" in sys.argv[1:]
 
@@ -303,7 +303,7 @@ def quality_cases(tmp):
     write(v, "04 Inner World/My Life/Key Elements/Ideas.md",
           "---\ntype: key-element\n---\n\n[[My idea]], [[Inline]]\n")
     idea = "04 Inner World/Notes/My idea.md"
-    (v / idea).write_bytes((v / "06 AI Team/AI Team Knowledge/Templates/idea.md").read_bytes())
+    (v / idea).write_bytes((v / "_System/Templates/idea.md").read_bytes())
     check("a note made from the idea template has no findings",
           not findings_for(v, idea), str(findings_for(v, idea)))
     check("the idea template's idea_status is a clean enum",
@@ -324,7 +324,7 @@ def quality_cases(tmp):
           str(findings_for(v, chat)))
     plant = chat.replace("1215", "1216")
     write(v, plant, "---\ntype: scratchpad\ndate: 2026-11-02\nsessionids: []\n---\n")
-    check("a field GL-1002 does not name is still invented",
+    check("a field the schema does not name is still invented",
           [f for f in findings_for(v, plant) if f.get("metric") == "invented_fields"],
           str(findings_for(v, plant)))
 
@@ -335,30 +335,30 @@ def all_findings(vault):
 
 
 def reading_queue_cases(tmp):
-    """Member report on 2.2.1, item 3: a reference with no `consumed` field
-    was counted as unread and left out of the Reading queue."""
-    print("Reading queue vs unconsumed_references")
+    """Member report on 2.2.1, item 3: a reference with no `consumed` field was counted as unread and left out of
+    the Reading queue. Since 3.0 the queue is unread sources in 06 Outer World; the rule is the same."""
+    print("Reading queue vs unread sources")
     v = fresh(tmp, "rq")
     NB = load("nb_rq", v / SCRIPTS / "new-base.py")
-    views = {x["name"]: x for x in NB.REGISTRY["note"]["extra_views"]}
+    views = {x["name"]: x for x in NB.REGISTRY["source"]["extra_views"]}
     queue = views["Reading queue"]["filters"]
-    check("new-base's Reading queue keeps a reference unless consumed is true",
+    check("new-base's Reading queue keeps a source unless consumed is true",
           "note.consumed != true" in queue and not any("== false" in f for f in queue),
           str(queue))
-    base = (v / "04 Inner World/Notes/Notes.base").read_text(encoding="utf-8")
-    check("the shipped Notes.base says the same", "- note.consumed != true\n" in base
+    base = (v / "06 Outer World/Sources.base").read_text(encoding="utf-8")
+    check("the shipped Sources.base says the same", "- note.consumed != true\n" in base
           and "note.consumed == false" not in base)
-    ref = "04 Inner World/Notes/Test Reference.md"
-    write(v, ref, '---\ntype: note\nnote_type: reference\n'
+    ref = "06 Outer World/Test Source.md"
+    write(v, ref, '---\ntype: source\nsource_type: article\n'
                   'topics: ["[[Knowledge Management]]"]\n---\n\nbody\n')
     unread = lambda rel: [f for f in findings_for(v, rel)
                           if f.get("metric") == "unconsumed_references"]
-    check("a reference with no consumed field counts as unread", unread(ref),
+    check("a source with no consumed field counts as unread", unread(ref),
           str(findings_for(v, ref)))
     for value, want_unread in (("true", False), ("True", False), ("false", True),
                                ("yes", True), ("1", True)):
-        rel = "04 Inner World/Notes/Ref %s.md" % value
-        write(v, rel, '---\ntype: note\nnote_type: reference\nconsumed: %s\n'
+        rel = "06 Outer World/Source %s.md" % value
+        write(v, rel, '---\ntype: source\nsource_type: article\nconsumed: %s\n'
                       'topics: ["[[Knowledge Management]]"]\n---\n' % value)
         check("consumed: %s is %s, as the queue's `!= true` reads it"
               % (value, "unread" if want_unread else "read"),
@@ -367,7 +367,7 @@ def reading_queue_cases(tmp):
 
 def subfolder_cases(tmp):
     """Member report on 2.2.1, items 4 and 6: the orphan and duplicate checks
-    and validate-scaffold's project and goal checks looked at the top level
+    and the project and goal checks (validate-scaffold, now check-quality) looked at the top level
     of an entity folder only."""
     print("subfolders of an entity folder")
     v = fresh(tmp, "sub")
@@ -399,12 +399,13 @@ def subfolder_cases(tmp):
     write(w, "04 Inner World/My Life/Projects/Sub/No Goal.md", "---\ntype: project\n---\n")
     write(w, "04 Inner World/My Life/Goals/Sub/Bad Status.md",
           "---\ntype: goal\nstatus: maybe\n---\n")
-    r = run(w, "validate-scaffold.py", w, "--json")
-    fails_ = json.loads(r.stdout)["fails"] if r.stdout.strip() else [r.stderr]
-    check("validate-scaffold: a project in a subfolder still needs a goal",
-          any("Sub/No Goal.md" in f and "goal wikilink" in f for f in fails_), str(fails_))
-    check("validate-scaffold: a goal in a subfolder still has a checked status",
-          any("Sub/Bad Status.md" in f and "goal status" in f for f in fails_), str(fails_))
+    # validate-scaffold.py is retired (3.0); the schema's rules are checked by check-quality.py
+    rep_w = all_findings(w)
+    found = lambda path: [f for f in rep_w["findings"] if f["path"].endswith(path)]
+    check("check-quality: a project in a subfolder still needs a goal",
+          any("goal" in (f["message"] + f.get("fix", "")).lower() for f in found("Sub/No Goal.md")), str(found("Sub/No Goal.md")))
+    check("check-quality: a goal in a subfolder still has a checked status",
+          any("status" in (f["message"] + f.get("fix", "")).lower() for f in found("Sub/Bad Status.md")), str(found("Sub/Bad Status.md")))
 
 
 def gitignore_case(tmp):

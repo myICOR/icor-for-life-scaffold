@@ -15,7 +15,7 @@ Exit 0 = every case held. Exit 1 = a case did not.
 import json, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parent.parent / "_System" / "Tools"
 SCRIPT = HERE / "link-dates-to-daily-notes.py"
 PY = sys.executable
 BREAK = "--break-me" in sys.argv[1:]

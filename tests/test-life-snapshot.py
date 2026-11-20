@@ -33,7 +33,7 @@ from pathlib import Path
 # running.
 sys.dont_write_bytecode = True
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parent.parent / "_System" / "Tools"
 SCRIPT = HERE / "life-snapshot.py"
 PY = sys.executable
 BREAK = "--break-me" in sys.argv[1:]

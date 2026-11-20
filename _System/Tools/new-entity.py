@@ -142,7 +142,10 @@ def fail(msg):
 def rooms_check(root):
     """Every room in ROOMS must be the folder _System/schema.json gives its type."""
     import json
-    schema = json.loads((Path(root) / "_System/schema.json").read_text(encoding="utf-8"))
+    p = Path(root) / "_System/schema.json"
+    if not p.is_file():
+        p = HERE.parent / "schema.json"
+    schema = json.loads(p.read_text(encoding="utf-8"))
     for t, folder in sorted(ROOMS.items()):
         want = (schema["types"].get(t) or {}).get("folder")
         if want != folder:
