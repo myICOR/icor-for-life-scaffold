@@ -51,14 +51,14 @@
     },
     {
       "id": "icor-for-life-focus",
-      "version": "0.7.0",
+      "version": "0.7.1",
       "source": {
         "github": "myICOR/icor-for-life-focus",
-        "tag": "0.7.0"
+        "tag": "0.7.1"
       },
       "files": {
-        "main.js": "e8eeb643be0c361d5c7b52fdb68e5286e9c53ee1afa6e5be9057a2c0eba324b7",
-        "manifest.json": "20c1ffeeb7cc2904f9f4ab73dbcaa56f5c20106b311cc95fb15905b77e3690a0",
+        "main.js": "85149ced8e962e02ecbe99d46dd252834aed0544f9109b2750c343753ef74591",
+        "manifest.json": "071fa51c4e8fe92e476519d99a463ff6bf47a5df4d19b1118737dcf3ae650dcd",
         "styles.css": "e3048a369ccb282456f9109fe9a55f0cd08c21a20edfe6b56af5674dc413ebf4"
       }
     },
