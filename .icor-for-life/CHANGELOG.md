@@ -26,8 +26,8 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
   `.claude/skills/` where AI tools look (Claude Code finds skills only in `.claude/skills/`).
 - `06 Outer World/`: what others made, one `source` note each (book, article, video, podcast, post, paper), with a
   Web Clipper template, a Readwise setup and `Sources.base`.
-- Plugins, preinstalled and on: Journal (new), Objects (new), AI Chat, Planner, Connect, Focus, Outliner,
-  Canvases, PDF Annotation, Scratchpad, Terminal; the INKLINE theme 1.7.0 with the Gradient look.
+- Plugins, preinstalled and on: Journal (new), Objects (new), Interface (the look, properties, _System, the chrome), AI Chat, Planner, Connect, Focus, Outliner,
+  Canvases, PDF Annotation, Scratchpad, Terminal; the INKLINE theme 1.7.1 with the Gradient look.
 - Example journal entries (tagged `example`) so the Journal is not empty on first open.
 - `_System/Tools/migrate-to-3.py`: moves a 2.x folder to this layout, a dry run first.
 

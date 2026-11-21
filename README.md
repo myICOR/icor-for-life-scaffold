@@ -43,9 +43,10 @@ The notes tagged `example` show how each kind of note looks. Keep them as long a
 
 - **Your files stay yours.** Plain text in a folder on your computer: no account, no database, no lock-in. Back it up
   like any folder; Obsidian Sync, iCloud and Dropbox all carry it.
-- **The look:** Settings, ICOR for Life - Objects, Look: Gradient or Flat.
+- **The look:** Settings, ICOR for Life - Interface: Gradient or Flat, and where a note's properties show (on top,
+  folded, under the note, or only in the right sidebar).
 - **`_System`** holds the structure, templates, skills and tools your AI and the plugins use. It is hidden in the file
-  tree and kept out of search and the quick switcher; the same settings page shows it.
+  tree and kept out of search and the quick switcher; ICOR for Life - Interface shows it.
 
 ## Learn the method
 

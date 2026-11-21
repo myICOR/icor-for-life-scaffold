@@ -2,13 +2,13 @@
   "$comment": "What the ICOR for Life download bundles. release/build-zip.py copies exactly these files and refuses any whose sha256 differs. A local source is a build on the maintainer's computer (local testing); a release uses GitHub releases only.",
   "theme": {
     "name": "ICOR for Life - INKLINE",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "source": {
       "local": "/Users/tom/projects/icor-for-life-inkline-gradient"
     },
     "files": {
-      "theme.css": "0f190de9e88e966d7311ff39c8648fe6acca39d966bbb16d5deb981e7a8b1ba7",
-      "manifest.json": "053ba983f1102dcec3c75805f1ae08f45b5e87d89b83ac3562e8982795673163"
+      "theme.css": "e81314f43b6175661c37b101a45dffb6ed9c06c2bcc376ce6f13abeaed49ef0b",
+      "manifest.json": "1bcd2060c5483a18aaaece422fd15a343fef580da59a48aad15505bf0e487d41"
     }
   },
   "plugins": [
@@ -63,6 +63,18 @@
       }
     },
     {
+      "id": "icor-for-life-interface",
+      "version": "0.9.0",
+      "source": {
+        "local": "/Users/tom/projects/icor-for-life-interface-3.0"
+      },
+      "files": {
+        "main.js": "4b6a5f8926eeb80b74c5dd5d08e8c726504f905fb468f8f46ca79bf643ecc2ee",
+        "manifest.json": "9e3c6214a9c44e7da75c584590661bea3b85de54d343645432709588505659f3",
+        "styles.css": "d8e32983af70f9245df715c64bf948142c9475f42f0ca8c7b56451a121a5c627"
+      }
+    },
+    {
       "id": "icor-for-life-journal",
       "version": "0.1.0",
       "source": {
@@ -76,14 +88,14 @@
     },
     {
       "id": "icor-for-life-objects",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-objects"
       },
       "files": {
-        "main.js": "dfcb5885f0e83a0579b0bd0040fe704a9ce07be533762f0fa52be98e2949f34d",
-        "manifest.json": "a02d9b14158050bcc10f5cc285c245630849bf138cfec0f7450dbd040766f1a6",
-        "styles.css": "bf212a9c58253397c53e8c1e1ee6f0d76d1a2590d1fa30c29d5961b8a4d86b8e"
+        "main.js": "6b10628e28731421a5caea4deb57935145cb3af810b3f9be29de7f90ec05df38",
+        "manifest.json": "a585ecb5a7269118f742f1e97788169865d28db2c0e4f38f4cef74d712ab1411",
+        "styles.css": "666b670ec3f2f2ade48da6596f930fe8d01a749965ed69ea7956acd0c08dea8e"
       }
     },
     {
