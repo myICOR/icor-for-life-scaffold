@@ -13,7 +13,7 @@
     "04 Inner World": "what you know and who you know: Journal, Notes, Contacts, My Life",
     "05 Assets": "files only (Images/, Audio/, Documents/), embedded from notes",
     "06 Outer World": "what others made: one source note per book, article, video, podcast, post or paper, with your highlights",
-    "07 Databases": "data too large or row-shaped for notes; sources only"
+    "07 Databases": "Objects.base (every object, a view per type), and data too large or row-shaped for notes; no notes"
   },
   "my_life": [
     "key-element",

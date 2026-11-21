@@ -8,7 +8,7 @@ Cursor, Gemini or any other). Everything you need is in three places:
 | --- | --- |
 | this page | the principles, the rooms, and where to look |
 | `_System/schema.json` | **the structure**: every type of note, its folder, its fields, the values a field allows, and which type each link points to |
-| `Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
+| `07 Databases/Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
 | `_System/Skills/` (copies in `.agents/skills/` and `.claude/skills/`) | **the skills**: how to do the work here, step by step |
 
 ## The principles
@@ -41,7 +41,7 @@ Cursor, Gemini or any other). Everything you need is in three places:
 | `04 Inner World/` | **what went through the person**: `Journal/`, `Notes/`, `Contacts/`, `My Life/` |
 | `05 Assets/` | files only (`Images/`, `Audio/`, `Documents/`), embedded from notes |
 | `06 Outer World/` | **what others made**: one `source` note per book, article, video, podcast, post or paper, with highlights |
-| `07 Databases/` | data too large or row-shaped for notes |
+| `07 Databases/` | `Objects.base` (every object, a view per type), and data too large or row-shaped for notes |
 | `_System/` | the schema, templates, skills and tools. Read it; change it only when asked |
 
 **My Life** (`04 Inner World/My Life/`) is the map of the person's life: **Key Elements** (the big areas, like

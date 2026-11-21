@@ -19,7 +19,7 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - Types change and build on each other: Change type (the palette, a note's menu, the type in the Connections panel)
   sets `type`, adds the new type's fields empty, keeps every other field and moves the note; a type can be a kind of
   another (a restaurant is a kind of company: its fields and links, and it counts as one wherever a company is asked).
-- `Objects.base`: every object in one table and a view per type; a type you add gets its view there and its own base
+- `07 Databases/Objects.base`: every object in one table and a view per type; a type you add gets its view there and its own base
   in its folder. Delete this object, Show all objects (a table per type), and removing a type you added (Settings,
   Objects) while it has no objects. `_System` stays out of search and the quick switcher (Excluded files).
 - One way to each thing: Obsidian's own Daily notes opens today (the Connections panel, now in the right sidebar in

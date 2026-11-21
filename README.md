@@ -15,7 +15,7 @@ Everything is ready in Obsidian, and any AI you point at the folder knows how to
 4. **Create something** with the shapes icon (New object): a goal, a project, a person, a book you are reading. You
    fill in only what it needs, and it lands in the right place. Missing a kind? `@tool` (or any word) adds it as a
    type of your own.
-6. **Find your objects** in `Objects.base`: all of them in one table, and a view per type (Projects, People, your
+6. **Find your objects** in `07 Databases/Objects.base`: all of them in one table, and a view per type (Projects, People, your
    Tools…). Each type's folder has its own table with all its fields. Delete one with the command Delete this object.
 5. **Bring in your AI.** Open this folder in Claude, Codex, Cursor, Gemini or another AI that works with files. It
    reads `AGENTS.md` and knows the rooms, the rules and the skills.
@@ -30,7 +30,7 @@ Everything is ready in Obsidian, and any AI you point at the folder knows how to
 | `04 Inner World` | what went through you: Journal, Notes, Contacts, My Life |
 | `05 Assets` | images, audio and documents |
 | `06 Outer World` | what others made: books, articles, videos, podcasts, with your highlights |
-| `07 Databases` | data your notes cannot hold |
+| `07 Databases` | the tables: `Objects.base` (every object), and data your notes cannot hold |
 
 **My Life** (in `04 Inner World`) is the map of your life: Key Elements, Goals, Projects, Topics and Habits.
 Everything you write connects to something on it, so you can find it again.
