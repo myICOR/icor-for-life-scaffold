@@ -88,14 +88,14 @@
     },
     {
       "id": "icor-for-life-objects",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-objects"
       },
       "files": {
-        "main.js": "6b10628e28731421a5caea4deb57935145cb3af810b3f9be29de7f90ec05df38",
-        "manifest.json": "a585ecb5a7269118f742f1e97788169865d28db2c0e4f38f4cef74d712ab1411",
-        "styles.css": "666b670ec3f2f2ade48da6596f930fe8d01a749965ed69ea7956acd0c08dea8e"
+        "main.js": "753cbf21bb37a788d592388f306630af0ed8105c5654e81eff033fd51093ba70",
+        "manifest.json": "34e78b36b13cc2d9fa43909400f0450ab2576aef9ebb7d019b1e02f39cf9fde5",
+        "styles.css": "0a2c8bcfb6d732452162981d0cf92ce89dba5ac6e101d723731f9a264b2eb798"
       }
     },
     {
