@@ -160,6 +160,22 @@ def add_schema_types(root):
             if not link.get("many", True):
                 SINGLE_FIELDS.add(field)
         LINK_FIELDS[t] = fields
+    # a kind of another type (schema "extends": a restaurant is a kind of company) is linked wherever that type is:
+    # a person's companies may hold a restaurant
+    types = schema.get("types", {})
+    def is_a(t, target):
+        for _ in range(10):
+            if t == target:
+                return True
+            t = (types.get(t) or {}).get("extends")
+            if not t:
+                return False
+        return False
+    for fields in LINK_FIELDS.values():
+        for target, field in list(fields.items()):
+            for kind in types:
+                if kind != target and is_a(kind, target) and kind not in fields:
+                    fields[kind] = field
 
 
 def rooms_check(root):

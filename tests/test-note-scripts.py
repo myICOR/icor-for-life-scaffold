@@ -173,6 +173,20 @@ def new_entity_cases(tmp):
     r = run(v, "new-entity.py", "--list", "--root", v)
     check("an added type: --list shows it", "06 Outer World/Tools" in r.stdout, r.stdout)
 
+    # a kind of another type: a restaurant is a kind of company, so a person's companies can hold one
+    schema = json.loads(sp.read_text(encoding="utf-8"))
+    schema["types"]["restaurant"] = {"label": "Restaurant", "description": "x", "folder": "04 Inner World/Contacts/Companies/Restaurants",
+                                     "template": "restaurant.md", "icon": "utensils", "owner": "you", "required": [], "extends": "company",
+                                     "fields": ["created", "tags", "name", "industry", "website", "people", "rating"], "values": {},
+                                     "links": {"people": {"to": "person", "many": True}}}
+    sp.write_text(json.dumps(schema, indent=2), encoding="utf-8")
+    write(v, "_System/Templates/restaurant.md", "---\ntype: restaurant\nname: {{title}}\nrating: \ncreated: {{date}}\npeople: []\ntags: []\n---\n\n# {{title}}\n")
+    r = run(v, "new-entity.py", "restaurant", "Luv", "--set", "rating=5", "--root", v)
+    check("a kind of company: new-entity.py files it in its own folder", (v / "04 Inner World/Contacts/Companies/Restaurants/Luv.md").is_file(), r.stdout + r.stderr)
+    r = run(v, "new-entity.py", "person", "Guest Cook", "--link", "[[Luv]]", "--root", v)
+    guest = v / "04 Inner World/Contacts/People/Guest Cook.md"
+    check("a kind of company: a person's companies can hold a restaurant", guest.is_file() and "[[Luv]]" in frontmatter_line(guest, "companies"), r.stdout + r.stderr)
+
 
 def journal_cases(tmp):
     print("new-journal-entry.py")

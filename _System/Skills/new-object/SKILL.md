@@ -28,5 +28,12 @@ kind that does not exist yet, point them to `@tool` (or New object type) in Obsi
 ask: an entry in `_System/schema.json` shaped like the others, `_System/Templates/<type>.md`, a `.base` in its
 folder like the others, and a view for it in `Objects.base`.
 
+**A kind of another type** (`"extends": "company"` in the schema): a restaurant is a company with a rating. It
+has the company's fields and links, lives inside Companies, and a person's `companies` can hold it. Prefer a kind over a
+new unrelated type when the thing *is* one of an existing type.
+
+**Changing a note's type**: set `type` with `set-property.py`, add the new type's missing fields empty, and move the
+note to that type's folder (links keep working). Never delete fields when you change a type.
+
 Set or change one field later, by the note's path:
 `python3 _System/Tools/set-property.py "04 Inner World/My Life/Projects/<Project>.md" <field> <value>` (it checks the schema).

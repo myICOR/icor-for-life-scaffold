@@ -23,6 +23,9 @@ Cursor, Gemini or any other). Everything you need is in three places:
    link only to the type a field points to. If something does not fit, ask the person; never invent a field, a type
    or a folder. The person may add types of their own (a tool, a recipe, a trip): they are in the schema like the
    rest, with a template and a folder, and `new-entity.py` takes them. Add a type yourself only when the person asks.
+   A type can be a kind of another (`extends`: a restaurant is a kind of company): it has that type's fields and links
+   and counts as one wherever it is asked for. To change a note's type, set `type`, add the new type's missing fields
+   empty and move the note to the type's folder; never delete a field when you do, so changing back loses nothing.
 5. **Only what lasts comes in.** Work in progress (drafts, research, an agent's working files) stays where the work
    happens: your harness, your project folder, the tool you work in. When it is done, file the result here as an object
    (a note, a project, a source, a journal entry) with skill **new-object** or **capture**. No temporary folders.
