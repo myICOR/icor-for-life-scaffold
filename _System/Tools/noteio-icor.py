@@ -64,7 +64,23 @@ def read_note(path) -> tuple:
     return data.decode("utf-8"), detect_eol(data)
 
 
+TOP_KEEP = {"readme.md", "agents.md", "claude.md", "license.md", "security.md"}
+
+
+def refuse_top_level(path) -> None:
+    """Stop before writing in the top folder of an ICOR for Life folder (the
+    folder with _System/schema.json): it holds only its own pages and the
+    rooms. Every tool that writes a note writes through write_note, so this
+    one check covers new-entity, new-base, new-journal-entry and the rest."""
+    p = Path(path).resolve()
+    if (p.parent / "_System" / "schema.json").is_file() and not p.name.startswith(".") and p.name.lower() not in TOP_KEEP:
+        raise SystemExit("FAIL %s would land in the top folder, which holds only README.md, AGENTS.md and the rooms. "
+                         "Give a path inside a room (a typed note: its type's folder; unsorted: 01 Inbox/). "
+                         "AGENTS.md, \"Where files go\", has the rule." % p.name)
+
+
 def write_note(path, text: str) -> None:
     """Write `text` as bytes. Whatever line endings are in `text` are the
-    line endings that land on disk, byte for byte."""
+    line endings that land on disk, byte for byte. Never in the top folder."""
+    refuse_top_level(path)
     Path(path).write_bytes(text.encode("utf-8"))

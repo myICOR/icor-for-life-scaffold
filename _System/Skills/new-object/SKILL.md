@@ -16,6 +16,8 @@ fields, allowed values (`values`) and the types its links point to (`links`). Re
    `python3 _System/Tools/new-entity.py <type> "<Title>" --link "[[<target>]]" --set <field>=<value>`
    (`python3 _System/Tools/new-entity.py --list` shows the types and their folders). It picks the folder and template, puts each
    link in the field the schema gives that pair, and refuses a value the schema does not allow.
+   Never write an object, or its file, in the top folder or in a folder you made up: the type's folder is its home;
+   a document's file goes in `05 Assets/Documents/`, a picture in `05 Assets/Images/`, a recording in `05 Assets/Audio/`.
 4. **Name** it by its natural title: `Spain Holidays`, `Alex Rivera`, `Health`. Journal entries are the exception:
    use skill **write-journal-entry**.
 5. **Keep My Life notes short**: what it is, why it matters, its status. Material about it lives in Notes and links

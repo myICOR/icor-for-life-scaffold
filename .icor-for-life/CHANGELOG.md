@@ -22,6 +22,11 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - `07 Databases/Objects.base`: every object in one table and a view per type; a type you add gets its view there and its own base
   in its folder. Delete this object, Show all objects (a table per type), and removing a type you added (Settings,
   Objects) while it has no objects. `_System` stays out of search and the quick switcher (Excluded files).
+- The top folder stays clear: in Obsidian the Objects plugin moves a file that lands there to its room (pictures, videos
+  and sound to `05 Assets`, documents to `05 Assets/Documents`, the rest to `01 Inbox`), links following; in Claude Code
+  `.claude/settings.json` runs `_System/Tools/guard-paths.py` before every Write and Edit and refuses the top folder and
+  made-up folders; the tools refuse a top-level path; AGENTS.md ("Where files go") and the capture and new-object skills
+  say where each kind of file goes.
 - One way to each thing: Obsidian's own Daily notes opens today (the Connections panel, now in the right sidebar in
   place of Backlinks and Outgoing links, shows the day's page); the graph colours each type as its links are coloured.
 - `_System/Skills/`: nine skills (capture, process-scratchpad, process-outer-world, write-journal-entry, new-object,

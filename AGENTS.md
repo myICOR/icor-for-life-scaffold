@@ -61,6 +61,23 @@ Health or Family), **Goals** (outcomes in a Key Element), **Projects** (work tha
 - **A file you keep**: the file in `05 Assets/Documents/`, a `document` note in `Notes/` pointing at it.
 - **A goal, project, topic, habit or area of life**: one note in `My Life/`, short; the material links to it.
 
+## Where files go
+
+**Never write in the top folder.** It holds only `README.md`, `AGENTS.md`, `LICENSE.md` and the rooms. Every file has
+a room; if you are unsure, `01 Inbox/` is the room for "not sorted yet".
+
+| A file that is | Goes in |
+| --- | --- |
+| a picture, a screenshot, a photo or a video | `05 Assets/Images/` |
+| a recording, a voice memo, a sound | `05 Assets/Audio/` |
+| a PDF, an office file, an e-book, a spreadsheet you keep | `05 Assets/Documents/` (and a `document` note in `04 Inner World/Notes/`) |
+| a scan still to be filed | `01 Inbox/Scanner Inbox/` |
+| a note | the folder of its type in `_System/schema.json` (made with `new-entity.py`); unsorted: `01 Inbox/` |
+
+Never make a new folder next to the rooms. In Obsidian the Objects plugin moves anything that lands in the top folder
+to its room; in Claude Code a hook (`_System/Tools/guard-paths.py`) refuses the write and says where it belongs; the
+tools in `_System/Tools/` refuse a top-level path too.
+
 ## Skills
 
 | Skill | Use it when the person says |
@@ -91,3 +108,4 @@ Connections panel. You and the plugin follow one definition.
 - `.icor-for-life/`: this computer's machine files and `.env` (API keys). Never read `.env` out loud or copy it.
 - `02 Planner/`: the Planner plugin's notes.
 - `00 Daily Scratchpad/` text: only its processed stamp is yours.
+- The top folder: nothing new goes there (see "Where files go").

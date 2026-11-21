@@ -32,6 +32,10 @@ No yes at all: tell the person it connects to nothing yet, and offer to leave it
 
 Date or subject? Date: Journal. Subject: Notes.
 
+A file goes in its folder, never in the top folder: pictures, screenshots and videos in `05 Assets/Images/`, recordings in
+`05 Assets/Audio/`, PDFs and office files in `05 Assets/Documents/`, a scan to file later in `01 Inbox/Scanner Inbox/`.
+Nothing sorted yet: `01 Inbox/`. Never make a new folder next to the rooms.
+
 ## 3. Tell the person
 
 One line: what you created or changed, where, and what it links to, as a `[[wikilink]]`.
