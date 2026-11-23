@@ -14,145 +14,145 @@
   "plugins": [
     {
       "id": "icor-for-life-canvases",
-      "version": "0.4.2",
+      "version": "0.4.3",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-canvases"
       },
       "files": {
-        "main.js": "d69d9cde1d2a3e0789460bf192d0af9ec952b6c3bd674010a28393bc09fd8461",
-        "manifest.json": "b3df59d53d44f2384ec27c730854f751ac45621f9976e2ec4250d3484098f9f4",
+        "main.js": "6fc7da4003da931afe100b0d54933660400b15b4cae63544fa7854ed6cd64958",
+        "manifest.json": "0b01c46bacaf4c4cd73f5393255993ac1626631ebb225eb14cbfc146563a6c52",
         "styles.css": "1dd1ab14e5556ab20e1e2036748b4adf44674b1c46828f444bfb532ea7159afd"
       }
     },
     {
       "id": "icor-for-life-chat",
-      "version": "0.17.3",
+      "version": "0.17.4",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-chat"
       },
       "files": {
-        "main.js": "63babee83f2a96533d47b6666b1148b4bdbdf37bf90c7ab5eb7bb82d36feeecd",
-        "manifest.json": "a940ff2bd9b5c01e6bf4e9dd8581523163d5cddc217655575e676064b85f5950",
+        "main.js": "8056ccd3694b43564a3988b3434d563a266150e32f37af45ff97f61d20883ead",
+        "manifest.json": "12949204380dc7494d2064cfabfe4fb6ec1d8d2288b557fa0300aec7995663cf",
         "styles.css": "cce722240b0fc8328e5ba2dd1e9fb450ef68da47705d691a949c0f587616c6c5"
       }
     },
     {
       "id": "icor-for-life-connect",
-      "version": "0.18.2",
+      "version": "0.18.3",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-connect"
       },
       "files": {
-        "main.js": "c54c4d195eb21bc9ebdc29542ecee93961fe9a8a83db126ee087d490422a9e12",
-        "manifest.json": "97ab65ae700c4fdc1b5f38b599fdae966144416172717b4997636f8d83aad5fa",
+        "main.js": "2e64d1c84712715b9dcfb4840ea0e1def18ca4c2a1e11cf630d2c80856210114",
+        "manifest.json": "8a86ed2268206ced3f3e5a156bd98dca14c775bb648b42edb7beef28fb3c48b0",
         "styles.css": "cd0f72021829881761392f7ef7e35ca3b1586d54200dbea94926839dae22e13d"
       }
     },
     {
       "id": "icor-for-life-focus",
-      "version": "0.8.2",
+      "version": "0.8.3",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-focus"
       },
       "files": {
-        "main.js": "8b6072b4e5d9de0a372ecd9c44e117fe8183c0ef4b6203663fe8037d445a43cf",
-        "manifest.json": "679d73fd497eda86201f1dc40b4be3d3da6212d7ad699b4291a0b9e7838527df",
+        "main.js": "dcc43a39bc5c795f476aa2ff61689cac35daecd9a4f56c148f4aed9b7b0788ad",
+        "manifest.json": "462b0c339efd3737ed8423c053eca2043c33bbd93ced0c984fabb65040abaa0f",
         "styles.css": "e92d0ca3466a855b4c374c98e1b71e3431477e92c2ee48ee34bd4fc32ec76363"
       }
     },
     {
       "id": "icor-for-life-interface",
-      "version": "0.10.3",
+      "version": "0.10.4",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-interface"
       },
       "files": {
-        "main.js": "3943fc9883f442f2f965197ddceb3ea6e8b2c73a1a7fe05988f814139598bbfa",
-        "manifest.json": "5460cc8bc1f40540727811691e270ea1ccfddf8b3f2941f80d90592f6322c953",
+        "main.js": "54b4e2b8eb946b353fea812c22a94571fae34dbc655591c1935ac49cabed1927",
+        "manifest.json": "c0c16e1336b55992f89ecf1b4fceec0a6894cf2f8ba50010c9c8e7a1cb706439",
         "styles.css": "9e184c4d7d39fc47dd1e30935aa1d012e3bd888f38d6de19754dcf7a398eb1e2"
       }
     },
     {
       "id": "icor-for-life-journal",
-      "version": "0.3.2",
+      "version": "0.3.3",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-journal"
       },
       "files": {
         "main.js": "8683070db55fd87f52b6ebe4c6342089a59e73a17f7d116242fb77ab7ddb7e3b",
-        "manifest.json": "6171baf59f2da9cbfded2e42e604e1eab3306d2eae7b7808e6233f5f943c9c44",
+        "manifest.json": "44176e40babc7c341b5ae41bd3d06e3012453b8d36d9e2fcc861349d4a7f0d56",
         "styles.css": "15ee672e291244ee79119514d711bcd047adf3909acaf484424947e08d100b6e"
       }
     },
     {
       "id": "icor-for-life-objects",
-      "version": "0.9.1",
+      "version": "0.9.2",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-objects"
       },
       "files": {
-        "main.js": "f351dcf703580c8efca9d3d7209c5507c0bb85117b21ca91ebc02fa2c760c3af",
-        "manifest.json": "bfcd37df665c7f5ae07c6de7c9178e4ac331363e1adb8aa85cedc6f8f2f8a651",
+        "main.js": "47d9d4eeba1421610cf121019aafb867e12b2b51373f1014d002c7aeac429faa",
+        "manifest.json": "90413ab0fb6d8725f27fde189a82a3b7b1df99c9baba07c2699f12ef11e672af",
         "styles.css": "5e0d77d85e893f4aed0f2fbb80381340684d17241326dcaedf0ffca35e3421b9"
       }
     },
     {
       "id": "icor-for-life-outliner",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-outliner"
       },
       "files": {
-        "main.js": "3ec8a8fa52de10c013566d6cc3b869b0078bc496e11d34348e42fe32a4aeede3",
-        "manifest.json": "16b9909ec88156b2b6f20b9fc0184f13a6b41fe365026116a522f27db4f89036",
+        "main.js": "5f9e79b7a343ff795ad5025dd63b5a6e7788bf7e3c186395718e84affcd4791e",
+        "manifest.json": "dd3021cafe620d189a51d018bfd6fbcc9d1e7ab9240031a9006f4852c00f0dfa",
         "styles.css": "87240ff7ddba80af9e643b8912e2274454bc3e5d974262573a0c533018c792a6"
       }
     },
     {
       "id": "icor-for-life-pdf-annotation",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-pdf-annotation"
       },
       "files": {
-        "main.js": "1c745ff985a70100ce57fabca3ca1a96596c9200201b7d2a13795ee9cbfcbd51",
-        "manifest.json": "1673ca26cf0173545b33a405a202b6817bb88e57b0b9b437d71cee36b052c658",
+        "main.js": "06d2a24ebb2f9800dc799263e153a44ffac2988a31196c04982659fe3ea355c7",
+        "manifest.json": "230c0264ad29ac12d1eb4b201bb1e290a07988d75347a5afc136e0f51ace41a4",
         "styles.css": "7cb2ad3a3d7c630657c439c0a525f53178f0405bc14d15070ad9391c5b182fd2"
       }
     },
     {
       "id": "icor-for-life-planner",
-      "version": "0.18.2",
+      "version": "0.18.3",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-planner"
       },
       "files": {
-        "main.js": "c197eba193234450d8680172937426ae8d9e92e57ee6b2739db9ccf1344dac90",
-        "manifest.json": "538c68632cf23d31e056f68fdcbcca7cb5793e9277cd5e944c197eb88a0308b9",
+        "main.js": "72ee7f153f454e2ddc85924615e31d210ddfb9b908fa9c82faecfdecca6aad3e",
+        "manifest.json": "e5b7919076d225dd1f0b1f4ee96fdc7aa0b2f670919ac14827ad53c91fbdbecd",
         "styles.css": "90bb67a8063b0471c68460925fc4a090d5a1396e37f728269e09c977fdb9ff19"
       }
     },
     {
       "id": "icor-for-life-scratchpad",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-scratchpad"
       },
       "files": {
-        "main.js": "d8064116949d5bc36d856b0bb65fb4cc4020e4372fd89466ded38ca68783656a",
-        "manifest.json": "eb3886542261500cc316b7351a18797bea8a9ea7049c121030401aee760a3e36",
+        "main.js": "823109038f19aa3e79a9c53e7d1a06581fad7b5a7e96c1a041dbc39898912933",
+        "manifest.json": "67f490b322ed96949503e6df185af6767244640ad8b1a064b4f7e08adbe5c63f",
         "styles.css": "b03b9f23debc40d6a37615b271118e5108dd537674bd361417f6cafc74fc0bc0"
       }
     },
     {
       "id": "icor-for-life-sqlite-viewer",
-      "version": "0.6.5",
+      "version": "0.6.6",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-sqlite-viewer"
       },
       "files": {
-        "main.js": "64514a329df2c4d3a7f04d98257f31bcd3731a0ca73e50bdc9292b6e1cbb99f4",
-        "manifest.json": "a1bd1fc9246622e21f90f894fdd26d695375702e1a338859474f286ad1868aa4",
+        "main.js": "fee6a644f5fe48697e5db8c336f293a53736f78631e3341d7327b40b7e3f21dd",
+        "manifest.json": "9c62c005e7088c172c69167581add1c81b0322f3e46535bdd9df1e3eab437a1b",
         "styles.css": "05c8528db2e07f820e03f77bfc2883c5a66e18e19418c1fa07ce4dffc9e4808f",
         "sql-wasm.js": "694ca5b36aa3e6e71f417819d7df390b65343665fcfa5c69015ca33d93d291b3",
         "sql-wasm.wasm": "0734155c83e493983d1f2ff5b09a4fab6e35a32e9449c7e4e545756439f62d73"
@@ -160,14 +160,14 @@
     },
     {
       "id": "icor-for-life-terminal",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-terminal"
       },
       "files": {
-        "main.js": "9369262da1dd250a3bd31f60e4e6cfb68e2c7e6cbbe3a9b9c043c4f6f33587af",
-        "manifest.json": "22a4e6d283e97d3090df1ff08077df826b7ef0c631096b2eefa0a709a35f3413",
-        "styles.css": "4d1db1fe19d2ac301bcf78ac20dc6ae1070b867f3407e42923eb7bc7114ceeed"
+        "main.js": "670e266ac29ffb98978a12ef92b4867339678f1b6cb3baa59092b2e36d0980fb",
+        "manifest.json": "83ab7548d8cf6eb3a0d464b02bca6dd7d749475a5c6b86f881e3cc984d113536",
+        "styles.css": "3952b11d6e34e8b4c66f99361bf1b2f557b8fc2d79672172b4e635f855d59a11"
       }
     }
   ]
