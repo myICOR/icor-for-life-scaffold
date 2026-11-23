@@ -17,4 +17,5 @@ The life scripts. Run from the folder's root with `python3 _System/Tools/<script
 | `new-base.py` | writes the Bases table view for a collection; also the schema reader the other scripts use |
 | `open-in-obsidian.py` | opens a file in Obsidian |
 | `migrate-to-3.py` | brings a 2.x folder to the 3.0 layout from this download: a dry run first, `--live` to do it; never deletes, never overwrites |
+| `new-database.py` | makes an optional database in 05 Databases, empty, from its schema in _System/Databases (`health`, `finance`); never over one that exists |
 | `noteio-icor.py` | reads and writes notes without touching bytes it did not mean to (used by the others) |

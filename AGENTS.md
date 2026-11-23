@@ -63,6 +63,12 @@ Never make a new folder next to the numbered folders. In Obsidian the Objects pl
 - **No H1 title.** Obsidian shows the file name as the note's title, so a note starts right after its properties: with its first section or its first words. No blank line first, no `# Title`.
 - **Never hard-wrap Markdown here: one paragraph per line.** Obsidian shows every newline as a break, so a paragraph or a list item stays on one line, however long. `_System/Tools/tidy-markdown.py check` finds wrapped ones.
 
+## What's core, what's optional
+
+`_System/parts.json` lists every piece that ships. **Core**, needed for the folder to work: the numbered folders, this page and `_System`; Obsidian's Daily notes, Templates, Properties and Bases; ICOR for Life - Objects, ICOR for Life - Journal, ICOR for Life - Planner and ICOR for Life - Interface (the ICOR for Life - INKLINE theme only changes the look). **Optional**, each removable on its own with nothing depending on it: ICOR for Life - Scratchpad, ICOR for Life - AI Chat, ICOR for Life - Connect, ICOR for Life - Focus, ICOR for Life - Canvases, ICOR for Life - Outliner, ICOR for Life - PDF Annotation, ICOR for Life - Terminal, ICOR for Life - SQLite Viewer, and the databases `05 Databases/Health.sqlite` and `05 Databases/Finance.sqlite`. Never assume an optional piece is there: check the plugin's folder in `.obsidian/plugins/` or the file before you use it, and say so when it is missing. Never remove a piece yourself unless the person asks.
+
+**Health and money stay in their databases.** A person's health data and finances live in `05 Databases/Health.sqlite` and `05 Databases/Finance.sqlite`, on their computer. Read them through SQL (`sqlite3 -readonly`, or your own SQLite access) when they ask, and answer in your words. Never copy rows into a note, a journal entry or anywhere outside the folder, and never send them anywhere unless the person asks for exactly that. Write to them only when the person asks, and only in the tables `05 Databases/README.md` describes. The schemas are in `_System/Databases/`.
+
 ## Skills
 
 | Skill | Use it when the person says |

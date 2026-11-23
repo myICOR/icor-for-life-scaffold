@@ -40,6 +40,14 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - `_System/Tools/migrate-to-3.py`: moves a 2.x folder to this layout, a dry run first.
 
 ### Changed
+- What's core and what's optional, said once (`_System/parts.json`) and the same in README.md and AGENTS.md: the core
+  is the folders, AGENTS.md, `_System`, Obsidian's Daily notes, Templates, Properties and Bases, and Objects, Journal,
+  Planner and Interface; everything else ships turned on and can go on its own (how, and what stops working, is
+  written beside each). ICOR for Life - SQLite Viewer ships, turned on. `05 Databases/Health.sqlite` and
+  `05 Databases/Finance.sqlite` start empty, for your health data and your money on this computer, never in a note;
+  their schemas are in `_System/Databases/`, `05 Databases/README.md` says what goes in, and
+  `_System/Tools/new-database.py` makes one again. `tests/test-parts.py` keeps the lists in step and checks the folder
+  with every optional piece removed.
 - The numbered folders follow the ICOR stages, flat as before: Input `00 Daily Notes` (was 00 Daily Scratchpad) and
   `01 Inbox`; Control `02 Inner World` (was 04), `03 Outer World` (was 06), `04 Assets` (was 05) and `05 Databases`
   (was 07); Output `06 Planner` (was 02). Refine has no folder: it happens in the plugins (AI Chat, Connect, Focus) and

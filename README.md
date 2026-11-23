@@ -31,6 +31,30 @@ Refine has no folder: you refine with the plugins (AI Chat, Connect, Focus) and 
 
 The notes tagged `example` show how each kind of note looks. Keep them as long as they help, then delete them.
 
+## What's core, what's optional
+
+Everything comes installed and turned on, the way we use it ourselves. Some of it is the core: the folder needs it to work. The rest is optional: remove any of it and nothing else breaks. `_System/parts.json` lists the same.
+
+**Core.** The numbered folders, `AGENTS.md` and `_System`; Obsidian's own Daily notes, Templates, Properties and Bases; and four plugins: ICOR for Life - Objects (objects, typed links, the type badge, the top folder kept clear), ICOR for Life - Journal, ICOR for Life - Planner (your week in 06 Planner) and ICOR for Life - Interface (the folders in their stage colours). The ICOR for Life - INKLINE theme is how it looks; any other theme works too.
+
+**Optional.** To remove a plugin: Settings, Community plugins, turn it off, then delete its folder in `.obsidian/plugins/`. To remove a database: delete the file.
+
+| Optional | What it gives you | Without it |
+| --- | --- | --- |
+| ICOR for Life - Scratchpad | a floating window for today's note or a scratch note | Obsidian's Daily notes still opens today |
+| ICOR for Life - AI Chat | a chat with your AI inside the vault | your AI still works with the folder from outside |
+| ICOR for Life - Connect | your app.myicor.com account in the vault | no myICOR dashboards or synced reflections |
+| ICOR for Life - Focus | a map of where your attention goes | no Focus map |
+| ICOR for Life - Canvases | ink and shapes on canvases | Obsidian's own canvases still open |
+| ICOR for Life - Outliner | lists that behave like an outline | plain lists |
+| ICOR for Life - PDF Annotation | highlights on PDFs as notes | the highlight notes you made stay |
+| ICOR for Life - Terminal | a terminal inside the vault | no terminal tab |
+| ICOR for Life - SQLite Viewer | opens the databases in 05 Databases | any SQLite tool still reads them |
+| `05 Databases/Health.sqlite` | your health data, on this computer | nothing else changes |
+| `05 Databases/Finance.sqlite` | your money, on this computer | nothing else changes |
+
+Keeping your health or your finances here? The two databases stay on this computer, never in a note, and are yours to fill. `05 Databases/README.md` says what goes in each. Deleted one and want it back, empty: `python3 _System/Tools/new-database.py health` (or `finance`).
+
 ## Good to know
 
 - **Your files stay yours.** Plain text in a folder on your computer: no account, no database, no lock-in. Back it up like any folder; Obsidian Sync, iCloud and Dropbox all carry it.

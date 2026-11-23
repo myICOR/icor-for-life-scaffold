@@ -1,0 +1,134 @@
+{
+  "$comment": "What ships in ICOR for Life and what each piece is for: the core keeps the folder working; every optional piece can be removed on its own, and nothing else depends on it. README.md, AGENTS.md and 05 Databases/README.md say the same in words; tests/test-parts.py keeps them in step.",
+  "core": [
+    {
+      "name": "The numbered folders, AGENTS.md and _System",
+      "kind": "folder",
+      "what": "where everything lives, how any AI works here, the schema, templates, skills and tools"
+    },
+    {
+      "name": "Obsidian's own Daily notes, Templates, Properties and Bases",
+      "kind": "obsidian",
+      "what": "today's note, new notes from templates, properties, the tables in 05 Databases"
+    },
+    {
+      "name": "ICOR for Life - Objects",
+      "kind": "plugin",
+      "id": "icor-for-life-objects",
+      "what": "objects from the schema, typed links, the type badge, Connections, the top folder kept clear"
+    },
+    {
+      "name": "ICOR for Life - Journal",
+      "kind": "plugin",
+      "id": "icor-for-life-journal",
+      "what": "your journal entries as a journal you can browse, and On this day"
+    },
+    {
+      "name": "ICOR for Life - Planner",
+      "kind": "plugin",
+      "id": "icor-for-life-planner",
+      "what": "your week and your tasks in 06 Planner (the Output stage)"
+    },
+    {
+      "name": "ICOR for Life - Interface",
+      "kind": "plugin",
+      "id": "icor-for-life-interface",
+      "what": "the folders in their stage colours, where properties show, the look"
+    },
+    {
+      "name": "ICOR for Life - INKLINE (theme)",
+      "kind": "theme",
+      "what": "how it all looks; any other theme works, it only looks different"
+    }
+  ],
+  "optional": [
+    {
+      "name": "ICOR for Life - Scratchpad",
+      "kind": "plugin",
+      "id": "icor-for-life-scratchpad",
+      "what": "a floating window for today's note or a scratch note, behind a shortcut",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - Scratchpad, then delete its folder .obsidian/plugins/icor-for-life-scratchpad/.",
+      "stops": "the floating window and its shortcut; Obsidian's Daily notes still opens today"
+    },
+    {
+      "name": "ICOR for Life - AI Chat",
+      "kind": "plugin",
+      "id": "icor-for-life-chat",
+      "what": "a chat with your AI inside the vault",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - AI Chat, then delete its folder .obsidian/plugins/icor-for-life-chat/.",
+      "stops": "the chat panel; your AI still works with the folder from outside"
+    },
+    {
+      "name": "ICOR for Life - Connect",
+      "kind": "plugin",
+      "id": "icor-for-life-connect",
+      "what": "your app.myicor.com account in the vault: dashboards, search, reflections",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - Connect, then delete its folder .obsidian/plugins/icor-for-life-connect/.",
+      "stops": "the myICOR dashboards and synced reflections"
+    },
+    {
+      "name": "ICOR for Life - Focus",
+      "kind": "plugin",
+      "id": "icor-for-life-focus",
+      "what": "a map of where your attention goes",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - Focus, then delete its folder .obsidian/plugins/icor-for-life-focus/.",
+      "stops": "the Focus map"
+    },
+    {
+      "name": "ICOR for Life - Canvases",
+      "kind": "plugin",
+      "id": "icor-for-life-canvases",
+      "what": "ink and shapes on canvases, canvases inside canvases",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - Canvases, then delete its folder .obsidian/plugins/icor-for-life-canvases/.",
+      "stops": "drawing on canvases; Obsidian's own canvases still open"
+    },
+    {
+      "name": "ICOR for Life - Outliner",
+      "kind": "plugin",
+      "id": "icor-for-life-outliner",
+      "what": "lists that behave like an outline",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - Outliner, then delete its folder .obsidian/plugins/icor-for-life-outliner/.",
+      "stops": "moving a bullet with everything under it"
+    },
+    {
+      "name": "ICOR for Life - PDF Annotation",
+      "kind": "plugin",
+      "id": "icor-for-life-pdf-annotation",
+      "what": "highlights on PDFs as notes",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - PDF Annotation, then delete its folder .obsidian/plugins/icor-for-life-pdf-annotation/.",
+      "stops": "highlighting PDFs; the highlight notes you made stay"
+    },
+    {
+      "name": "ICOR for Life - Terminal",
+      "kind": "plugin",
+      "id": "icor-for-life-terminal",
+      "what": "a terminal inside the vault",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - Terminal, then delete its folder .obsidian/plugins/icor-for-life-terminal/.",
+      "stops": "the terminal tab"
+    },
+    {
+      "name": "ICOR for Life - SQLite Viewer",
+      "kind": "plugin",
+      "id": "icor-for-life-sqlite-viewer",
+      "what": "opens the SQLite databases in 05 Databases: tables, queries, dashboards",
+      "remove": "Settings, Community plugins: turn off ICOR for Life - SQLite Viewer, then delete its folder .obsidian/plugins/icor-for-life-sqlite-viewer/.",
+      "stops": "opening the databases in Obsidian; any SQLite tool and your AI still read them"
+    },
+    {
+      "name": "Health.sqlite",
+      "kind": "database",
+      "path": "05 Databases/Health.sqlite",
+      "what": "your health data: measurements, workouts, medication, symptoms, mood",
+      "remove": "Delete 05 Databases/Health.sqlite. To have it again, empty: python3 _System/Tools/new-database.py health.",
+      "stops": "nothing else; only what you put in it is gone"
+    },
+    {
+      "name": "Finance.sqlite",
+      "kind": "database",
+      "path": "05 Databases/Finance.sqlite",
+      "what": "your money: accounts, transactions, categories, budgets",
+      "remove": "Delete 05 Databases/Finance.sqlite. To have it again, empty: python3 _System/Tools/new-database.py finance.",
+      "stops": "nothing else; only what you put in it is gone"
+    }
+  ]
+}

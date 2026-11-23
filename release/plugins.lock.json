@@ -145,6 +145,20 @@
       }
     },
     {
+      "id": "icor-for-life-sqlite-viewer",
+      "version": "0.6.4",
+      "source": {
+        "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-sqlite-viewer"
+      },
+      "files": {
+        "main.js": "8772f25e44567878f7e7499d70e5b49d2d3fc4d5e3337500a9c69bff2df99924",
+        "manifest.json": "b9483304777aee3483a205dbf50031749b32c5f0fe8f70e7b3f94cccce073375",
+        "styles.css": "05c8528db2e07f820e03f77bfc2883c5a66e18e19418c1fa07ce4dffc9e4808f",
+        "sql-wasm.js": "694ca5b36aa3e6e71f417819d7df390b65343665fcfa5c69015ca33d93d291b3",
+        "sql-wasm.wasm": "0734155c83e493983d1f2ff5b09a4fab6e35a32e9449c7e4e545756439f62d73"
+      }
+    },
+    {
       "id": "icor-for-life-terminal",
       "version": "0.3.0",
       "source": {
