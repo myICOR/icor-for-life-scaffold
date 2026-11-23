@@ -2,13 +2,13 @@
   "$comment": "What the ICOR for Life download bundles. release/build-zip.py copies exactly these files and refuses any whose sha256 differs. A local source is a build on the maintainer's computer (local testing); a release uses GitHub releases only.",
   "theme": {
     "name": "ICOR for Life - INKLINE",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "source": {
       "local": "/Users/tom/projects/icor-for-life-inkline-stages"
     },
     "files": {
-      "theme.css": "30a2bbdd9f13bc19efe9e0a1132cf6d01f9c5d957c1a955270209e824658bda2",
-      "manifest.json": "48b2df068d5c84aa2435749fece21cf518ca3a65c8cf687bf03eec5ebde359f6"
+      "theme.css": "4f1be472189bc06b1b6c59fb6f294164286f06e053eccb15937556a54bb6c2db",
+      "manifest.json": "afe165819e2748ff3e88cd1cd6ab76d1cbf80600e83dfd3cab85c45ad7533cd6"
     }
   },
   "plugins": [
