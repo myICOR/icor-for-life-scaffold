@@ -50,15 +50,14 @@
     },
     {
       "id": "icor-for-life-focus",
-      "version": "0.7.1",
+      "version": "0.8.2",
       "source": {
-        "github": "myICOR/icor-for-life-focus",
-        "tag": "0.7.1"
+        "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-focus"
       },
       "files": {
-        "main.js": "85149ced8e962e02ecbe99d46dd252834aed0544f9109b2750c343753ef74591",
-        "manifest.json": "071fa51c4e8fe92e476519d99a463ff6bf47a5df4d19b1118737dcf3ae650dcd",
-        "styles.css": "e3048a369ccb282456f9109fe9a55f0cd08c21a20edfe6b56af5674dc413ebf4"
+        "main.js": "8b6072b4e5d9de0a372ecd9c44e117fe8183c0ef4b6203663fe8037d445a43cf",
+        "manifest.json": "679d73fd497eda86201f1dc40b4be3d3da6212d7ad699b4291a0b9e7838527df",
+        "styles.css": "e92d0ca3466a855b4c374c98e1b71e3431477e92c2ee48ee34bd4fc32ec76363"
       }
     },
     {
@@ -75,26 +74,26 @@
     },
     {
       "id": "icor-for-life-journal",
-      "version": "0.2.0",
+      "version": "0.3.2",
       "source": {
-        "local": "/Users/tom/projects/icor-for-life-journal"
+        "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-journal"
       },
       "files": {
-        "main.js": "0b078a4b98ccc7c9ea970471be90a59ba4f090d969ae01fd83e7392adab32d9b",
-        "manifest.json": "e4db34e786af0649a13de0f204f7ffdfda666f7bee69e97786635050c7c52d60",
-        "styles.css": "88e9b71c75c72aef3ad29780f19b58fa7fe365a0f24f65e3d7f178a98ddcdd7f"
+        "main.js": "8683070db55fd87f52b6ebe4c6342089a59e73a17f7d116242fb77ab7ddb7e3b",
+        "manifest.json": "6171baf59f2da9cbfded2e42e604e1eab3306d2eae7b7808e6233f5f943c9c44",
+        "styles.css": "15ee672e291244ee79119514d711bcd047adf3909acaf484424947e08d100b6e"
       }
     },
     {
       "id": "icor-for-life-objects",
-      "version": "0.4.0",
+      "version": "0.9.1",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-objects"
       },
       "files": {
-        "main.js": "5648e8c23c41d87de7a953bf8f33d232361c3ff9c5d726cb635b6715b538abe6",
-        "manifest.json": "0a4fd7deeedb61811eccf329acdc6b63f86c3cb807189f62a9c3a03d4546c986",
-        "styles.css": "0a2c8bcfb6d732452162981d0cf92ce89dba5ac6e101d723731f9a264b2eb798"
+        "main.js": "f351dcf703580c8efca9d3d7209c5507c0bb85117b21ca91ebc02fa2c760c3af",
+        "manifest.json": "bfcd37df665c7f5ae07c6de7c9178e4ac331363e1adb8aa85cedc6f8f2f8a651",
+        "styles.css": "5e0d77d85e893f4aed0f2fbb80381340684d17241326dcaedf0ffca35e3421b9"
       }
     },
     {
@@ -111,14 +110,13 @@
     },
     {
       "id": "icor-for-life-pdf-annotation",
-      "version": "0.2.1",
+      "version": "0.3.1",
       "source": {
-        "github": "myICOR/icor-for-life-pdf-annotation",
-        "tag": "0.2.1"
+        "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-pdf-annotation"
       },
       "files": {
-        "main.js": "0a02b2029bd5df6fc702ca7f5e9c830878626a5ab9fe2aa337d717326872fcae",
-        "manifest.json": "35106d4548c52c87c5b985fafca420c4215854544b97ed5863ffbd411461ea38",
+        "main.js": "1c745ff985a70100ce57fabca3ca1a96596c9200201b7d2a13795ee9cbfcbd51",
+        "manifest.json": "1673ca26cf0173545b33a405a202b6817bb88e57b0b9b437d71cee36b052c658",
         "styles.css": "7cb2ad3a3d7c630657c439c0a525f53178f0405bc14d15070ad9391c5b182fd2"
       }
     },
