@@ -560,8 +560,10 @@ def run(root, today=None):
     events = {}            # target rel -> [(date, source kind)]
     sources_counted = {"journal": 0, "scratchpad": 0, "notes": 0, "planner": 0}
 
-    def add_events(rel_source, when, kind, names, prose=None):
-        """One event per target, however many times the source names it."""
+    def add_events(rel_source, when, kind, names, prose=None, unless_same_day=None):
+        """One event per target, however many times the source names it. With
+        `unless_same_day`, a target that already has an event of that kind on
+        the same day is left alone: it is the same moment written twice."""
         targets = set()
         for raw in names:
             t = resolve(link_name(raw))
@@ -572,6 +574,8 @@ def run(root, today=None):
                 t = resolve(link_name(raw))
                 if t is not None and t != rel_source:
                     targets.add(t)
+        if unless_same_day:
+            targets = {t for t in targets if (when, unless_same_day) not in events.get(t, [])}
         for t in targets:
             events.setdefault(t, []).append((when, kind))
         return bool(targets)
@@ -623,8 +627,9 @@ def run(root, today=None):
             if add_events(rel, d, "journal", names, n["prose"]):
                 sources_counted["journal"] += 1
 
-    # Scratchpads: the user's raw writing, counted only while unprocessed, so
-    # a scratchpad and the journal entries it became are never counted twice.
+    # Scratchpads: the user's raw writing. Nothing stamps them any more (3.0),
+    # so a scratchpad and the journal entry it became are told apart by day: a
+    # thing a journal entry of the same day already names is not counted twice.
     if (root / ROOMS["scratchpad"]).is_dir():
         for rel in walk_md(root, ROOMS["scratchpad"]):
             m = DATE_PREFIX.match(rel.stem)
@@ -637,9 +642,9 @@ def run(root, today=None):
             if age < 0 or age > WINDOW_DAYS:
                 continue
             n = read_note(root, rel)
-            if n is None or truthy(n["front"].get("processed", "")):
+            if n is None:
                 continue
-            if add_events(rel, d, "scratchpad", [], n["prose"]):
+            if add_events(rel, d, "scratchpad", [], n["prose"], unless_same_day="journal"):
                 sources_counted["scratchpad"] += 1
     else:
         degrade("scratchpad", "no folder at %s" % ROOMS["scratchpad"],

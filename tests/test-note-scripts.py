@@ -204,28 +204,16 @@ def journal_cases(tmp):
 
 
 def stamp_name_cases(tmp):
-    print("stamp-processed.py, the name of a scratchpad")
+    """3.0 (Tom, 2026-11-23): a scratchpad is never stamped. Every name shape, a day or a quick note, is refused with
+    a FAIL line and the note is left byte for byte as it was."""
+    print("stamp-processed.py refuses a scratchpad")
     v = fresh(tmp, "sn")
     room = "00 Daily Scratchpad/2026/11/"
-    for name, want in (("202611021215.md", "2026-11-02"),
-                       ("202611021215 2.md", "2026-11-02"),
-                       ("202611021215 - a title.md", "2026-11-02"),
-                       ("20261102121530.md", "2026-11-02"),
-                       ("2026-11-02.md", "2026-11-02"),
-                       ("2026-11-02-121530.md", "2026-11-02")):
+    for name in ("202611021215.md", "202611021215 - a title.md", "2026-11-02.md", "my notes.md"):
         note = write(v, room + name, "typed\n")
         r = run(v, "stamp-processed.py", note, "--summary", "s", "--into", "[[Health]]")
-        check("%s stamps with date %s" % (name, want),
-              r.returncode == 0 and frontmatter_line(note, "date") == "date: " + want,
-              r.stdout + r.stderr)
-        check("%s becomes a scratchpad" % name,
-              frontmatter_line(note, "type") == "type: scratchpad")
-    for name in ("202613451215.md", "202602301215.md", "202611022561.md", "2026-13-45.md",
-                 "1234567890123456.md", "my notes.md"):
-        note = write(v, room + name, "typed\n")
-        r = run(v, "stamp-processed.py", note, "--summary", "s", "--into", "[[Health]]")
-        check("%s is still refused" % name,
-              r.returncode == 1 and r.stderr.startswith("FAIL") and no_traceback(r)
+        check("%s is refused and left as it was" % name,
+              r.returncode == 1 and r.stderr.startswith("FAIL") and "never stamped" in r.stderr and no_traceback(r)
               and note.read_text(encoding="utf-8") == "typed\n", r.stdout + r.stderr)
 
 
@@ -364,6 +352,22 @@ def quality_cases(tmp):
           str(findings_for(v, plant)))
 
 
+def scratchpad_queue_cases(tmp):
+    """3.0 (Tom, 2026-11-23): the scratchpad is never stamped. A written day, a quick note or an old one is no
+    backlog: check-quality has no unprocessed-scratchpad queue any more, and no finding on a scratchpad for it."""
+    print("check-quality.py, the scratchpad is no queue")
+    v = fresh(tmp, "sq")
+    for rel in ("00 Daily Scratchpad/2026/01/2026-01-05.md", "00 Daily Scratchpad/2026/01/202601051230.md"):
+        write(v, rel, "a thought I may carry somewhere, or leave here\n")
+    rep = all_findings(v)
+    metrics = rep.get("metrics", rep) if isinstance(rep, dict) else {}
+    names = json.dumps(rep)
+    check("no unprocessed-scratchpad metric in the report", "unprocessed_scratchpad" not in names, names[:400])
+    check("a written scratchpad has no finding about processing",
+          not [f for f in rep.get("findings", []) if "Daily Scratchpad" in f.get("file", f.get("path", ""))
+               and "process" in f.get("message", "").lower()], str(rep.get("findings", [])[:3]))
+
+
 def all_findings(vault):
     r = run(vault, "check-quality.py", vault, "--json")
     return json.loads(r.stdout)
@@ -462,6 +466,7 @@ def main():
         stamp_name_cases(tmp)
         stamp_capture_cases(tmp)
         quality_cases(tmp)
+        scratchpad_queue_cases(tmp)
         reading_queue_cases(tmp)
         subfolder_cases(tmp)
         gitignore_case(tmp)

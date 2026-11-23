@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Stamp a scratchpad, a capture or a document wrapper note as processed
-(GL-1002), and archive the capture the way its shape demands.
+"""Stamp a capture or a document wrapper note as processed (GL-1002), and
+archive the capture the way its shape demands. A scratchpad is never stamped
+(3.0, Tom 2026-11-23): it stays as the person wrote it, and is refused here.
 
 Usage:
-  # TEXT capture (or a scratchpad): the capture IS the note
+  # TEXT capture: the capture IS the note
   stamp-processed.py <note.md> --summary "2 journal entries" \
       --into "[[2026-08-27_entry]]" --into "[[Some Topic]]" [--archive]
 
@@ -87,6 +88,9 @@ if a.archive and a.capture:
 note = Path(a.note).resolve()
 if not note.is_file():
     sys.exit(f"FAIL no such note: {note}")
+if any(p.name == "00 Daily Scratchpad" for p in note.parents):
+    sys.exit(f"FAIL {note.name} is a scratchpad, and a scratchpad is never stamped: it stays as the person "
+             "wrote it. Carry a piece on (skill process-scratchpad) and leave the note as it is.")
 if note.suffix.lower() != ".md":
     sys.exit(f"FAIL {note.name} is not a markdown note and a binary cannot carry the stamp; "
              "stamp its wrapper note in 04 Inner World/Notes/ and pass the binary as --capture")
@@ -134,14 +138,7 @@ def date_in_name(stem):
 def created_block(note):
     """The minimum frontmatter a note with none must carry to hold a stamp."""
     lines = []
-    in_scratchpad = any(p.name == "00 Daily Scratchpad" for p in note.parents)
     date = date_in_name(note.stem)
-    if in_scratchpad:
-        if not date:
-            sys.exit(f"FAIL {note.name} is in 00 Daily Scratchpad/ but its name carries "
-                     "no valid YYYY-MM-DD or YYYYMMDDHHmm, so the `date` the schema requires "
-                     "cannot be derived; add a frontmatter block by hand and run this again")
-        lines.append("type: scratchpad")
     if date:
         lines.append(f"date: {date}")
     return lines

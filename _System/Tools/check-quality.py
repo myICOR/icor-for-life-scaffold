@@ -73,10 +73,6 @@ THRESHOLDS = {
     "dangling_links": {"attention": 1, "broken": 50},
     # a document whose file is gone is the one failure that loses data
     "documents_without_file": {"attention": 1, "broken": 10},
-    # two unprocessed scratchpads is a normal week; fourteen is a backlog
-    "unprocessed_scratchpads": {"attention": 2, "broken": 14},
-    # the oldest one matters more than the count: age is what rots
-    "unprocessed_scratchpad_oldest_days": {"attention": 2, "broken": 14},
     # the inbox is a queue that empties; anything sitting in it is waiting
     "unprocessed_captures": {"attention": 1, "broken": 30},
     # a capture older than three days has stopped being a capture
@@ -96,8 +92,6 @@ METRIC_ORDER = [
     ("orphans", "Orphans", "notes"),
     ("dangling_links", "Dangling links", "links"),
     ("documents_without_file", "Documents without a file", "notes"),
-    ("unprocessed_scratchpads", "Unprocessed scratchpads", "notes"),
-    ("unprocessed_scratchpad_oldest_days", "Oldest unprocessed scratchpad", "days"),
     ("unprocessed_captures", "Unprocessed captures", "notes"),
     ("unprocessed_capture_oldest_days", "Oldest unprocessed capture", "days"),
     ("unconsumed_references", "Unread sources", "notes"),
@@ -107,10 +101,10 @@ SOP = "SOP-1014"
 MAX_FINDINGS = 200
 # Two metrics describe one queue: how many are waiting, and how long the
 # oldest has waited. A per-file finding belongs to the count metric but
-# must carry the worse of the two, or a single scratchpad rotting for a
-# month would be filed as `ok` and never shown.
+# must carry the worse of the two, or a single capture waiting for a
+# month would be filed as `ok` and never shown. The scratchpad is no queue
+# (3.0): nothing stamps it, and a day left as it is is allowed.
 PAIRED = {
-    "unprocessed_scratchpads": "unprocessed_scratchpad_oldest_days",
     "unprocessed_captures": "unprocessed_capture_oldest_days",
 }
 
@@ -515,7 +509,7 @@ def run(root):
                if _in_scan(rel)  # 3.0: agents' journals live outside the folder, or in a myPKA team that checks its own
                and rel.name not in SKIP_NAMES]
 
-    scratchpad_ages, capture_ages = [], []
+    capture_ages = []
     identities = {}          # (folder, normalised name) -> [paths]
 
     for rel in sorted(in_scan):
@@ -602,22 +596,8 @@ def run(root):
                     "or fix the link.")
 
         # --- the queues ---------------------------------------------------------
-        # A blank scratchpad is not a queue item. link-dates-to-daily-notes.py
-        # --fix CREATES the daily note for any day a link points at, empty and
-        # on purpose (GL-1007), so a member who linked forty dates woke up to
-        # forty "unprocessed scratchpads" and an oldest-unprocessed age
-        # measured from a note nobody had written in (Brian Carroll, T16-5).
-        # Nothing to process means nothing to report, and it stays out of the
-        # oldest-unprocessed clock too.
-        if t == "scratchpad" and n["body"].strip() \
-                and not truthy(front.get("processed", "")):
-            days = age_days(rel, root, front, today)
-            scratchpad_ages.append(days)
-            values["unprocessed_scratchpads"] += 1
-            add("unprocessed_scratchpads", posix,
-                "Scratchpad is %d day(s) old and not processed." % days,
-                "Process it (SOP-1001), or stamp it by hand if you already "
-                "carried it into its homes.")
+        # The scratchpad is not one (3.0, Tom 2026-11-23): what was written there
+        # is carried on with Objects when it matters, or simply stays.
 
         # --- unconsumed references ------------------------------------------------
         if (t == "source" or t == "note" and str(front.get("note_type", "")).strip() == "reference") \
@@ -665,7 +645,6 @@ def run(root):
                 "File it into the room it belongs to (SOP-1002); the original "
                 "is archived, never deleted.")
 
-    values["unprocessed_scratchpad_oldest_days"] = max(scratchpad_ages or [0])
     values["unprocessed_capture_oldest_days"] = max(capture_ages or [0])
 
     for (folder, _t, key), paths in sorted(identities.items()):

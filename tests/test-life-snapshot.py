@@ -226,12 +226,13 @@ with tempfile.TemporaryDirectory() as td:
     V = TD / "scratchpad"
     rooms(V)
     write(V, "04 Inner World/My Life/Topics/Topic B.md", "---\ntype: topic\n---\n")
-    write(V, "00 Daily Scratchpad/%s.md" % day(2),
-          "---\nprocessed: true\n---\nthinking about [[Topic B]]\n")
+    write(V, "00 Daily Scratchpad/%s.md" % day(2), "thinking about [[Topic B]]\n")
     journal(V, 2, "from-the-pad", "linked_topics: [\"[[Topic B]]\"]\n")
     rep, r = snap(V)
     b = by_name(rep["topics"]["hot"], "Topic B") if rep else None
-    check("a processed scratchpad plus its journal entry is ONE event",
+    # 3.0: nothing stamps a scratchpad any more; a journal entry of the same day naming the same thing is the same
+    # moment, so the pair counts once
+    check("a scratchpad plus its journal entry of that day is ONE event",
           b and b["attention"]["n30"] == 1 and b["attention"]["score"] == 3,
           str(b))
 

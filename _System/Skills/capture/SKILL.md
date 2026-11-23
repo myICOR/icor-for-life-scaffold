@@ -28,7 +28,7 @@ No yes at all: tell the person it connects to nothing yet, and offer to leave it
 | a file to keep | file in `05 Assets/Documents/`, a `document` note | skill **new-object**, type `document` |
 | a new goal, project, topic, habit, Key Element, person, company | `My Life/` or `Contacts/` | skill **new-object** |
 | someone else's work (a book, an article, a video, a podcast, a post) | a `source` in `06 Outer World/` | `python3 _System/Tools/new-entity.py source "<Title>" --set source_type=<book|article|video|podcast|post|paper|other> --set source_url=<url> --link "[[<Project/Key Element/Topic>]]"` |
-| you are not sure, or the person is busy | today's scratchpad, `00 Daily Scratchpad/YYYY/MM/YYYY-MM-DD.md` | append one line; it is processed later |
+| you are not sure, or the person is busy | today's scratchpad, `00 Daily Scratchpad/YYYY/MM/YYYY-MM-DD.md` | append one line; it can be carried on later, or stay |
 
 Date or subject? Date: Journal. Subject: Notes.
 

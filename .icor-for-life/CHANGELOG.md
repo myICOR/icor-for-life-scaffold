@@ -44,6 +44,11 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
   Templates points here), the skills and the tools. `.icor-for-life/` keeps only this computer's files and `.env`.
 - The shared `.env` for the plugins moved from `06 AI Team/AI Team Knowledge/.env` to `.icor-for-life/.env`.
 - `reference` is no longer a kind of note: what someone else made is a `source` in `06 Outer World`.
+- The Daily Scratchpad is never stamped. A day's note or a quick scratch note stays as you wrote it: carry a line on
+  when it matters (Objects turns it into a project, a person or a note; your AI can help with skill
+  process-scratchpad, now optional), or leave it. `check-quality.py` has no unprocessed-scratchpad queue,
+  `life-snapshot.py` counts a scratchpad once beside a journal entry of the same day, and `stamp-processed.py` refuses
+  a scratchpad (it still files Inbox captures). Older notes keep their `processed` fields, which still read as valid.
 
 ### Removed or moved
 - `06 AI Team/`: gone. Its guidelines became `_System/schema.json` and the skills; its templates moved to

@@ -644,7 +644,7 @@
     },
     "scratchpad": {
       "label": "Scratchpad",
-      "description": "Your raw writing for one day. Never edited by an AI; stamped when processed.",
+      "description": "Your raw writing for one day, or a quick scratch note. Never edited or marked by an AI.",
       "folder": "00 Daily Scratchpad",
       "template": null,
       "icon": "notebook-pen",

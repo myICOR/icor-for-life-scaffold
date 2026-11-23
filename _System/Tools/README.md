@@ -8,7 +8,7 @@ The life scripts. Run from the folder's root with `python3 _System/Tools/<script
 | `new-journal-entry.py` | creates a journal entry with the person's words verbatim |
 | `find-entity.py` | finds the note a name or alias belongs to, so one thing never gets two notes |
 | `set-property.py` | sets or removes one property on one note, within the schema |
-| `stamp-processed.py` | stamps a scratchpad or capture as processed and archives a capture |
+| `stamp-processed.py` | stamps an Inbox capture or a document note as processed and archives the capture (never a scratchpad) |
 | `life-snapshot.py` | goals, focus projects, the week's priorities, today's highlight, Key Elements, active topics |
 | `planner-week.py` | this week's priorities and daily highlight |
 | `check-quality.py` | links, required and invented fields, allowed values, orphans, waiting captures |

@@ -35,7 +35,7 @@ Cursor, Gemini or any other). Everything you need is in three places:
 
 | Folder | What lives there |
 | --- | --- |
-| `00 Daily Scratchpad/YYYY/MM/` | the person's raw writing, one note a day. **Never edit its text.** Read it, process it, stamp it |
+| `00 Daily Scratchpad/YYYY/MM/` | the person's raw writing: one note a day and quick scratch notes. **Never edit or mark it.** Read it; carry a piece on when they ask |
 | `01 Inbox/` | scans (`Scanner Inbox/`) and anything not yet sorted |
 | `02 Planner/` | tasks synced from their task apps by the Planner plugin; not yours to edit |
 | `04 Inner World/` | **what went through the person**: `Journal/`, `Notes/`, `Contacts/`, `My Life/` |
@@ -107,5 +107,5 @@ Connections panel. You and the plugin follow one definition.
 - `.obsidian/`: the person's Obsidian settings, plugins and theme.
 - `.icor-for-life/`: this computer's machine files and `.env` (API keys). Never read `.env` out loud or copy it.
 - `02 Planner/`: the Planner plugin's notes.
-- `00 Daily Scratchpad/` text: only its processed stamp is yours.
+- `00 Daily Scratchpad/`: read it, never write in it.
 - The top folder: nothing new goes there (see "Where files go").
