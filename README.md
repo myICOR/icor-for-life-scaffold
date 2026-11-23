@@ -5,9 +5,9 @@ Your life and your work in one folder of plain markdown files, organised by ICOR
 ## Start here
 
 1. **Turn on the plugins.** Obsidian asks once whether you trust this folder's plugins: choose to trust them. They are the ICOR for Life plugins, made by myICOR.
-2. **Write today.** Click the calendar icon (Open today's daily note) and write whatever is on your mind. Type `@` to link a person, project, topic or book as you write, or create it on the spot: `@person/Paco Cantero`, `@project/Learn Spanish`, `@book/Deep Work`. The Connections panel on the right shows the day line by line, each line ready to become a journal entry, a project or a note.
-3. **Open your Journal** with the book icon: your entries as cards, your streak, and a question for today.
-4. **Create something** with the shapes icon (New object): a goal, a project, a person, a book you are reading. You fill in only what it needs, and it lands in the right place. Missing a kind? `@tool` (or any word) adds it as a type of your own.
+2. **Write today.** Click the calendar icon in the ribbon on the left (Open today's daily note) and write whatever is on your mind. Type `@` to link a person, project, topic or book as you write, or create it on the spot: `@person/Paco Cantero`, `@project/Learn Spanish`, `@book/Deep Work`. The Connections panel on the right shows the day line by line, each line ready to become a journal entry, a project or a note.
+3. **Open your Journal** with the book icon in the ribbon: your entries as cards, your streak, and a question for today.
+4. **Create something** with the shapes icon in the ribbon (New object): a goal, a project, a person, a book you are reading. You fill in only what it needs, and it lands in the right place. Missing a kind? `@tool` (or any word) adds it as a type of your own.
 5. **Find your objects** in `05 Databases/Objects.base`: all of them in one table, and a view per type (Projects, People, your Tools…). Each type's folder has its own table with all its fields. Delete one with the command Delete this object.
 6. **Bring in your AI.** Open this folder in Claude, Codex, Cursor, Gemini or another AI that works with files. It reads `AGENTS.md` and knows the folders, the rules and the skills.
 
@@ -56,6 +56,8 @@ Everything comes installed and turned on, the way we use it ourselves. Some of i
 Keeping your health or your finances here? The two databases stay on this computer, never in a note, and are yours to fill. `05 Databases/README.md` says what goes in each. Deleted one and want it back, empty: `python3 _System/Tools/new-database.py health` (or `finance`).
 
 ## Good to know
+
+- Every ICOR for Life plugin keeps its icon in the ribbon on the left. Right-click the ribbon to reorder or hide icons.
 
 - **Your files stay yours.** Plain text in a folder on your computer: no account, no database, no lock-in. Back it up like any folder; Obsidian Sync, iCloud and Dropbox all carry it.
 - **The look:** Settings, ICOR for Life - Interface: Gradient or Flat, and where a note's properties show (on top, folded, under the note, or only in the right sidebar).
