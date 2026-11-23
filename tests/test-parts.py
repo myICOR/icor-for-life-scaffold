@@ -77,6 +77,14 @@ for f in tracked:
         pass
 check("only the documentation names the optional databases and SQLite Viewer", not leaks, leaks)
 
+print("the ICOR names (Tom, 2026-11-23: plugins are ICOR Objects, ICOR Planner…; the theme keeps its name)")
+OLD_NAME = re.compile(r"ICOR for Life - (AI Chat|Canvases|Connect|Focus|Interface|Journal|Objects|Outliner|PDF Annotation|Planner|Scratchpad|Terminal|SQLite Viewer)\b")
+stale = [f for f in tracked if f not in (".icor-for-life/CHANGELOG.md", "release/plugins.lock.json") and not f.startswith("tests/")
+         and (ROOT / f).is_file() and (ROOT / f).suffix not in (".sqlite", ".png", ".jpg")
+         and OLD_NAME.search((ROOT / f).read_text(encoding="utf-8", errors="ignore"))]
+check("no page uses a plugin's old name", not stale, stale)
+check("every plugin in parts.json has its ICOR name", all(p["name"].startswith("ICOR ") and not p["name"].startswith("ICOR for Life - ") or p["kind"] != "plugin" for p in parts["core"] + parts["optional"]))
+
 print("the folder without the optional pieces")
 with tempfile.TemporaryDirectory(prefix="test-parts.") as tmp:
     full = Path(tmp) / "full"

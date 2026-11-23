@@ -12,25 +12,25 @@
       "what": "today's note, new notes from templates, properties, the tables in 05 Databases"
     },
     {
-      "name": "ICOR for Life - Objects",
+      "name": "ICOR Objects",
       "kind": "plugin",
       "id": "icor-for-life-objects",
       "what": "objects from the schema, typed links, the type badge, Connections, the top folder kept clear"
     },
     {
-      "name": "ICOR for Life - Journal",
+      "name": "ICOR Journal",
       "kind": "plugin",
       "id": "icor-for-life-journal",
       "what": "your journal entries as a journal you can browse, and On this day"
     },
     {
-      "name": "ICOR for Life - Planner",
+      "name": "ICOR Planner",
       "kind": "plugin",
       "id": "icor-for-life-planner",
       "what": "your week and your tasks in 06 Planner (the Output stage)"
     },
     {
-      "name": "ICOR for Life - Interface",
+      "name": "ICOR Interface",
       "kind": "plugin",
       "id": "icor-for-life-interface",
       "what": "the folders in their stage colours, where properties show, the look"
@@ -43,75 +43,75 @@
   ],
   "optional": [
     {
-      "name": "ICOR for Life - Scratchpad",
+      "name": "ICOR Scratchpad",
       "kind": "plugin",
       "id": "icor-for-life-scratchpad",
       "what": "a floating window for today's note or a scratch note, behind a shortcut",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - Scratchpad, then delete its folder .obsidian/plugins/icor-for-life-scratchpad/.",
+      "remove": "Settings, Community plugins: turn off ICOR Scratchpad, then delete its folder .obsidian/plugins/icor-for-life-scratchpad/.",
       "stops": "the floating window and its shortcut; Obsidian's Daily notes still opens today"
     },
     {
-      "name": "ICOR for Life - AI Chat",
+      "name": "ICOR AI Chat",
       "kind": "plugin",
       "id": "icor-for-life-chat",
       "what": "a chat with your AI inside the vault",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - AI Chat, then delete its folder .obsidian/plugins/icor-for-life-chat/.",
+      "remove": "Settings, Community plugins: turn off ICOR AI Chat, then delete its folder .obsidian/plugins/icor-for-life-chat/.",
       "stops": "the chat panel; your AI still works with the folder from outside"
     },
     {
-      "name": "ICOR for Life - Connect",
+      "name": "ICOR Connect",
       "kind": "plugin",
       "id": "icor-for-life-connect",
       "what": "your app.myicor.com account in the vault: dashboards, search, reflections",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - Connect, then delete its folder .obsidian/plugins/icor-for-life-connect/.",
+      "remove": "Settings, Community plugins: turn off ICOR Connect, then delete its folder .obsidian/plugins/icor-for-life-connect/.",
       "stops": "the myICOR dashboards and synced reflections"
     },
     {
-      "name": "ICOR for Life - Focus",
+      "name": "ICOR Focus",
       "kind": "plugin",
       "id": "icor-for-life-focus",
       "what": "a map of where your attention goes",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - Focus, then delete its folder .obsidian/plugins/icor-for-life-focus/.",
+      "remove": "Settings, Community plugins: turn off ICOR Focus, then delete its folder .obsidian/plugins/icor-for-life-focus/.",
       "stops": "the Focus map"
     },
     {
-      "name": "ICOR for Life - Canvases",
+      "name": "ICOR Canvases",
       "kind": "plugin",
       "id": "icor-for-life-canvases",
       "what": "ink and shapes on canvases, canvases inside canvases",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - Canvases, then delete its folder .obsidian/plugins/icor-for-life-canvases/.",
+      "remove": "Settings, Community plugins: turn off ICOR Canvases, then delete its folder .obsidian/plugins/icor-for-life-canvases/.",
       "stops": "drawing on canvases; Obsidian's own canvases still open"
     },
     {
-      "name": "ICOR for Life - Outliner",
+      "name": "ICOR Outliner",
       "kind": "plugin",
       "id": "icor-for-life-outliner",
       "what": "lists that behave like an outline",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - Outliner, then delete its folder .obsidian/plugins/icor-for-life-outliner/.",
+      "remove": "Settings, Community plugins: turn off ICOR Outliner, then delete its folder .obsidian/plugins/icor-for-life-outliner/.",
       "stops": "moving a bullet with everything under it"
     },
     {
-      "name": "ICOR for Life - PDF Annotation",
+      "name": "ICOR PDF Annotation",
       "kind": "plugin",
       "id": "icor-for-life-pdf-annotation",
       "what": "highlights on PDFs as notes",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - PDF Annotation, then delete its folder .obsidian/plugins/icor-for-life-pdf-annotation/.",
+      "remove": "Settings, Community plugins: turn off ICOR PDF Annotation, then delete its folder .obsidian/plugins/icor-for-life-pdf-annotation/.",
       "stops": "highlighting PDFs; the highlight notes you made stay"
     },
     {
-      "name": "ICOR for Life - Terminal",
+      "name": "ICOR Terminal",
       "kind": "plugin",
       "id": "icor-for-life-terminal",
       "what": "a terminal inside the vault",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - Terminal, then delete its folder .obsidian/plugins/icor-for-life-terminal/.",
+      "remove": "Settings, Community plugins: turn off ICOR Terminal, then delete its folder .obsidian/plugins/icor-for-life-terminal/.",
       "stops": "the terminal tab"
     },
     {
-      "name": "ICOR for Life - SQLite Viewer",
+      "name": "ICOR SQLite Viewer",
       "kind": "plugin",
       "id": "icor-for-life-sqlite-viewer",
       "what": "opens the SQLite databases in 05 Databases: tables, queries, dashboards",
-      "remove": "Settings, Community plugins: turn off ICOR for Life - SQLite Viewer, then delete its folder .obsidian/plugins/icor-for-life-sqlite-viewer/.",
+      "remove": "Settings, Community plugins: turn off ICOR SQLite Viewer, then delete its folder .obsidian/plugins/icor-for-life-sqlite-viewer/.",
       "stops": "opening the databases in Obsidian; any SQLite tool and your AI still read them"
     },
     {

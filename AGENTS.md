@@ -65,7 +65,7 @@ Never make a new folder next to the numbered folders. In Obsidian the Objects pl
 
 ## What's core, what's optional
 
-`_System/parts.json` lists every piece that ships. **Core**, needed for the folder to work: the numbered folders, this page and `_System`; Obsidian's Daily notes, Templates, Properties and Bases; ICOR for Life - Objects, ICOR for Life - Journal, ICOR for Life - Planner and ICOR for Life - Interface (the ICOR for Life - INKLINE theme only changes the look). **Optional**, each removable on its own with nothing depending on it: ICOR for Life - Scratchpad, ICOR for Life - AI Chat, ICOR for Life - Connect, ICOR for Life - Focus, ICOR for Life - Canvases, ICOR for Life - Outliner, ICOR for Life - PDF Annotation, ICOR for Life - Terminal, ICOR for Life - SQLite Viewer, and the databases `05 Databases/Health.sqlite` and `05 Databases/Finance.sqlite`. Never assume an optional piece is there: check the plugin's folder in `.obsidian/plugins/` or the file before you use it, and say so when it is missing. Never remove a piece yourself unless the person asks.
+`_System/parts.json` lists every piece that ships. **Core**, needed for the folder to work: the numbered folders, this page and `_System`; Obsidian's Daily notes, Templates, Properties and Bases; ICOR Objects, ICOR Journal, ICOR Planner and ICOR Interface (the ICOR for Life - INKLINE theme only changes the look). **Optional**, each removable on its own with nothing depending on it: ICOR Scratchpad, ICOR AI Chat, ICOR Connect, ICOR Focus, ICOR Canvases, ICOR Outliner, ICOR PDF Annotation, ICOR Terminal, ICOR SQLite Viewer, and the databases `05 Databases/Health.sqlite` and `05 Databases/Finance.sqlite`. Never assume an optional piece is there: check the plugin's folder in `.obsidian/plugins/` or the file before you use it, and say so when it is missing. Never remove a piece yourself unless the person asks.
 
 **Health and money stay in their databases.** A person's health data and finances live in `05 Databases/Health.sqlite` and `05 Databases/Finance.sqlite`, on their computer. Read them through SQL (`sqlite3 -readonly`, or your own SQLite access) when they ask, and answer in your words. Never copy rows into a note, a journal entry or anywhere outside the folder, and never send them anywhere unless the person asks for exactly that. Write to them only when the person asks, and only in the tables `05 Databases/README.md` describes. The schemas are in `_System/Databases/`.
 
@@ -87,7 +87,7 @@ Never make a new folder next to the numbered folders. In Obsidian the Objects pl
 
 Python 3.9 or newer, no packages: the scripts in `_System/Tools/` (their `README.md` lists them). Every script prints `OK …` or `FAIL …`. Prefer a script to writing a file by hand: they know the schema, the names and the folders. Templates for every type: `_System/Templates/`.
 
-In Obsidian, the **ICOR for Life - Objects** plugin enforces the same schema for the person: New object, `@` to link or create while writing, New object type, typed links, turning a line of the daily note into an object, and a Connections panel. You and the plugin follow one definition.
+In Obsidian, the **ICOR Objects** plugin enforces the same schema for the person: New object, `@` to link or create while writing, New object type, typed links, turning a line of the daily note into an object, and a Connections panel. You and the plugin follow one definition.
 
 ## Never touch
 

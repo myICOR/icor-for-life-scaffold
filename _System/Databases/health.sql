@@ -1,5 +1,5 @@
 -- Health.sqlite: your own health data, kept on this computer, in 05 Databases. Optional: delete the file if you do
--- not track your health here. Read it with ICOR for Life - SQLite Viewer or any SQLite tool; your AI reads it through
+-- not track your health here. Read it with ICOR SQLite Viewer or any SQLite tool; your AI reads it through
 -- SQL and never copies it into notes. Made from this file by `python3 _System/Tools/new-database.py health`.
 
 CREATE TABLE about (key TEXT PRIMARY KEY, value TEXT NOT NULL);

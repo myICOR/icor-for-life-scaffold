@@ -3,7 +3,7 @@
 The tables of this folder: one for your objects, and two optional databases for data that does not belong in notes.
 
 - `Objects.base`: every object in one table, and a view per type (Projects, People, Sources, the types you add). Each type's folder has its own `.base` with all of that type's fields. Part of the core.
-- `Health.sqlite` and `Finance.sqlite`: your health data and your money, as SQLite databases on this computer. Both are optional and start empty. Open them with ICOR for Life - SQLite Viewer (a table, a query, a dashboard), or with any SQLite tool.
+- `Health.sqlite` and `Finance.sqlite`: your health data and your money, as SQLite databases on this computer. Both are optional and start empty. Open them with ICOR SQLite Viewer (a table, a query, a dashboard), or with any SQLite tool.
 
 Your health and money stay in these files. No note copies them, and nothing sends them anywhere. Your AI reads them through SQL when you ask, and answers in its own words without pasting your numbers into a note.
 
@@ -40,4 +40,4 @@ Made from `_System/Databases/finance.sql`. Amounts are whole cents (12.34 EUR is
 
 ## Not using one?
 
-Delete the file: nothing else in the folder needs it. To have it back, empty: `python3 _System/Tools/new-database.py health` (or `finance`). Not using either? Turn off ICOR for Life - SQLite Viewer as well (see "What's core, what's optional" in README.md).
+Delete the file: nothing else in the folder needs it. To have it back, empty: `python3 _System/Tools/new-database.py health` (or `finance`). Not using either? Turn off ICOR SQLite Viewer as well (see "What's core, what's optional" in README.md).

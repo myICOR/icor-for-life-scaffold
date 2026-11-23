@@ -40,10 +40,13 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - `_System/Tools/migrate-to-3.py`: moves a 2.x folder to this layout, a dry run first.
 
 ### Changed
+- The plugins carry ICOR names (Tom, 2026-11-23): ICOR Objects, ICOR Journal, ICOR Planner, ICOR Interface, ICOR AI
+  Chat, ICOR Connect, ICOR Focus, ICOR Canvases, ICOR Outliner, ICOR PDF Annotation, ICOR Scratchpad, ICOR Terminal and
+  ICOR SQLite Viewer; their ids stay icor-for-life-*. The theme stays ICOR for Life - INKLINE.
 - What's core and what's optional, said once (`_System/parts.json`) and the same in README.md and AGENTS.md: the core
   is the folders, AGENTS.md, `_System`, Obsidian's Daily notes, Templates, Properties and Bases, and Objects, Journal,
   Planner and Interface; everything else ships turned on and can go on its own (how, and what stops working, is
-  written beside each). ICOR for Life - SQLite Viewer ships, turned on. `05 Databases/Health.sqlite` and
+  written beside each). ICOR SQLite Viewer ships, turned on. `05 Databases/Health.sqlite` and
   `05 Databases/Finance.sqlite` start empty, for your health data and your money on this computer, never in a note;
   their schemas are in `_System/Databases/`, `05 Databases/README.md` says what goes in, and
   `_System/Tools/new-database.py` makes one again. `tests/test-parts.py` keeps the lists in step and checks the folder

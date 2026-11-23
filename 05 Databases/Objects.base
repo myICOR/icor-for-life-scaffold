@@ -1,4 +1,4 @@
-# Every object in one place: all of them, and one view per type. ICOR for Life - Objects adds a view for each
+# Every object in one place: all of them, and one view per type. ICOR Objects adds a view for each
 # type you add. The bases in the type folders (Projects.base, People.base…) show each type with all its fields.
 filters:
   and:

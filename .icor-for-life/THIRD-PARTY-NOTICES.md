@@ -2,7 +2,7 @@
 
 Every plugin and the theme in this folder are ICOR for Life's own work. This file lists the open-source libraries
 some of the plugins use inside their code: MIT and Apache notices that travel with that code under its own licence.
-ICOR for Life - Journal and ICOR for Life - Objects bundle no third-party code.
+ICOR Journal and ICOR Objects bundle no third-party code.
 
 What follows is not a notice about a bundled tool. It is the licenses of
 the open-source libraries some of our own plugins use inside their code
@@ -15,8 +15,8 @@ The ICOR plugins are our own work. Several of them bundle no
 third-party code at all: ICOR Focus, ICOR Interface and myICOR Connect are
 hand-written JavaScript against the Obsidian plugin API, ICOR for
 Life - Outliner is hand-written TypeScript against the CodeMirror and
-Obsidian editor APIs, ICOR for Life - Canvases is hand-written TypeScript
-against the Obsidian plugin API alone, and ICOR for Life - PDF Annotation
+Obsidian editor APIs, ICOR Canvases is hand-written TypeScript
+against the Obsidian plugin API alone, and ICOR PDF Annotation
 is hand-written
 TypeScript against the Obsidian plugin API and the built-in PDF viewer's
 own objects (the pdf.js inside Obsidian, not a bundled copy). The `rect=`
