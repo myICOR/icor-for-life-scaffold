@@ -62,14 +62,14 @@
     },
     {
       "id": "icor-for-life-interface",
-      "version": "0.10.4",
+      "version": "0.11.0",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-interface"
       },
       "files": {
-        "main.js": "54b4e2b8eb946b353fea812c22a94571fae34dbc655591c1935ac49cabed1927",
-        "manifest.json": "c0c16e1336b55992f89ecf1b4fceec0a6894cf2f8ba50010c9c8e7a1cb706439",
-        "styles.css": "9e184c4d7d39fc47dd1e30935aa1d012e3bd888f38d6de19754dcf7a398eb1e2"
+        "main.js": "d534b99739b7b829623688a2c49f9d7d7bb8f977a8aaf0732d8a148941754f12",
+        "manifest.json": "ed65a8be2a2931c93e4e743d863fc535c421a5681889f26f0f4e8286ef76fc32",
+        "styles.css": "6fbbb6004396c0aafb54f27289f3155597a7938dd5aa916f2604c61418327dcf"
       }
     },
     {
