@@ -12,7 +12,6 @@ linked_projects: ["[[Train for the spring marathon]]"]
 source: 
 tags: [example]
 ---
-
 ## Original Text
 
 20 kilometres for the first time. Slow, but done. Halfway to the marathon distance and four months to go.

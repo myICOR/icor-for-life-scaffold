@@ -14,9 +14,6 @@ people: []
 companies: []
 tags: []
 ---
-
-# Video on why I switched to Obsidian
-
 An idea is a thing you might do. No finish line, so it is not a Project. Not one of your three quarterly explorations, so it is not a Topic. It sits here collecting thoughts until it becomes one of them or you let it go.
 
 ## The idea in one line

@@ -14,8 +14,5 @@ people: []
 companies: []
 tags: []
 ---
-
-# {{title}}
-
 ## Highlights
 

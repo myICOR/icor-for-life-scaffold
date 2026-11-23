@@ -15,6 +15,3 @@ ai_summary:                                # meeting only - the model id, if an 
 audio_retained:                            # meeting only - can you still re-listen to it
 tags: []
 ---
-
-# {{title}}
-

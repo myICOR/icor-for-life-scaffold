@@ -2,7 +2,6 @@
 name: capture
 description: Decide where something the person wants to keep belongs in their ICOR for Life folder, and put it there. Use when they say "save this", "note that", "where does this go?", paste a thought, a link or a fact, or hand you a file.
 ---
-
 # Capture: put it where it will be found
 
 Run from the folder's root. The structure is in `_System/schema.json`; read it when you need a type's fields.
@@ -15,8 +14,7 @@ Ask, in this order, and stop at the first yes:
 3. Does it belong to one of their **Topics**? (`My Life/Topics/`)
 4. Is it about a **person** or **company**? (`Contacts/`)
 
-Find the existing note before you link: `python3 _System/Tools/find-entity.py "<name>"`. Never make a second note for the same thing.
-No yes at all: tell the person it connects to nothing yet, and offer to leave it in today's scratchpad or let it go.
+Find the existing note before you link: `python3 _System/Tools/find-entity.py "<name>"`. Never make a second note for the same thing. No yes at all: tell the person it connects to nothing yet, and offer to leave it in today's scratchpad or let it go.
 
 ## 2. Pick the home
 
@@ -32,9 +30,7 @@ No yes at all: tell the person it connects to nothing yet, and offer to leave it
 
 Date or subject? Date: Journal. Subject: Notes.
 
-A file goes in its folder, never in the top folder: pictures, screenshots and videos in `04 Assets/Images/`, recordings in
-`04 Assets/Audio/`, PDFs and office files in `04 Assets/Documents/`, a scan to file later in `01 Inbox/Scanner Inbox/`.
-Nothing sorted yet: `01 Inbox/`. Never make a new folder next to the numbered folders.
+A file goes in its folder, never in the top folder: pictures, screenshots and videos in `04 Assets/Images/`, recordings in `04 Assets/Audio/`, PDFs and office files in `04 Assets/Documents/`, a scan to file later in `01 Inbox/Scanner Inbox/`. Nothing sorted yet: `01 Inbox/`. Never make a new folder next to the numbered folders.
 
 ## 3. Tell the person
 

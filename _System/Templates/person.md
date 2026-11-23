@@ -12,6 +12,3 @@ last_contact:
 next_action: 
 tags: []
 ---
-
-# {{title}}
-

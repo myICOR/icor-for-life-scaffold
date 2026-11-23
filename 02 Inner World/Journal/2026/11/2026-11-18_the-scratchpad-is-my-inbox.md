@@ -12,7 +12,6 @@ linked_projects: []
 source: 
 tags: [example]
 ---
-
 ## Original Text
 
 ![[example-notebook.jpg]]

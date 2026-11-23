@@ -6,7 +6,4 @@ target_date:
 key_elements: []
 tags: [example]
 ---
-# Enjoy real family time
-
-Example goal serving the [[Spain Holidays]] project: projects always
-serve a goal, never float free.
+Example goal serving the [[Spain Holidays]] project: projects always serve a goal, never float free.

@@ -18,6 +18,3 @@ processed_summary:
 processed_into: []
 tags: []
 ---
-
-# {{title}}
-

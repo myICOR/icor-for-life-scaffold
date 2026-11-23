@@ -5,6 +5,3 @@ people: []
 goals: []
 tags: []
 ---
-
-# {{title}}
-

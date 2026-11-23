@@ -5,8 +5,4 @@ people: []
 goals: ["[[Run a marathon]]"]
 tags: [example]
 ---
-
-# Health
-
-Example key element. Key elements are the pillars of your life; goals,
-projects, people, and journal entries connect to them.
+Example key element. Key elements are the pillars of your life; goals, projects, people, and journal entries connect to them.

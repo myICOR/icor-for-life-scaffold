@@ -61,20 +61,7 @@ A useful report has:
 These aren't vulnerabilities in ICOR for Life, and we close them as such:
 
 - **The AI team: report to myPKA.** The write guard, the hooks, `session-start.py`, the updater, the resolver, `add-mcp-server.py`, `scaffold-init.py`, the expansion-pack installer and the shipped `.mcp.json` are myPKA's. Its policy: [SECURITY-myPKA.md](https://github.com/myICOR/myPKA/blob/main/SECURITY-myPKA.md). Its form: https://github.com/myICOR/myPKA/security/advisories/new.
-- **Plugin and theme code.** You install them from Obsidian's community directory. Each has its own repository and its own `SECURITY.md`:
-  [Planner](https://github.com/myICOR/icor-for-life-planner),
-  [Focus](https://github.com/myICOR/icor-for-life-focus),
-  [Connect](https://github.com/myICOR/icor-for-life-connect),
-  [AI Chat](https://github.com/myICOR/icor-for-life-chat),
-  [Interface](https://github.com/myICOR/icor-for-life-interface),
-  [Scaffold Check](https://github.com/myICOR/icor-for-life-scaffold-check),
-  [SQLite Viewer](https://github.com/myICOR/icor-for-life-sqlite-viewer),
-  [Terminal](https://github.com/myICOR/icor-for-life-terminal),
-  [Outliner](https://github.com/myICOR/icor-for-life-outliner),
-  [PDF Annotation](https://github.com/myICOR/icor-for-life-pdf-annotation),
-  [Canvases](https://github.com/myICOR/icor-for-life-canvases),
-  [Scratchpad](https://github.com/myICOR/icor-for-life-scratchpad),
-  [INKLINE theme](https://github.com/myICOR/icor-for-life-inkline).
+- **Plugin and theme code.** You install them from Obsidian's community directory. Each has its own repository and its own `SECURITY.md`: [Planner](https://github.com/myICOR/icor-for-life-planner), [Focus](https://github.com/myICOR/icor-for-life-focus), [Connect](https://github.com/myICOR/icor-for-life-connect), [AI Chat](https://github.com/myICOR/icor-for-life-chat), [Interface](https://github.com/myICOR/icor-for-life-interface), [Scaffold Check](https://github.com/myICOR/icor-for-life-scaffold-check), [SQLite Viewer](https://github.com/myICOR/icor-for-life-sqlite-viewer), [Terminal](https://github.com/myICOR/icor-for-life-terminal), [Outliner](https://github.com/myICOR/icor-for-life-outliner), [PDF Annotation](https://github.com/myICOR/icor-for-life-pdf-annotation), [Canvases](https://github.com/myICOR/icor-for-life-canvases), [Scratchpad](https://github.com/myICOR/icor-for-life-scratchpad), [INKLINE theme](https://github.com/myICOR/icor-for-life-inkline).
 - **Obsidian itself.** Report to [Obsidian](https://github.com/obsidianmd/obsidian-releases/issues).
 - **Your AI host and its model.** ICOR for Life is not a sandbox and can't stop a model you gave file access from using it.
 - **Your own notes, keys and setup.** What you put in your folder, a plugin's settings, where you sync it and who uses your computer. Anything in ICOR for Life that moves a key or a note out of your folder, or into a file you didn't choose, is in scope.

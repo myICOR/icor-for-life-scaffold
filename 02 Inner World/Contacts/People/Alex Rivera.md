@@ -9,8 +9,4 @@ email:
 birthday:
 tags: [example]
 ---
-
-# Alex Rivera
-
-Example person. Properties live above; the story lives in journal
-entries that link here via linked_people.
+Example person. Properties live above; the story lives in journal entries that link here via linked_people.

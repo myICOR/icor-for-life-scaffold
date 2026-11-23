@@ -12,7 +12,6 @@ linked_projects: []
 source: 
 tags: []
 ---
-
 ## Original Text
 
 

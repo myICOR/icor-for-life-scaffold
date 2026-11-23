@@ -7,6 +7,3 @@ people: []
 website: 
 tags: []
 ---
-
-# {{title}}
-

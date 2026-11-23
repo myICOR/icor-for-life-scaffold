@@ -14,13 +14,8 @@ people: []
 companies: []
 tags: [example]
 ---
-
-# How to Take Smart Notes
-
-Example source: a book someone else wrote, linked to the topic it serves. It stays unread (`consumed: false`) until
-you have read it, so it shows in the reading queue in `Sources.base` and on the topic's Connections.
+Example source: a book someone else wrote, linked to the topic it serves. It stays unread (`consumed: false`) until you have read it, so it shows in the reading queue in `Sources.base` and on the topic's Connections.
 
 ## Highlights
 
-Your highlights land here, from the Web Clipper, from Readwise, or typed by hand. What you think about them is
-yours: write it as a journal entry or a note that links back to this source.
+Your highlights land here, from the Web Clipper, from Readwise, or typed by hand. What you think about them is yours: write it as a journal entry or a note that links back to this source.

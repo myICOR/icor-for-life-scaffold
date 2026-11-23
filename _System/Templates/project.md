@@ -9,6 +9,3 @@ external_links: []
 key_elements: []
 tags: []
 ---
-
-# {{title}}
-

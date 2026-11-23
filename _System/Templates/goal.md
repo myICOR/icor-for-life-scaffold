@@ -6,6 +6,3 @@ target_date:
 key_elements: []
 tags: []
 ---
-
-# {{title}}
-

@@ -80,6 +80,17 @@ said = [f for f in tracked if f.endswith(".md") and f != ".icor-for-life/CHANGEL
         and WORD.search((ROOT / f).read_text(encoding="utf-8"))]
 check("no member- or AI-facing page says room", not said, said)
 
+# --- how notes are written (Tom, 2026-11-23): no hard wraps, no blank first line, no title heading ------------------
+import importlib.util as _iu
+_spec = _iu.spec_from_file_location("tidy", ROOT / "_System/Tools/tidy-markdown.py")
+TIDY = _iu.module_from_spec(_spec); _spec.loader.exec_module(TIDY)
+visible = [ROOT / f for f in tracked if f.endswith(".md") and not f.startswith((".icor-for-life/", "tests/", "release/", ".agents/", ".claude/"))
+           and (ROOT / f).is_file()]
+wrapped = [str(p.relative_to(ROOT)) for p in visible if TIDY.unwrap(p.read_text(encoding="utf-8"))[1]]
+check("no visible page is hard-wrapped (one paragraph per line)", not wrapped, wrapped[:8])
+untidy = [str(p.relative_to(ROOT)) for p in visible if TIDY.tidy_top(p.read_text(encoding="utf-8"), p.stem)[1]]
+check("no note or template starts with a blank line or its own title", not untidy, untidy[:8])
+
 # --- the skills ------------------------------------------------------------------------------------------------------
 skills = sorted(p for p in (ROOT / "_System/Skills").iterdir() if p.is_dir())
 check("nine skills", len(skills) == 9, [p.name for p in skills])

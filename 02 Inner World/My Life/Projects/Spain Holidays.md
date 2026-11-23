@@ -9,9 +9,4 @@ external_links: []
 key_elements: []
 tags: [example]
 ---
-
-# Spain Holidays
-
-Example project. The note holds the knowledge (why, decisions, links);
-task execution lives in your external PM tool, linked in
-external_links. The bookings and notes about it link here.
+Example project. The note holds the knowledge (why, decisions, links); task execution lives in your external PM tool, linked in external_links. The bookings and notes about it link here.
