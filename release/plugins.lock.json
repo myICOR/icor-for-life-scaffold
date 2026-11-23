@@ -26,25 +26,25 @@
     },
     {
       "id": "icor-for-life-chat",
-      "version": "0.17.1",
+      "version": "0.17.2",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-chat"
       },
       "files": {
-        "main.js": "84e7e5e178e94393d68b4b0c289f75e97f8f8bbc6699065f5eba38097124ac58",
-        "manifest.json": "63c6e67bb39cb4fd92e9dbe065da466648c600348a514e3159e0c4bd1e149bdf",
+        "main.js": "66af32803e0bb8b3d0e427f6df9a766e0fa2bcaa38d5ec3c963a71a184f7953b",
+        "manifest.json": "06ccb0fb17d6c6db10d0deafc6ead6e819aa4fd282a105397a455183e9effcae",
         "styles.css": "cce722240b0fc8328e5ba2dd1e9fb450ef68da47705d691a949c0f587616c6c5"
       }
     },
     {
       "id": "icor-for-life-connect",
-      "version": "0.18.0",
+      "version": "0.18.1",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-connect"
       },
       "files": {
-        "main.js": "fd8c2e8a0445dd4a3fa90d82fe84d0223881d9dab4709d39efa9e6d4978f69a1",
-        "manifest.json": "15ae4f88e006cef8059015a193223db539a0d17005fae4175cab8a51bd63c0a2",
+        "main.js": "1fe3eac660ed3ea47f7f50400d2e3882edb4f2c077229ffcab81eff7d5fca385",
+        "manifest.json": "823d45c10603fc4c5bd860fddb904771ea59da004faf75407c09f698cea3402d",
         "styles.css": "559513282f7cbffccfed91ea3c57e182f4d9b85a483f5d623ef9779c0212e0b6"
       }
     },
@@ -63,14 +63,14 @@
     },
     {
       "id": "icor-for-life-interface",
-      "version": "0.10.0",
+      "version": "0.10.1",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-interface"
       },
       "files": {
-        "main.js": "324491798c9140f2d2d203bdc9fc49fdb1f0bc47188610b8fb996b2fc271ef52",
-        "manifest.json": "6621aeeae8421587a41a7e3ef93ec86bfc4ce68b15916bb4611f6c953be66df3",
-        "styles.css": "d8e32983af70f9245df715c64bf948142c9475f42f0ca8c7b56451a121a5c627"
+        "main.js": "176cde6ea319f11d9e53ef980dabcdd38b355a9588dbd9a5b2c26afa89f32c5a",
+        "manifest.json": "80322e8f4a34baffab5da00fcc324dc1438c386b394ac80705fae60bc5208828",
+        "styles.css": "9e184c4d7d39fc47dd1e30935aa1d012e3bd888f38d6de19754dcf7a398eb1e2"
       }
     },
     {
@@ -124,13 +124,13 @@
     },
     {
       "id": "icor-for-life-planner",
-      "version": "0.18.0",
+      "version": "0.18.1",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-planner"
       },
       "files": {
-        "main.js": "58b73f5a706570527b8a9bb39a9578bcfefd2508a6091332a7b0a278ca627343",
-        "manifest.json": "8680adfc3ece3f19dc703474348c6a1f027fcee9e2577719f7202aa5bd1d889c",
+        "main.js": "4a47cc09f1b57f2d3976c4733ec54deaf19e03f2645a9cb55375798c530e93f5",
+        "manifest.json": "9e1f9f6c099cdfb5611ded3d99d62d34c10630a22831255bd76c810f8aae2c32",
         "styles.css": "90bb67a8063b0471c68460925fc4a090d5a1396e37f728269e09c977fdb9ff19"
       }
     },
@@ -144,6 +144,20 @@
         "main.js": "d8064116949d5bc36d856b0bb65fb4cc4020e4372fd89466ded38ca68783656a",
         "manifest.json": "eb3886542261500cc316b7351a18797bea8a9ea7049c121030401aee760a3e36",
         "styles.css": "b03b9f23debc40d6a37615b271118e5108dd537674bd361417f6cafc74fc0bc0"
+      }
+    },
+    {
+      "id": "icor-for-life-sqlite-viewer",
+      "version": "0.6.5",
+      "source": {
+        "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-sqlite-viewer"
+      },
+      "files": {
+        "main.js": "64514a329df2c4d3a7f04d98257f31bcd3731a0ca73e50bdc9292b6e1cbb99f4",
+        "manifest.json": "a1bd1fc9246622e21f90f894fdd26d695375702e1a338859474f286ad1868aa4",
+        "styles.css": "05c8528db2e07f820e03f77bfc2883c5a66e18e19418c1fa07ce4dffc9e4808f",
+        "sql-wasm.js": "694ca5b36aa3e6e71f417819d7df390b65343665fcfa5c69015ca33d93d291b3",
+        "sql-wasm.wasm": "0734155c83e493983d1f2ff5b09a4fab6e35a32e9449c7e4e545756439f62d73"
       }
     },
     {
