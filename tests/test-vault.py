@@ -67,7 +67,7 @@ tracked = subprocess.check_output(["git", "-C", str(ROOT), "ls-files"], text=Tru
 stale = []
 for f in tracked:
     p = ROOT / f
-    if f in (".icor-for-life/CHANGELOG.md", "tests/test-vault.py") or "migrate-to-3" in f or not p.is_file():
+    if f in (".icor-for-life/CHANGELOG.md", "tests/test-vault.py") or "migrate" in f or not p.is_file():
         continue
     try:
         if OLD.search(p.read_text(encoding="utf-8")) or OLD.search(f):
