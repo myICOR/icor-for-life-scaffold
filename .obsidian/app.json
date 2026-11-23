@@ -1,10 +1,10 @@
 {
-  "attachmentFolderPath": "05 Assets/Images",
+  "attachmentFolderPath": "04 Assets/Images",
   "alwaysUpdateLinks": true,
   "newLinkFormat": "shortest",
   "useMarkdownLinks": false,
   "newFileLocation": "folder",
-  "newFileFolderPath": "00 Daily Scratchpad",
+  "newFileFolderPath": "00 Daily Notes",
   "userIgnoreFilters": [
     "_System/"
   ]

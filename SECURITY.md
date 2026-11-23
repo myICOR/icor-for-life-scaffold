@@ -1,6 +1,6 @@
 # ICOR for Life security policy
 
-ICOR for Life is a content folder: the rooms, the entity templates, the concept Guidelines and the Obsidian setup. It is mostly markdown, and markdown doesn't attack anybody. The parts that run are the parts this policy is about: the life scripts, the Obsidian settings in the zip, and the release pipeline that builds that zip. Since 2.3.0 the zip carries no plugin, no theme and no myPKA file.
+ICOR for Life is a content folder: the folders, the note templates, the concept Guidelines and the Obsidian setup. It is mostly markdown, and markdown doesn't attack anybody. The parts that run are the parts this policy is about: the life scripts, the Obsidian settings in the zip, and the release pipeline that builds that zip. Since 2.3.0 the zip carries no plugin, no theme and no myPKA file.
 
 The AI team is not part of ICOR for Life. Agent teams come from myPKA 8, a separate download in its own folder; a myPKA 7 folder that also holds ICOR for Life keeps its team files under myPKA's policy. The contracts, the team scripts, the hooks and the write guard they run, the updater, the resolver, `add-mcp-server.py`, the expansion-pack installer and the shipped `.mcp.json` all belong to myPKA, which has its own policy: [SECURITY-myPKA.md](https://github.com/myICOR/myPKA/blob/main/SECURITY-myPKA.md).
 

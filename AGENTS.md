@@ -6,9 +6,9 @@ Cursor, Gemini or any other). Everything you need is in three places:
 
 | Where | What it is |
 | --- | --- |
-| this page | the principles, the rooms, and where to look |
+| this page | the principles, the folders by ICOR stage, and where to look |
 | `_System/schema.json` | **the structure**: every type of note, its folder, its fields, the values a field allows, and which type each link points to |
-| `07 Databases/Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
+| `05 Databases/Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
 | `_System/Skills/` (copies in `.agents/skills/` and `.claude/skills/`) | **the skills**: how to do the work here, step by step |
 
 ## The principles
@@ -32,51 +32,55 @@ Cursor, Gemini or any other). Everything you need is in three places:
    folder. No temporary folders, no folder of your own.
 6. **Ask before you move, rename or delete** anything the person made. Create freely where a skill says so.
 
-## The rooms
+## The folders, by ICOR stage
 
-| Folder | What lives there |
-| --- | --- |
-| `00 Daily Scratchpad/YYYY/MM/` | the person's raw writing: one note a day and quick scratch notes. **Never edit or mark it.** Read it; carry a piece on when they ask |
-| `01 Inbox/` | scans (`Scanner Inbox/`) and anything not yet sorted |
-| `02 Planner/` | tasks synced from their task apps by the Planner plugin; not yours to edit |
-| `04 Inner World/` | **what went through the person**: `Journal/`, `Notes/`, `Contacts/`, `My Life/` |
-| `05 Assets/` | files only (`Images/`, `Audio/`, `Documents/`), embedded from notes |
-| `06 Outer World/` | **what others made**: one `source` note per book, article, video, podcast, post or paper, with highlights |
-| `07 Databases/` | `Objects.base` (every object, a view per type), and data too large or row-shaped for notes |
-| `_System/` | the schema, templates, skills and tools. Read it; change it only when asked |
+The numbered folders follow the ICOR stages (`stages` in `_System/schema.json`): what comes in, what is kept and
+connected, what goes out. Refine has no folder: it happens in the plugins (AI Chat, Connect, Focus) and in the weekly
+review, and you do it from outside the folder.
 
-**My Life** (`04 Inner World/My Life/`) is the map of the person's life: **Key Elements** (the big areas, like
+| Stage | Folder | What lives there |
+| --- | --- | --- |
+| Input | `00 Daily Notes/YYYY/MM/` | the person's raw writing: one note a day and quick scratch notes. **Never edit or mark it.** Read it; carry a piece on when they ask |
+| Input | `01 Inbox/` | scans (`Scanner Inbox/`) and anything not yet sorted |
+| Control | `02 Inner World/` | **what went through the person**: `Journal/`, `Notes/`, `Contacts/`, `My Life/` |
+| Control | `03 Outer World/` | **what others made**: one `source` note per book, article, video, podcast, post or paper, with highlights |
+| Control | `04 Assets/` | files only (`Images/`, `Audio/`, `Documents/`), embedded from notes |
+| Control | `05 Databases/` | `Objects.base` (every object, a view per type), and data too large or row-shaped for notes |
+| Output | `06 Planner/` | tasks synced from their task apps by the Planner plugin; not yours to edit |
+| | `_System/` | the schema, templates, skills and tools. Read it; change it only when asked |
+
+**My Life** (`02 Inner World/My Life/`) is the map of the person's life: **Key Elements** (the big areas, like
 Health or Family), **Goals** (outcomes in a Key Element), **Projects** (work that serves a goal), **Topics**
 (subjects they follow) and **Habits**. Almost everything you file links to something on this map.
 
 ## What goes where
 
 - **The person wrote it, and it has a date as its identity** (what happened, what they thought): a journal entry,
-  `04 Inner World/Journal/YYYY/MM/YYYY-MM-DD_<slug>.md`, one of four types: interaction, note, thought, milestone.
+  `02 Inner World/Journal/YYYY/MM/YYYY-MM-DD_<slug>.md`, one of four types: interaction, note, thought, milestone.
 - **The person's knowledge with a subject that keeps changing** (an idea, an outline, meeting notes, a draft): a note
-  in `04 Inner World/Notes/`, linked to its project, Key Element or topic.
-- **Someone else made it** (a book, an article, a video, a podcast, a post): a `source` in `06 Outer World/`, linked to
+  in `02 Inner World/Notes/`, linked to its project, Key Element or topic.
+- **Someone else made it** (a book, an article, a video, a podcast, a post): a `source` in `03 Outer World/`, linked to
   what it serves. The person's own thought about it is a journal entry or note that links to the source.
 - **A fact about a person or company**: a property on their note in `Contacts/`. The conversation itself is a
   journal entry of type `interaction` that links to them.
-- **A file you keep**: the file in `05 Assets/Documents/`, a `document` note in `Notes/` pointing at it.
+- **A file you keep**: the file in `04 Assets/Documents/`, a `document` note in `Notes/` pointing at it.
 - **A goal, project, topic, habit or area of life**: one note in `My Life/`, short; the material links to it.
 
 ## Where files go
 
-**Never write in the top folder.** It holds only `README.md`, `AGENTS.md`, `LICENSE.md` and the rooms. Every file has
-a room; if you are unsure, `01 Inbox/` is the room for "not sorted yet".
+**Never write in the top folder.** It holds only `README.md`, `AGENTS.md`, `LICENSE.md` and the numbered folders. Every
+file has its folder; if you are unsure, `01 Inbox/` is the folder for "not sorted yet".
 
 | A file that is | Goes in |
 | --- | --- |
-| a picture, a screenshot, a photo or a video | `05 Assets/Images/` |
-| a recording, a voice memo, a sound | `05 Assets/Audio/` |
-| a PDF, an office file, an e-book, a spreadsheet you keep | `05 Assets/Documents/` (and a `document` note in `04 Inner World/Notes/`) |
+| a picture, a screenshot, a photo or a video | `04 Assets/Images/` |
+| a recording, a voice memo, a sound | `04 Assets/Audio/` |
+| a PDF, an office file, an e-book, a spreadsheet you keep | `04 Assets/Documents/` (and a `document` note in `02 Inner World/Notes/`) |
 | a scan still to be filed | `01 Inbox/Scanner Inbox/` |
 | a note | the folder of its type in `_System/schema.json` (made with `new-entity.py`); unsorted: `01 Inbox/` |
 
-Never make a new folder next to the rooms. In Obsidian the Objects plugin moves anything that lands in the top folder
-to its room; in Claude Code a hook (`_System/Tools/guard-paths.py`) refuses the write and says where it belongs; the
+Never make a new folder next to the numbered folders. In Obsidian the Objects plugin moves anything that lands in the
+top folder to its place; in Claude Code a hook (`_System/Tools/guard-paths.py`) refuses the write and says where it belongs; the
 tools in `_System/Tools/` refuse a top-level path too.
 
 ## Skills
@@ -107,6 +111,6 @@ Connections panel. You and the plugin follow one definition.
 
 - `.obsidian/`: the person's Obsidian settings, plugins and theme.
 - `.icor-for-life/`: this computer's machine files and `.env` (API keys). Never read `.env` out loud or copy it.
-- `02 Planner/`: the Planner plugin's notes.
-- `00 Daily Scratchpad/`: read it, never write in it.
+- `06 Planner/`: the Planner plugin's notes.
+- `00 Daily Notes/`: read it, never write in it.
 - The top folder: nothing new goes there (see "Where files go").

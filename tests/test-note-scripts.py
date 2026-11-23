@@ -87,8 +87,8 @@ def findings_for(vault, rel):
 def set_property_cases(tmp):
     print("set-property.py")
     v = fresh(tmp, "sp")
-    note = write(v, "04 Inner World/My Life/Habits/Walk.md", "---\ntype: habit\n---\n\nBody\n")
-    link = "[[02 Planner/Habits/Morning walk]]"
+    note = write(v, "02 Inner World/My Life/Habits/Walk.md", "---\ntype: habit\n---\n\nBody\n")
+    link = "[[06 Planner/Habits/Morning walk]]"
     r = run(v, "set-property.py", note, "planner_habit", link, "--root", v)
     check("a wikilink value lands double-quoted",
           frontmatter_line(note, "planner_habit") == 'planner_habit: "%s"' % link,
@@ -106,25 +106,25 @@ def set_property_cases(tmp):
     r = run(v, "set-property.py", note, "planner_habit", link, "--root", v)
     check("the same value again is already there", "already" in r.stdout, r.stdout)
 
-    note = write(v, "04 Inner World/My Life/Habits/Old.md",
+    note = write(v, "02 Inner World/My Life/Habits/Old.md",
                  "---\ntype: habit\nplanner_habit: %s\n---\n" % link)
     run(v, "set-property.py", note, "planner_habit", link, "--root", v)
     check("a bare link an older version wrote is repaired",
           frontmatter_line(note, "planner_habit") == 'planner_habit: "%s"' % link,
           repr(frontmatter_line(note, "planner_habit")))
 
-    note = write(v, "04 Inner World/My Life/Habits/Embed.md", "---\ntype: habit\n---\n")
+    note = write(v, "02 Inner World/My Life/Habits/Embed.md", "---\ntype: habit\n---\n")
     run(v, "set-property.py", note, "planner_habit", "![[x.png]]", "--root", v)
     check("an embed is quoted too",
           frontmatter_line(note, "planner_habit") == 'planner_habit: "![[x.png]]"')
 
-    note = write(v, "04 Inner World/My Life/Habits/Crlf.md", "---\r\ntype: habit\r\n---\r\nBody\r\n")
+    note = write(v, "02 Inner World/My Life/Habits/Crlf.md", "---\r\ntype: habit\r\n---\r\nBody\r\n")
     run(v, "set-property.py", note, "planner_habit", link, "--root", v)
     check("a CRLF note keeps its line endings",
           note.read_bytes() == ('---\r\ntype: habit\r\nplanner_habit: "%s"\r\n---\r\nBody\r\n'
                                 % link).encode("utf-8"), repr(note.read_bytes()))
 
-    note = write(v, "04 Inner World/My Life/Habits/Plain.md", "---\ntype: habit\n---\n")
+    note = write(v, "02 Inner World/My Life/Habits/Plain.md", "---\ntype: habit\n---\n")
     for value in ("active", "see [[A]] and more", "[[A]] and more", "[a, b]", '"already quoted"'):
         run(v, "set-property.py", note, "name", value, "--root", v)
         check("a non-wikilink value is written byte for byte: %s" % value,
@@ -135,10 +135,10 @@ def set_property_cases(tmp):
 def new_entity_cases(tmp):
     print("new-entity.py")
     v = fresh(tmp, "ne")
-    write(v, "05 Assets/Documents/Example Invoice.pdf", "pdf")
+    write(v, "04 Assets/Documents/Example Invoice.pdf", "pdf")
     r = run(v, "new-entity.py", "document", "Test contract", "--set", "doc_type=contract",
             "--set", "source_file=[[Example Invoice.pdf]]", "--link", "[[Health]]", "--root", v)
-    note = v / "04 Inner World/Notes/Test contract.md"
+    note = v / "02 Inner World/Notes/Test contract.md"
     check("--set with a wikilink lands double-quoted", note.is_file() and
           frontmatter_line(note, "source_file") == 'source_file: "[[Example Invoice.pdf]]"',
           r.stdout + r.stderr)
@@ -156,7 +156,7 @@ def new_entity_cases(tmp):
     import json
     sp = v / "_System/schema.json"
     schema = json.loads(sp.read_text(encoding="utf-8"))
-    schema["types"]["tool"] = {"label": "Tool", "description": "Tool, a type you added.", "folder": "06 Outer World/Tools",
+    schema["types"]["tool"] = {"label": "Tool", "description": "Tool, a type you added.", "folder": "03 Outer World/Tools",
                                "template": "tool.md", "icon": "wrench", "owner": "you", "required": [],
                                "fields": ["created", "tags", "website", "projects", "key_elements", "topics"], "values": {},
                                "links": {"projects": {"to": "project", "many": True}, "key_elements": {"to": "key-element", "many": True},
@@ -164,27 +164,27 @@ def new_entity_cases(tmp):
     sp.write_text(json.dumps(schema, indent=2), encoding="utf-8")
     write(v, "_System/Templates/tool.md", "---\ntype: tool\nwebsite: \ncreated: {{date}}\nprojects: []\nkey_elements: []\ntopics: []\ntags: []\n---\n\n# {{title}}\n")
     r = run(v, "new-entity.py", "tool", "Obsidian", "--set", "website=https://obsidian.md", "--link", "[[Health]]", "--root", v)
-    tool = v / "06 Outer World/Tools/Obsidian.md"
+    tool = v / "03 Outer World/Tools/Obsidian.md"
     check("an added type: new-entity.py files it in its folder, made on first use", tool.is_file(), r.stdout + r.stderr)
     check("an added type: its link field and its own field are filled",
           tool.is_file() and '[[Health]]' in frontmatter_line(tool, "key_elements") and frontmatter_line(tool, "website") == "website: https://obsidian.md")
     r = run(v, "new-entity.py", "tool", "Other", "--set", "colour=red", "--root", v)
     check("an added type: a field it does not have is refused", r.returncode != 0 and "not a field" in r.stdout + r.stderr, r.stdout + r.stderr)
     r = run(v, "new-entity.py", "--list", "--root", v)
-    check("an added type: --list shows it", "06 Outer World/Tools" in r.stdout, r.stdout)
+    check("an added type: --list shows it", "03 Outer World/Tools" in r.stdout, r.stdout)
 
     # a kind of another type: a restaurant is a kind of company, so a person's companies can hold one
     schema = json.loads(sp.read_text(encoding="utf-8"))
-    schema["types"]["restaurant"] = {"label": "Restaurant", "description": "x", "folder": "04 Inner World/Contacts/Companies/Restaurants",
+    schema["types"]["restaurant"] = {"label": "Restaurant", "description": "x", "folder": "02 Inner World/Contacts/Companies/Restaurants",
                                      "template": "restaurant.md", "icon": "utensils", "owner": "you", "required": [], "extends": "company",
                                      "fields": ["created", "tags", "name", "industry", "website", "people", "rating"], "values": {},
                                      "links": {"people": {"to": "person", "many": True}}}
     sp.write_text(json.dumps(schema, indent=2), encoding="utf-8")
     write(v, "_System/Templates/restaurant.md", "---\ntype: restaurant\nname: {{title}}\nrating: \ncreated: {{date}}\npeople: []\ntags: []\n---\n\n# {{title}}\n")
     r = run(v, "new-entity.py", "restaurant", "Luv", "--set", "rating=5", "--root", v)
-    check("a kind of company: new-entity.py files it in its own folder", (v / "04 Inner World/Contacts/Companies/Restaurants/Luv.md").is_file(), r.stdout + r.stderr)
+    check("a kind of company: new-entity.py files it in its own folder", (v / "02 Inner World/Contacts/Companies/Restaurants/Luv.md").is_file(), r.stdout + r.stderr)
     r = run(v, "new-entity.py", "person", "Guest Cook", "--link", "[[Luv]]", "--root", v)
-    guest = v / "04 Inner World/Contacts/People/Guest Cook.md"
+    guest = v / "02 Inner World/Contacts/People/Guest Cook.md"
     check("a kind of company: a person's companies can hold a restaurant", guest.is_file() and "[[Luv]]" in frontmatter_line(guest, "companies"), r.stdout + r.stderr)
 
 
@@ -193,7 +193,7 @@ def journal_cases(tmp):
     v = fresh(tmp, "nj")
     r = run(v, "new-journal-entry.py", "--date", "2024-03-05", "--slug", "old-entry",
             "--journal-type", "thought", "--original", "words", "--root", v)
-    note = v / "04 Inner World/Journal/2024/03/2024-03-05_old-entry.md"
+    note = v / "02 Inner World/Journal/2024/03/2024-03-05_old-entry.md"
     check("--date drives created", note.is_file() and
           frontmatter_line(note, "created") == "created: 2024-03-05", r.stdout + r.stderr)
     check("--date still drives date",
@@ -208,7 +208,7 @@ def stamp_name_cases(tmp):
     a FAIL line and the note is left byte for byte as it was."""
     print("stamp-processed.py refuses a scratchpad")
     v = fresh(tmp, "sn")
-    room = "00 Daily Scratchpad/2026/11/"
+    room = "00 Daily Notes/2026/11/"
     for name in ("202611021215.md", "202611021215 - a title.md", "2026-11-02.md", "my notes.md"):
         note = write(v, room + name, "typed\n")
         r = run(v, "stamp-processed.py", note, "--summary", "s", "--into", "[[Health]]")
@@ -222,9 +222,9 @@ def capture_fixture(v, name, folder="Scanner Inbox"):
     cap = v / "01 Inbox" / folder / name
     cap.parent.mkdir(parents=True, exist_ok=True)
     cap.write_bytes(data)
-    (v / "05 Assets/Documents").mkdir(parents=True, exist_ok=True)
-    (v / "05 Assets/Documents" / name).write_bytes(data)
-    note = write(v, "04 Inner World/Notes/%s wrapper.md" % name,
+    (v / "04 Assets/Documents").mkdir(parents=True, exist_ok=True)
+    (v / "04 Assets/Documents" / name).write_bytes(data)
+    note = write(v, "02 Inner World/Notes/%s wrapper.md" % name,
                  '---\ntype: document\ndoc_type: other\nsource_file: "[[%s]]"\n---\n' % name)
     return note, cap
 
@@ -286,9 +286,9 @@ def quality_cases(tmp):
     head = ('---\ntype: pdf-highlight\nhighlight_id: h1\nsource_file: "[[paper.pdf]]"\npage: 1\n'
             "anchor: rect\nrects: %s\ncolor: yellow\ncreated: 2026-11-02\n"
             'canvases: []\nlinked_notes: []\ncssclasses: [icor-pdf-highlight]\n---\n\n%s\n')
-    write(v, "05 Assets/Documents/paper.pdf", "pdf")
-    one = "04 Inner World/Notes/Highlights/one.md"
-    many = "04 Inner World/Notes/Highlights/many.md"
+    write(v, "04 Assets/Documents/paper.pdf", "pdf")
+    one = "02 Inner World/Notes/Highlights/one.md"
+    many = "02 Inner World/Notes/Highlights/many.md"
     write(v, one, head % ("[[72.5, 400, 300, 520]]", "> a quote"))
     write(v, many, head % ("[[72.5, 400, 300, 520], [72.5, 380, 300, 396]]", "See [[Missing note]]."))
     dangling = lambda rel: [f for f in findings_for(v, rel) if f.get("metric") == "dangling_links"]
@@ -297,7 +297,7 @@ def quality_cases(tmp):
     check("a real dangling link beside two rects is still reported",
           len(got) == 1 and "Missing note" in got[0]["message"], str(got))
 
-    q = "04 Inner World/Notes/quoted.md"
+    q = "02 Inner World/Notes/quoted.md"
     write(v, q, '---\ntype: note\nnote_type: other\ntopics: ["[[Gone topic]]"]\n---\n\ntext\n')
     check("a quoted frontmatter link to nothing is still reported",
           [f for f in dangling(q) if "Gone topic" in f["message"]], str(dangling(q)))
@@ -323,22 +323,22 @@ def quality_cases(tmp):
 
     # Any note nothing links to yet is an orphan, whatever made it, so the
     # vault links to these two the way a member would.
-    write(v, "04 Inner World/My Life/Key Elements/Ideas.md",
+    write(v, "02 Inner World/My Life/Key Elements/Ideas.md",
           "---\ntype: key-element\n---\n\n[[My idea]], [[Inline]]\n")
-    idea = "04 Inner World/Notes/My idea.md"
+    idea = "02 Inner World/Notes/My idea.md"
     (v / idea).write_bytes((v / "_System/Templates/idea.md").read_bytes())
     check("a note made from the idea template has no findings",
           not findings_for(v, idea), str(findings_for(v, idea)))
     check("the idea template's idea_status is a clean enum",
           CQ.parse_front(CQ.split_front((v / idea).read_text(encoding="utf-8"))[0])
           .get("idea_status") == "open")
-    note = "04 Inner World/Notes/Inline.md"
+    note = "02 Inner World/Notes/Inline.md"
     write(v, note, '---\ntype: note\nnote_type: idea\nidea_status: open   # open | parked\n'
                    'key_elements:                # the link rule\n  - "[[Health]]"\n---\n')
     check("an inline comment is no enum violation and hides no list",
           not findings_for(v, note), str(findings_for(v, note)))
 
-    chat = "00 Daily Scratchpad/2026/11/202611021215.md"
+    chat = "00 Daily Notes/2026/11/202611021215.md"
     write(v, chat, '---\ntype: scratchpad\ndate: 2026-11-02\nsource: icor-chat\n'
                    'session_ids: ["abc"]\nprocessed: true\nprocessed_summary: "s"\n'
                    'processed_into:\n  - "[[Health]]"\n---\n\nreply\n')
@@ -357,14 +357,14 @@ def scratchpad_queue_cases(tmp):
     backlog: check-quality has no unprocessed-scratchpad queue any more, and no finding on a scratchpad for it."""
     print("check-quality.py, the scratchpad is no queue")
     v = fresh(tmp, "sq")
-    for rel in ("00 Daily Scratchpad/2026/01/2026-01-05.md", "00 Daily Scratchpad/2026/01/202601051230.md"):
+    for rel in ("00 Daily Notes/2026/01/2026-01-05.md", "00 Daily Notes/2026/01/202601051230.md"):
         write(v, rel, "a thought I may carry somewhere, or leave here\n")
     rep = all_findings(v)
     metrics = rep.get("metrics", rep) if isinstance(rep, dict) else {}
     names = json.dumps(rep)
     check("no unprocessed-scratchpad metric in the report", "unprocessed_scratchpad" not in names, names[:400])
     check("a written scratchpad has no finding about processing",
-          not [f for f in rep.get("findings", []) if "Daily Scratchpad" in f.get("file", f.get("path", ""))
+          not [f for f in rep.get("findings", []) if "Daily Notes" in f.get("file", f.get("path", ""))
                and "process" in f.get("message", "").lower()], str(rep.get("findings", [])[:3]))
 
 
@@ -375,7 +375,7 @@ def all_findings(vault):
 
 def reading_queue_cases(tmp):
     """Member report on 2.2.1, item 3: a reference with no `consumed` field was counted as unread and left out of
-    the Reading queue. Since 3.0 the queue is unread sources in 06 Outer World; the rule is the same."""
+    the Reading queue. Since 3.0 the queue is unread sources in 03 Outer World; the rule is the same."""
     print("Reading queue vs unread sources")
     v = fresh(tmp, "rq")
     NB = load("nb_rq", v / SCRIPTS / "new-base.py")
@@ -384,10 +384,10 @@ def reading_queue_cases(tmp):
     check("new-base's Reading queue keeps a source unless consumed is true",
           "note.consumed != true" in queue and not any("== false" in f for f in queue),
           str(queue))
-    base = (v / "06 Outer World/Sources.base").read_text(encoding="utf-8")
+    base = (v / "03 Outer World/Sources.base").read_text(encoding="utf-8")
     check("the shipped Sources.base says the same", "- note.consumed != true\n" in base
           and "note.consumed == false" not in base)
-    ref = "06 Outer World/Test Source.md"
+    ref = "03 Outer World/Test Source.md"
     write(v, ref, '---\ntype: source\nsource_type: article\n'
                   'topics: ["[[Knowledge Management]]"]\n---\n\nbody\n')
     unread = lambda rel: [f for f in findings_for(v, rel)
@@ -396,7 +396,7 @@ def reading_queue_cases(tmp):
           str(findings_for(v, ref)))
     for value, want_unread in (("true", False), ("True", False), ("false", True),
                                ("yes", True), ("1", True)):
-        rel = "06 Outer World/Source %s.md" % value
+        rel = "03 Outer World/Source %s.md" % value
         write(v, rel, '---\ntype: source\nsource_type: article\nconsumed: %s\n'
                       'topics: ["[[Knowledge Management]]"]\n---\n' % value)
         check("consumed: %s is %s, as the queue's `!= true` reads it"
@@ -410,18 +410,18 @@ def subfolder_cases(tmp):
     of an entity folder only."""
     print("subfolders of an entity folder")
     v = fresh(tmp, "sub")
-    lonely = "04 Inner World/Notes/Sub/Lonely.md"
+    lonely = "02 Inner World/Notes/Sub/Lonely.md"
     write(v, lonely, '---\ntype: note\nnote_type: idea\n'
                      'topics: ["[[Knowledge Management]]"]\n---\n\nNobody links here.\n')
-    alex = "04 Inner World/Contacts/People/Sub/Alex.md"
+    alex = "02 Inner World/Contacts/People/Sub/Alex.md"
     write(v, alex, "---\ntype: person\nname: Alex Rivera\n---\n")
-    hl = "04 Inner World/Notes/Highlights/h1.md"
-    write(v, "05 Assets/Documents/paper.pdf", "pdf")
+    hl = "02 Inner World/Notes/Highlights/h1.md"
+    write(v, "04 Assets/Documents/paper.pdf", "pdf")
     write(v, hl, '---\ntype: pdf-highlight\nhighlight_id: h1\nsource_file: "[[paper.pdf]]"\n'
                  "page: 1\nanchor: rect\nrects: [[1, 2, 3, 4]]\ncolor: yellow\n"
                  "created: 2026-11-02\ncanvases: []\nlinked_notes: []\n"
                  "cssclasses: [icor-pdf-highlight]\n---\n")
-    arch = "04 Inner World/Notes/archive/Old.md"
+    arch = "02 Inner World/Notes/archive/Old.md"
     write(v, arch, '---\ntype: note\nnote_type: idea\ntopics: ["[[Health]]"]\n---\n')
     rep = all_findings(v)
     orphans = {f["path"] for f in rep["findings"] if f["metric"] == "orphans"}
@@ -435,8 +435,8 @@ def subfolder_cases(tmp):
           str(sorted(orphans)))
 
     w = fresh(tmp, "vs")
-    write(w, "04 Inner World/My Life/Projects/Sub/No Goal.md", "---\ntype: project\n---\n")
-    write(w, "04 Inner World/My Life/Goals/Sub/Bad Status.md",
+    write(w, "02 Inner World/My Life/Projects/Sub/No Goal.md", "---\ntype: project\n---\n")
+    write(w, "02 Inner World/My Life/Goals/Sub/Bad Status.md",
           "---\ntype: goal\nstatus: maybe\n---\n")
     # validate-scaffold.py is retired (3.0); the schema's rules are checked by check-quality.py
     rep_w = all_findings(w)

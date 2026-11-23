@@ -74,8 +74,8 @@ def refuse_top_level(path) -> None:
     one check covers new-entity, new-base, new-journal-entry and the rest."""
     p = Path(path).resolve()
     if (p.parent / "_System" / "schema.json").is_file() and not p.name.startswith(".") and p.name.lower() not in TOP_KEEP:
-        raise SystemExit("FAIL %s would land in the top folder, which holds only README.md, AGENTS.md and the rooms. "
-                         "Give a path inside a room (a typed note: its type's folder; unsorted: 01 Inbox/). "
+        raise SystemExit("FAIL %s would land in the top folder, which holds only README.md, AGENTS.md and the numbered folders. "
+                         "Give a path inside a folder (a typed note: its type's folder; unsorted: 01 Inbox/). "
                          "AGENTS.md, \"Where files go\", has the rule." % p.name)
 
 

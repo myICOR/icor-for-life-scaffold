@@ -43,8 +43,42 @@ for t, v in types.items():
         if tp.is_file():
             m = re.search(r"^type:\s*(\S+)", tp.read_text(encoding="utf-8"), re.M)
             check(f"template {v['template']} says type: {t}", bool(m) and m.group(1) == t, m.group(1) if m else None)
-for room in schema["rooms"]:
-    check(f"room exists: {room}", (ROOT / room).is_dir())
+for folder in schema["folders"]:
+    check(f"folder exists: {folder}", (ROOT / folder).is_dir())
+
+# --- the ICOR stages (Tom, 2026-11-23): flat folders, numbered in stage order, each in exactly one stage ------------
+NEW = ["00 Daily Notes", "01 Inbox", "02 Inner World", "03 Outer World", "04 Assets", "05 Databases", "06 Planner"]
+check("schema: the folders are the seven, in stage order", list(schema.get("folders", {})) == NEW, list(schema.get("folders", {})))
+check("schema: no rooms key any more", "rooms" not in schema)
+stages = schema.get("stages", {})
+check("schema: four stages, Input Control Output Refine", list(stages) == ["input", "control", "output", "refine"], list(stages))
+want = {"input": ("#5271FC", NEW[:2]), "control": ("#52F49A", NEW[2:6]), "output": ("#FD63FF", NEW[6:])}
+for st, (colour, folders) in want.items():
+    check(f"stage {st}: colour {colour}", stages.get(st, {}).get("color") == colour, stages.get(st))
+    check(f"stage {st}: its folders", stages.get(st, {}).get("folders") == folders, stages.get(st))
+check("stage refine has no folder", stages.get("refine", {}).get("folders") == [], stages.get("refine"))
+check("schema: worlds are 02 and 03", schema.get("worlds") == {"inner": "02 Inner World", "outer": "03 Outer World"}, schema.get("worlds"))
+dn = json.loads((ROOT / ".obsidian/daily-notes.json").read_text())
+check("Daily notes opens 00 Daily Notes", dn.get("folder") == "00 Daily Notes", dn)
+app = json.loads((ROOT / ".obsidian/app.json").read_text())
+check("attachments go to 04 Assets/Images", app.get("attachmentFolderPath") == "04 Assets/Images", app)
+OLD = re.compile(r"00 Daily Scratchpad|02 Planner|04 Inner World|05 Assets|06 Outer World|07 Databases")
+tracked = subprocess.check_output(["git", "-C", str(ROOT), "ls-files"], text=True).splitlines()
+stale = []
+for f in tracked:
+    p = ROOT / f
+    if f in (".icor-for-life/CHANGELOG.md", "tests/test-vault.py") or "migrate-to-3" in f or not p.is_file():
+        continue
+    try:
+        if OLD.search(p.read_text(encoding="utf-8")) or OLD.search(f):
+            stale.append(f)
+    except UnicodeDecodeError:
+        pass
+check("no old folder name anywhere (migrate-to-3 and the changelog excepted)", not stale, stale[:8])
+WORD = re.compile(r"\brooms?\b", re.I)
+said = [f for f in tracked if f.endswith(".md") and f != ".icor-for-life/CHANGELOG.md" and (ROOT / f).is_file()
+        and WORD.search((ROOT / f).read_text(encoding="utf-8"))]
+check("no member- or AI-facing page says room", not said, said)
 
 # --- the skills ------------------------------------------------------------------------------------------------------
 skills = sorted(p for p in (ROOT / "_System/Skills").iterdir() if p.is_dir())
@@ -99,7 +133,7 @@ for f in shipped:
 check('no shipped note says "scaffold", "local folder" or "full stack"', not said, said)
 names = {Path(f).stem for f in tracked} | {Path(f).name for f in tracked}
 broken = []
-rooms = tuple(schema["rooms"])
+rooms = tuple(schema["folders"])
 for f in shipped:
     if not f.endswith(".md") or not f.startswith(rooms):
         continue
@@ -108,7 +142,7 @@ for f in shipped:
         if target and target not in names and not target.startswith("<"):
             broken.append(f"{f} -> {link}")
 check("every link in the notes goes to a note or file that exists", not broken, broken[:10])
-untagged = [f for f in shipped if f.endswith(".md") and f.startswith(("04 Inner World/", "06 Outer World/"))
+untagged = [f for f in shipped if f.endswith(".md") and f.startswith(("02 Inner World/", "03 Outer World/"))
             and not f.endswith("README.md") and "example" not in (ROOT / f).read_text(encoding="utf-8")]
 check("every example note is tagged example, so a member knows what to delete", not untagged, untagged)
 

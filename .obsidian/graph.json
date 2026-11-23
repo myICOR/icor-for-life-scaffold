@@ -85,7 +85,7 @@
       }
     },
     {
-      "query": "path:\"00 Daily Scratchpad\"",
+      "query": "path:\"00 Daily Notes\"",
       "color": {
         "a": 1,
         "rgb": 8028042

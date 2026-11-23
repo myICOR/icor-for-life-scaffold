@@ -39,9 +39,9 @@ def build(root: Path):
     per rule."""
     (root / ".obsidian").mkdir(parents=True)
     (root / ".obsidian" / "daily-notes.json").write_text(json.dumps(
-        {"folder": "00 Daily Scratchpad", "format": "YYYY/MM/YYYY-MM-DD"}),
+        {"folder": "00 Daily Notes", "format": "YYYY/MM/YYYY-MM-DD"}),
         encoding="utf-8")
-    for d in ("00 Daily Scratchpad", "04 Inner World/Notes",
+    for d in ("00 Daily Notes", "02 Inner World/Notes",
               "06 AI Team/AI Team Knowledge/Session Logs",
               "06 AI Team/AI Team Knowledge/Templates",
               "06 AI Team/Agents/Silas/journal"):
@@ -50,15 +50,15 @@ def build(root: Path):
     # 3.0: a 2.x 03 WiP left in a migrated folder is nobody's room any more; its dates are not linked
     write(root, "03 WiP/Projects/draft.md", "Drafted on 2026-09-13.\n")
 
-    write(root, "04 Inner World/Notes/bare.md",
+    write(root, "02 Inner World/Notes/bare.md",
           "---\ncreated: 2026-01-05\ndue: 2026-01-06\n---\n"
           "We met on 2026-09-11 and again on 2026-09-12.\n")
 
-    write(root, "04 Inner World/Notes/code.md",
+    write(root, "02 Inner World/Notes/code.md",
           "Prose has none here.\n\n```python\nd = '2026-03-04'\n```\n"
           "And inline `2026-03-05` stays code.\n")
 
-    write(root, "04 Inner World/Notes/tokens.md",
+    write(root, "02 Inner World/Notes/tokens.md",
           "See [[2026-09-11-jeff-meyers-stood-up]] and "
           "[[2026-09-11]] already linked.\n"
           "Stamp 2026-09-11T14:12 and id tsk-2026-09-09-020 and "
@@ -67,12 +67,12 @@ def build(root: Path):
           "A link https://example.com/blog/2026-09-11/post stays bare.\n"
           "A markdown [2026-09-11](./x.md) stays bare.\n")
 
-    write(root, "04 Inner World/Notes/invalid.md",
+    write(root, "02 Inner World/Notes/invalid.md",
           "Not a date: 2026-13-45 and 2026-02-30 are both impossible.\n")
 
-    write(root, "04 Inner World/Notes/collides.md",
+    write(root, "02 Inner World/Notes/collides.md",
           "The meeting on 2026-07-04 is the one.\n")
-    write(root, "04 Inner World/Notes/2026-07-04.md", "A note that stole the name.\n")
+    write(root, "02 Inner World/Notes/2026-07-04.md", "A note that stole the name.\n")
 
     # Out of scope: ALL of 06 AI Team/. The daily note is a timeline of the
     # user's life, not of the team's housekeeping, so none of these three
@@ -94,15 +94,15 @@ def build(root: Path):
     # Protected text inside a room that IS in scope. The Original Text
     # section of a journal entry and every blockquote stay as written; the
     # Expansion after it, and prose around a quote, still get their links.
-    write(root, "04 Inner World/Journal/2026/08/2026-08-27_entry.md",
+    write(root, "02 Inner World/Journal/2026/08/2026-08-27_entry.md",
           "---\ntype: journal\n---\n\n## Original Text\n\n"
           "Call the bank on 2026-12-01.\n\n"
           "### A sub-heading the user typed\n\nStill mine: 2026-12-02.\n\n"
           "## Expansion\n\nThe call is on 2026-12-03.\n")
-    write(root, "04 Inner World/Journal/2026/08/2026-08-28_tail.md",
+    write(root, "02 Inner World/Journal/2026/08/2026-08-28_tail.md",
           "## Expansion\n\nLinked: 2026-12-04.\n\n"
           "## original text\n\nTo the end of the note: 2026-12-05.\n")
-    write(root, "04 Inner World/Notes/quote.md",
+    write(root, "02 Inner World/Notes/quote.md",
           "Before the quote, 2026-12-06.\n\n"
           "> Released 2026-12-07.\n"
           "lazy continuation of the quote, 2026-12-08.\n"
@@ -112,20 +112,20 @@ def build(root: Path):
 
     # A date already written as a link whose daily note is missing: no
     # rewrite to do, but the note behind it still has to be created.
-    write(root, "04 Inner World/Notes/prelinked.md",
+    write(root, "02 Inner World/Notes/prelinked.md",
           "Booked for [[2026-10-20]] and [[2026-10-21|that Tuesday]].\n")
 
     # Line endings are the member's, not the script's. A CRLF note and a
     # note with a stray lone CR in the body must come back out of --fix with
     # every byte except the two pairs of brackets untouched.
-    write(root, "04 Inner World/Notes/crlf.md",
+    write(root, "02 Inner World/Notes/crlf.md",
           "---\r\ntype: note\r\n---\r\nSigned on 2026-06-01 in Madrid.\r\n"
           "A second line.\r\n")
-    write(root, "04 Inner World/Notes/stray-cr.md",
+    write(root, "02 Inner World/Notes/stray-cr.md",
           "Filed on 2026-06-02.\nA line with a \r stray carriage return.\n")
 
     # The daily note that already exists; the others must be created.
-    write(root, "00 Daily Scratchpad/2026/09/2026-09-11.md", "")
+    write(root, "00 Daily Notes/2026/09/2026-09-11.md", "")
 
 
 def write(root, rel, text):
@@ -164,8 +164,8 @@ with tempfile.TemporaryDirectory() as td:
     check("check exits 1 when mentions exist", r.returncode == 1,
           f"exit {r.returncode}")
     check("bare date in body is flagged",
-          ("04 Inner World/Notes/bare.md", "2026-09-11") in found
-          and ("04 Inner World/Notes/bare.md", "2026-09-12") in found,
+          ("02 Inner World/Notes/bare.md", "2026-09-11") in found
+          and ("02 Inner World/Notes/bare.md", "2026-09-12") in found,
           str(sorted(found)))
     check("frontmatter date is ignored",
           not any(d in ("2026-01-05", "2026-01-06") for _f, d in found))
@@ -193,15 +193,15 @@ with tempfile.TemporaryDirectory() as td:
     check("the Original Text section is never touched, sub-headings included",
           not {"2026-12-01", "2026-12-02"} & found_dates, str(sorted(found_dates)))
     check("the Expansion after Original Text is still linked",
-          ("04 Inner World/Journal/2026/08/2026-08-27_entry.md", "2026-12-03") in found)
+          ("02 Inner World/Journal/2026/08/2026-08-27_entry.md", "2026-12-03") in found)
     check("an Original Text section runs to the end of the note, any case",
           "2026-12-05" not in found_dates
-          and ("04 Inner World/Journal/2026/08/2026-08-28_tail.md", "2026-12-04") in found)
+          and ("02 Inner World/Journal/2026/08/2026-08-28_tail.md", "2026-12-04") in found)
     check("blockquotes are never touched (lazy continuation and indent too)",
           not {"2026-12-07", "2026-12-08", "2026-12-09"} & found_dates,
           str(sorted(found_dates)))
     check("prose around a quote, and after a fenced heading, is still linked",
-          {("04 Inner World/Notes/quote.md", d)
+          {("02 Inner World/Notes/quote.md", d)
            for d in ("2026-12-06", "2026-12-10", "2026-12-11")} <= found)
 
     print("since filter")
@@ -221,24 +221,24 @@ with tempfile.TemporaryDirectory() as td:
 
     print("fix")
     r_fix, rep_fix = run_json(V, "--fix")
-    body = (V / "04 Inner World/Notes/bare.md").read_text(encoding="utf-8")
+    body = (V / "02 Inner World/Notes/bare.md").read_text(encoding="utf-8")
     check("fix wrote the links",
           "[[2026-09-11]]" in body and "[[2026-09-12]]" in body, body)
     check("fix left frontmatter bare",
           "created: 2026-01-05\n" in body and "[[2026-01-05]]" not in body)
     check("fix created the missing daily note with its folders",
-          (V / "00 Daily Scratchpad/2026/09/2026-09-12.md").is_file()
-          and (V / "00 Daily Scratchpad/2026/12/2026-12-03.md").is_file())
+          (V / "00 Daily Notes/2026/09/2026-09-12.md").is_file()
+          and (V / "00 Daily Notes/2026/12/2026-12-03.md").is_file())
     check("fix did not touch the agent journal",
           (V / "06 AI Team/Agents/Silas/journal/entry.md")
           .read_text(encoding="utf-8") == "Shipped on 2026-08-01.\n")
     check("created daily notes are empty",
-          (V / "00 Daily Scratchpad/2026/09/2026-09-12.md").read_text() == "")
+          (V / "00 Daily Notes/2026/09/2026-09-12.md").read_text() == "")
     check("an already-linked date still gets its daily note",
-          (V / "00 Daily Scratchpad/2026/10/2026-10-20.md").is_file()
-          and (V / "00 Daily Scratchpad/2026/10/2026-10-21.md").is_file())
+          (V / "00 Daily Notes/2026/10/2026-10-20.md").is_file()
+          and (V / "00 Daily Notes/2026/10/2026-10-21.md").is_file())
     check("an already-linked file is not rewritten",
-          (V / "04 Inner World/Notes/prelinked.md").read_text(encoding="utf-8")
+          (V / "02 Inner World/Notes/prelinked.md").read_text(encoding="utf-8")
           == "Booked for [[2026-10-20]] and [[2026-10-21|that Tuesday]].\n")
     check("fix did not touch the out-of-scope session log",
           (V / "06 AI Team/AI Team Knowledge/Session Logs/2026/09/log.md")
@@ -249,49 +249,49 @@ with tempfile.TemporaryDirectory() as td:
           and "[[" not in (V / "01 Inbox/Outer World/archive/"
                                 "2026-08-27-obsidian-video-clip.md")
                           .read_text(encoding="utf-8"))
-    journal = (V / "04 Inner World/Journal/2026/08/2026-08-27_entry.md"
+    journal = (V / "02 Inner World/Journal/2026/08/2026-08-27_entry.md"
                ).read_text(encoding="utf-8")
     check("fix left Original Text verbatim and linked the Expansion",
           "Call the bank on 2026-12-01.\n" in journal
           and "Still mine: 2026-12-02.\n" in journal
           and "The call is on [[2026-12-03]].\n" in journal, journal)
-    quote = (V / "04 Inner World/Notes/quote.md").read_text(encoding="utf-8")
+    quote = (V / "02 Inner World/Notes/quote.md").read_text(encoding="utf-8")
     check("fix left the blockquote verbatim",
           "> Released 2026-12-07.\nlazy continuation of the quote, 2026-12-08.\n"
           in quote and "Before the quote, [[2026-12-06]]." in quote, quote)
     check("fix did not touch the code fence",
           "[[2026-03-04]]" not in
-          (V / "04 Inner World/Notes/code.md").read_text(encoding="utf-8"))
+          (V / "02 Inner World/Notes/code.md").read_text(encoding="utf-8"))
 
     print("line endings")
-    crlf = (V / "04 Inner World/Notes/crlf.md").read_bytes()
+    crlf = (V / "02 Inner World/Notes/crlf.md").read_bytes()
     check("a CRLF note keeps every CRLF",
           crlf == b"---\r\ntype: note\r\n---\r\nSigned on [[2026-06-01]] in "
                   b"Madrid.\r\nA second line.\r\n", repr(crlf))
-    stray = (V / "04 Inner World/Notes/stray-cr.md").read_bytes()
+    stray = (V / "02 Inner World/Notes/stray-cr.md").read_bytes()
     check("a stray lone CR in the body survives",
           stray == b"Filed on [[2026-06-02]].\nA line with a \r stray "
                    b"carriage return.\n", repr(stray))
-    created = (V / "00 Daily Scratchpad/2026/06/2026-06-01.md").read_bytes()
+    created = (V / "00 Daily Notes/2026/06/2026-06-01.md").read_bytes()
     check("a created daily note carries no CR at all", b"\r" not in created,
           repr(created))
 
     print("--path scoping")
     V4 = Path(td) / "scoped"
     shutil.copytree(V, V4)
-    write(V4, "04 Inner World/Notes/one.md", "Scoped 2026-05-01.\n")
-    write(V4, "04 Inner World/Notes/two.md", "Untouched 2026-05-02.\n")
-    before_two = (V4 / "04 Inner World/Notes/two.md").read_bytes()
-    r_scope = run(V4, "--fix", "--path", "04 Inner World/Notes/one.md")
+    write(V4, "02 Inner World/Notes/one.md", "Scoped 2026-05-01.\n")
+    write(V4, "02 Inner World/Notes/two.md", "Untouched 2026-05-02.\n")
+    before_two = (V4 / "02 Inner World/Notes/two.md").read_bytes()
+    r_scope = run(V4, "--fix", "--path", "02 Inner World/Notes/one.md")
     check("--path exits 0", r_scope.returncode == 0,
           r_scope.stdout + r_scope.stderr)
     check("--path linked the file it was given",
-          b"[[2026-05-01]]" in (V4 / "04 Inner World/Notes/one.md").read_bytes())
+          b"[[2026-05-01]]" in (V4 / "02 Inner World/Notes/one.md").read_bytes())
     check("--path left every other note alone",
-          (V4 / "04 Inner World/Notes/two.md").read_bytes() == before_two)
+          (V4 / "02 Inner World/Notes/two.md").read_bytes() == before_two)
     check("--path created only its own daily note",
-          (V4 / "00 Daily Scratchpad/2026/05/2026-05-01.md").is_file()
-          and not (V4 / "00 Daily Scratchpad/2026/05/2026-05-02.md").exists())
+          (V4 / "00 Daily Notes/2026/05/2026-05-01.md").is_file()
+          and not (V4 / "00 Daily Notes/2026/05/2026-05-02.md").exists())
     r_inbox = run(V4, "--fix", "--path", "01 Inbox/Outer World/clip.md")
     check("--path on an inbox capture says it is out of scope and writes nothing",
           r_inbox.returncode == 0 and "out of the linker's scope" in r_inbox.stderr
@@ -325,7 +325,7 @@ with tempfile.TemporaryDirectory() as td:
     V3 = Path(td) / "bad-format"
     shutil.copytree(V, V3)
     (V3 / ".obsidian" / "daily-notes.json").write_text(
-        json.dumps({"folder": "00 Daily Scratchpad", "format": "DD-MM-YYYY"}),
+        json.dumps({"folder": "00 Daily Notes", "format": "DD-MM-YYYY"}),
         encoding="utf-8")
     r_bf = run(V3, "--check")
     check("a format that cannot back a [[YYYY-MM-DD]] link is refused",

@@ -14,7 +14,7 @@ Checks (all deterministic):
      a sibling vault: a tracked People/People.base and an untracked
      People.base with different columns, each plausible, neither
      canonical.) A folder MAY carry two bases when they filter on
-     different types: 04 Inner World/Notes holds Documents.base (type
+     different types: 02 Inner World/Notes holds Documents.base (type
      document) and Notes.base (type note) side by side. Two bases in
      one folder that do not both name a type are still one collection
      claimed twice.

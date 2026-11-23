@@ -4,7 +4,7 @@
 It refuses, with the reason and where the file belongs:
   - a file in the folder's top level, except its own pages (README.md, AGENTS.md, CLAUDE.md, LICENSE.md, SECURITY.md)
     and dot files;
-  - a file inside the folder but outside its rooms (the numbered rooms in _System/schema.json, _System, and dot
+  - a file inside the folder but outside its folders (the numbered folders in _System/schema.json, _System, and dot
     folders such as .claude, .agents, .obsidian, .icor-for-life).
 Paths outside the folder are not this hook's business. Wired in .claude/settings.json; reads the hook's JSON on stdin.
 Exit 0 lets the write through; exit 2 refuses it and Claude reads the message.
@@ -32,7 +32,8 @@ def vault_of(start: Path):
 
 def rooms_of(vault: Path):
     try:
-        return list(json.loads((vault / "_System/schema.json").read_text(encoding="utf-8")).get("rooms", {}))
+        s = json.loads((vault / "_System/schema.json").read_text(encoding="utf-8"))
+        return list(s.get("folders") or s.get("rooms") or {})      # `rooms` in a schema from before the ICOR stages
     except (OSError, ValueError):
         return []
 
@@ -40,12 +41,12 @@ def rooms_of(vault: Path):
 def home_for(name: str, rooms):
     """Where a file of this kind belongs (the same rule as the Objects plugin's top-folder guard)."""
     inbox = next((r for r in rooms if "inbox" in r.lower()), "01 Inbox")
-    assets = next((r for r in rooms if "assets" in r.lower()), "05 Assets")
+    assets = next((r for r in rooms if "assets" in r.lower()), "04 Assets")
     ext = name.rsplit(".", 1)[-1].lower() if "." in name else ""
     if ext in IMAGE: return f"{assets}/Images/"
     if ext in AUDIO: return f"{assets}/Audio/"
     if ext in DOCUMENT: return f"{assets}/Documents/"
-    if ext == "md": return f"the room the note belongs in (a typed note: its type's folder in _System/schema.json; unsorted: {inbox}/)"
+    if ext == "md": return f"the folder the note belongs in (a typed note: its type's folder in _System/schema.json; unsorted: {inbox}/)"
     return f"{inbox}/"
 
 
@@ -68,11 +69,11 @@ def verdict(path_text: str, cwd: str):
         if name.startswith(".") or name.lower() in KEEP:
             return None
         return (f"Refused: {name} would land in the top folder of this ICOR for Life folder, which holds only README.md, "
-                f"AGENTS.md and the rooms. Put it in {home_for(name, rooms)} instead. AGENTS.md (\"Where files go\") has the rule.")
+                f"AGENTS.md and the numbered folders. Put it in {home_for(name, rooms)} instead. AGENTS.md (\"Where files go\") has the rule.")
     top = parts[0]
     if top.startswith(".") or top == "_System" or top in rooms or top in LEGACY:
         return None
-    return (f"Refused: {top}/ is not one of this folder's rooms ({', '.join(rooms)}). Put {parts[-1]} in "
+    return (f"Refused: {top}/ is not one of this vault's folders ({', '.join(rooms)}). Put {parts[-1]} in "
             f"{home_for(parts[-1], rooms)} instead. AGENTS.md (\"Where files go\") has the rule.")
 
 

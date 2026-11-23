@@ -80,17 +80,17 @@ _nio.loader.exec_module(noteio)
 # against validate-scaffold.py's REQUIRED list at run time (rooms_check),
 # so this map cannot name a folder the scaffold does not guarantee.
 ROOMS = {
-    "person":      "04 Inner World/Contacts/People",
-    "company":     "04 Inner World/Contacts/Companies",
-    "note":        "04 Inner World/Notes",
-    "document":    "04 Inner World/Notes",
-    "project":     "04 Inner World/My Life/Projects",
-    "goal":        "04 Inner World/My Life/Goals",
-    "habit":       "04 Inner World/My Life/Habits",
-    "topic":       "04 Inner World/My Life/Topics",
-    "key-element": "04 Inner World/My Life/Key Elements",
-    "source":      "06 Outer World",
-    "journal":     "04 Inner World/Journal",   # delegated, see below
+    "person":      "02 Inner World/Contacts/People",
+    "company":     "02 Inner World/Contacts/Companies",
+    "note":        "02 Inner World/Notes",
+    "document":    "02 Inner World/Notes",
+    "project":     "02 Inner World/My Life/Projects",
+    "goal":        "02 Inner World/My Life/Goals",
+    "habit":       "02 Inner World/My Life/Habits",
+    "topic":       "02 Inner World/My Life/Topics",
+    "key-element": "02 Inner World/My Life/Key Elements",
+    "source":      "03 Outer World",
+    "journal":     "02 Inner World/Journal",   # delegated, see below
 }
 
 BUILT_IN = frozenset(ROOMS)
@@ -120,10 +120,10 @@ LINK_FIELDS = {
 # Fields that hold ONE wikilink rather than a list (GL-1002).
 SINGLE_FIELDS = {"goal", "planner_habit"}
 # Fields whose wikilink is written FULL-PATH-QUALIFIED,
-# `[[02 Planner/Habits/Morning walk]]`, rather than as the bare note name
+# `[[06 Planner/Habits/Morning walk]]`, rather than as the bare note name
 # (GL-1002 rows `habit` and `planner-habit`, ruling 2026-09-16). A habit and
 # its planner-habit note carry the SAME name by design, one in
-# `02 Planner/Habits/` and one in `04 Inner World/My Life/Habits/`, so a bare
+# `06 Planner/Habits/` and one in `02 Inner World/My Life/Habits/`, so a bare
 # `[[Morning walk]]` cannot say which of the two it means: Obsidian resolves
 # it by proximity and every other reader has to guess (Brian Carroll, B2-3).
 QUALIFIED_FIELDS = {"planner_habit"}
@@ -188,7 +188,7 @@ def rooms_check(root):
     for t, folder in sorted(ROOMS.items()):
         want = (schema["types"].get(t) or {}).get("folder")
         if want != folder:
-            fail("room for %r is %s here but %s in _System/schema.json; fix one of the two "
+            fail("the folder for %r is %s here but %s in _System/schema.json; fix one of the two "
                  "before creating notes" % (t, folder, want))
 
 
@@ -366,7 +366,7 @@ def main():
                     help='a note to link, "[[Target]]" or Target; repeatable')
     ap.add_argument("--set", action="append", default=[], metavar="FIELD=VALUE",
                     dest="sets", help="fill a scalar field, e.g. --set note_type=outline")
-    ap.add_argument("--list", action="store_true", help="show the types and their rooms")
+    ap.add_argument("--list", action="store_true", help="show the types and their folders")
     ap.add_argument("--root", default=None)
     # journal only: new-entity.py hands these straight to new-journal-entry.py
     ap.add_argument("--journal-type", help="journal only: interaction|note|thought|milestone")
@@ -432,7 +432,7 @@ def main():
     folder = root / ROOMS[a.type]
     if not folder.is_dir():
         if a.type in BUILT_IN:
-            fail("room missing: %s" % ROOMS[a.type])
+            fail("folder missing: %s" % ROOMS[a.type])
         folder.mkdir(parents=True)   # an added type's folder appears with its first note
     dest = folder / (title + ".md")
     if dest.exists():

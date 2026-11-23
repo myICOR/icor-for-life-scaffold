@@ -1,6 +1,6 @@
 # ICOR for Life: what you may do with each part
 
-**This folder is MIT.** The rooms, the notes, the schema, the templates, the
+**This folder is MIT.** The folders, the notes, the schema, the templates, the
 skills, the tools, the Obsidian settings and everything else in this folder
 are open source under the MIT licence below, unless the short list under
 "Parts with their own terms" names it. Use it, change it, share it,

@@ -18,12 +18,12 @@ operating records stay bare, and the daily notes never fill up with the
 team's housekeeping.
 
   IN   the body (after the closing frontmatter ---) of .md files under
-       04 Inner World/. Nothing else.
+       02 Inner World/. Nothing else.
   OUT  all of 06 AI Team/ without exception: session logs, specialist
        journals, Team Knowledge, SOPs, Guidelines, Workstreams, Tasks,
-       Templates, Scripts, AI Sessions. Also 00 Daily Scratchpad/ itself,
-       01 Inbox/ (captures and their archive), 02 Planner/, 05 Assets/ and
-       07 Databases/.
+       Templates, Scripts, AI Sessions. Also 00 Daily Notes/ itself,
+       01 Inbox/ (captures and their archive), 06 Planner/, 04 Assets/ and
+       05 Databases/.
   Inside the two rooms, still OUT: YAML frontmatter (typed dates are
        data, GL-1002); fenced and inline code; anything already inside
        [[...]]; markdown link targets and URLs; blockquotes (a quoted
@@ -121,7 +121,7 @@ URL = re.compile(r"(?:https?://|www\.)\S+")
 # edited, so the inbox is out (2.3.0). A capture's dates get their links
 # when it is processed into a note in this room. 3.0 has no 03 WiP: one a
 # migrated folder still holds is nobody's room and stays bare.
-USER_ROOMS = ("04 Inner World",)
+USER_ROOMS = ("02 Inner World",)
 # Folders that are never prose, wherever they sit inside those rooms.
 EXCLUDED_SEGMENTS = {".obsidian", ".git", ".trash", "node_modules",
                      "__pycache__", "Templates"}
@@ -147,7 +147,7 @@ def read_daily_config(root: Path, allow_default: bool):
     if not cfg_file.is_file():
         if not allow_default:
             fail(f"no {cfg_file.relative_to(root)}; cannot know where daily "
-                 f"notes live, and guessing would write into the wrong room")
+                 f"notes live, and guessing would write into the wrong folder")
         print(f"WARNING no .obsidian/daily-notes.json; falling back to "
               f"Obsidian's defaults (folder '', format YYYY-MM-DD)",
               file=sys.stderr)
@@ -401,7 +401,7 @@ if a.path:
                if not any(f == w or w in f.parents for f in files)]
     if skipped:
         # Said out loud rather than passed over: a path that is simply out of
-        # the linker's scope (all of 06 AI Team/, 00 Daily Scratchpad/ itself,
+        # the linker's scope (all of 06 AI Team/, 00 Daily Notes/ itself,
         # 01 Inbox/, whose captures hard rule 1 protects) would otherwise look
         # like a clean run on a note nobody looked at.
         print("NOTE out of the linker's scope, nothing to do there: "

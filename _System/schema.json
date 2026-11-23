@@ -6,14 +6,46 @@
     "created",
     "tags"
   ],
-  "rooms": {
-    "00 Daily Scratchpad": "your raw writing, one note a day; never edited by an AI",
+  "folders": {
+    "00 Daily Notes": "your raw writing: one note a day and quick scratch notes; never edited by an AI",
     "01 Inbox": "scans (Scanner Inbox/) and anything not yet sorted",
-    "02 Planner": "tasks synced from your task apps by the Planner plugin",
-    "04 Inner World": "what you know and who you know: Journal, Notes, Contacts, My Life",
-    "05 Assets": "files only (Images/, Audio/, Documents/), embedded from notes",
-    "06 Outer World": "what others made: one source note per book, article, video, podcast, post or paper, with your highlights",
-    "07 Databases": "Objects.base (every object, a view per type), and data too large or row-shaped for notes; no notes"
+    "02 Inner World": "what you know and who you know: Journal, Notes, Contacts, My Life",
+    "03 Outer World": "what others made: one source note per book, article, video, podcast, post or paper, with your highlights",
+    "04 Assets": "files only (Images/, Audio/, Documents/), embedded from notes",
+    "05 Databases": "Objects.base (every object, a view per type), and data too large or row-shaped for notes; no notes",
+    "06 Planner": "tasks synced from your task apps by the Planner plugin"
+  },
+  "stages": {
+    "input": {
+      "label": "Input",
+      "color": "#5271FC",
+      "folders": [
+        "00 Daily Notes",
+        "01 Inbox"
+      ]
+    },
+    "control": {
+      "label": "Control",
+      "color": "#52F49A",
+      "folders": [
+        "02 Inner World",
+        "03 Outer World",
+        "04 Assets",
+        "05 Databases"
+      ]
+    },
+    "output": {
+      "label": "Output",
+      "color": "#FD63FF",
+      "folders": [
+        "06 Planner"
+      ]
+    },
+    "refine": {
+      "label": "Refine",
+      "folders": [],
+      "about": "no folder: the plugins (AI Chat, Connect, Focus) and the weekly review refine; an AI works in the folder from outside and keeps nothing of its own here"
+    }
   },
   "my_life": [
     "key-element",
@@ -23,8 +55,8 @@
     "habit"
   ],
   "worlds": {
-    "inner": "04 Inner World",
-    "outer": "06 Outer World"
+    "inner": "02 Inner World",
+    "outer": "03 Outer World"
   },
   "types": {
     "capture": {
@@ -56,7 +88,7 @@
     "company": {
       "label": "Company",
       "description": "One company or organisation.",
-      "folder": "04 Inner World/Contacts/Companies",
+      "folder": "02 Inner World/Contacts/Companies",
       "template": "company.md",
       "icon": "building-2",
       "owner": "you",
@@ -81,8 +113,8 @@
     },
     "document": {
       "label": "Document",
-      "description": "A note with a file attached (a contract, an invoice, an ID); the file lives in 05 Assets/Documents.",
-      "folder": "04 Inner World/Notes",
+      "description": "A note with a file attached (a contract, an invoice, an ID); the file lives in 04 Assets/Documents.",
+      "folder": "02 Inner World/Notes",
       "template": "document.md",
       "icon": "file-badge",
       "owner": "you",
@@ -148,7 +180,7 @@
     "goal": {
       "label": "Goal",
       "description": "An outcome you want, in one of your Key Elements.",
-      "folder": "04 Inner World/My Life/Goals",
+      "folder": "02 Inner World/My Life/Goals",
       "template": "goal.md",
       "icon": "target",
       "owner": "you",
@@ -178,7 +210,7 @@
     "habit": {
       "label": "Habit",
       "description": "A habit you keep.",
-      "folder": "04 Inner World/My Life/Habits",
+      "folder": "02 Inner World/My Life/Habits",
       "template": "habit.md",
       "icon": "repeat",
       "owner": "you",
@@ -232,7 +264,7 @@
     "journal": {
       "label": "Journal",
       "description": "Something that happened or was thought, written on purpose, with a date: interaction, note, thought or milestone.",
-      "folder": "04 Inner World/Journal",
+      "folder": "02 Inner World/Journal",
       "template": "journal.md",
       "icon": "book-heart",
       "owner": "you",
@@ -295,7 +327,7 @@
     "key-element": {
       "label": "Key Element",
       "description": "A big area of your life (Health, Family, Work, Finances).",
-      "folder": "04 Inner World/My Life/Key Elements",
+      "folder": "02 Inner World/My Life/Key Elements",
       "template": "key-element.md",
       "icon": "gem",
       "owner": "you",
@@ -320,8 +352,8 @@
     },
     "note": {
       "label": "Note",
-      "description": "Your knowledge about one subject: an idea, an outline, meeting notes, a draft. What someone else made is a source in 06 Outer World.",
-      "folder": "04 Inner World/Notes",
+      "description": "Your knowledge about one subject: an idea, an outline, meeting notes, a draft. What someone else made is a source in 03 Outer World.",
+      "folder": "02 Inner World/Notes",
       "template": "note.md",
       "icon": "file-text",
       "owner": "you",
@@ -427,7 +459,7 @@
     "person": {
       "label": "Person",
       "description": "One person you know: their properties (role, relation, email). The story lives in journal entries that link to them.",
-      "folder": "04 Inner World/Contacts/People",
+      "folder": "02 Inner World/Contacts/People",
       "template": "person.md",
       "icon": "user",
       "owner": "you",
@@ -604,7 +636,7 @@
     "project": {
       "label": "Project",
       "description": "Work with an end that serves a goal. Every project names its goal.",
-      "folder": "04 Inner World/My Life/Projects",
+      "folder": "02 Inner World/My Life/Projects",
       "template": "project.md",
       "icon": "folder-kanban",
       "owner": "you",
@@ -645,7 +677,7 @@
     "scratchpad": {
       "label": "Scratchpad",
       "description": "Your raw writing for one day, or a quick scratch note. Never edited or marked by an AI.",
-      "folder": "00 Daily Scratchpad",
+      "folder": "00 Daily Notes",
       "template": null,
       "icon": "notebook-pen",
       "owner": "you",
@@ -669,7 +701,7 @@
     "topic": {
       "label": "Topic",
       "description": "A subject you follow over time.",
-      "folder": "04 Inner World/My Life/Topics",
+      "folder": "02 Inner World/My Life/Topics",
       "template": "topic.md",
       "icon": "hash",
       "owner": "you",
@@ -690,7 +722,7 @@
     "source": {
       "label": "Source",
       "description": "Something someone else made: a book, article, video, podcast, post or paper, with your highlights. Synced by the Web Clipper or Readwise, linked to what it serves.",
-      "folder": "06 Outer World",
+      "folder": "03 Outer World",
       "template": "source.md",
       "icon": "library",
       "owner": "you",

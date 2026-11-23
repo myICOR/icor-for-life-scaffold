@@ -14,14 +14,14 @@
 
 
 # Live personal data syncs into these paths - never tracked, never shipped
-02 Planner/*/
-00 Daily Scratchpad/2026-*.md
-00 Daily Scratchpad/2027-*.md
+06 Planner/*/
+00 Daily Notes/2026-*.md
+00 Daily Notes/2027-*.md
 # ... and the same notes in the YYYY/MM/ shape the scratchpad actually uses
 # (GL-1004). The two flat lines above predate the nesting and match nothing;
 # link-dates-to-daily-notes.py --fix creates daily notes, and a daily note is
 # personal data that must never reach the zip.
-00 Daily Scratchpad/[0-9][0-9][0-9][0-9]/
+00 Daily Notes/[0-9][0-9][0-9][0-9]/
 
 
 # The machine layer (GL-1008): what plugins and scripts write for each other,

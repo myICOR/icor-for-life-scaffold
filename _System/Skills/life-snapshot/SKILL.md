@@ -12,4 +12,4 @@ topics with recent attention. `--json` for the data, `--write` to save the repor
 Read it, then tell the person in a few lines, with `[[links]]`. Do not invent priorities; if the week has none, ask
 them for one and use skill **weekly-review**.
 
-Set a project's focus: `python3 _System/Tools/set-property.py "04 Inner World/My Life/Projects/<Project>.md" focus_rank 1` (at most three projects carry one).
+Set a project's focus: `python3 _System/Tools/set-property.py "02 Inner World/My Life/Projects/<Project>.md" focus_rank 1` (at most three projects carry one).

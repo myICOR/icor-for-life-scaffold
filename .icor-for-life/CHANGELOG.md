@@ -19,11 +19,11 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - Types change and build on each other: Change type (the palette, a note's menu, the type in the Connections panel)
   sets `type`, adds the new type's fields empty, keeps every other field and moves the note; a type can be a kind of
   another (a restaurant is a kind of company: its fields and links, and it counts as one wherever a company is asked).
-- `07 Databases/Objects.base`: every object in one table and a view per type; a type you add gets its view there and its own base
+- `05 Databases/Objects.base`: every object in one table and a view per type; a type you add gets its view there and its own base
   in its folder. Delete this object, Show all objects (a table per type), and removing a type you added (Settings,
   Objects) while it has no objects. `_System` stays out of search and the quick switcher (Excluded files).
 - The top folder stays clear: in Obsidian the Objects plugin moves a file that lands there to its room (pictures, videos
-  and sound to `05 Assets`, documents to `05 Assets/Documents`, the rest to `01 Inbox`), links following; in Claude Code
+  and sound to `04 Assets`, documents to `04 Assets/Documents`, the rest to `01 Inbox`), links following; in Claude Code
   `.claude/settings.json` runs `_System/Tools/guard-paths.py` before every Write and Edit and refuses the top folder and
   made-up folders; the tools refuse a top-level path; AGENTS.md ("Where files go") and the capture and new-object skills
   say where each kind of file goes.
@@ -32,7 +32,7 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - `_System/Skills/`: nine skills (capture, process-scratchpad, process-outer-world, write-journal-entry, new-object,
   find-everything-about, life-snapshot, weekly-review, check-quality), copied to `.agents/skills/` and
   `.claude/skills/` where AI tools look (Claude Code finds skills only in `.claude/skills/`).
-- `06 Outer World/`: what others made, one `source` note each (book, article, video, podcast, post, paper), with a
+- `03 Outer World/`: what others made, one `source` note each (book, article, video, podcast, post, paper), with a
   Web Clipper template, a Readwise setup and `Sources.base`.
 - Plugins, preinstalled and on: Journal (new), Objects (new), Interface (the look, properties, _System, the chrome), AI Chat, Planner, Connect, Focus, Outliner,
   Canvases, PDF Annotation, Scratchpad, Terminal; the INKLINE theme 1.7.1 with the Gradient look.
@@ -40,11 +40,19 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - `_System/Tools/migrate-to-3.py`: moves a 2.x folder to this layout, a dry run first.
 
 ### Changed
+- The numbered folders follow the ICOR stages, flat as before: Input `00 Daily Notes` (was 00 Daily Scratchpad) and
+  `01 Inbox`; Control `02 Inner World` (was 04), `03 Outer World` (was 06), `04 Assets` (was 05) and `05 Databases`
+  (was 07); Output `06 Planner` (was 02). Refine has no folder: it happens in the plugins (AI Chat, Connect, Focus) and
+  in the weekly review. `_System/schema.json` names them under `folders` (was `rooms`) and groups them in `stages`, each
+  with its colour (Input #5271FC, Control #52F49A, Output #FD63FF); Interface colours the file tree from it. The word
+  "room" is gone: they are folders, grouped by stage. `migrate-to-3.py` renames a 2.x folder's (or an early 3.0
+  folder's) numbered folders and rewrites the paths in its notes, bases, canvases and Obsidian settings, leaving a
+  myPKA team's files alone; `tests/test-migrate.py` covers it.
 - `_System/` holds what every device needs (Obsidian Sync skips hidden folders): the schema, the templates (Obsidian's
   Templates points here), the skills and the tools. `.icor-for-life/` keeps only this computer's files and `.env`.
 - The shared `.env` for the plugins moved from `06 AI Team/AI Team Knowledge/.env` to `.icor-for-life/.env`.
-- `reference` is no longer a kind of note: what someone else made is a `source` in `06 Outer World`.
-- The Daily Scratchpad is never stamped. A day's note or a quick scratch note stays as you wrote it: carry a line on
+- `reference` is no longer a kind of note: what someone else made is a `source` in `03 Outer World`.
+- Daily notes are never stamped. A day's note or a quick scratch note stays as you wrote it: carry a line on
   when it matters (Objects turns it into a project, a person or a note; your AI can help with skill
   process-scratchpad, now optional), or leave it. `check-quality.py` has no unprocessed-scratchpad queue,
   `life-snapshot.py` counts a scratchpad once beside a journal entry of the same day, and `stamp-processed.py` refuses
@@ -53,7 +61,7 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 ### Removed or moved
 - `06 AI Team/`: gone. Its guidelines became `_System/schema.json` and the skills; its templates moved to
   `_System/Templates/`, its life scripts to `_System/Tools/`; the Brand folder and the workstream notes are gone.
-- `01 Inbox/Outer World/`: gone; clips go to `06 Outer World/`.
+- `01 Inbox/Outer World/`: gone; clips go to `03 Outer World/`.
 - `03 WiP/`: gone, and a migrated folder's old one is nobody's room (the AI may not write there, dates there are not
   linked). Only what lasts goes in the folder; work in progress stays in the tools where it happens (your AI's own
   workspace, a project folder) and the result is filed as an object when it is done. The `workstreams` field on goals
