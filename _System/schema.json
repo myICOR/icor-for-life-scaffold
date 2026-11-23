@@ -151,7 +151,8 @@
           "statement",
           "letter",
           "manual",
-          "other"
+          "other",
+          "report"
         ]
       },
       "links": {
@@ -298,6 +299,13 @@
           "photo",
           "meeting-notes",
           "other"
+        ],
+        "mood": [
+          "Great",
+          "Good",
+          "Okay",
+          "Low",
+          "Rough"
         ]
       },
       "links": {
@@ -479,7 +487,18 @@
         "role",
         "tags"
       ],
-      "values": {},
+      "values": {
+        "relation": [
+          "family",
+          "partner",
+          "friend",
+          "colleague",
+          "client",
+          "member",
+          "service-provider",
+          "other"
+        ]
+      },
       "links": {
         "companies": {
           "to": "company",
