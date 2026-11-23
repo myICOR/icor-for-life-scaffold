@@ -26,26 +26,26 @@
     },
     {
       "id": "icor-for-life-chat",
-      "version": "0.17.2",
+      "version": "0.17.3",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-chat"
       },
       "files": {
-        "main.js": "66af32803e0bb8b3d0e427f6df9a766e0fa2bcaa38d5ec3c963a71a184f7953b",
-        "manifest.json": "06ccb0fb17d6c6db10d0deafc6ead6e819aa4fd282a105397a455183e9effcae",
+        "main.js": "63babee83f2a96533d47b6666b1148b4bdbdf37bf90c7ab5eb7bb82d36feeecd",
+        "manifest.json": "a940ff2bd9b5c01e6bf4e9dd8581523163d5cddc217655575e676064b85f5950",
         "styles.css": "cce722240b0fc8328e5ba2dd1e9fb450ef68da47705d691a949c0f587616c6c5"
       }
     },
     {
       "id": "icor-for-life-connect",
-      "version": "0.18.1",
+      "version": "0.18.2",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-connect"
       },
       "files": {
-        "main.js": "1fe3eac660ed3ea47f7f50400d2e3882edb4f2c077229ffcab81eff7d5fca385",
-        "manifest.json": "823d45c10603fc4c5bd860fddb904771ea59da004faf75407c09f698cea3402d",
-        "styles.css": "559513282f7cbffccfed91ea3c57e182f4d9b85a483f5d623ef9779c0212e0b6"
+        "main.js": "c54c4d195eb21bc9ebdc29542ecee93961fe9a8a83db126ee087d490422a9e12",
+        "manifest.json": "97ab65ae700c4fdc1b5f38b599fdae966144416172717b4997636f8d83aad5fa",
+        "styles.css": "cd0f72021829881761392f7ef7e35ca3b1586d54200dbea94926839dae22e13d"
       }
     },
     {
@@ -63,13 +63,13 @@
     },
     {
       "id": "icor-for-life-interface",
-      "version": "0.10.1",
+      "version": "0.10.3",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-interface"
       },
       "files": {
-        "main.js": "176cde6ea319f11d9e53ef980dabcdd38b355a9588dbd9a5b2c26afa89f32c5a",
-        "manifest.json": "80322e8f4a34baffab5da00fcc324dc1438c386b394ac80705fae60bc5208828",
+        "main.js": "3943fc9883f442f2f965197ddceb3ea6e8b2c73a1a7fe05988f814139598bbfa",
+        "manifest.json": "5460cc8bc1f40540727811691e270ea1ccfddf8b3f2941f80d90592f6322c953",
         "styles.css": "9e184c4d7d39fc47dd1e30935aa1d012e3bd888f38d6de19754dcf7a398eb1e2"
       }
     },
@@ -124,13 +124,13 @@
     },
     {
       "id": "icor-for-life-planner",
-      "version": "0.18.1",
+      "version": "0.18.2",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-planner"
       },
       "files": {
-        "main.js": "4a47cc09f1b57f2d3976c4733ec54deaf19e03f2645a9cb55375798c530e93f5",
-        "manifest.json": "9e1f9f6c099cdfb5611ded3d99d62d34c10630a22831255bd76c810f8aae2c32",
+        "main.js": "c197eba193234450d8680172937426ae8d9e92e57ee6b2739db9ccf1344dac90",
+        "manifest.json": "538c68632cf23d31e056f68fdcbcca7cb5793e9277cd5e944c197eb88a0308b9",
         "styles.css": "90bb67a8063b0471c68460925fc4a090d5a1396e37f728269e09c977fdb9ff19"
       }
     },
