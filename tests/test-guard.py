@@ -28,7 +28,9 @@ with tempfile.TemporaryDirectory() as tmp:
     for room in json.loads((ROOT / "_System/schema.json").read_text())["rooms"]:
         (v / room).mkdir()
     refused = {"CleanShot 2026-11-21 at 00.30.03@2x.png": "05 Assets/Images/", "memo.m4a": "05 Assets/Audio/",
-               "Invoice.pdf": "05 Assets/Documents/", "Untitled.md": "01 Inbox", "board.canvas": "01 Inbox/", "Random/thing.md": "01 Inbox"}
+               "Invoice.pdf": "05 Assets/Documents/", "Untitled.md": "01 Inbox", "board.canvas": "01 Inbox/", "Random/thing.md": "01 Inbox",
+               # 3.0 (Tom, 2026-11-23): no WiP, not even a 2.x one left in a migrated folder; the AI has no area of its own
+               "03 WiP/draft.md": "01 Inbox"}
     for rel, home in refused.items():
         code, msg = hook(str(v / rel), v)
         check(code == 2, f"hook lets {rel} through")

@@ -47,6 +47,9 @@ def build(root: Path):
               "06 AI Team/Agents/Silas/journal"):
         (root / d).mkdir(parents=True, exist_ok=True)
 
+    # 3.0: a 2.x 03 WiP left in a migrated folder is nobody's room any more; its dates are not linked
+    write(root, "03 WiP/Projects/draft.md", "Drafted on 2026-09-13.\n")
+
     write(root, "04 Inner World/Notes/bare.md",
           "---\ncreated: 2026-01-05\ndue: 2026-01-06\n---\n"
           "We met on 2026-09-11 and again on 2026-09-12.\n")
@@ -180,6 +183,9 @@ with tempfile.TemporaryDirectory() as td:
     check("all of 06 AI Team/ is out of scope (session log, template, agent journal)",
           not any(f.startswith("06 AI Team/") for f, _d in found),
           str(sorted(f for f, _d in found if f.startswith("06 AI Team/"))))
+    check("a leftover 03 WiP is out of scope",
+          not any(f.startswith("03 WiP/") for f, _d in found),
+          str(sorted(f for f, _d in found if f.startswith("03 WiP/"))))
     check("01 Inbox is out of scope, archive included (hard rule 1)",
           not any(f.startswith("01 Inbox/") for f, _d in found),
           str(sorted(f for f, _d in found if f.startswith("01 Inbox/"))))

@@ -18,7 +18,7 @@ operating records stay bare, and the daily notes never fill up with the
 team's housekeeping.
 
   IN   the body (after the closing frontmatter ---) of .md files under
-       04 Inner World/ and 03 WiP/. Nothing else.
+       04 Inner World/. Nothing else.
   OUT  all of 06 AI Team/ without exception: session logs, specialist
        journals, Team Knowledge, SOPs, Guidelines, Workstreams, Tasks,
        Templates, Scripts, AI Sessions. Also 00 Daily Scratchpad/ itself,
@@ -119,8 +119,9 @@ URL = re.compile(r"(?:https?://|www\.)\S+")
 # never links in. 01 Inbox/ is the user's too, but every file in it is a
 # capture or an archived capture, and hard rule 1 says a capture is never
 # edited, so the inbox is out (2.3.0). A capture's dates get their links
-# when it is processed into a note in one of these two rooms.
-USER_ROOMS = ("04 Inner World", "03 WiP")
+# when it is processed into a note in this room. 3.0 has no 03 WiP: one a
+# migrated folder still holds is nobody's room and stays bare.
+USER_ROOMS = ("04 Inner World",)
 # Folders that are never prose, wherever they sit inside those rooms.
 EXCLUDED_SEGMENTS = {".obsidian", ".git", ".trash", "node_modules",
                      "__pycache__", "Templates"}

@@ -1,6 +1,6 @@
 ---
 name: weekly-review
-description: Run the ICOR weekly review in the person's ICOR for Life folder - leftovers in the inbox and scratchpad, stale work in progress, the reading queue, the week's journal recap, and the priorities for the coming week. Use when they say "weekly review" or "plan my week".
+description: Run the ICOR weekly review in the person's ICOR for Life folder - leftovers in the inbox and scratchpad, the reading queue, the week's journal recap, and the priorities for the coming week. Use when they say "weekly review" or "plan my week".
 ---
 
 # Weekly review

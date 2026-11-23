@@ -129,7 +129,7 @@ CLOSED_GOAL_STATUS = {"done", "achieved", "abandoned", "cancelled"}
 
 SKIP_NAMES = {"README.md", "INDEX.md", "_template.md", "template.md"}
 # Never read for attention, at any depth. The team's own work record is not
-# the user's attention, and a WiP folder is a draft nobody lives in.
+# the user's attention, and a 2.x 03 WiP a migrated folder still holds is a draft nobody lives in.
 SKIP_PARTS = {"06 AI Team", "03 WiP", "05 Assets", "07 Databases", "01 Inbox",
               "_archive", "archive", "Highlights", "node_modules"}
 

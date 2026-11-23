@@ -16,7 +16,7 @@ from pathlib import Path
 
 sys.dont_write_bytecode = True
 KEEP = {"readme.md", "agents.md", "claude.md", "license.md", "security.md"}
-LEGACY = {"03 WiP", "06 AI Team"}       # 2.x rooms a migrated folder may still hold (a myPKA team lives in 06 AI Team)
+LEGACY = {"06 AI Team"}       # a 2.x room a migrated folder may still hold (a myPKA team lives there); 03 WiP is gone in 3.0
 IMAGE = {"png", "jpg", "jpeg", "gif", "webp", "heic", "heif", "avif", "svg", "bmp", "tif", "tiff", "mp4", "mov", "m4v", "webm"}
 AUDIO = {"mp3", "m4a", "wav", "aac", "flac", "ogg", "opus", "aif", "aiff", "caf"}
 DOCUMENT = {"pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "odt", "ods", "odp", "rtf", "pages", "numbers", "key", "epub", "txt", "csv"}

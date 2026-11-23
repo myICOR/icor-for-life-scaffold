@@ -54,9 +54,12 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - `06 AI Team/`: gone. Its guidelines became `_System/schema.json` and the skills; its templates moved to
   `_System/Templates/`, its life scripts to `_System/Tools/`; the Brand folder and the workstream notes are gone.
 - `01 Inbox/Outer World/`: gone; clips go to `06 Outer World/`.
-- `03 WiP/`: gone. Only what lasts goes in the folder; work in progress stays in the tools where it happens (an AI
-  agent's harness, a project folder) and the result is filed as an object when it is done. The `workstreams` field
-  on goals and projects goes with it.
+- `03 WiP/`: gone, and a migrated folder's old one is nobody's room (the AI may not write there, dates there are not
+  linked). Only what lasts goes in the folder; work in progress stays in the tools where it happens (your AI's own
+  workspace, a project folder) and the result is filed as an object when it is done. The `workstreams` field on goals
+  and projects goes with it.
+- No room for the AI: it reads how the folder works and works in it the way an outside tool would through MCP or an
+  API. Its drafts, memory and working files stay with it, outside the folder (AGENTS.md rule 5).
 - `.icor-for-life/manifest.json`: written by the release builder now, not kept in the repo.
 - `SECURITY.md`: in the repository, not in the download.
 - The Scaffold Check plugin is retired; the quality check (`check-quality.py`, skill check-quality) and the Objects

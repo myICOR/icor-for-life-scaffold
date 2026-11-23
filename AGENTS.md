@@ -26,9 +26,10 @@ Cursor, Gemini or any other). Everything you need is in three places:
    A type can be a kind of another (`extends`: a restaurant is a kind of company): it has that type's fields and links
    and counts as one wherever it is asked for. To change a note's type, set `type`, add the new type's missing fields
    empty and move the note to the type's folder; never delete a field when you do, so changing back loses nothing.
-5. **Only what lasts comes in.** Work in progress (drafts, research, an agent's working files) stays where the work
-   happens: your harness, your project folder, the tool you work in. When it is done, file the result here as an object
-   (a note, a project, a source, a journal entry) with skill **new-object** or **capture**. No temporary folders.
+5. **Only what lasts comes in, and nothing here is yours.** Work in this folder the way an outside tool would through
+   MCP or an API: read how it works, then file results as objects (a note, a project, a source, a journal entry) with
+   skill **new-object** or **capture**. Drafts, research, memory and your own working files stay with you, outside the
+   folder. No temporary folders, no folder of your own.
 6. **Ask before you move, rename or delete** anything the person made. Create freely where a skill says so.
 
 ## The rooms
