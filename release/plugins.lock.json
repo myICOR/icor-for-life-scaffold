@@ -38,13 +38,13 @@
     },
     {
       "id": "icor-for-life-connect",
-      "version": "0.18.3",
+      "version": "0.18.4",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-connect"
       },
       "files": {
-        "main.js": "2e64d1c84712715b9dcfb4840ea0e1def18ca4c2a1e11cf630d2c80856210114",
-        "manifest.json": "8a86ed2268206ced3f3e5a156bd98dca14c775bb648b42edb7beef28fb3c48b0",
+        "main.js": "0b7d8bbe89ba73f5b81fc8dbc5be8ef429360a098c0bfd2b8cb9873a1938c865",
+        "manifest.json": "9c5fbebb3352a73fa1716bbc3733ac6a8ff429dff277e0b806e39446f8f53f17",
         "styles.css": "cd0f72021829881761392f7ef7e35ca3b1586d54200dbea94926839dae22e13d"
       }
     },
