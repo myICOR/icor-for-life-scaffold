@@ -57,11 +57,10 @@ Keeping your health or your finances here? The two databases stay on this comput
 
 ## Good to know
 
-- Every ICOR for Life plugin keeps its icon in the ribbon on the left. Right-click the ribbon to reorder or hide icons.
-
-- **Your files stay yours.** Plain text in a folder on your computer: no account, no database, no lock-in. Back it up like any folder; Obsidian Sync, iCloud and Dropbox all carry it.
+- **Your files stay yours.** Plain text in a folder on your computer (and, if you keep them, two SQLite files in 05 Databases): no account, no lock-in. Back it up like any folder; Obsidian Sync, iCloud and Dropbox all carry it.
 - **The look:** Settings, ICOR for Life - Interface: Gradient or Flat, and where a note's properties show (on top, folded, under the note, or only in the right sidebar).
 - **`_System`** holds the structure, templates, skills and tools your AI and the plugins use. It is hidden in the file tree and kept out of search and the quick switcher; ICOR for Life - Interface shows it.
+- **The icons are in the ribbon.** Every ICOR for Life plugin keeps its icon in the ribbon on the left. Right-click the ribbon to reorder or hide icons.
 
 ## Learn the method
 
