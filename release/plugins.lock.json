@@ -162,15 +162,14 @@
     },
     {
       "id": "icor-for-life-terminal",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "source": {
-        "github": "myICOR/icor-for-life-terminal",
-        "tag": "0.3.0"
+        "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-terminal"
       },
       "files": {
-        "main.js": "2d606133697200b3f21e75ee2411796f9f056ad7281004855c4ff3cf83cfbcf9",
-        "manifest.json": "c261d10c91f75322f2293d10c402fd81dbec8c1810730ea65eecc98d0209f4f5",
-        "styles.css": "292ac1c1e33ed8b597275d539e1ede74636e90a2b948b7d8b6d65bb87e33b494"
+        "main.js": "9369262da1dd250a3bd31f60e4e6cfb68e2c7e6cbbe3a9b9c043c4f6f33587af",
+        "manifest.json": "22a4e6d283e97d3090df1ff08077df826b7ef0c631096b2eefa0a709a35f3413",
+        "styles.css": "4d1db1fe19d2ac301bcf78ac20dc6ae1070b867f3407e42923eb7bc7114ceeed"
       }
     }
   ]
