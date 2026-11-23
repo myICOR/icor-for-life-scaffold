@@ -14,14 +14,13 @@
   "plugins": [
     {
       "id": "icor-for-life-canvases",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "source": {
-        "github": "myICOR/icor-for-life-canvases",
-        "tag": "0.4.1"
+        "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-canvases"
       },
       "files": {
-        "main.js": "f8a4bcf504535a82bc902771c96124b9c09a962582e3f0edc78e5c22a4a03071",
-        "manifest.json": "54f33336028767752787b851b1149b6985d8d087a83ac5b929c0c66e73aa98e8",
+        "main.js": "d69d9cde1d2a3e0789460bf192d0af9ec952b6c3bd674010a28393bc09fd8461",
+        "manifest.json": "b3df59d53d44f2384ec27c730854f751ac45621f9976e2ec4250d3484098f9f4",
         "styles.css": "1dd1ab14e5556ab20e1e2036748b4adf44674b1c46828f444bfb532ea7159afd"
       }
     },
