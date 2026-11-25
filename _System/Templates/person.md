@@ -11,4 +11,6 @@ birthday:
 last_contact: 
 next_action: 
 tags: []
+phone:
+location:
 ---

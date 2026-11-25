@@ -101,7 +101,8 @@
         "name",
         "people",
         "tags",
-        "website"
+        "website",
+        "location"
       ],
       "values": {},
       "links": {
@@ -485,7 +486,9 @@
         "next_action",
         "relation",
         "role",
-        "tags"
+        "tags",
+        "phone",
+        "location"
       ],
       "values": {
         "relation": [
@@ -797,6 +800,56 @@
           "many": true
         }
       }
+    },
+    "meeting": {
+      "label": "Meeting",
+      "description": "A meeting: who was there, what was said, decided and left open.",
+      "folder": "02 Inner World/Meetings",
+      "template": "meeting.md",
+      "icon": "calendar-clock",
+      "owner": "you",
+      "required": [],
+      "fields": [
+        "created",
+        "tags",
+        "date",
+        "started",
+        "ended",
+        "platform",
+        "people",
+        "companies",
+        "projects",
+        "key_elements",
+        "topics"
+      ],
+      "values": {},
+      "links": {
+        "people": {
+          "to": "person",
+          "many": true
+        },
+        "companies": {
+          "to": "company",
+          "many": true
+        },
+        "projects": {
+          "to": "project",
+          "many": true
+        },
+        "key_elements": {
+          "to": "key-element",
+          "many": true
+        },
+        "topics": {
+          "to": "topic",
+          "many": true
+        }
+      },
+      "ask": [
+        "date",
+        "platform"
+      ],
+      "color": "#5fb3d9"
     }
   }
 }

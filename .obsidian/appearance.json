@@ -3,5 +3,6 @@
   "nativeMenus": true,
   "enabledCssSnippets": [],
   "translucency": false,
-  "theme": "obsidian"
+  "theme": "obsidian",
+  "showRibbon": true
 }

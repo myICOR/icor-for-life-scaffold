@@ -35,9 +35,13 @@ preinstalled and turned on again. The AI team's room is gone: agents live outsid
 - `03 Outer World/`: what others made, one `source` note each (book, article, video, podcast, post, paper), with a
   Web Clipper template, a Readwise setup and `Sources.base`.
 - Plugins, preinstalled and on: Journal (new), Objects (new), Interface (the look, properties, _System, the chrome), AI Chat, Planner, Connect, Focus, Outliner,
-  Canvases, PDF Annotation, Scratchpad, Terminal; the INKLINE theme 1.7.1 with the Gradient look.
+  Canvases, PDF Annotation, Scratchpad, Terminal; the INKLINE theme 1.9.0 with the Gradient look.
 - Example journal entries (tagged `example`) so the Journal is not empty on first open.
 - `_System/Tools/migrate-to-3.py`: moves a 2.x folder to this layout, a dry run first.
+- A `meeting` type (Tom, 2026-11-25, from the Demo): who was there, what was said, decided and left open, in
+  `02 Inner World/Meetings/` with `_System/Templates/meeting.md`; it links people, companies, projects, key elements
+  and topics. People gain `phone` and `location`, companies gain `location`.
+- The ribbon is on by default (`showRibbon` in `.obsidian/appearance.json`), since every plugin's icon lives there.
 
 ### Changed
 - The plugins carry ICOR names (Tom, 2026-11-23): ICOR Objects, ICOR Journal, ICOR Planner, ICOR Interface, ICOR AI
