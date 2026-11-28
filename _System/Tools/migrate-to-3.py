@@ -66,7 +66,8 @@ def path_files(root: Path):
 
 def rename_stages(plan, old: Path):
     """Step 0: the folders move to the 3.0 layout; then every written path follows."""
-    moves, taken = [], set()
+    moves, taken, tidies = [], set(), []
+    already = [(was, now) for was, now in MOVES if not (old / was).exists() and (old / now).is_dir()]
     for was, now in MOVES:
         if not (old / was).is_dir():
             continue
@@ -107,16 +108,24 @@ def rename_stages(plan, old: Path):
                     keep.parent.mkdir(parents=True, exist_ok=True)
                     child.rename(keep)
                 plan.do(f"{rel} → {keep.relative_to(old)} (kept, not deleted)", stash)
-        def tidy(root=root):
-            ds = root / ".DS_Store"
-            if ds.is_file():
-                ds.unlink()
-            if root.is_dir() and not any(root.iterdir()):
-                root.rmdir()
-        plan.do(f"the empty {inner} folder is removed", tidy)
-    if not moves:
+        def tidy(root=root, inner=inner):
+            try:
+                ds = root / ".DS_Store"
+                if ds.is_file():
+                    ds.unlink()
+                if root.is_dir() and not any(root.iterdir()):
+                    root.rmdir()
+            except OSError as e:
+                print(f"      {inner} is left in place ({e.strerror}); it is empty, delete it yourself")
+        tidies.append((f"the empty {inner} folder is removed", tidy))
+    # A run that stopped part way (a folder that would not delete, a closed laptop) moved some folders already: their
+    # paths still follow, so running again finishes the job.
+    done = dict(already)
+    done.update(moves)
+    if not done:
+        for text, fn in tidies:
+            plan.do(text, fn)
         return
-    done = dict(moves)
     for inner in INNER:
         if any(w.startswith(inner + "/") for w in done):
             done.setdefault(inner, "04 Notes")
@@ -134,6 +143,8 @@ def rename_stages(plan, old: Path):
                 n += 1
         print(f"      paths rewritten in {n} file(s)")
     plan.do("paths in notes, bases, canvases and Obsidian settings follow the new folder names", rewrite)
+    for text, fn in tidies:
+        plan.do(text, fn)
 
 
 def at(old: Path, new_name: str) -> Path:

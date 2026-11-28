@@ -140,6 +140,14 @@ def cases(tmp: Path):
     r = run(v)
     check("a second run finds nothing to do", "already" in r.stdout + r.stderr, r.stdout + r.stderr)
 
+    print("a run that stopped part way is finished by the next one")
+    v = tmp / "resumed"
+    vault_30(v)
+    (v / "03 Outer World").rename(v / "06 Sources")
+    r = run(v, "--live")
+    check("the resumed run ends OK", r.returncode == 0 and "OK done" in r.stdout, r.stdout + r.stderr)
+    check("a link into a folder the stopped run had moved still follows", "[[06 Sources/Book]]" in (v / "04 Notes/Idea.md").read_text())
+
     print("the new name exists already")
     v = tmp / "both"
     vault_2x(v, "2.3.0", outer=False, team=False)
