@@ -26,13 +26,13 @@
     },
     {
       "id": "icor-for-life-chat",
-      "version": "0.17.6",
+      "version": "0.17.7",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-chat"
       },
       "files": {
-        "main.js": "b7c54cd0b6778afd8d87a8717818734b71e5016ecdc2141ba9dd1b64ae30f5d6",
-        "manifest.json": "08b1824e213a4f50f623885f246357abd6a46c081e24fbd8255b61857413f203",
+        "main.js": "c3bd5d92615cb7ae6c55135e433d99a54356c694e1d0fb956920d80afc40f6b8",
+        "manifest.json": "eb806167d886cbfe0d6c09506b5e77d6e9d0dff62f4e430a61c43be1b3453c05",
         "styles.css": "cce722240b0fc8328e5ba2dd1e9fb450ef68da47705d691a949c0f587616c6c5"
       }
     },
@@ -86,13 +86,13 @@
     },
     {
       "id": "icor-for-life-objects",
-      "version": "0.10.0",
+      "version": "0.10.1",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-objects"
       },
       "files": {
-        "main.js": "8ad9816f4c7fa4bd3ff5add60632d8bb43dc8abee4b09974a2190a9bcacb166b",
-        "manifest.json": "fc26067775b475982d95420021d96d3370df13a5cba99cc546898bedebd88ba7",
+        "main.js": "de67d5c0e54987eb130eab9723bcf393d174803555e2d42cf8730f60a641bebf",
+        "manifest.json": "e4fe4db8b22c6ac9d24198a654d7652137c4cdece1fc8d7d16f6160a9c0f7775",
         "styles.css": "5e0d77d85e893f4aed0f2fbb80381340684d17241326dcaedf0ffca35e3421b9"
       }
     },
