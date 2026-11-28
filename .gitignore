@@ -78,3 +78,6 @@ DerivedData/
 # tracked, never shipped; both builders refuse to ship either suffix.
 *.local.md
 *.update
+
+# The maintainer's own vault paths for release/align.py: personal, never tracked
+release/vaults.local.json

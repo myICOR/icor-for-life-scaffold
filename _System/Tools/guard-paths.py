@@ -7,6 +7,8 @@ It refuses, with the reason and where the file belongs:
   - a change to AboutMe.md, the person's own page: an AI reads it and never writes it;
   - a file inside the folder but outside its folders (the numbered folders in _System/schema.json, _System, and dot
     folders such as .claude, .agents, .obsidian, .icor-for-life).
+In the scaffold's own repository, recognised by release/build-zip.py (a member's folder never has it: the zip leaves
+release/ out), its repository folders release/ and tests/ are allowed too (Tom, 2026-11-28).
 Paths outside the folder are not this hook's business. Wired in .claude/settings.json; reads the hook's JSON on stdin.
 Exit 0 lets the write through; exit 2 refuses it and Claude reads the message.
 
@@ -17,6 +19,7 @@ from pathlib import Path
 
 sys.dont_write_bytecode = True
 KEEP = {"readme.md", "agents.md", "aboutme.md", "claude.md", "license.md", "security.md"}
+REPO_ONLY = {"release", "tests"}   # the scaffold repository's own folders; build-zip.py leaves them out of the zip
 LEGACY = {"06 AI Team"}       # a 2.x room a migrated folder may still hold (a myPKA team lives there); 03 WiP is gone in 3.0
 IMAGE = {"png", "jpg", "jpeg", "gif", "webp", "heic", "heif", "avif", "svg", "bmp", "tif", "tiff", "mp4", "mov", "m4v", "webm"}
 AUDIO = {"mp3", "m4a", "wav", "aac", "flac", "ogg", "opus", "aif", "aiff", "caf"}
@@ -78,6 +81,8 @@ def verdict(path_text: str, cwd: str):
     top = parts[0]
     if top.startswith(".") or top == "_System" or top in rooms or top in LEGACY:
         return None
+    if top in REPO_ONLY and (vault / "release" / "build-zip.py").is_file():
+        return None                       # the scaffold repository itself, never a member's folder
     return (f"Refused: {top}/ is not one of this vault's folders ({', '.join(rooms)}). Put {parts[-1]} in "
             f"{home_for(parts[-1], rooms)} instead. AGENTS.md (\"Where files go\") has the rule.")
 

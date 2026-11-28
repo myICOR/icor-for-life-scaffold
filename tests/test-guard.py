@@ -41,6 +41,17 @@ with tempfile.TemporaryDirectory() as tmp:
     for rel in allowed:
         code, msg = hook(str(v / rel), v)
         check(code == 0, f"hook refuses {rel}: {msg}")
+    # release/ and tests/ are the scaffold repository's own folders: refused in a member's folder, allowed in the repository
+    for rel in ["release/align.py", "tests/test-x.py"]:
+        code, _ = hook(str(v / rel), v)
+        check(code == 2, f"hook lets {rel} through in a member's folder")
+    (v / "release").mkdir(); (v / "release/build-zip.py").write_text("# the scaffold repository\n")
+    for rel in ["release/align.py", "tests/test-x.py"]:
+        code, msg = hook(str(v / rel), v)
+        check(code == 0, f"hook refuses {rel} in the scaffold repository: {msg}")
+    code, _ = hook(str(v / "Random/thing.md"), v)
+    check(code == 2, "the scaffold repository lets any other top folder through")
+    (v / "release/build-zip.py").unlink(); (v / "release").rmdir()
     (v / "AboutMe.md").write_text("me\n")
     code, msg = hook(str(v / "AboutMe.md"), v)
     check(code == 2 and "read-only" in msg and "Memory.md" in msg, f"hook lets an AI change AboutMe.md: {msg!r}")
