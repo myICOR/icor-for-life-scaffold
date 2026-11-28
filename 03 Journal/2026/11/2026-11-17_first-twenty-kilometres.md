@@ -16,6 +16,6 @@ tags: [example]
 
 20 kilometres for the first time. Slow, but done. Halfway to the marathon distance and four months to go.
 
-## Expansion
+## AI Expansion
 
 Milestone on the way to [[Run a marathon]].

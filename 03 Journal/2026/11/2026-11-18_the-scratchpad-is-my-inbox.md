@@ -18,6 +18,6 @@ tags: [example]
 
 Realised today that the Daily Scratchpad is really my inbox. Everything lands there first, messy, and the evening is when I carry the pieces home. The trick is to never organise while capturing.
 
-## Expansion
+## AI Expansion
 
 Connects to [[Why I keep a Daily Scratchpad]].

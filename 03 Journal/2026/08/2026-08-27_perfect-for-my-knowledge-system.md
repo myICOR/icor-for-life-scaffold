@@ -12,6 +12,6 @@ tags: [example]
 
 I think this is perfect to build my knowledge system in Obsidian.
 
-## Expansion
+## AI Expansion
 
 The first entry of this example vault. The words above are the person's own, kept exactly as written; this part is what an AI adds. It links to [[Knowledge Management]], so the topic page finds it, and the source that started the thought, [[How to Take Smart Notes]], is in the Outer World.
