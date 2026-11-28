@@ -37,6 +37,14 @@ your AI keeps its record in the folder.
   stage's colour: subfolders as before, now files and chevrons too, a step softer, so the folder on top still stands
   out. Dated folders ("08 Workbench/2026-11-28 ...") showed grey and are in their stage now. The lock pins ICOR
   Interface 0.13.0 and INKLINE 1.11.0.
+- **ICOR Terminal draws text at full size again (same day):** in Obsidian 1.15.1 every letter in the terminal was
+  drawn tiny in a full-size cell (Claude Code read as letters spaced far apart). Obsidian's new Chromium rejects the
+  font the terminal's WebGL renderer asked for; Terminal 0.3.3 asks for it in a form it accepts. The lock pins 0.3.3.
+  INKLINE 1.11.0 also centres the ICOR for Life banner, whose artwork sat off-centre inside its image.
+- **For the maintainer, not in the download (same day):** `release/align.py` keeps the lock, its builds and the
+  maintainer's vaults on the same plugins and theme, on demand: `pin <build>` puts a build into the lock, `rollout`
+  brings every vault to the lock with a backup first, `check` proves all three agree. It replaces an hourly background
+  job that read a stale lock. The guard hook allows `release/` and `tests/` in the scaffold's own repository only.
 
 ### Added
 - `AGENTS.md`: how the folder works, for any AI. Claude Code reads it directly when the folder has no `CLAUDE.md`,
