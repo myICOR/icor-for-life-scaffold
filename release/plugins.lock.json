@@ -160,13 +160,13 @@
     },
     {
       "id": "icor-for-life-terminal",
-      "version": "0.3.2",
+      "version": "0.3.3",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-terminal"
       },
       "files": {
-        "main.js": "670e266ac29ffb98978a12ef92b4867339678f1b6cb3baa59092b2e36d0980fb",
-        "manifest.json": "83ab7548d8cf6eb3a0d464b02bca6dd7d749475a5c6b86f881e3cc984d113536",
+        "main.js": "90f9f02e7eb41d2f73f79a3a746919b6a6673431bbe773ece397baf2938cb228",
+        "manifest.json": "703bf7b585c5839a1a7f45c6c11f1e33e51e3f1eaf2d1f5f27f4a216c26c2121",
         "styles.css": "3952b11d6e34e8b4c66f99361bf1b2f557b8fc2d79672172b4e635f855d59a11"
       }
     }
