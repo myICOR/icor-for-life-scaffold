@@ -2,13 +2,13 @@
   "$comment": "What the ICOR for Life download bundles. release/build-zip.py copies exactly these files and refuses any whose sha256 differs. A local source is a build on the maintainer's computer (local testing); a release uses GitHub releases only.",
   "theme": {
     "name": "ICOR for Life - INKLINE",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "source": {
-      "local": "/Users/tom/projects/icor-for-life-inkline-stages"
+      "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-inkline"
     },
     "files": {
-      "theme.css": "96d61ca44e6dc7276e659ee78a806b8c33578929fb44ffc48919bd8be6a63cac",
-      "manifest.json": "4e13167811d000d321e19616ae91f8944d220d1630b36fedc487f04521e38cdf"
+      "theme.css": "1ab9ebda2f2988e28ca61a88e00bd8800f30c7103e36af5461e6344e6944b75e",
+      "manifest.json": "9daf5b4177853b1597b095dc014dae06b87a2b0239f8fe0a526873f07c000289"
     }
   },
   "plugins": [
@@ -62,13 +62,13 @@
     },
     {
       "id": "icor-for-life-interface",
-      "version": "0.12.0",
+      "version": "0.13.0",
       "source": {
         "local": "/Users/tom/projects/icor-for-life-vault-build/plugins-staging/icor-for-life-interface"
       },
       "files": {
-        "main.js": "aeda6588a2e6e18964cd161d8a0882c7e558f3724827f5dc807c0402d2dfe159",
-        "manifest.json": "2d70516cfc451a85f92121e3b5574d8f6a7791f608f927c997a8a028dced8065",
+        "main.js": "a7ea835787029ac9cf0e22f81896a178760afaf643abf556188e71dc944e7862",
+        "manifest.json": "aa8cee56db2feafc852dcb681ce3f305ae4c4d1f695e88b5c5ad13d08b4c2803",
         "styles.css": "6fbbb6004396c0aafb54f27289f3155597a7938dd5aa916f2604c61418327dcf"
       }
     },

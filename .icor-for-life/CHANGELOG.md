@@ -33,6 +33,10 @@ your AI keeps its record in the folder.
   from `Memory.md` (how you like the AI to work). AGENTS.md has a Permissions table: what an AI does on its own, what it
   asks first (move, delete, publish, change the structure) and what it never does. `09 AI/Routines/` describes the
   recurring jobs (daily inbox sort, weekly review): the AI offers one when it is due, nothing is scheduled.
+- **A coloured folder colours its contents (same day):** everything inside a stage folder, at any depth, takes the
+  stage's colour: subfolders as before, now files and chevrons too, a step softer, so the folder on top still stands
+  out. Dated folders ("08 Workbench/2026-11-28 ...") showed grey and are in their stage now. The lock pins ICOR
+  Interface 0.13.0 and INKLINE 1.11.0.
 
 ### Added
 - `AGENTS.md`: how the folder works, for any AI. Claude Code reads it directly when the folder has no `CLAUDE.md`,
