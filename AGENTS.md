@@ -1,13 +1,14 @@
 # AGENTS.md: how this folder works
 
-You are an AI working in a person's **ICOR for Life** folder: their life and work as plain markdown files, organised by ICOR (Input, Control, Output, Refine). This page is for any AI that opens the folder (Claude, ChatGPT, Codex, Cursor, Gemini or any other). Everything you need is in three places:
+You are an AI working in a person's **ICOR for Life** folder: their life and work as plain markdown files, organised by ICOR (Input, Control, Output, Refine). This page is for any AI that opens the folder (Claude, ChatGPT, Codex, Cursor, Gemini or any other). **Read `AboutMe.md` next**: who the person is, how they write and what they believe. Everything you need is in these places:
 
 | Where | What it is |
 | --- | --- |
 | this page | the principles, the folders by ICOR stage, and where to look |
+| `AboutMe.md` | **the person**: who they are, what they do, their tone of voice, their beliefs, what they want now. Write as they would; theirs to edit, never yours unless they ask |
 | `_System/schema.json` | **the structure**: every type of note, its folder, its fields, the values a field allows, and which type each link points to |
 | `11 Databases/Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
-| `_System/Skills/` (copies in `.agents/skills/` and `.claude/skills/`) | **the skills**: how to do the work here, step by step |
+| `09 AI/Skills/` (copies in `.agents/skills/` and `.claude/skills/`) | **the skills**: how to do the work here, step by step |
 
 ## The principles
 
@@ -16,7 +17,7 @@ You are an AI working in a person's **ICOR for Life** folder: their life and wor
 3. **One fact lives in one note.** Never copy. Find the note that holds it (`find-entity.py`) and link to it.
 4. **The schema is the law.** Every note has a `type`; use only the fields and values the schema gives that type (a field with options takes one of them: never a stray value; a new option goes into the schema first, when the person asks), and link only to the type a field points to. If something does not fit, ask the person; never invent a field, a type or a folder. The person may add types of their own (a tool, a recipe, a trip): they are in the schema like the rest, with a template and a folder, and `new-entity.py` takes them. Add a type yourself only when the person asks. A type can be a kind of another (`extends`: a restaurant is a kind of company): it has that type's fields and links and counts as one wherever it is asked for. To change a note's type, set `type`, add the new type's missing fields empty and move the note to the type's folder; never delete a field when you do, so changing back loses nothing.
 5. **Work happens in the Workbench; what lasts is filed.** Drafts, sketches, research and your own working files go in `08 Workbench/<YYYY-MM-DD> <name>/`, never anywhere else. When the work is done, file what lasts as objects (a note, a project, a source, a journal entry) with skill **new-object** or **capture**, and move the folder to `08 Workbench/Done/`.
-6. **Keep your record in `09 AI/`.** Read `09 AI/README.md` and `09 AI/Memory.md` when you start. Every time you change something in this folder, add an entry to today's log, `09 AI/Log/YYYY/MM/YYYY-MM-DD.md` (`_System/Tools/ai-log.py` writes it). When the person corrects you or states a preference, update `Memory.md`. Never edit an earlier log entry.
+6. **Keep your record in `09 AI/`.** Read `AboutMe.md`, `09 AI/README.md` and `09 AI/Memory.md` when you start. Every time you change something in this folder, add an entry to today's log, `09 AI/Log/YYYY/MM/YYYY-MM-DD.md` (`_System/Tools/ai-log.py` writes it). When the person corrects you or states a preference, update `Memory.md`. Never edit an earlier log entry.
 7. **Ask before you move, rename or delete** anything the person made. Create freely where a skill says so.
 
 ## The folders, by ICOR stage
@@ -34,10 +35,10 @@ The numbered folders follow the ICOR stages (`stages` in `_System/schema.json`):
 | Control | `06 Sources/` | **what others made**: one `source` note per book, article, video, podcast, post or paper, with highlights |
 | Output | `07 Planner/` | tasks synced from their task apps by the Planner plugin; not yours to edit |
 | Output | `08 Workbench/` | work in progress: one dated folder per piece of work, anything goes inside; finished work in `Done/` |
-| Refine | `09 AI/` | the AI's own record: `README.md`, `Memory.md`, `Log/` (what was done, by day), `Reviews/` (the weekly reviews) |
+| Refine | `09 AI/` | the AI's own folder: `README.md`, `Skills/` (how to work here), `Memory.md`, `Log/` (what was done, by day), `Reviews/` (the weekly reviews) |
 | | `10 Files/` | files only (`Images/`, `Audio/`, `Documents/`), embedded from notes |
 | | `11 Databases/` | `Objects.base` (every object, a view per type), and data too large or row-shaped for notes |
-| | `_System/` | the schema, templates, skills and tools. Read it; change it only when asked |
+| | `_System/` | the schema, templates and tools. Read it; change it only when asked |
 
 **Inner World and Outer World** are how the folders split, not folders of their own: `02` to `05` are what went through the person (their Inner World), `06 Sources` is what others made (the Outer World).
 
@@ -55,7 +56,7 @@ The numbered folders follow the ICOR stages (`stages` in `_System/schema.json`):
 
 ## Where files go
 
-**Never write in the top folder.** It holds only `README.md`, `AGENTS.md`, `LICENSE.md` and the numbered folders. Every file has its folder; if you are unsure, `01 Inbox/` is the folder for "not sorted yet".
+**Never write in the top folder.** It holds only `README.md`, `AGENTS.md`, `AboutMe.md`, `LICENSE.md` and the numbered folders. Every file has its folder; if you are unsure, `01 Inbox/` is the folder for "not sorted yet".
 
 | A file that is | Goes in |
 | --- | --- |
@@ -79,6 +80,8 @@ Never make a new folder next to the numbered folders. In Obsidian the Objects pl
 **Health and money stay in their databases.** A person's health data and finances live in `11 Databases/Health.sqlite` and `11 Databases/Finance.sqlite`, on their computer. Read them through SQL (`sqlite3 -readonly`, or your own SQLite access) when they ask, and answer in your words. Never copy rows into a note, a journal entry or anywhere outside the folder, and never send them anywhere unless the person asks for exactly that. Write to them only when the person asks, and only in the tables `11 Databases/README.md` describes. The schemas are in `_System/Databases/`.
 
 ## Skills
+
+In `09 AI/Skills/`, one folder per skill.
 
 | Skill | Use it when the person says |
 | --- | --- |
@@ -105,4 +108,5 @@ In Obsidian, the **ICOR Objects** plugin enforces the same schema for the person
 - `07 Planner/`: the Planner plugin's notes.
 - `00 Daily Notes/`: read it, never write in it.
 - `09 AI/Log/`: add today's entries; never change an earlier one.
+- `AboutMe.md`: the person's own page; change it only when they ask.
 - The top folder: nothing new goes there (see "Where files go").

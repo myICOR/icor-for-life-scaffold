@@ -6,6 +6,7 @@
   "newFileLocation": "folder",
   "newFileFolderPath": "00 Daily Notes",
   "userIgnoreFilters": [
-    "_System/"
+    "_System/",
+    "09 AI/Skills/"
   ]
 }

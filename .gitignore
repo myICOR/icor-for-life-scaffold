@@ -53,7 +53,7 @@
 # content hash and a link has none, and the release zip lists files only. The
 # source of truth is tracked; this rendering of it is not.
 .agents/skills/
-# the same copies for Claude Code; release/build-zip.py makes both from _System/Skills
+# the same copies for Claude Code; release/build-zip.py makes both from 09 AI/Skills
 .claude/skills/
 # the release builder's work folders
 release/.cache/

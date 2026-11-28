@@ -8,7 +8,7 @@
 What it does, in order:
   1. the tree is `git archive HEAD`: committed files only, so nothing uncommitted or ignored can reach a member;
   2. what belongs to the repository stays out: tests/, release/, .github/, .gitignore, SECURITY.md;
-  3. the skills are copied from _System/Skills to .agents/skills and .claude/skills, where AI tools look;
+  3. the skills are copied from 09 AI/Skills to .agents/skills and .claude/skills, where AI tools look;
   4. every plugin and the theme in release/plugins.lock.json is copied in, each file checked against its sha256;
   5. .icor-for-life/manifest.json describes every file of the download;
   6. the gates (below) must all hold, or nothing is written;
@@ -17,7 +17,7 @@ What it does, in order:
 The gates: one top folder; no .env, data.json, workspace-mobile.json, .DS_Store, __pycache__ or symlink anywhere; no
 06 AI Team; nothing that looks like a key outside the plugins' own code; every turned-on plugin present with an id
 that matches its folder; the theme Obsidian is set to use is present; the schema parses; the skill copies are
-identical to _System/Skills; VERSION is the version in the file name.
+identical to 09 AI/Skills; VERSION is the version in the file name.
 """
 import argparse, hashlib, io, json, os, re, shutil, subprocess, sys, tarfile, tempfile, zipfile
 from pathlib import Path
@@ -90,7 +90,7 @@ def main():
             elif q.exists(): q.unlink()
         # 3. the skill copies
         for target in (".agents/skills", ".claude/skills"):
-            shutil.copytree(stage / "_System/Skills", stage / target)
+            shutil.copytree(stage / "09 AI/Skills", stage / target)
         # 4. plugins and theme
         cache = REPO / "release/.cache"
         for p in lock["plugins"]:
@@ -129,10 +129,10 @@ def main():
         if theme and not (stage / ".obsidian/themes" / theme / "theme.css").is_file(): fail.append(f"the theme {theme} is set but not bundled")
         try: json.loads((stage / "_System/schema.json").read_text())
         except Exception as e: fail.append(f"_System/schema.json does not parse: {e}")
-        src_sk = {rel(p)[len("_System/Skills/"):]: p.read_bytes() for p in (stage / "_System/Skills").rglob("*") if p.is_file()}
+        src_sk = {rel(p)[len("09 AI/Skills/"):]: p.read_bytes() for p in (stage / "09 AI/Skills").rglob("*") if p.is_file()}
         for target in (".agents/skills", ".claude/skills"):
             got = {p.relative_to(stage / target).as_posix(): p.read_bytes() for p in (stage / target).rglob("*") if p.is_file()}
-            if got != src_sk: fail.append(f"{target} differs from _System/Skills")
+            if got != src_sk: fail.append(f"{target} differs from 09 AI/Skills")
         if (stage / ".icor-for-life/VERSION").read_text().strip() != version: fail.append("VERSION disagrees")
         if fail:
             print("\n".join("BLOCKED " + f for f in fail))

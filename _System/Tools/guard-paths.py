@@ -2,7 +2,7 @@
 """guard-paths.py: Claude Code's PreToolUse hook for Write, Edit and MultiEdit in an ICOR for Life folder.
 
 It refuses, with the reason and where the file belongs:
-  - a file in the folder's top level, except its own pages (README.md, AGENTS.md, CLAUDE.md, LICENSE.md, SECURITY.md)
+  - a file in the folder's top level, except its own pages (README.md, AGENTS.md, AboutMe.md, CLAUDE.md, LICENSE.md, SECURITY.md)
     and dot files;
   - a file inside the folder but outside its folders (the numbered folders in _System/schema.json, _System, and dot
     folders such as .claude, .agents, .obsidian, .icor-for-life).
@@ -15,7 +15,7 @@ import json, os, sys
 from pathlib import Path
 
 sys.dont_write_bytecode = True
-KEEP = {"readme.md", "agents.md", "claude.md", "license.md", "security.md"}
+KEEP = {"readme.md", "agents.md", "aboutme.md", "claude.md", "license.md", "security.md"}
 LEGACY = {"06 AI Team"}       # a 2.x room a migrated folder may still hold (a myPKA team lives there); 03 WiP is gone in 3.0
 IMAGE = {"png", "jpg", "jpeg", "gif", "webp", "heic", "heif", "avif", "svg", "bmp", "tif", "tiff", "mp4", "mov", "m4v", "webm"}
 AUDIO = {"mp3", "m4a", "wav", "aac", "flac", "ogg", "opus", "aif", "aiff", "caf"}

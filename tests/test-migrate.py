@@ -140,6 +140,22 @@ def cases(tmp: Path):
     r = run(v)
     check("a second run finds nothing to do", "already" in r.stdout + r.stderr, r.stdout + r.stderr)
 
+    print("a Workbench folder from before the skills moved to 09 AI")
+    v = tmp / "workbench"
+    for d in ("02 My Life", "03 Journal", "04 Notes", "05 Contacts", "06 Sources", "07 Planner", "08 Workbench", "09 AI", "10 Files", "11 Databases"):
+        (v / d).mkdir(parents=True)
+    write(v, ".icor-for-life/VERSION", "3.0.0\n")
+    write(v, "_System/Skills/capture/SKILL.md", "my own capture\n")
+    r = run(v, "--live")
+    check("it is not turned away as already done", r.returncode == 0 and "already" not in r.stdout, r.stdout + r.stderr)
+    check("the skills moved, with the person's change", (v / "09 AI/Skills/capture/SKILL.md").read_text() == "my own capture\n"
+          and not (v / "_System/Skills").exists())
+    check("the shipped version waits beside it", (v / "09 AI/Skills/capture/SKILL.md.update").is_file())
+    check("AboutMe.md is added", (v / "AboutMe.md").read_text() == (ROOT / "AboutMe.md").read_text())
+    write(v, "AboutMe.md", "me\n")
+    r = run(v, "--live")
+    check("a second run leaves it alone", "already" in r.stdout + r.stderr and (v / "AboutMe.md").read_text() == "me\n", r.stdout + r.stderr)
+
     print("a run that stopped part way is finished by the next one")
     v = tmp / "resumed"
     vault_30(v)

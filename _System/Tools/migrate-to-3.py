@@ -213,7 +213,8 @@ def main():
         sys.exit("FAIL that is the 3.0 download itself; give the folder you want to bring to 3.0")
     version = (old / ".icor-for-life/VERSION").read_text().strip() if (old / ".icor-for-life/VERSION").is_file() else "unknown"
     if version.startswith("3.") and not any((old / k).is_dir() for k, _ in MOVES) and all(
-            (old / f).is_dir() for f in ("08 Workbench", "09 AI")):
+            (old / f).is_dir() for f in ("08 Workbench", "09 AI/Skills")) and not (old / "_System/Skills").exists() \
+            and (old / "AboutMe.md").is_file():
         sys.exit(f"OK {old.name} is already {version}")
     agents = old / "AGENTS.md"
     team = (old / ".mypka").is_dir() or (agents.is_file() and MARK not in agents.read_text(encoding="utf-8", errors="ignore"))
@@ -222,12 +223,22 @@ def main():
 
     # 0. the folders follow the ICOR stages
     rename_stages(plan, old)
-    # 1. what every device needs
-    copy_tree(plan, NEW / "_System", old / "_System", "_System (schema, templates, skills, tools)")
+    # 1. what every device needs; the skills moved from _System/Skills to 09 AI/Skills (2026-11-28), with any change of yours
+    if (old / "_System/Skills").is_dir() and not (old / "09 AI/Skills").exists():
+        def move_skills():
+            (old / "09 AI").mkdir(exist_ok=True)
+            shutil.move(str(old / "_System/Skills"), str(old / "09 AI/Skills"))
+        plan.do("_System/Skills → 09 AI/Skills (the skills live with your AI now)", move_skills)
+    elif (old / "_System/Skills").is_dir():
+        plan.note("Both _System/Skills and 09 AI/Skills are there. 09 AI/Skills is the one AI tools get; "
+                  "move anything of yours from _System/Skills into it and delete _System/Skills.")
+    copy_tree(plan, NEW / "_System", old / "_System", "_System (schema, templates, tools)")
     # 2. the Outer World, the Workbench and the AI's folder
     copy_tree(plan, NEW / "06 Sources", at(old, "06 Sources"), "06 Sources (README, Web Clipper template, Readwise, Sources.base)")
     copy_tree(plan, NEW / "08 Workbench", old / "08 Workbench", "08 Workbench (where you work)")
-    copy_tree(plan, NEW / "09 AI", old / "09 AI", "09 AI (your AI's memory, log and weekly reviews)")
+    copy_tree(plan, NEW / "09 AI", old / "09 AI", "09 AI (your AI's skills, memory, log and weekly reviews)")
+    if not (old / "AboutMe.md").exists():
+        plan.do("AboutMe.md (who you are, for your AI: fill it in)", lambda: shutil.copy2(NEW / "AboutMe.md", old / "AboutMe.md"))
     # 3. how any AI reads the folder
     if team:
         copy_tree_file = NEW / "AGENTS.md"
@@ -243,7 +254,7 @@ def main():
         plan.note("Your folder has a CLAUDE.md. Claude Code reads AGENTS.md only when there is no CLAUDE.md: "
                   "add the line @AGENTS.md to your CLAUDE.md, or remove it if it holds nothing of yours.")
     for target in (".agents/skills", ".claude/skills"):
-        copy_tree(plan, NEW / "_System/Skills", old / target, f"{target} (the skills, where AI tools look)")
+        copy_tree(plan, NEW / "09 AI/Skills", old / target, f"{target} (the skills, where AI tools look)")
 
     # 4. Obsidian: Templates points at _System/Templates
     obs = old / ".obsidian"

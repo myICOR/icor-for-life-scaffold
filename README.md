@@ -24,7 +24,7 @@ Your life and your work in one folder of plain markdown files, organised by ICOR
 | Control | `06 Sources` | what others made: books, articles, videos, podcasts, with your highlights |
 | Output | `07 Planner` | your tasks, synced by the Planner plugin |
 | Output | `08 Workbench` | where you work: one folder per piece of work, messy on purpose |
-| Refine | `09 AI` | your AI's record: what it did, what it learned about you, your weekly reviews |
+| Refine | `09 AI` | your AI's folder: its skills, what it did, what it learned about you, your weekly reviews |
 | | `10 Files` | images, audio and documents |
 | | `11 Databases` | the tables: `Objects.base` (every object), and data your notes cannot hold |
 
@@ -35,6 +35,8 @@ Your life and your work in one folder of plain markdown files, organised by ICOR
 **Work in the Workbench, keep what lasts.** Start a folder in `08 Workbench` for anything you are working on: a plan, a draft, a sketch, research for a decision. Write a `brief.md` first (what it is, what it serves, the next step). When it is done, what lasts becomes a note, a journal entry or a project update, and the folder moves to `Done/`.
 
 **Your AI keeps a log.** Any AI that works here writes what it did in `09 AI/Log/`, one file a day, and keeps what it learned about you in `09 AI/Memory.md`. Change AI tools and the record stays with you.
+
+**Tell your AI who you are.** `AboutMe.md`, in the top folder, is your page: who you are, what you do, how you write, what you believe. Fill it in once and every AI that opens the folder writes and decides more like you.
 
 The notes tagged `example` show how each kind of note looks. Keep them as long as they help, then delete them.
 
@@ -66,7 +68,7 @@ Keeping your health or your finances here? The two databases stay on this comput
 
 - **Your files stay yours.** Plain text in a folder on your computer (and, if you keep them, two SQLite files in 11 Databases): no account, no lock-in. Back it up like any folder; Obsidian Sync, iCloud and Dropbox all carry it.
 - **The look:** Settings, ICOR Interface: Gradient or Flat, and where a note's properties show (on top, folded, under the note, or only in the right sidebar).
-- **`_System`** holds the structure, templates, skills and tools your AI and the plugins use. It is hidden in the file tree and kept out of search and the quick switcher; ICOR Interface shows it.
+- **`_System`** holds the structure, templates and tools your AI and the plugins use. It is hidden in the file tree and kept out of search and the quick switcher; ICOR Interface shows it.
 - **The icons are in the ribbon.** Every ICOR for Life plugin keeps its icon in the ribbon on the left. Right-click the ribbon to reorder or hide icons. Two of them fold the file tree: Collapse all folders, and Show the open note in the file tree. The file tree's own row of buttons is hidden; ICOR Interface's settings bring it back.
 
 ## Learn the method

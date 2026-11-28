@@ -16,7 +16,7 @@
     "06 Sources": "what others made: one source note per book, article, video, podcast, post or paper, with your highlights",
     "07 Planner": "tasks synced from your task apps by the Planner plugin",
     "08 Workbench": "work in progress: one dated folder per piece of work, anything goes inside; finished work moves to Done/",
-    "09 AI": "your AI's own record: how it works here, what it learned (Memory.md), what it did (Log/) and the weekly reviews (Reviews/)",
+    "09 AI": "your AI's own folder: how it works here (Skills/), what it learned (Memory.md), what it did (Log/) and the weekly reviews (Reviews/)",
     "10 Files": "files only (Images/, Audio/, Documents/), embedded from notes",
     "11 Databases": "Objects.base (every object, a view per type), and data too large or row-shaped for notes; no notes"
   },

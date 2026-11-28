@@ -63,7 +63,7 @@ cmds = [h["command"] for e in s["hooks"]["PreToolUse"] for h in e["hooks"] if "W
 check(any("guard-paths.py" in c and "$CLAUDE_PROJECT_DIR" in c for c in cmds), ".claude/settings.json does not run guard-paths.py on Write and Edit")
 check("## Where files go" in (ROOT / "AGENTS.md").read_text() and "Never write in the top folder" in (ROOT / "AGENTS.md").read_text(), "AGENTS.md lacks the rule")
 for sk in ("capture", "new-object"):
-    check("top folder" in (ROOT / f"_System/Skills/{sk}/SKILL.md").read_text(), f"skill {sk} does not say where files go")
+    check("top folder" in (ROOT / f"09 AI/Skills/{sk}/SKILL.md").read_text(), f"skill {sk} does not say where files go")
 
 if fails:
     print("\n".join("FAIL " + f for f in fails)); sys.exit(1)

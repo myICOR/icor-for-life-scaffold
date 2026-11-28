@@ -24,6 +24,11 @@ your AI keeps its record in the folder.
 - **Changed:** AGENTS.md principle 5: work happens in the Workbench and the AI keeps its record in `09 AI`, instead of
   "nothing here is yours". Refine has a folder and a colour in `stages`. A type of your own goes in `04 Notes/<Type>`
   (or `06 Sources/<Type>`). `migrate-to-3.py` brings 2.x and both earlier 3.0 layouts here.
+- **The AI's folder holds its skills, and the person has a page (same day):** `_System/Skills` → `09 AI/Skills`, so
+  everything about your AI is in one folder you can read and change (copies still go to `.agents/skills` and
+  `.claude/skills`). New `AboutMe.md` in the top folder: who you are, what you do, how you write, what you believe,
+  what you want now, what an AI should never do for you. AGENTS.md sends every AI there next; it ships with
+  placeholders to fill in. `migrate-to-3.py` moves the skills and adds the page.
 
 ### Added
 - `AGENTS.md`: how the folder works, for any AI. Claude Code reads it directly when the folder has no `CLAUDE.md`,

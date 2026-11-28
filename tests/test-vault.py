@@ -102,7 +102,7 @@ untidy = [str(p.relative_to(ROOT)) for p in visible if TIDY.tidy_top(p.read_text
 check("no note or template starts with a blank line or its own title", not untidy, untidy[:8])
 
 # --- the skills ------------------------------------------------------------------------------------------------------
-skills = sorted(p for p in (ROOT / "_System/Skills").iterdir() if p.is_dir())
+skills = sorted(p for p in (ROOT / "09 AI/Skills").iterdir() if p.is_dir())
 check("nine skills", len(skills) == 9, [p.name for p in skills])
 agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 for sk in skills:
@@ -114,7 +114,7 @@ for sk in skills:
     for tool in set(re.findall(r"_System/Tools/([a-z-]+\.py)", md)):
         check(f"skill {sk.name}: the tool {tool} exists", (ROOT / "_System/Tools" / tool).is_file())
     for other in set(re.findall(r"skill \*\*([a-z-]+)\*\*", md)):
-        check(f"skill {sk.name}: the skill it names, {other}, exists", (ROOT / "_System/Skills" / other).is_dir())
+        check(f"skill {sk.name}: the skill it names, {other}, exists", (ROOT / "09 AI/Skills" / other).is_dir())
 
 # --- the Obsidian settings agree with what ships ---------------------------------------------------------------------
 lock = json.loads((ROOT / "release/plugins.lock.json").read_text(encoding="utf-8"))
@@ -156,7 +156,7 @@ names = {Path(f).stem for f in tracked} | {Path(f).name for f in tracked}
 broken = []
 rooms = tuple(schema["folders"])
 for f in shipped:
-    if not f.endswith(".md") or not f.startswith(rooms):
+    if not f.endswith(".md") or not f.startswith(rooms) or f.startswith("09 AI/Skills/"):  # a skill's links are examples
         continue
     for link in re.findall(r"\[\[([^\]|#]+)", (ROOT / f).read_text(encoding="utf-8", errors="ignore")):
         target = link.strip().split("/")[-1]

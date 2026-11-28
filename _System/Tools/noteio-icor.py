@@ -64,7 +64,7 @@ def read_note(path) -> tuple:
     return data.decode("utf-8"), detect_eol(data)
 
 
-TOP_KEEP = {"readme.md", "agents.md", "claude.md", "license.md", "security.md"}
+TOP_KEEP = {"readme.md", "agents.md", "aboutme.md", "claude.md", "license.md", "security.md"}
 
 
 def refuse_top_level(path) -> None:
