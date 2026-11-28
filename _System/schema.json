@@ -296,6 +296,7 @@
         "linked_projects",
         "linked_topics",
         "mood",
+        "pinned",
         "source",
         "tags"
       ],
@@ -342,7 +343,7 @@
       "path": "YYYY/MM/YYYY-MM-DD_<slug>.md",
       "sections": [
         "## Original Text",
-        "## Expansion"
+        "## AI Expansion"
       ]
     },
     "key-element": {

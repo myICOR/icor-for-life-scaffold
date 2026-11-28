@@ -45,6 +45,10 @@ your AI keeps its record in the folder.
   maintainer's vaults on the same plugins and theme, on demand: `pin <build>` puts a build into the lock, `rollout`
   brings every vault to the lock with a backup first, `check` proves all three agree. It replaces an hourly background
   job that read a stale lock. The guard hook allows `release/` and `tests/` in the scaffold's own repository only.
+- **Journal entries (same day):** pin an entry (`pinned: true`, an optional journal field) and ICOR Journal 0.5.0 keeps it
+  in a Pinned section at the top of the Journal. A new entry starts right under its properties and its AI's section is
+  `## AI Expansion` (template, `new-journal-entry.py`, the write-journal-entry skill, the schema). ICOR Objects 0.11.0
+  shows a dated note's title as words with its date as a badge beside its type. The lock pins both.
 
 ### Added
 - `AGENTS.md`: how the folder works, for any AI. Claude Code reads it directly when the folder has no `CLAUDE.md`,

@@ -29,7 +29,7 @@ Then in its frontmatter (fields in `_System/schema.json`, type `journal`):
 ## The two sections
 
 - `## Original Text`: their words, **verbatim, forever**. Never edit, shorten or "improve" them.
-- `## Expansion`: what you add, marked as yours by living here: context you know, connections you see.
+- `## AI Expansion`: what you add, marked as yours by living here and by its name: context you know, connections you see.
 
 A person's story lives in the journal; their contact note only holds properties.
 

@@ -16,6 +16,6 @@ tags: []
 
 
 
-## Expansion
+## AI Expansion
 
 

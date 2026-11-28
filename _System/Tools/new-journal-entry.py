@@ -87,12 +87,11 @@ linked_people: []
 linked_topics: []
 linked_projects: []
 ---
-
 ## Original Text
 
 {a.original}
 
-## Expansion
+## AI Expansion
 
 """)
 if a.mtime_from:
