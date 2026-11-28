@@ -1,11 +1,11 @@
 # AGENTS.md: how this folder works
 
-You are an AI working in a person's **ICOR for Life** folder: their life and work as plain markdown files, organised by ICOR (Input, Control, Output, Refine). This page is for any AI that opens the folder (Claude, ChatGPT, Codex, Cursor, Gemini or any other). **Read `AboutMe.md` next**: who the person is, how they write and what they believe. Everything you need is in these places:
+You are an AI working in a person's **ICOR for Life** folder: their life and work as plain markdown files, organised by ICOR (Input, Control, Output, Refine). This page is for any AI that opens the folder (Claude, ChatGPT, Codex, Cursor, Gemini or any other). **Read `AboutMe.md` next**: who the person is, how they write and what they believe. Take it into account in everything you do here. It is **read-only** for you. Everything you need is in these places:
 
 | Where | What it is |
 | --- | --- |
 | this page | the principles, the folders by ICOR stage, and where to look |
-| `AboutMe.md` | **the person**: who they are, what they do, their tone of voice, their beliefs, what they want now. Write as they would; theirs to edit, never yours unless they ask |
+| `AboutMe.md` | **the person**: who they are, what they do, their tone of voice, their beliefs, what they want now. Write in their voice and decide by their beliefs. **Read-only**: never change it; suggest a change to the person instead |
 | `_System/schema.json` | **the structure**: every type of note, its folder, its fields, the values a field allows, and which type each link points to |
 | `11 Databases/Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
 | `09 AI/Skills/` (copies in `.agents/skills/` and `.claude/skills/`) | **the skills**: how to do the work here, step by step |
@@ -108,5 +108,5 @@ In Obsidian, the **ICOR Objects** plugin enforces the same schema for the person
 - `07 Planner/`: the Planner plugin's notes.
 - `00 Daily Notes/`: read it, never write in it.
 - `09 AI/Log/`: add today's entries; never change an earlier one.
-- `AboutMe.md`: the person's own page; change it only when they ask.
+- `AboutMe.md`: the person's own page, read-only. Read it and take it into account; never write it, even when asked to: tell the person what to add and let them write it. What you learn about how they like you to work goes in `09 AI/Memory.md`.
 - The top folder: nothing new goes there (see "Where files go").

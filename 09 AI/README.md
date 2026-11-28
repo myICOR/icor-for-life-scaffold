@@ -11,4 +11,6 @@ Your AI's own folder: how it works here, and its record. Whichever AI you point 
 
 Your Daily Notes are what you wrote. The Log is what your AI did. Read both in the weekly review: that is the Refine in ICOR.
 
-`AGENTS.md`, in the top folder, is where every AI starts reading. `AboutMe.md`, beside it, is who you are: your AI reads it next. Then it comes here.
+`AGENTS.md`, in the top folder, is where every AI starts reading. `AboutMe.md`, beside it, is who you are: your AI reads it next and takes it into account in everything it does, read-only. Only you write it. Then your AI comes here.
+
+**AboutMe.md or Memory.md?** AboutMe is who you are, in your words, and changes rarely. Memory is how you like your AI to work, and your AI adds to it.

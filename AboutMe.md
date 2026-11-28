@@ -1,4 +1,4 @@
-Who you are, for any AI that works in this folder. It reads this page right after `AGENTS.md`, so it knows whose life this is, how you sound and what matters to you. You write it; your AI never changes it unless you ask. Replace each line in *italics* with your own words, and leave out what you would rather not say.
+Who you are, for any AI that works in this folder. It reads this page right after `AGENTS.md`, so it knows whose life this is, how you sound and what matters to you. You write it; your AI takes it into account in everything it does and never changes it. Replace each line in *italics* with your own words, and leave out what you would rather not say.
 
 ## Who I am
 

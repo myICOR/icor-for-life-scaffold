@@ -4,6 +4,7 @@
 It refuses, with the reason and where the file belongs:
   - a file in the folder's top level, except its own pages (README.md, AGENTS.md, AboutMe.md, CLAUDE.md, LICENSE.md, SECURITY.md)
     and dot files;
+  - a change to AboutMe.md, the person's own page: an AI reads it and never writes it;
   - a file inside the folder but outside its folders (the numbered folders in _System/schema.json, _System, and dot
     folders such as .claude, .agents, .obsidian, .icor-for-life).
 Paths outside the folder are not this hook's business. Wired in .claude/settings.json; reads the hook's JSON on stdin.
@@ -66,6 +67,10 @@ def verdict(path_text: str, cwd: str):
     rooms = rooms_of(vault)
     if len(parts) == 1:
         name = parts[0]
+        if name.lower() == "aboutme.md" and (vault / name).exists():
+            return ("Refused: AboutMe.md is the person's own page, read-only for an AI. Take it into account; to change it, "
+                    "tell the person what you would add and let them write it. What you learn about how they work goes in "
+                    "09 AI/Memory.md. AGENTS.md has the rule.")
         if name.startswith(".") or name.lower() in KEEP:
             return None
         return (f"Refused: {name} would land in the top folder of this ICOR for Life folder, which holds only README.md, "

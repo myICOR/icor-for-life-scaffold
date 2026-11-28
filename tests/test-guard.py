@@ -41,6 +41,11 @@ with tempfile.TemporaryDirectory() as tmp:
     for rel in allowed:
         code, msg = hook(str(v / rel), v)
         check(code == 0, f"hook refuses {rel}: {msg}")
+    (v / "AboutMe.md").write_text("me\n")
+    code, msg = hook(str(v / "AboutMe.md"), v)
+    check(code == 2 and "read-only" in msg and "Memory.md" in msg, f"hook lets an AI change AboutMe.md: {msg!r}")
+    code, msg = hook(str(v / "AboutMe.md"), Path(tmp))
+    check(code == 2, "hook lets an AI change AboutMe.md from outside the folder's cwd")
     code, _ = hook("04 Notes/relative.md", v)
     check(code == 0, "hook refuses a relative path inside a room")
     code, _ = hook("stray.png", v)
