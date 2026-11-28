@@ -29,6 +29,10 @@ your AI keeps its record in the folder.
   `.claude/skills`). New `AboutMe.md` in the top folder: who you are, what you do, how you write, what you believe,
   what you want now, what an AI should never do for you. AGENTS.md sends every AI there next; it ships with
   placeholders to fill in. `migrate-to-3.py` moves the skills and adds the page.
+- **Decisions, permissions and routines (same day):** `09 AI/Decisions.md` holds the standing decisions, dated, apart
+  from `Memory.md` (how you like the AI to work). AGENTS.md has a Permissions table: what an AI does on its own, what it
+  asks first (move, delete, publish, change the structure) and what it never does. `09 AI/Routines/` describes the
+  recurring jobs (daily inbox sort, weekly review): the AI offers one when it is due, nothing is scheduled.
 
 ### Added
 - `AGENTS.md`: how the folder works, for any AI. Claude Code reads it directly when the folder has no `CLAUDE.md`,

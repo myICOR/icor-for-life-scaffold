@@ -34,7 +34,7 @@ Your life and your work in one folder of plain markdown files, organised by ICOR
 
 **Work in the Workbench, keep what lasts.** Start a folder in `08 Workbench` for anything you are working on: a plan, a draft, a sketch, research for a decision. Write a `brief.md` first (what it is, what it serves, the next step). When it is done, what lasts becomes a note, a journal entry or a project update, and the folder moves to `Done/`.
 
-**Your AI keeps a log.** Any AI that works here writes what it did in `09 AI/Log/`, one file a day, and keeps what it learned about you in `09 AI/Memory.md`. Change AI tools and the record stays with you.
+**Your AI keeps a log.** Any AI that works here writes what it did in `09 AI/Log/`, one file a day, and keeps what it learned about you in `09 AI/Memory.md` and what you decided in `09 AI/Decisions.md`. The jobs it does again and again, like the daily inbox sort and the weekly review, are described in `09 AI/Routines/`. `AGENTS.md` says what it may do on its own and what it asks you first. Change AI tools and the record stays with you.
 
 **Tell your AI who you are.** `AboutMe.md`, in the top folder, is your page: who you are, what you do, how you write, what you believe. Fill it in once and every AI that opens the folder writes and decides more like you.
 

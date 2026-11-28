@@ -17,8 +17,20 @@ You are an AI working in a person's **ICOR for Life** folder: their life and wor
 3. **One fact lives in one note.** Never copy. Find the note that holds it (`find-entity.py`) and link to it.
 4. **The schema is the law.** Every note has a `type`; use only the fields and values the schema gives that type (a field with options takes one of them: never a stray value; a new option goes into the schema first, when the person asks), and link only to the type a field points to. If something does not fit, ask the person; never invent a field, a type or a folder. The person may add types of their own (a tool, a recipe, a trip): they are in the schema like the rest, with a template and a folder, and `new-entity.py` takes them. Add a type yourself only when the person asks. A type can be a kind of another (`extends`: a restaurant is a kind of company): it has that type's fields and links and counts as one wherever it is asked for. To change a note's type, set `type`, add the new type's missing fields empty and move the note to the type's folder; never delete a field when you do, so changing back loses nothing.
 5. **Work happens in the Workbench; what lasts is filed.** Drafts, sketches, research and your own working files go in `08 Workbench/<YYYY-MM-DD> <name>/`, never anywhere else. When the work is done, file what lasts as objects (a note, a project, a source, a journal entry) with skill **new-object** or **capture**, and move the folder to `08 Workbench/Done/`.
-6. **Keep your record in `09 AI/`.** Read `AboutMe.md`, `09 AI/README.md` and `09 AI/Memory.md` when you start. Every time you change something in this folder, add an entry to today's log, `09 AI/Log/YYYY/MM/YYYY-MM-DD.md` (`_System/Tools/ai-log.py` writes it). When the person corrects you or states a preference, update `Memory.md`. Never edit an earlier log entry.
-7. **Ask before you move, rename or delete** anything the person made. Create freely where a skill says so.
+6. **Keep your record in `09 AI/`.** Read `AboutMe.md`, `09 AI/README.md`, `09 AI/Memory.md` and `09 AI/Decisions.md` when you start, and look in `09 AI/Routines/` for a routine that is due: offer it, never run it unasked. Every time you change something in this folder, add an entry to today's log, `09 AI/Log/YYYY/MM/YYYY-MM-DD.md` (`_System/Tools/ai-log.py` writes it). When the person corrects you or states a preference, update `Memory.md`; when they decide something that should hold, add it to `Decisions.md` with the date. Never edit an earlier log entry, and never go against a standing decision without asking.
+7. **Stay inside your permissions** (below). When in doubt, ask.
+
+## Permissions
+
+What you may do on your own, and what needs the person's OK first. The person can change this in `09 AI/Decisions.md`; a decision there wins.
+
+| On your own | Ask first | Never |
+| --- | --- | --- |
+| read anything in the folder (except `.env`) | move, rename or delete anything the person made | change `AboutMe.md` |
+| create what a skill says to create: a note, a journal entry, a source, an object, a Workbench folder | change the structure: `_System/schema.json`, a template, a new type or field | write in `00 Daily Notes/` or edit `07 Planner/` |
+| add links and fill empty fields on a note you just made | change a note the person wrote, beyond adding a link | edit an earlier log entry |
+| write the AI log, `Memory.md` and `Decisions.md` (a decision the person just made) | send, post or publish anything outside the folder (an email, a message, a post, a release) | read `.env` out loud, or copy a secret anywhere |
+| run the tools in `_System/Tools/` that only read or check | run a tool that rewrites many notes, or a repair; install or remove a plugin | spend money or accept terms for the person |
 
 ## The folders, by ICOR stage
 
@@ -35,7 +47,7 @@ The numbered folders follow the ICOR stages (`stages` in `_System/schema.json`):
 | Control | `06 Sources/` | **what others made**: one `source` note per book, article, video, podcast, post or paper, with highlights |
 | Output | `07 Planner/` | tasks synced from their task apps by the Planner plugin; not yours to edit |
 | Output | `08 Workbench/` | work in progress: one dated folder per piece of work, anything goes inside; finished work in `Done/` |
-| Refine | `09 AI/` | the AI's own folder: `README.md`, `Skills/` (how to work here), `Memory.md`, `Log/` (what was done, by day), `Reviews/` (the weekly reviews) |
+| Refine | `09 AI/` | the AI's own folder: `README.md`, `Skills/` (how to work here), `Routines/` (the recurring jobs), `Memory.md`, `Decisions.md`, `Log/` (what was done, by day), `Reviews/` (the weekly reviews) |
 | | `10 Files/` | files only (`Images/`, `Audio/`, `Documents/`), embedded from notes |
 | | `11 Databases/` | `Objects.base` (every object, a view per type), and data too large or row-shaped for notes |
 | | `_System/` | the schema, templates and tools. Read it; change it only when asked |
