@@ -122,16 +122,16 @@ def write(root, rel, text):
 
 
 def rooms(root, planner=True, scratchpad=True, goals=True, notes=True):
-    made = ["02 Inner World/My Life/Projects",
-            "02 Inner World/My Life/Key Elements",
-            "02 Inner World/My Life/Topics",
-            "02 Inner World/Journal"]
+    made = ["02 My Life/Projects",
+            "02 My Life/Key Elements",
+            "02 My Life/Topics",
+            "03 Journal"]
     if goals:
-        made.append("02 Inner World/My Life/Goals")
+        made.append("02 My Life/Goals")
     if notes:
-        made.append("02 Inner World/Notes")
+        made.append("04 Notes")
     if planner:
-        made.append("06 Planner/Todoist")
+        made.append("07 Planner/Todoist")
     if scratchpad:
         made.append("00 Daily Notes")
     for d in made:
@@ -141,7 +141,7 @@ def rooms(root, planner=True, scratchpad=True, goals=True, notes=True):
 def journal(root, offset, slug, front_extra="", body=""):
     d = day(offset)
     y, m = d[:4], d[5:7]
-    write(root, "02 Inner World/Journal/%s/%s/%s-%s.md" % (y, m, d, slug),
+    write(root, "03 Journal/%s/%s/%s-%s.md" % (y, m, d, slug),
           "---\ntype: journal\ndate: %s\n%s---\n%s\n" % (d, front_extra, body))
 
 
@@ -182,7 +182,7 @@ with tempfile.TemporaryDirectory() as td:
     V = TD / "attention"
     rooms(V)
     for t in ("Topic A", "Topic B", "Topic C", "Topic D"):
-        write(V, "02 Inner World/My Life/Topics/%s.md" % t,
+        write(V, "02 My Life/Topics/%s.md" % t,
               "---\ntype: topic\n---\n")
     journal(V, 3, "a-one", "linked_topics: [\"[[Topic A]]\"]\n")
     journal(V, 10, "a-two", "linked_topics: [\"[[Topic A]]\"]\n")
@@ -194,7 +194,7 @@ with tempfile.TemporaryDirectory() as td:
     write(V, "06 AI Team/AI Team Knowledge/Session Logs/2026/09/log.md",
           "---\ndate: %s\n---\nWorked on [[Topic C]] all day.\n" % day(1))
     # negative control: a touched file is not an attended file
-    p = write(V, "02 Inner World/My Life/Topics/Topic D.md",
+    p = write(V, "02 My Life/Topics/Topic D.md",
               "---\ntype: topic\n---\n")
     os.utime(p, (time.time(), time.time()))
 
@@ -225,7 +225,7 @@ with tempfile.TemporaryDirectory() as td:
     print("double counting")
     V = TD / "scratchpad"
     rooms(V)
-    write(V, "02 Inner World/My Life/Topics/Topic B.md", "---\ntype: topic\n---\n")
+    write(V, "02 My Life/Topics/Topic B.md", "---\ntype: topic\n---\n")
     write(V, "00 Daily Notes/%s.md" % day(2), "thinking about [[Topic B]]\n")
     journal(V, 2, "from-the-pad", "linked_topics: [\"[[Topic B]]\"]\n")
     rep, r = snap(V)
@@ -238,7 +238,7 @@ with tempfile.TemporaryDirectory() as td:
 
     V = TD / "scratchpad-raw"
     rooms(V)
-    write(V, "02 Inner World/My Life/Topics/Topic B.md", "---\ntype: topic\n---\n")
+    write(V, "02 My Life/Topics/Topic B.md", "---\ntype: topic\n---\n")
     write(V, "00 Daily Notes/%s.md" % day(2), "thinking about [[Topic B]]\n")
     rep, r = snap(V)
     b = by_name(rep["topics"]["hot"], "Topic B") if rep else None
@@ -252,7 +252,7 @@ with tempfile.TemporaryDirectory() as td:
     print("link shapes")
     V = TD / "shapes"
     rooms(V)
-    write(V, "02 Inner World/My Life/Topics/scaffold-over-model.md",
+    write(V, "02 My Life/Topics/scaffold-over-model.md",
           "---\nname: Scaffold over model\n---\n")
     journal(V, 1, "slug-shape", "linked_topics:\n  - scaffold-over-model\n")
     journal(V, 2, "wikilink-shape",
@@ -268,7 +268,7 @@ with tempfile.TemporaryDirectory() as td:
     V = TD / "focus"
     rooms(V)
     for i, rank in enumerate((1, 2, 3, 3), start=1):
-        write(V, "02 Inner World/My Life/Projects/P%d.md" % i,
+        write(V, "02 My Life/Projects/P%d.md" % i,
               "---\ntype: project\nstatus: active\nfocus_rank: %d\n---\n" % rank)
     rep, r = snap(V)
     ids = [f["id"] for f in rep["findings"]] if rep else []
@@ -287,7 +287,7 @@ with tempfile.TemporaryDirectory() as td:
 
     V = TD / "focus-none"
     rooms(V)
-    write(V, "02 Inner World/My Life/Projects/P1.md",
+    write(V, "02 My Life/Projects/P1.md",
           "---\ntype: project\nstatus: active\n---\n")
     rep, r = snap(V)
     check("no rank anywhere: focus[] empty and degraded names focus_rank",
@@ -297,7 +297,7 @@ with tempfile.TemporaryDirectory() as td:
 
     V = TD / "focus-paused"
     rooms(V)
-    write(V, "02 Inner World/My Life/Projects/P1.md",
+    write(V, "02 My Life/Projects/P1.md",
           "---\ntype: project\nstatus: paused\nfocus_rank: 1\n---\n")
     rep, r = snap(V)
     check("focus_rank_not_active fires on a paused project",
@@ -308,13 +308,13 @@ with tempfile.TemporaryDirectory() as td:
     print("goals")
     V = TD / "goals"
     rooms(V)
-    write(V, "02 Inner World/My Life/Goals/Late.md",
+    write(V, "02 My Life/Goals/Late.md",
           "---\ntype: goal\nstatus: active\ntarget_date: %s\n---\n" % day(30))
-    write(V, "02 Inner World/My Life/Goals/Later.md",
+    write(V, "02 My Life/Goals/Later.md",
           "---\ntype: goal\nstatus: active\ntarget_date: %s\n---\n" % day(-10))
-    write(V, "02 Inner World/My Life/Goals/Someday.md",
+    write(V, "02 My Life/Goals/Someday.md",
           "---\ntype: goal\nstatus: active\ntarget_date:\n---\n")
-    write(V, "02 Inner World/My Life/Goals/Done.md",
+    write(V, "02 My Life/Goals/Done.md",
           "---\ntype: goal\nstatus: achieved\n---\n")
     rep, r = snap(V)
     check("a closed goal is not open", len(rep["goals"]["open"]) == 3,
@@ -332,16 +332,16 @@ with tempfile.TemporaryDirectory() as td:
     print("goal carriers")
     V = TD / "carriers"
     rooms(V)
-    write(V, "02 Inner World/My Life/Goals/Floor.md",
+    write(V, "02 My Life/Goals/Floor.md",
           "---\ntype: goal\nstatus: active\n"
           "linked_projects:\n  - podcast-relaunch\n"
           "linked_habits:\n  - weekly-cadence\n"
           "linked_workstreams:\n  - WS-013-video-publishing-lifecycle\n"
           "linked_topics:\n  - revenue-growth\n---\n")
-    write(V, "02 Inner World/My Life/Goals/Public.md",
+    write(V, "02 My Life/Goals/Public.md",
           "---\ntype: goal\nstatus: not-achieved\n"
           "workstreams: [\"[[WS-1002-weekly-review|WS-1002]]\"]\n---\n")
-    write(V, "02 Inner World/My Life/Goals/Plain.md",
+    write(V, "02 My Life/Goals/Plain.md",
           "---\ntype: goal\nstatus: active\n---\n")
     rep, r = snap(V)
     floor = by_name(rep["goals"]["open"], "Floor")
@@ -396,7 +396,7 @@ with tempfile.TemporaryDirectory() as td:
     rooms(V)
     y, w, _ = TODAY.isocalendar()
     week_id = "%04d-W%02d" % (y, w)
-    write(V, "06 Planner/Weeks/%s.md" % week_id,
+    write(V, "07 Planner/Weeks/%s.md" % week_id,
           "---\ntype: planner-week\nweek: %s\n---\n\n"
           "## Weekly priorities\n%s\n"
           "- [ ] Ship the explainer video\n"
@@ -423,7 +423,7 @@ with tempfile.TemporaryDirectory() as td:
 
     V = TD / "week-over-max"
     rooms(V)
-    write(V, "06 Planner/Weeks/%s.md" % week_id,
+    write(V, "07 Planner/Weeks/%s.md" % week_id,
           "---\ntype: planner-week\nweek: %s\n---\n\n## Weekly priorities\n%s\n%s\n"
           % (week_id, LS.PRIORITIES_SENTINEL,
              "\n".join("- [ ] priority %d" % i for i in range(1, 8))))
@@ -438,12 +438,12 @@ with tempfile.TemporaryDirectory() as td:
     rooms(V, planner=False)
     rep, r = snap(V)
     srcs = [d["source"] for d in rep["degraded"]]
-    check("a missing 06 Planner is degraded, exit 0",
+    check("a missing 07 Planner is degraded, exit 0",
           r.returncode == 0 and "planner" in srcs, str(srcs))
 
     V = TD / "planner-unlinked"
     rooms(V)
-    write(V, "06 Planner/Todoist/Task.md",
+    write(V, "07 Planner/Todoist/Task.md",
           "---\ntype: planner-item\nstatus: open\nplanned_day: %s\n"
           "weekly_goal: false\n---\n" % TODAY.isoformat())
     rep, r = snap(V)
@@ -472,14 +472,14 @@ with tempfile.TemporaryDirectory() as td:
     V = TD / "not-a-vault"
     V.mkdir()
     r = run(V, "--json", "--write")
-    check("a root without '02 Inner World' exits 1", r.returncode == 1,
+    check("a root without '02 My Life' exits 1", r.returncode == 1,
           str(r.returncode))
     check("and writes no file",
           not (V / ".icor-for-life/scripts/snapshot.json").exists())
 
     V = TD / "secret"
     rooms(V)
-    write(V, "02 Inner World/My Life/Goals/Ship it.md",
+    write(V, "02 My Life/Goals/Ship it.md",
           "---\ntype: goal\nstatus: active\n"
           "name: \"ship with sk-abcdefghijklmnopqrstuvwxyz012345\"\n---\n")
     r = run(V, "--write")
@@ -496,9 +496,9 @@ with tempfile.TemporaryDirectory() as td:
     print("write, brief, staleness")
     V = TD / "write"
     rooms(V)
-    write(V, "02 Inner World/My Life/Goals/Run a marathon.md",
+    write(V, "02 My Life/Goals/Run a marathon.md",
           "---\ntype: goal\nstatus: not-achieved\nkey_elements: [\"[[Health]]\"]\n---\n")
-    write(V, "02 Inner World/My Life/Key Elements/Health.md",
+    write(V, "02 My Life/Key Elements/Health.md",
           "---\ntype: key-element\n---\n")
     r = run(V, "--write")
     dest = V / ".icor-for-life/scripts/snapshot.json"
@@ -602,7 +602,7 @@ with tempfile.TemporaryDirectory() as td:
         V = TD / ("secret-" + family)
         rooms(V)
         # the likeliest real paste: a checklist line in the week note
-        write(V, "06 Planner/Weeks/%s.md" % week_id,
+        write(V, "07 Planner/Weeks/%s.md" % week_id,
               "---\ntype: planner-week\nweek: %s\n---\n\n"
               "## Weekly priorities\n%s\n- [ ] rotate %s\n"
               % (week_id, LS.PRIORITIES_SENTINEL, sample))
@@ -715,7 +715,7 @@ with tempfile.TemporaryDirectory() as td:
     print("planner-week.py")
     V = TD / "pw"
     rooms(V)
-    note = V / "06 Planner/Weeks" / ("%s.md" % week_id)
+    note = V / "07 Planner/Weeks" / ("%s.md" % week_id)
 
     r = pw(V, "ensure")
     check("ensure creates the note", r.returncode == 0 and note.is_file(),
@@ -789,7 +789,7 @@ with tempfile.TemporaryDirectory() as td:
     # untouched by the next write.
     V = TD / "pw-plain"
     rooms(V)
-    note = V / "06 Planner/Weeks" / ("%s.md" % week_id)
+    note = V / "07 Planner/Weeks" / ("%s.md" % week_id)
     note.parent.mkdir(parents=True, exist_ok=True)
     note.write_text("---\ntype: planner-week\nweek: %s\n---\n\n"
                     "## Weekly priorities\n%s\n- [ ] one\n"
@@ -806,7 +806,7 @@ with tempfile.TemporaryDirectory() as td:
     # Axon 10.1: the CRLF case.
     V = TD / "pw-crlf"
     rooms(V)
-    note = V / "06 Planner/Weeks" / ("%s.md" % week_id)
+    note = V / "07 Planner/Weeks" / ("%s.md" % week_id)
     note.parent.mkdir(parents=True, exist_ok=True)
     crlf = ("---\r\ntype: planner-week\r\nweek: %s\r\n---\r\n\r\n"
             "## Weekly priorities\r\n%s\r\n- [ ] one\r\n\r\n"
@@ -834,7 +834,7 @@ with tempfile.TemporaryDirectory() as td:
     print("set-property.py")
     V = TD / "sp"
     rooms(V)
-    proj = write(V, "02 Inner World/My Life/Projects/Alpha.md",
+    proj = write(V, "02 My Life/Projects/Alpha.md",
                  "---\ntype: project\nstatus: active\ngoal: \"[[G]]\"\n---\nbody\n")
     r = sp(V, str(proj), "focus_rank", "1")
     check("focus_rank 1 is written",
@@ -863,7 +863,7 @@ with tempfile.TemporaryDirectory() as td:
     check("--dry writes nothing",
           "focus_rank" not in proj.read_text(encoding="utf-8"), r.stdout)
 
-    crlf_proj = V / "02 Inner World/My Life/Projects/Beta.md"
+    crlf_proj = V / "02 My Life/Projects/Beta.md"
     crlf_proj.write_bytes(b"---\r\ntype: project\r\nstatus: active\r\n---\r\nbody\r\n")
     sp(V, str(crlf_proj), "focus_rank", "3")
     raw = crlf_proj.read_bytes()
@@ -885,8 +885,8 @@ with tempfile.TemporaryDirectory() as td:
         smuggled = outside / "smuggled-goal.md"
         smuggled.write_text("---\ntype: goal\nname: Text from outside the vault\n"
                             "status: not-achieved\n---\nbody\n", encoding="utf-8")
-        os.symlink(smuggled, V / "02 Inner World/My Life/Goals/Innocent.md")
-        write(V, "02 Inner World/My Life/Goals/Real.md",
+        os.symlink(smuggled, V / "02 My Life/Goals/Innocent.md")
+        write(V, "02 My Life/Goals/Real.md",
               "---\ntype: goal\nname: A real goal\nstatus: not-achieved\n---\n")
         rep, r = snap(V)
         names = [g["name"] for g in rep["goals"]["open"]]
@@ -898,7 +898,7 @@ with tempfile.TemporaryDirectory() as td:
         V = TD / "symlink-journal"
         rooms(V)
         d = TODAY.isoformat()
-        month = V / "02 Inner World/Journal" / d[:4] / d[5:7]
+        month = V / "03 Journal" / d[:4] / d[5:7]
         month.mkdir(parents=True, exist_ok=True)
         os.symlink(smuggled, month / ("%s-smuggled.md" % d))
         rep, r = snap(V)

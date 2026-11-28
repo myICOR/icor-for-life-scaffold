@@ -9,6 +9,22 @@ where it went.
 preinstalled and turned on again. The AI team's room is gone: agents live outside the folder and learn it from
 `AGENTS.md`, the skills and the schema.
 
+### The Workbench layout (2026-11-28)
+Inspired by Stephen Anderson's sidebar: every place you use daily is one click away, there is a place to work, and
+your AI keeps its record in the folder.
+- **Moved up a level:** `02 Inner World/My Life` → `02 My Life`, `Journal` → `03 Journal`, `Notes` → `04 Notes`,
+  `Contacts` → `05 Contacts`; `Meetings` and `ICOR Journey Notes` → inside `04 Notes`. Inner World and Outer World
+  stay as the idea (02 to 05 are yours, 06 is what others made), not as a folder level.
+- **Renamed:** `03 Outer World` → `06 Sources`, `06 Planner` → `07 Planner`, `04 Assets` → `10 Files`,
+  `05 Databases` → `11 Databases`.
+- **Added:** `08 Workbench` (Output): one dated folder per piece of work with a `brief.md`, anything goes inside,
+  finished work in `Done/`. `09 AI` (Refine): `README.md`, `Memory.md`, `Log/` (one file a day, `type: log`) and
+  `Reviews/` (`type: review`). `_System/Tools/ai-log.py` writes the log; skill weekly-review reads the Workbench and
+  the log and keeps the review.
+- **Changed:** AGENTS.md principle 5: work happens in the Workbench and the AI keeps its record in `09 AI`, instead of
+  "nothing here is yours". Refine has a folder and a colour in `stages`. A type of your own goes in `04 Notes/<Type>`
+  (or `06 Sources/<Type>`). `migrate-to-3.py` brings 2.x and both earlier 3.0 layouts here.
+
 ### Added
 - `AGENTS.md`: how the folder works, for any AI. Claude Code reads it directly when the folder has no `CLAUDE.md`,
   as Codex, Cursor and the others do, so there is no `CLAUDE.md`.

@@ -6,7 +6,7 @@ You are an AI working in a person's **ICOR for Life** folder: their life and wor
 | --- | --- |
 | this page | the principles, the folders by ICOR stage, and where to look |
 | `_System/schema.json` | **the structure**: every type of note, its folder, its fields, the values a field allows, and which type each link points to |
-| `05 Databases/Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
+| `11 Databases/Objects.base` | every object in one table, a view per type; each type's folder has its own `.base` with all its fields |
 | `_System/Skills/` (copies in `.agents/skills/` and `.claude/skills/`) | **the skills**: how to do the work here, step by step |
 
 ## The principles
@@ -15,34 +15,43 @@ You are an AI working in a person's **ICOR for Life** folder: their life and wor
 2. **Connect before you file.** Ask what a thing connects to on their My Life map (a Key Element, a Goal, a Project, a Topic, a Habit) or which person it is about, and link it as a `[[wikilink]]`. A note that connects to nothing is lost; if nothing fits, do not file it.
 3. **One fact lives in one note.** Never copy. Find the note that holds it (`find-entity.py`) and link to it.
 4. **The schema is the law.** Every note has a `type`; use only the fields and values the schema gives that type (a field with options takes one of them: never a stray value; a new option goes into the schema first, when the person asks), and link only to the type a field points to. If something does not fit, ask the person; never invent a field, a type or a folder. The person may add types of their own (a tool, a recipe, a trip): they are in the schema like the rest, with a template and a folder, and `new-entity.py` takes them. Add a type yourself only when the person asks. A type can be a kind of another (`extends`: a restaurant is a kind of company): it has that type's fields and links and counts as one wherever it is asked for. To change a note's type, set `type`, add the new type's missing fields empty and move the note to the type's folder; never delete a field when you do, so changing back loses nothing.
-5. **Only what lasts comes in, and nothing here is yours.** Work in this folder the way an outside tool would through MCP or an API: read how it works, then file results as objects (a note, a project, a source, a journal entry) with skill **new-object** or **capture**. Drafts, research, memory and your own working files stay with you, outside the folder. No temporary folders, no folder of your own.
-6. **Ask before you move, rename or delete** anything the person made. Create freely where a skill says so.
+5. **Work happens in the Workbench; what lasts is filed.** Drafts, sketches, research and your own working files go in `08 Workbench/<YYYY-MM-DD> <name>/`, never anywhere else. When the work is done, file what lasts as objects (a note, a project, a source, a journal entry) with skill **new-object** or **capture**, and move the folder to `08 Workbench/Done/`.
+6. **Keep your record in `09 AI/`.** Read `09 AI/README.md` and `09 AI/Memory.md` when you start. Every time you change something in this folder, add an entry to today's log, `09 AI/Log/YYYY/MM/YYYY-MM-DD.md` (`_System/Tools/ai-log.py` writes it). When the person corrects you or states a preference, update `Memory.md`. Never edit an earlier log entry.
+7. **Ask before you move, rename or delete** anything the person made. Create freely where a skill says so.
 
 ## The folders, by ICOR stage
 
-The numbered folders follow the ICOR stages (`stages` in `_System/schema.json`): what comes in, what is kept and connected, what goes out. Refine has no folder: it happens in the plugins (AI Chat, Connect, Focus) and in the weekly review, and you do it from outside the folder.
+The numbered folders follow the ICOR stages (`stages` in `_System/schema.json`): what comes in, what is kept and connected, what goes out, and what you learn from it.
 
 | Stage | Folder | What lives there |
 | --- | --- | --- |
 | Input | `00 Daily Notes/YYYY/MM/` | the person's raw writing: one note a day and quick scratch notes. **Never edit or mark it.** Read it; carry a piece on when they ask |
 | Input | `01 Inbox/` | scans (`Scanner Inbox/`) and anything not yet sorted |
-| Control | `02 Inner World/` | **what went through the person**: `Journal/`, `Notes/`, `Contacts/`, `My Life/` |
-| Control | `03 Outer World/` | **what others made**: one `source` note per book, article, video, podcast, post or paper, with highlights |
-| Control | `04 Assets/` | files only (`Images/`, `Audio/`, `Documents/`), embedded from notes |
-| Control | `05 Databases/` | `Objects.base` (every object, a view per type), and data too large or row-shaped for notes |
-| Output | `06 Planner/` | tasks synced from their task apps by the Planner plugin; not yours to edit |
+| Control | `02 My Life/` | the map of the person's life: `Key Elements/`, `Goals/`, `Projects/`, `Topics/`, `Habits/` |
+| Control | `03 Journal/YYYY/MM/` | their journal entries, by date |
+| Control | `04 Notes/` | their knowledge: ideas, outlines, drafts, documents, `Meetings/`, `Highlights/`, `ICOR Journey Notes/` |
+| Control | `05 Contacts/` | `People/` and `Companies/` |
+| Control | `06 Sources/` | **what others made**: one `source` note per book, article, video, podcast, post or paper, with highlights |
+| Output | `07 Planner/` | tasks synced from their task apps by the Planner plugin; not yours to edit |
+| Output | `08 Workbench/` | work in progress: one dated folder per piece of work, anything goes inside; finished work in `Done/` |
+| Refine | `09 AI/` | the AI's own record: `README.md`, `Memory.md`, `Log/` (what was done, by day), `Reviews/` (the weekly reviews) |
+| | `10 Files/` | files only (`Images/`, `Audio/`, `Documents/`), embedded from notes |
+| | `11 Databases/` | `Objects.base` (every object, a view per type), and data too large or row-shaped for notes |
 | | `_System/` | the schema, templates, skills and tools. Read it; change it only when asked |
 
-**My Life** (`02 Inner World/My Life/`) is the map of the person's life: **Key Elements** (the big areas, like Health or Family), **Goals** (outcomes in a Key Element), **Projects** (work that serves a goal), **Topics** (subjects they follow) and **Habits**. Almost everything you file links to something on this map.
+**Inner World and Outer World** are how the folders split, not folders of their own: `02` to `05` are what went through the person (their Inner World), `06 Sources` is what others made (the Outer World).
+
+**My Life** (`02 My Life/`) is the map of the person's life: **Key Elements** (the big areas, like Health or Family), **Goals** (outcomes in a Key Element), **Projects** (work that serves a goal), **Topics** (subjects they follow) and **Habits**. Almost everything you file links to something on this map.
 
 ## What goes where
 
-- **The person wrote it, and it has a date as its identity** (what happened, what they thought): a journal entry, `02 Inner World/Journal/YYYY/MM/YYYY-MM-DD_<slug>.md`, one of four types: interaction, note, thought, milestone.
-- **The person's knowledge with a subject that keeps changing** (an idea, an outline, meeting notes, a draft): a note in `02 Inner World/Notes/`, linked to its project, Key Element or topic.
-- **Someone else made it** (a book, an article, a video, a podcast, a post): a `source` in `03 Outer World/`, linked to what it serves. The person's own thought about it is a journal entry or note that links to the source.
-- **A fact about a person or company**: a property on their note in `Contacts/`. The conversation itself is a journal entry of type `interaction` that links to them.
-- **A file you keep**: the file in `04 Assets/Documents/`, a `document` note in `Notes/` pointing at it.
-- **A goal, project, topic, habit or area of life**: one note in `My Life/`, short; the material links to it.
+- **The person wrote it, and it has a date as its identity** (what happened, what they thought): a journal entry, `03 Journal/YYYY/MM/YYYY-MM-DD_<slug>.md`, one of four types: interaction, note, thought, milestone.
+- **The person's knowledge with a subject that keeps changing** (an idea, an outline, meeting notes, a draft): a note in `04 Notes/`, linked to its project, Key Element or topic.
+- **Someone else made it** (a book, an article, a video, a podcast, a post): a `source` in `06 Sources/`, linked to what it serves. The person's own thought about it is a journal entry or note that links to the source.
+- **A fact about a person or company**: a property on their note in `05 Contacts/`. The conversation itself is a journal entry of type `interaction` that links to them.
+- **A file you keep**: the file in `10 Files/Documents/`, a `document` note in `04 Notes/` pointing at it.
+- **A goal, project, topic, habit or area of life**: one note in `02 My Life/`, short; the material links to it.
+- **Work not done yet** (a draft in several files, a sketch, research for a decision): a dated folder in `08 Workbench/`, with a `brief.md` first (what it is, the My Life item it serves as a link, the next step). Anything goes inside; nothing in it is checked.
 
 ## Where files go
 
@@ -50,9 +59,9 @@ The numbered folders follow the ICOR stages (`stages` in `_System/schema.json`):
 
 | A file that is | Goes in |
 | --- | --- |
-| a picture, a screenshot, a photo or a video | `04 Assets/Images/` |
-| a recording, a voice memo, a sound | `04 Assets/Audio/` |
-| a PDF, an office file, an e-book, a spreadsheet you keep | `04 Assets/Documents/` (and a `document` note in `02 Inner World/Notes/`) |
+| a picture, a screenshot, a photo or a video | `10 Files/Images/` |
+| a recording, a voice memo, a sound | `10 Files/Audio/` |
+| a PDF, an office file, an e-book, a spreadsheet you keep | `10 Files/Documents/` (and a `document` note in `04 Notes/`) |
 | a scan still to be filed | `01 Inbox/Scanner Inbox/` |
 | a note | the folder of its type in `_System/schema.json` (made with `new-entity.py`); unsorted: `01 Inbox/` |
 
@@ -65,9 +74,9 @@ Never make a new folder next to the numbered folders. In Obsidian the Objects pl
 
 ## What's core, what's optional
 
-`_System/parts.json` lists every piece that ships. **Core**, needed for the folder to work: the numbered folders, this page and `_System`; Obsidian's Daily notes, Templates, Properties and Bases; ICOR Objects, ICOR Journal, ICOR Planner and ICOR Interface (the ICOR for Life - INKLINE theme only changes the look). **Optional**, each removable on its own with nothing depending on it: ICOR Scratchpad, ICOR AI Chat, ICOR Connect, ICOR Focus, ICOR Canvases, ICOR Outliner, ICOR PDF Annotation, ICOR Terminal, ICOR SQLite Viewer, and the databases `05 Databases/Health.sqlite` and `05 Databases/Finance.sqlite`. Never assume an optional piece is there: check the plugin's folder in `.obsidian/plugins/` or the file before you use it, and say so when it is missing. Never remove a piece yourself unless the person asks.
+`_System/parts.json` lists every piece that ships. **Core**, needed for the folder to work: the numbered folders, this page and `_System`; Obsidian's Daily notes, Templates, Properties and Bases; ICOR Objects, ICOR Journal, ICOR Planner and ICOR Interface (the ICOR for Life - INKLINE theme only changes the look). **Optional**, each removable on its own with nothing depending on it: ICOR Scratchpad, ICOR AI Chat, ICOR Connect, ICOR Focus, ICOR Canvases, ICOR Outliner, ICOR PDF Annotation, ICOR Terminal, ICOR SQLite Viewer, and the databases `11 Databases/Health.sqlite` and `11 Databases/Finance.sqlite`. Never assume an optional piece is there: check the plugin's folder in `.obsidian/plugins/` or the file before you use it, and say so when it is missing. Never remove a piece yourself unless the person asks.
 
-**Health and money stay in their databases.** A person's health data and finances live in `05 Databases/Health.sqlite` and `05 Databases/Finance.sqlite`, on their computer. Read them through SQL (`sqlite3 -readonly`, or your own SQLite access) when they ask, and answer in your words. Never copy rows into a note, a journal entry or anywhere outside the folder, and never send them anywhere unless the person asks for exactly that. Write to them only when the person asks, and only in the tables `05 Databases/README.md` describes. The schemas are in `_System/Databases/`.
+**Health and money stay in their databases.** A person's health data and finances live in `11 Databases/Health.sqlite` and `11 Databases/Finance.sqlite`, on their computer. Read them through SQL (`sqlite3 -readonly`, or your own SQLite access) when they ask, and answer in your words. Never copy rows into a note, a journal entry or anywhere outside the folder, and never send them anywhere unless the person asks for exactly that. Write to them only when the person asks, and only in the tables `11 Databases/README.md` describes. The schemas are in `_System/Databases/`.
 
 ## Skills
 
@@ -93,6 +102,7 @@ In Obsidian, the **ICOR Objects** plugin enforces the same schema for the person
 
 - `.obsidian/`: the person's Obsidian settings, plugins and theme.
 - `.icor-for-life/`: this computer's machine files and `.env` (API keys). Never read `.env` out loud or copy it.
-- `06 Planner/`: the Planner plugin's notes.
+- `07 Planner/`: the Planner plugin's notes.
 - `00 Daily Notes/`: read it, never write in it.
+- `09 AI/Log/`: add today's entries; never change an earlier one.
 - The top folder: nothing new goes there (see "Where files go").

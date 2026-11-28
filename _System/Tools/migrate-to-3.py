@@ -5,12 +5,13 @@
     python3 "<3.0 download>/_System/Tools/migrate-to-3.py" "<your folder>" --live     do it
 
     --plugins     also add the plugins your folder does not have yet (Journal, Objects…) and turn them on
-    --sources     also turn reference notes in 02 Inner World/Notes into sources in 03 Outer World
+    --sources     also turn reference notes in 04 Notes into sources in 06 Sources
     --move-env    also copy 06 AI Team/AI Team Knowledge/.env to .icor-for-life/.env (the plugins read both)
 
-The numbered folders follow the ICOR stages (Input 00 Daily Notes, 01 Inbox; Control 02 Inner World, 03 Outer World,
-04 Assets, 05 Databases; Output 06 Planner): the old folders are renamed to these, and the paths written in your notes,
-bases, canvases and Obsidian settings follow. A myPKA team's files (06 AI Team, .mypka) are left as they are.
+The numbered folders follow the ICOR stages (Input 00 Daily Notes, 01 Inbox; Control 02 My Life, 03 Journal, 04 Notes,
+05 Contacts, 06 Sources; Output 07 Planner, 08 Workbench; Refine 09 AI; then 10 Files and 11 Databases): the old folders
+are moved to these (the Inner World's folders come up one level), and the paths written in your notes, bases, canvases
+and Obsidian settings follow. A myPKA team's files (06 AI Team, .mypka) are left as they are.
 
 It never deletes and never overwrites a file you have: where 3.0 has a different version of a file you already have,
 the new one lands beside yours as <file>.update. 06 AI Team stays where it is; when no AI team lives in it you can
@@ -26,11 +27,27 @@ NEW = HERE.parents[1]          # the 3.0 download this script came with
 MARK = "# AGENTS.md: how this folder works"
 
 
-# The ICOR stages (3.0, Tom 2026-11-23): the numbered folders, old name → new name. Matched by full name, never by
-# number: a 2.x folder may still hold 06 AI Team beside the new 06 Planner.
-STAGE_FOLDERS = {"00 Daily Scratchpad": "00 Daily Notes", "02 Planner": "06 Planner", "04 Inner World": "02 Inner World",
-                 "06 Outer World": "03 Outer World", "05 Assets": "04 Assets", "07 Databases": "05 Databases"}
-OLD_PATH = re.compile(r"(?<![\w-])(" + "|".join(re.escape(k) for k in STAGE_FOLDERS) + r")(?![\w-])")
+# The folders, old path → new path, in the order they move. Matched by full name, never by number: a 2.x folder may
+# still hold 06 AI Team, and 06 is Sources now. Two layouts come here: 2.x (00 Daily Scratchpad … 07 Databases) and the
+# first 3.0 one (02 Inner World, 03 Outer World, 04 Assets, 05 Databases, 06 Planner; Tom 2026-11-23). The Workbench
+# layout (Tom 2026-11-28) lifts the Inner World's folders to the top and gives the Workbench and the AI their own.
+MOVES = []
+for inner in ("04 Inner World", "02 Inner World"):
+    MOVES += [(f"{inner}/My Life", "02 My Life"), (f"{inner}/Journal", "03 Journal"), (f"{inner}/Notes", "04 Notes"),
+              (f"{inner}/Contacts", "05 Contacts"), (f"{inner}/Meetings", "04 Notes/Meetings"),
+              (f"{inner}/ICOR Journey Notes", "04 Notes/ICOR Journey Notes")]
+MOVES += [("00 Daily Scratchpad", "00 Daily Notes"), ("06 Outer World", "06 Sources"), ("03 Outer World", "06 Sources"),
+          ("02 Planner", "07 Planner"), ("06 Planner", "07 Planner"), ("05 Assets", "10 Files"), ("04 Assets", "10 Files"),
+          ("07 Databases", "11 Databases"), ("05 Databases", "11 Databases")]
+INNER = ("04 Inner World", "02 Inner World")      # what is left in them afterwards goes to 04 Notes/<folder>
+STAGE_FOLDERS = dict(MOVES)                       # old path → new path (at() and the tests read it)
+
+
+def path_rx(mapping):
+    keys = sorted(mapping, key=len, reverse=True)
+    return re.compile(r"(?<![\w-])(" + "|".join(re.escape(k) for k in keys) + r")(?![\w-])")
+
+
 REWRITE = {".md", ".base", ".canvas", ".json"}
 KEEP_OUT = {".git", ".trash", "node_modules", "06 AI Team", ".mypka"}
 
@@ -48,19 +65,62 @@ def path_files(root: Path):
 
 
 def rename_stages(plan, old: Path):
-    """Step 0: the folders get their stage numbers; then every written path follows."""
-    moves = []
-    for was, now in STAGE_FOLDERS.items():
+    """Step 0: the folders move to the 3.0 layout; then every written path follows."""
+    moves, taken = [], set()
+    for was, now in MOVES:
         if not (old / was).is_dir():
+            continue
+        if now in taken:
+            plan.note(f"{was} is left as it is: {now} comes from another folder. Move what is in it into {now} yourself.")
             continue
         if (old / now).exists():
             plan.note(f"Both {was} and {now} exist: {was} is left as it is. Move what is in it into {now} yourself.")
             continue
         moves.append((was, now))
+        taken.add(now)
+    def move(was, now):
+        (old / now).parent.mkdir(parents=True, exist_ok=True)
+        (old / was).rename(old / now)
     for was, now in moves:
-        plan.do(f"folder {was} → {now}", lambda was=was, now=now: (old / was).rename(old / now))
+        plan.do(f"folder {was} → {now}", lambda was=was, now=now: move(was, now))
+    # What is left in an Inner World: its own folders go to 04 Notes/<name>, its loose files (the old README) to a backup
+    moved_from = {w for w, _ in moves}
+    for inner in INNER:
+        root = old / inner
+        if not root.is_dir() or not any(w.startswith(inner + "/") for w in moved_from):
+            continue
+        for child in sorted(root.iterdir()):
+            rel = f"{inner}/{child.name}"
+            if rel in moved_from or child.name == ".DS_Store":
+                continue
+            if child.is_dir():
+                now = f"04 Notes/{child.name}"
+                if (old / now).exists() or now in taken:
+                    plan.note(f"{rel} is left where it is: 04 Notes already has a {child.name} folder.")
+                    continue
+                moves.append((rel, now))
+                taken.add(now)
+                plan.do(f"folder {rel} → {now}", lambda rel=rel, now=now: move(rel, now))
+            else:
+                keep = old / ".icor-for-life/backups/migrate-to-3" / inner / child.name
+                def stash(child=child, keep=keep):
+                    keep.parent.mkdir(parents=True, exist_ok=True)
+                    child.rename(keep)
+                plan.do(f"{rel} → {keep.relative_to(old)} (kept, not deleted)", stash)
+        def tidy(root=root):
+            ds = root / ".DS_Store"
+            if ds.is_file():
+                ds.unlink()
+            if root.is_dir() and not any(root.iterdir()):
+                root.rmdir()
+        plan.do(f"the empty {inner} folder is removed", tidy)
     if not moves:
         return
+    done = dict(moves)
+    for inner in INNER:
+        if any(w.startswith(inner + "/") for w in done):
+            done.setdefault(inner, "04 Notes")
+    rx = path_rx(done)
     def rewrite():
         n = 0
         for p in path_files(old):
@@ -68,7 +128,7 @@ def rename_stages(plan, old: Path):
                 text = p.read_text(encoding="utf-8")
             except (UnicodeDecodeError, OSError):
                 continue
-            new = OLD_PATH.sub(lambda m: STAGE_FOLDERS[m.group(1)] if m.group(1) in dict(moves) else m.group(1), text)
+            new = rx.sub(lambda m: done[m.group(1)], text)
             if new != text:
                 p.write_text(new, encoding="utf-8")
                 n += 1
@@ -80,8 +140,8 @@ def at(old: Path, new_name: str) -> Path:
     """Where a folder is now: under its new name, or still under its old one (a dry run renames nothing)."""
     if (old / new_name).exists():
         return old / new_name
-    was = next((k for k, v in STAGE_FOLDERS.items() if v == new_name), None)
-    return old / was if was and (old / was).exists() else old / new_name
+    was = next((k for k, v in MOVES if v == new_name and (old / k).exists()), None)
+    return old / was if was else old / new_name
 
 
 class Plan:
@@ -136,12 +196,13 @@ def main():
     ap.add_argument("--move-env", action="store_true")
     a = ap.parse_args()
     old = Path(a.folder).expanduser().resolve()
-    if not ((old / "02 Inner World").is_dir() or (old / "04 Inner World").is_dir()):
-        sys.exit(f"FAIL {old} does not look like an ICOR for Life folder (no Inner World)")
+    if not any((old / d).is_dir() for d in ("02 My Life", "04 Notes", "02 Inner World", "04 Inner World")):
+        sys.exit(f"FAIL {old} does not look like an ICOR for Life folder (no My Life, no Inner World)")
     if old == NEW:
         sys.exit("FAIL that is the 3.0 download itself; give the folder you want to bring to 3.0")
     version = (old / ".icor-for-life/VERSION").read_text().strip() if (old / ".icor-for-life/VERSION").is_file() else "unknown"
-    if version.startswith("3.") and not any((old / k).is_dir() for k in STAGE_FOLDERS):
+    if version.startswith("3.") and not any((old / k).is_dir() for k, _ in MOVES) and all(
+            (old / f).is_dir() for f in ("08 Workbench", "09 AI")):
         sys.exit(f"OK {old.name} is already {version}")
     agents = old / "AGENTS.md"
     team = (old / ".mypka").is_dir() or (agents.is_file() and MARK not in agents.read_text(encoding="utf-8", errors="ignore"))
@@ -152,8 +213,10 @@ def main():
     rename_stages(plan, old)
     # 1. what every device needs
     copy_tree(plan, NEW / "_System", old / "_System", "_System (schema, templates, skills, tools)")
-    # 2. the Outer World
-    copy_tree(plan, NEW / "03 Outer World", old / "03 Outer World", "03 Outer World (README, Web Clipper template, Readwise, Sources.base)")
+    # 2. the Outer World, the Workbench and the AI's folder
+    copy_tree(plan, NEW / "06 Sources", at(old, "06 Sources"), "06 Sources (README, Web Clipper template, Readwise, Sources.base)")
+    copy_tree(plan, NEW / "08 Workbench", old / "08 Workbench", "08 Workbench (where you work)")
+    copy_tree(plan, NEW / "09 AI", old / "09 AI", "09 AI (your AI's memory, log and weekly reviews)")
     # 3. how any AI reads the folder
     if team:
         copy_tree_file = NEW / "AGENTS.md"
@@ -221,7 +284,7 @@ def main():
                       "run again with --move-env to copy them to .icor-for-life/.env.")
 
     # 7. reference notes → sources
-    notes = at(old, "02 Inner World") / "Notes"
+    notes = at(old, "04 Notes")
     refs = []
     for f in sorted(notes.rglob("*.md")) if notes.is_dir() else []:
         fm, _ = frontmatter(f.read_text(encoding="utf-8", errors="ignore"))
@@ -229,9 +292,9 @@ def main():
             refs.append(f)
     if refs and a.sources:
         for f in refs:
-            to = at(old, "03 Outer World") / f.name
+            to = at(old, "06 Sources") / f.name
             if to.exists():
-                plan.note(f"{f.name} is already in 03 Outer World; left in Notes.")
+                plan.note(f"{f.name} is already in 06 Sources; left in Notes.")
                 continue
             def move(f=f, to=to):
                 text = f.read_text(encoding="utf-8")
@@ -242,11 +305,11 @@ def main():
                 to.parent.mkdir(parents=True, exist_ok=True)
                 to.write_text(f"---\n{fm}\n---\n{body}", encoding="utf-8")
                 f.unlink()
-            plan.do(f"source: {f.relative_to(old)} → 03 Outer World/{f.name}", move)
+            plan.do(f"source: {f.relative_to(old)} → 06 Sources/{f.name}", move)
         plan.note("Links to the moved sources keep working: Obsidian finds a note by its name.")
     elif refs:
-        plan.note(f"{len(refs)} reference note(s) in 02 Inner World/Notes. Run again with --sources to make them sources "
-                  "in 03 Outer World.")
+        plan.note(f"{len(refs)} reference note(s) in 04 Notes. Run again with --sources to make them sources "
+                  "in 06 Sources.")
     inbox = old / "01 Inbox/Outer World"
     if inbox.is_dir() and any(p.suffix == ".md" and p.name != "README.md" and "archive" not in p.parts for p in inbox.rglob("*.md")):
         plan.note("01 Inbox/Outer World still holds clips: process them (skill process-outer-world), then the folder can go.")
@@ -261,11 +324,12 @@ def main():
     plan.do(f"version {version} → {(NEW / '.icor-for-life/VERSION').read_text().strip()}", bump)
 
     if (old / "03 WiP").is_dir():
-        plan.note("03 WiP is not part of 3.0: work in progress stays where you do it, and only results come in. "
-                  "Your 03 WiP is untouched; file what is finished as notes or projects, then delete it when you like.")
+        plan.note("03 WiP is not part of 3.0: work in progress lives in 08 Workbench now, one dated folder per piece of "
+                  "work. Your 03 WiP is untouched; move what is still going into 08 Workbench, file what is finished.")
     if (old / "06 AI Team").is_dir():
         plan.note("06 AI Team is untouched. " + ("Your myPKA team lives there; keep it." if team else
-                  "No AI team lives there: once you are happy with 3.0, you can delete it (its templates and tools are in _System now)."))
+                  "No AI team lives there: once you are happy with 3.0, you can delete it (its templates and tools are in _System now; "
+                  "your AI keeps its log and memory in 09 AI)."))
 
     for i, s in enumerate(plan.steps, 1):
         print(f"  {i:2}. {s}")

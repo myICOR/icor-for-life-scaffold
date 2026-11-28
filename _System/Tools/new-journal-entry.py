@@ -68,7 +68,7 @@ if a.format is not None and a.format not in FORMATS:
 if not a.original.strip():
     sys.exit("FAIL empty --original; the user's words are required")
 
-dest = ROOT / "02 Inner World/Journal" / f"{d:%Y}" / f"{d:%m}" / f"{d}_{a.slug}.md"
+dest = ROOT / "03 Journal" / f"{d:%Y}" / f"{d:%m}" / f"{d}_{a.slug}.md"
 if dest.exists():
     sys.exit(f"FAIL entry already exists: {dest}")
 dest.parent.mkdir(parents=True, exist_ok=True)

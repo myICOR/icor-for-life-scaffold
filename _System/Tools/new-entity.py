@@ -80,17 +80,17 @@ _nio.loader.exec_module(noteio)
 # against validate-scaffold.py's REQUIRED list at run time (rooms_check),
 # so this map cannot name a folder the scaffold does not guarantee.
 ROOMS = {
-    "person":      "02 Inner World/Contacts/People",
-    "company":     "02 Inner World/Contacts/Companies",
-    "note":        "02 Inner World/Notes",
-    "document":    "02 Inner World/Notes",
-    "project":     "02 Inner World/My Life/Projects",
-    "goal":        "02 Inner World/My Life/Goals",
-    "habit":       "02 Inner World/My Life/Habits",
-    "topic":       "02 Inner World/My Life/Topics",
-    "key-element": "02 Inner World/My Life/Key Elements",
-    "source":      "03 Outer World",
-    "journal":     "02 Inner World/Journal",   # delegated, see below
+    "person":      "05 Contacts/People",
+    "company":     "05 Contacts/Companies",
+    "note":        "04 Notes",
+    "document":    "04 Notes",
+    "project":     "02 My Life/Projects",
+    "goal":        "02 My Life/Goals",
+    "habit":       "02 My Life/Habits",
+    "topic":       "02 My Life/Topics",
+    "key-element": "02 My Life/Key Elements",
+    "source":      "06 Sources",
+    "journal":     "03 Journal",   # delegated, see below
 }
 
 BUILT_IN = frozenset(ROOMS)
@@ -120,10 +120,10 @@ LINK_FIELDS = {
 # Fields that hold ONE wikilink rather than a list (GL-1002).
 SINGLE_FIELDS = {"goal", "planner_habit"}
 # Fields whose wikilink is written FULL-PATH-QUALIFIED,
-# `[[06 Planner/Habits/Morning walk]]`, rather than as the bare note name
+# `[[07 Planner/Habits/Morning walk]]`, rather than as the bare note name
 # (GL-1002 rows `habit` and `planner-habit`, ruling 2026-09-16). A habit and
 # its planner-habit note carry the SAME name by design, one in
-# `06 Planner/Habits/` and one in `02 Inner World/My Life/Habits/`, so a bare
+# `07 Planner/Habits/` and one in `02 My Life/Habits/`, so a bare
 # `[[Morning walk]]` cannot say which of the two it means: Obsidian resolves
 # it by proximity and every other reader has to guess (Brian Carroll, B2-3).
 QUALIFIED_FIELDS = {"planner_habit"}

@@ -1,4 +1,4 @@
--- Finance.sqlite: your own money, kept on this computer, in 05 Databases. Optional: delete the file if you do not
+-- Finance.sqlite: your own money, kept on this computer, in 11 Databases. Optional: delete the file if you do not
 -- keep your finances here. Amounts are whole cents (12.34 EUR is 1234; money out is negative), so sums never round.
 -- Read it with ICOR SQLite Viewer or any SQLite tool; your AI reads it through SQL and never copies it into
 -- notes. Made from this file by `python3 _System/Tools/new-database.py finance`.
@@ -7,7 +7,7 @@ CREATE TABLE about (key TEXT PRIMARY KEY, value TEXT NOT NULL);
 INSERT INTO about (key, value) VALUES
   ('what', 'Your money: accounts, transactions, categories and budgets. Yours only, never in a note.'),
   ('schema', '1'),
-  ('docs', '05 Databases/README.md');
+  ('docs', '11 Databases/README.md');
 
 CREATE TABLE accounts (
   id TEXT PRIMARY KEY,          -- a short name you pick: giro, savings, visa

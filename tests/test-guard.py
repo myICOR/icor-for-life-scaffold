@@ -27,21 +27,21 @@ with tempfile.TemporaryDirectory() as tmp:
     (v / "_System/schema.json").write_text((ROOT / "_System/schema.json").read_text())
     for room in json.loads((ROOT / "_System/schema.json").read_text())["folders"]:
         (v / room).mkdir()
-    refused = {"CleanShot 2026-11-21 at 00.30.03@2x.png": "04 Assets/Images/", "memo.m4a": "04 Assets/Audio/",
-               "Invoice.pdf": "04 Assets/Documents/", "Untitled.md": "01 Inbox", "board.canvas": "01 Inbox/", "Random/thing.md": "01 Inbox",
+    refused = {"CleanShot 2026-11-21 at 00.30.03@2x.png": "10 Files/Images/", "memo.m4a": "10 Files/Audio/",
+               "Invoice.pdf": "10 Files/Documents/", "Untitled.md": "01 Inbox", "board.canvas": "01 Inbox/", "Random/thing.md": "01 Inbox",
                # 3.0 (Tom, 2026-11-23): no WiP, not even a 2.x one left in a migrated folder; the AI has no area of its own
                "03 WiP/draft.md": "01 Inbox"}
     for rel, home in refused.items():
         code, msg = hook(str(v / rel), v)
         check(code == 2, f"hook lets {rel} through")
         check(home in msg and "AGENTS.md" in msg, f"hook message for {rel} does not name {home} and AGENTS.md: {msg!r}")
-    allowed = ["README.md", "AGENTS.md", "CLAUDE.md", ".gitignore", "02 Inner World/Notes/A note.md", "02 Inner World/Journal/2026/11/2026-11-21_x.md",
-               "00 Daily Notes/2026/11/2026-11-21.md", "04 Assets/Images/shot.png", "01 Inbox/x.md", "_System/Templates/tool.md",
+    allowed = ["README.md", "AGENTS.md", "CLAUDE.md", ".gitignore", "04 Notes/A note.md", "03 Journal/2026/11/2026-11-21_x.md",
+               "00 Daily Notes/2026/11/2026-11-21.md", "10 Files/Images/shot.png", "01 Inbox/x.md", "_System/Templates/tool.md",
                ".claude/skills/capture/SKILL.md", ".agents/skills/capture/SKILL.md", ".icor-for-life/scripts/quality.json", "06 AI Team/x.md"]
     for rel in allowed:
         code, msg = hook(str(v / rel), v)
         check(code == 0, f"hook refuses {rel}: {msg}")
-    code, _ = hook("02 Inner World/Notes/relative.md", v)
+    code, _ = hook("04 Notes/relative.md", v)
     check(code == 0, "hook refuses a relative path inside a room")
     code, _ = hook("stray.png", v)
     check(code == 2, "hook lets a relative top-level path through")

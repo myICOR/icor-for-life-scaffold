@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""new-database.py: make one of the optional databases in 05 Databases, empty, from its schema in _System/Databases.
+"""new-database.py: make one of the optional databases in 11 Databases, empty, from its schema in _System/Databases.
 
-    python3 _System/Tools/new-database.py health      05 Databases/Health.sqlite
-    python3 _System/Tools/new-database.py finance     05 Databases/Finance.sqlite
+    python3 _System/Tools/new-database.py health      11 Databases/Health.sqlite
+    python3 _System/Tools/new-database.py finance     11 Databases/Finance.sqlite
     python3 _System/Tools/new-database.py --list      what can be made, and what is there
 
 A database that exists is never touched: delete it yourself first if you want it new and empty. Health and finance
@@ -16,7 +16,7 @@ sys.dont_write_bytecode = True
 HERE = Path(__file__).resolve().parent
 VAULT = HERE.parents[1]
 SCHEMAS = HERE.parent / "Databases"
-FOLDER = "05 Databases"
+FOLDER = "11 Databases"
 NAMES = {"health": "Health.sqlite", "finance": "Finance.sqlite"}
 
 

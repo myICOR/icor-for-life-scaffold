@@ -9,11 +9,16 @@
   "folders": {
     "00 Daily Notes": "your raw writing: one note a day and quick scratch notes; never edited by an AI",
     "01 Inbox": "scans (Scanner Inbox/) and anything not yet sorted",
-    "02 Inner World": "what you know and who you know: Journal, Notes, Contacts, My Life",
-    "03 Outer World": "what others made: one source note per book, article, video, podcast, post or paper, with your highlights",
-    "04 Assets": "files only (Images/, Audio/, Documents/), embedded from notes",
-    "05 Databases": "Objects.base (every object, a view per type), and data too large or row-shaped for notes; no notes",
-    "06 Planner": "tasks synced from your task apps by the Planner plugin"
+    "02 My Life": "the map of your life: Key Elements, Goals, Projects, Topics, Habits",
+    "03 Journal": "your journal entries, by date",
+    "04 Notes": "your knowledge: ideas, outlines, drafts, documents, meetings, highlights",
+    "05 Contacts": "people and companies",
+    "06 Sources": "what others made: one source note per book, article, video, podcast, post or paper, with your highlights",
+    "07 Planner": "tasks synced from your task apps by the Planner plugin",
+    "08 Workbench": "work in progress: one dated folder per piece of work, anything goes inside; finished work moves to Done/",
+    "09 AI": "your AI's own record: how it works here, what it learned (Memory.md), what it did (Log/) and the weekly reviews (Reviews/)",
+    "10 Files": "files only (Images/, Audio/, Documents/), embedded from notes",
+    "11 Databases": "Objects.base (every object, a view per type), and data too large or row-shaped for notes; no notes"
   },
   "stages": {
     "input": {
@@ -28,23 +33,30 @@
       "label": "Control",
       "color": "#52F49A",
       "folders": [
-        "02 Inner World",
-        "03 Outer World",
-        "04 Assets",
-        "05 Databases"
+        "02 My Life",
+        "03 Journal",
+        "04 Notes",
+        "05 Contacts",
+        "06 Sources",
+        "10 Files",
+        "11 Databases"
       ]
     },
     "output": {
       "label": "Output",
       "color": "#FD63FF",
       "folders": [
-        "06 Planner"
+        "07 Planner",
+        "08 Workbench"
       ]
     },
     "refine": {
       "label": "Refine",
-      "folders": [],
-      "about": "no folder: the plugins (AI Chat, Connect, Focus) and the weekly review refine; an AI works in the folder from outside and keeps nothing of its own here"
+      "color": "#FFB547",
+      "folders": [
+        "09 AI"
+      ],
+      "about": "09 AI: what your AI did (Log), what it learned (Memory.md) and the weekly reviews (Reviews); the plugins (AI Chat, Connect, Focus) refine too"
     }
   },
   "my_life": [
@@ -55,8 +67,8 @@
     "habit"
   ],
   "worlds": {
-    "inner": "02 Inner World",
-    "outer": "03 Outer World"
+    "inner": "04 Notes",
+    "outer": "06 Sources"
   },
   "types": {
     "capture": {
@@ -88,7 +100,7 @@
     "company": {
       "label": "Company",
       "description": "One company or organisation.",
-      "folder": "02 Inner World/Contacts/Companies",
+      "folder": "05 Contacts/Companies",
       "template": "company.md",
       "icon": "building-2",
       "owner": "you",
@@ -114,8 +126,8 @@
     },
     "document": {
       "label": "Document",
-      "description": "A note with a file attached (a contract, an invoice, an ID); the file lives in 04 Assets/Documents.",
-      "folder": "02 Inner World/Notes",
+      "description": "A note with a file attached (a contract, an invoice, an ID); the file lives in 10 Files/Documents.",
+      "folder": "04 Notes",
       "template": "document.md",
       "icon": "file-badge",
       "owner": "you",
@@ -182,7 +194,7 @@
     "goal": {
       "label": "Goal",
       "description": "An outcome you want, in one of your Key Elements.",
-      "folder": "02 Inner World/My Life/Goals",
+      "folder": "02 My Life/Goals",
       "template": "goal.md",
       "icon": "target",
       "owner": "you",
@@ -212,7 +224,7 @@
     "habit": {
       "label": "Habit",
       "description": "A habit you keep.",
-      "folder": "02 Inner World/My Life/Habits",
+      "folder": "02 My Life/Habits",
       "template": "habit.md",
       "icon": "repeat",
       "owner": "you",
@@ -266,7 +278,7 @@
     "journal": {
       "label": "Journal",
       "description": "Something that happened or was thought, written on purpose, with a date: interaction, note, thought or milestone.",
-      "folder": "02 Inner World/Journal",
+      "folder": "03 Journal",
       "template": "journal.md",
       "icon": "book-heart",
       "owner": "you",
@@ -336,7 +348,7 @@
     "key-element": {
       "label": "Key Element",
       "description": "A big area of your life (Health, Family, Work, Finances).",
-      "folder": "02 Inner World/My Life/Key Elements",
+      "folder": "02 My Life/Key Elements",
       "template": "key-element.md",
       "icon": "gem",
       "owner": "you",
@@ -361,8 +373,8 @@
     },
     "note": {
       "label": "Note",
-      "description": "Your knowledge about one subject: an idea, an outline, meeting notes, a draft. What someone else made is a source in 03 Outer World.",
-      "folder": "02 Inner World/Notes",
+      "description": "Your knowledge about one subject: an idea, an outline, meeting notes, a draft. What someone else made is a source in 06 Sources.",
+      "folder": "04 Notes",
       "template": "note.md",
       "icon": "file-text",
       "owner": "you",
@@ -468,7 +480,7 @@
     "person": {
       "label": "Person",
       "description": "One person you know: their properties (role, relation, email). The story lives in journal entries that link to them.",
-      "folder": "02 Inner World/Contacts/People",
+      "folder": "05 Contacts/People",
       "template": "person.md",
       "icon": "user",
       "owner": "you",
@@ -658,7 +670,7 @@
     "project": {
       "label": "Project",
       "description": "Work with an end that serves a goal. Every project names its goal.",
-      "folder": "02 Inner World/My Life/Projects",
+      "folder": "02 My Life/Projects",
       "template": "project.md",
       "icon": "folder-kanban",
       "owner": "you",
@@ -723,7 +735,7 @@
     "topic": {
       "label": "Topic",
       "description": "A subject you follow over time.",
-      "folder": "02 Inner World/My Life/Topics",
+      "folder": "02 My Life/Topics",
       "template": "topic.md",
       "icon": "hash",
       "owner": "you",
@@ -744,7 +756,7 @@
     "source": {
       "label": "Source",
       "description": "Something someone else made: a book, article, video, podcast, post or paper, with your highlights. Synced by the Web Clipper or Readwise, linked to what it serves.",
-      "folder": "03 Outer World",
+      "folder": "06 Sources",
       "template": "source.md",
       "icon": "library",
       "owner": "you",
@@ -804,7 +816,7 @@
     "meeting": {
       "label": "Meeting",
       "description": "A meeting: who was there, what was said, decided and left open.",
-      "folder": "02 Inner World/Meetings",
+      "folder": "04 Notes/Meetings",
       "template": "meeting.md",
       "icon": "calendar-clock",
       "owner": "you",
@@ -850,6 +862,42 @@
         "platform"
       ],
       "color": "#5fb3d9"
+    },
+    "log": {
+      "label": "AI log",
+      "description": "What an AI did in this folder on one day: one entry per change, when, who, where and what. Written by the AI, never edited afterwards.",
+      "folder": "09 AI/Log",
+      "template": null,
+      "icon": "scroll-text",
+      "owner": "ai",
+      "required": [
+        "date"
+      ],
+      "fields": [
+        "created",
+        "date"
+      ],
+      "values": {},
+      "links": {},
+      "path": "YYYY/MM/YYYY-MM-DD.md"
+    },
+    "review": {
+      "label": "Weekly review",
+      "description": "One weekly review: what happened, what worked, what to refine, and the priorities for the coming week. Written with the AI in skill weekly-review.",
+      "folder": "09 AI/Reviews",
+      "template": null,
+      "icon": "refresh-cw",
+      "owner": "ai",
+      "required": [
+        "week"
+      ],
+      "fields": [
+        "created",
+        "week"
+      ],
+      "values": {},
+      "links": {},
+      "path": "YYYY/YYYY-Www.md"
     }
   }
 }

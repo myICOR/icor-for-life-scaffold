@@ -41,7 +41,7 @@ def rooms_of(vault: Path):
 def home_for(name: str, rooms):
     """Where a file of this kind belongs (the same rule as the Objects plugin's top-folder guard)."""
     inbox = next((r for r in rooms if "inbox" in r.lower()), "01 Inbox")
-    assets = next((r for r in rooms if "assets" in r.lower()), "04 Assets")
+    assets = next((r for r in rooms if r.lower().endswith((" files", " assets"))), "10 Files")
     ext = name.rsplit(".", 1)[-1].lower() if "." in name else ""
     if ext in IMAGE: return f"{assets}/Images/"
     if ext in AUDIO: return f"{assets}/Audio/"

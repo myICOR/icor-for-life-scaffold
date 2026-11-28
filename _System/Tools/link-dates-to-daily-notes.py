@@ -18,13 +18,13 @@ operating records stay bare, and the daily notes never fill up with the
 team's housekeeping.
 
   IN   the body (after the closing frontmatter ---) of .md files under
-       02 Inner World/. Nothing else.
+       02 My Life/, 03 Journal/, 04 Notes/ and 05 Contacts/. Nothing else.
   OUT  all of 06 AI Team/ without exception: session logs, specialist
        journals, Team Knowledge, SOPs, Guidelines, Workstreams, Tasks,
        Templates, Scripts, AI Sessions. Also 00 Daily Notes/ itself,
-       01 Inbox/ (captures and their archive), 06 Planner/, 04 Assets/ and
-       05 Databases/.
-  Inside the two rooms, still OUT: YAML frontmatter (typed dates are
+       01 Inbox/ (captures and their archive), 07 Planner/, 10 Files/ and
+       11 Databases/.
+  Inside those rooms, still OUT: YAML frontmatter (typed dates are
        data, GL-1002); fenced and inline code; anything already inside
        [[...]]; markdown link targets and URLs; blockquotes (a quoted
        passage is someone's words, kept as they were); the `## Original
@@ -121,7 +121,7 @@ URL = re.compile(r"(?:https?://|www\.)\S+")
 # edited, so the inbox is out (2.3.0). A capture's dates get their links
 # when it is processed into a note in this room. 3.0 has no 03 WiP: one a
 # migrated folder still holds is nobody's room and stays bare.
-USER_ROOMS = ("02 Inner World",)
+USER_ROOMS = ("02 My Life", "03 Journal", "04 Notes", "05 Contacts")
 # Folders that are never prose, wherever they sit inside those rooms.
 EXCLUDED_SEGMENTS = {".obsidian", ".git", ".trash", "node_modules",
                      "__pycache__", "Templates"}

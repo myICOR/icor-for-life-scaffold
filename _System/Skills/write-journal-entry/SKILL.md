@@ -4,7 +4,7 @@ description: Write a journal entry in the ICOR for Life folder the ICOR way - on
 ---
 # Write a journal entry
 
-An entry is created on purpose, never as a side effect. It lives at `02 Inner World/Journal/YYYY/MM/YYYY-MM-DD_<slug>.md` (slug: 3 to 6 words, lowercase, hyphens).
+An entry is created on purpose, never as a side effect. It lives at `03 Journal/YYYY/MM/YYYY-MM-DD_<slug>.md` (slug: 3 to 6 words, lowercase, hyphens).
 
 ## Pick the type (exactly one of four, never a fifth)
 

@@ -108,7 +108,7 @@ PAIRED = {
     "unprocessed_captures": "unprocessed_capture_oldest_days",
 }
 
-SCAN_ROOTS = ["02 Inner World", "03 Outer World", "00 Daily Notes", "01 Inbox"]
+SCAN_ROOTS = ["02 My Life", "03 Journal", "04 Notes", "05 Contacts", "06 Sources", "00 Daily Notes", "01 Inbox"]
 
 # Which link fields carry the link rule, per type. GL-1002 states the rule
 # in prose ("at least one of projects / key_elements / topics", "no project
@@ -120,16 +120,16 @@ LINK_RULE = {
 }
 # Where each entity type lives, for the counts and the duplicate check.
 ENTITY_FOLDERS = {
-    "person": "02 Inner World/Contacts/People",
-    "company": "02 Inner World/Contacts/Companies",
-    "project": "02 Inner World/My Life/Projects",
-    "goal": "02 Inner World/My Life/Goals",
-    "habit": "02 Inner World/My Life/Habits",
-    "topic": "02 Inner World/My Life/Topics",
-    "key-element": "02 Inner World/My Life/Key Elements",
-    "note": "02 Inner World/Notes",
-    "document": "02 Inner World/Notes",
-    "source": "03 Outer World",
+    "person": "05 Contacts/People",
+    "company": "05 Contacts/Companies",
+    "project": "02 My Life/Projects",
+    "goal": "02 My Life/Goals",
+    "habit": "02 My Life/Habits",
+    "topic": "02 My Life/Topics",
+    "key-element": "02 My Life/Key Elements",
+    "note": "04 Notes",
+    "document": "04 Notes",
+    "source": "06 Sources",
 }
 SKIP_NAMES = {"README.md", "_template.md"}
 # The types the orphan check reads: what lives in an entity folder and is
@@ -140,8 +140,8 @@ ORPHAN_TYPES = (set(ENTITY_FOLDERS) - {"source"}) | {""}
 def entity_folder(rel):
     """The entity folder a note sits ANYWHERE under, or None.
 
-    `02 Inner World/Notes/Books/x.md` is under `02 Inner World/Notes`, just as
-    `02 Inner World/Notes/x.md` is. The orphan and duplicate checks used to
+    `04 Notes/Books/x.md` is under `04 Notes`, just as
+    `04 Notes/x.md` is. The orphan and duplicate checks used to
     compare the note's parent folder with these folders exactly, so a note one
     subfolder down was never checked and nothing said so, while the counts in
     the same report include it (member report on 2.2.1, item 4). GL-1004
@@ -382,8 +382,8 @@ def _shorter(a, b):
 
     With one rule in front of depth (Brian Carroll, B2-3): a candidate
     inside SCAN_ROOTS beats one outside it. A habit and its planner-habit
-    note carry the SAME name by design, one in `06 Planner/Habits/` (three
-    segments) and one in `02 Inner World/My Life/Habits/` (four). Depth
+    note carry the SAME name by design, one in `07 Planner/Habits/` (three
+    segments) and one in `02 My Life/Habits/` (four). Depth
     alone therefore always picked the Planner copy, every bare `[[X]]` in
     the vault credited its backlink to a note this report does not read,
     and the member's own habit note was reported as an orphan while a link
@@ -586,13 +586,13 @@ def run(root):
                 values["documents_without_file"] += 1
                 add("documents_without_file", posix,
                     "A document wrapper note with no `source_file`.",
-                    "Link the file in 04 Assets/Documents with `source_file`.")
+                    "Link the file in 10 Files/Documents with `source_file`.")
             elif resolve(link_name(sf[0])) is None:
                 values["documents_without_file"] += 1
                 add("documents_without_file", posix,
                     "`source_file` points at `%s`, which is not in the vault."
                     % link_name(sf[0]),
-                    "Move the file onto the shelf in 04 Assets/Documents, "
+                    "Move the file onto the shelf in 10 Files/Documents, "
                     "or fix the link.")
 
         # --- the queues ---------------------------------------------------------
@@ -703,12 +703,12 @@ def run(root):
             n += 1
         return n
 
-    journal_dir = root / "02 Inner World/Journal"
+    journal_dir = root / "03 Journal"
     counts = {
         "journal": sum(1 for p in journal_dir.rglob("*.md")
                        if p.name not in SKIP_NAMES) if journal_dir.is_dir() else 0,
-        "notes": count_folder("02 Inner World/Notes", "note"),
-        "documents": count_folder("02 Inner World/Notes", "document"),
+        "notes": count_folder("04 Notes", "note"),
+        "documents": count_folder("04 Notes", "document"),
         "people": count_folder(ENTITY_FOLDERS["person"]),
         "companies": count_folder(ENTITY_FOLDERS["company"]),
         "projects": count_folder(ENTITY_FOLDERS["project"]),
@@ -786,8 +786,8 @@ def main():
     root = Path(a.root).resolve() if a.root else DEFAULT_ROOT
     if not root.is_dir():
         sys.exit("FAIL no such folder: %s" % root)
-    if not (root / "02 Inner World").is_dir():
-        sys.exit("FAIL %s is not a scaffold root (no '02 Inner World'); "
+    if not (root / "02 My Life").is_dir():
+        sys.exit("FAIL %s is not a scaffold root (no '02 My Life'); "
                  "give the vault root" % root)
 
     started = time.time()

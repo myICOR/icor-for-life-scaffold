@@ -8,4 +8,4 @@ description: Show where the person stands in their ICOR for Life folder - their 
 
 Read it, then tell the person in a few lines, with `[[links]]`. Do not invent priorities; if the week has none, ask them for one and use skill **weekly-review**.
 
-Set a project's focus: `python3 _System/Tools/set-property.py "02 Inner World/My Life/Projects/<Project>.md" focus_rank 1` (at most three projects carry one).
+Set a project's focus: `python3 _System/Tools/set-property.py "02 My Life/Projects/<Project>.md" focus_rank 1` (at most three projects carry one).

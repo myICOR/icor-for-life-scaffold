@@ -44,11 +44,11 @@ for p in parts["core"] + parts["optional"]:
 check("AGENTS.md keeps health and money in their databases", "never copy rows into a note" in agents.lower() and "through SQL" in agents)
 
 print("the databases")
-dbreadme = (ROOT / "05 Databases/README.md").read_text()
+dbreadme = (ROOT / "11 Databases/README.md").read_text()
 for kind, file in (("health", "Health.sqlite"), ("finance", "Finance.sqlite")):
     sql = (ROOT / f"_System/Databases/{kind}.sql").read_text()
     fresh = sqlite3.connect(":memory:"); fresh.executescript(sql)
-    shipped = sqlite3.connect(f"file:{ROOT / '05 Databases' / file}?mode=ro", uri=True)
+    shipped = sqlite3.connect(f"file:{ROOT / '11 Databases' / file}?mode=ro", uri=True)
     shape = lambda c: sorted(c.execute("SELECT type, name, sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%'").fetchall())
     check(f"{file} is exactly {kind}.sql", shape(fresh) == shape(shipped))
     tables = [n for (n,) in shipped.execute("SELECT name FROM sqlite_master WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%'")]
@@ -56,11 +56,11 @@ for kind, file in (("health", "Health.sqlite"), ("finance", "Finance.sqlite")):
             and shipped.execute("SELECT type FROM sqlite_master WHERE name = ?", (n,)).fetchone()[0] == "table"
             and shipped.execute(f'SELECT COUNT(*) FROM "{n}"').fetchone()[0]]
     check(f"{file} holds no data (only about and the starter categories)", not full, full)
-    check(f"05 Databases/README.md describes every table of {file}", all(f"`{n}`" in dbreadme for n in tables),
+    check(f"11 Databases/README.md describes every table of {file}", all(f"`{n}`" in dbreadme for n in tables),
           [n for n in tables if f"`{n}`" not in dbreadme])
 
 print("nothing core depends on an optional piece")
-ALLOWED = {"README.md", "AGENTS.md", "05 Databases/README.md", "_System/parts.json", "_System/Tools/new-database.py",
+ALLOWED = {"README.md", "AGENTS.md", "11 Databases/README.md", "_System/parts.json", "_System/Tools/new-database.py",
            "_System/Tools/README.md", ".obsidian/community-plugins.json", "release/plugins.lock.json", ".icor-for-life/CHANGELOG.md",
            "SECURITY.md", ".icor-for-life/THIRD-PARTY-NOTICES.md"}
 OPTIONAL_WORDS = re.compile(r"Health\.sqlite|Finance\.sqlite|sqlite-viewer|SQLite Viewer")
@@ -104,7 +104,7 @@ with tempfile.TemporaryDirectory(prefix="test-parts.") as tmp:
           (a.returncode, b.returncode, a.stderr[-300:], b.stderr[-300:]))
     check("the core plugins stay turned on", core_ids <= set(json.loads((slim / ".obsidian/community-plugins.json").read_text())))
     r = run(slim, "new-database.py", "health")
-    check("a deleted database can be made again, empty", r.returncode == 0 and (slim / "05 Databases/Health.sqlite").is_file(), r.stdout + r.stderr)
+    check("a deleted database can be made again, empty", r.returncode == 0 and (slim / "11 Databases/Health.sqlite").is_file(), r.stdout + r.stderr)
     r = run(slim, "new-database.py", "health")
     check("and is never made over one that exists", r.returncode != 0 and "left as it is" in (r.stdout + r.stderr), r.stdout + r.stderr)
 

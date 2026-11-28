@@ -84,15 +84,15 @@ WINDOW_DAYS = WEIGHTS[-1][0]
 # Where each room is. A room that does not exist is reported in `degraded`,
 # never crashed on.
 ROOMS = {
-    "goals": "02 Inner World/My Life/Goals",
-    "projects": "02 Inner World/My Life/Projects",
-    "key_elements": "02 Inner World/My Life/Key Elements",
-    "topics": "02 Inner World/My Life/Topics",
-    "journal": "02 Inner World/Journal",
-    "notes": "02 Inner World/Notes",
+    "goals": "02 My Life/Goals",
+    "projects": "02 My Life/Projects",
+    "key_elements": "02 My Life/Key Elements",
+    "topics": "02 My Life/Topics",
+    "journal": "03 Journal",
+    "notes": "04 Notes",
     "scratchpad": "00 Daily Notes",
-    "planner": "06 Planner",
-    "planner_weeks": "06 Planner/Weeks",
+    "planner": "07 Planner",
+    "planner_weeks": "07 Planner/Weeks",
 }
 
 # The per-vault field-name map, one line per logical field. The first name
@@ -130,7 +130,7 @@ CLOSED_GOAL_STATUS = {"done", "achieved", "abandoned", "cancelled"}
 SKIP_NAMES = {"README.md", "INDEX.md", "_template.md", "template.md"}
 # Never read for attention, at any depth. The team's own work record is not
 # the user's attention, and a 2.x 03 WiP a migrated folder still holds is a draft nobody lives in.
-SKIP_PARTS = {"06 AI Team", "03 WiP", "04 Assets", "05 Databases", "01 Inbox",
+SKIP_PARTS = {"06 AI Team", "03 WiP", "10 Files", "11 Databases", "01 Inbox",
               "_archive", "archive", "Highlights", "node_modules"}
 
 WIKILINK = re.compile(r"!?\[\[([^\]\n]+)\]\]")
@@ -1180,8 +1180,8 @@ def main():
     root = Path(a.root).resolve() if a.root else DEFAULT_ROOT
     if not root.is_dir():
         sys.exit("FAIL no such folder: %s" % root)
-    if not (root / "02 Inner World").is_dir():
-        sys.exit("FAIL %s is not a vault root (no '02 Inner World'); "
+    if not (root / "02 My Life").is_dir():
+        sys.exit("FAIL %s is not a vault root (no '02 My Life'); "
                  "give the vault root" % root)
 
     started = time.time()

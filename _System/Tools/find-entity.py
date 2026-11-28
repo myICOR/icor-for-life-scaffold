@@ -80,8 +80,8 @@ def main():
     if not a.name or not a.name.strip():
         sys.exit("FAIL give a name or an alias to look for")
     root = Path(a.root).resolve() if a.root else DEFAULT_ROOT
-    if not (root / "02 Inner World").is_dir():
-        sys.exit("FAIL %s is not a scaffold root (no '02 Inner World')" % root)
+    if not (root / "02 My Life").is_dir():
+        sys.exit("FAIL %s is not a scaffold root (no '02 My Life')" % root)
     for t in a.type:
         if t not in ROOMS:
             sys.exit("FAIL unknown --type %r; known: %s"

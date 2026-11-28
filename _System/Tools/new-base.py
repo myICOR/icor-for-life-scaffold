@@ -16,7 +16,7 @@ hand-authored. Guards (code, not prose):
   - refuses when the target folder does not exist
 
 One folder can hold more than one collection when the notes differ by
-`type`: 02 Inner World/Notes carries Documents.base (type document, the
+`type`: 04 Notes carries Documents.base (type document, the
 file wrappers) and Notes.base (type note). A collection is therefore
 (folder, type), and check-bases.py keys its one-Base-per-collection rule
 the same way.
@@ -77,7 +77,7 @@ def _guideline_texts(root):
 # the identity column and is added by render(), not listed here.
 REGISTRY = {
     "person": {
-        "folder": "02 Inner World/Contacts/People",
+        "folder": "05 Contacts/People",
         "base": "People.base",
         "view": "People",
         "type_value": "person",
@@ -94,7 +94,7 @@ REGISTRY = {
         "extra_views": [],
     },
     "company": {
-        "folder": "02 Inner World/Contacts/Companies",
+        "folder": "05 Contacts/Companies",
         "base": "Companies.base",
         "view": "Companies",
         "type_value": "company",
@@ -107,7 +107,7 @@ REGISTRY = {
         "cards_image": None,
     },
     "document": {
-        "folder": "02 Inner World/Notes",
+        "folder": "04 Notes",
         "base": "Documents.base",
         "view": "Documents",
         "type_value": "document",
@@ -127,7 +127,7 @@ REGISTRY = {
     # "which projects am I focused on" and "what are my key elements", and
     # they are edited as rows, which is exactly the decision test.
     "goal": {
-        "folder": "02 Inner World/My Life/Goals",
+        "folder": "02 My Life/Goals",
         "base": "Goals.base",
         "view": "Goals",
         "type_value": "goal",
@@ -149,7 +149,7 @@ REGISTRY = {
         ],
     },
     "project": {
-        "folder": "02 Inner World/My Life/Projects",
+        "folder": "02 My Life/Projects",
         "base": "Projects.base",
         "view": "Projects",
         "type_value": "project",
@@ -177,7 +177,7 @@ REGISTRY = {
         ],
     },
     "key-element": {
-        "folder": "02 Inner World/My Life/Key Elements",
+        "folder": "02 My Life/Key Elements",
         "base": "Key Elements.base",
         "view": "Key Elements",
         "type_value": "key-element",
@@ -189,7 +189,7 @@ REGISTRY = {
         "cards_image": None,
     },
     "topic": {
-        "folder": "02 Inner World/My Life/Topics",
+        "folder": "02 My Life/Topics",
         "base": "Topics.base",
         "view": "Topics",
         "type_value": "topic",
@@ -200,7 +200,7 @@ REGISTRY = {
         "cards_image": None,
     },
     "habit": {
-        "folder": "02 Inner World/My Life/Habits",
+        "folder": "02 My Life/Habits",
         "base": "Habits.base",
         "view": "Habits",
         "type_value": "habit",
@@ -218,7 +218,7 @@ REGISTRY = {
     # `== false`, because in Bases a missing property is not equal to false, and check-quality.py counts a source
     # with no `consumed` as unread (member report on 2.2.1, item 3).
     "source": {
-        "folder": "03 Outer World",
+        "folder": "06 Sources",
         "base": "Sources.base",
         "view": "Sources",
         "type_value": "source",
@@ -239,7 +239,7 @@ REGISTRY = {
         ],
     },
     "note": {
-        "folder": "02 Inner World/Notes",
+        "folder": "04 Notes",
         "base": "Notes.base",
         "view": "Notes",
         "type_value": "note",
@@ -371,7 +371,7 @@ def gl002_required(root):
 # A closed value set in GL-1002 is written as `field (a/b/c)` right after
 # the field name. That is the ONLY shape read as an enum: every token must
 # be a bare lowercase word, so `source_file (wikilink to the binary in
-# 04 Assets/Documents, MANDATORY)` (a slash inside prose) and
+# 10 Files/Documents, MANDATORY)` (a slash inside prose) and
 # `priority (1-5)` (a range) are not enums and are left alone.
 ENUM_CELL = re.compile(r"([a-z][a-z0-9_]*)\s*\(([^)]*)\)")
 

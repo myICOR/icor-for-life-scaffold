@@ -47,21 +47,30 @@ for folder in schema["folders"]:
     check(f"folder exists: {folder}", (ROOT / folder).is_dir())
 
 # --- the ICOR stages (Tom, 2026-11-23): flat folders, numbered in stage order, each in exactly one stage ------------
-NEW = ["00 Daily Notes", "01 Inbox", "02 Inner World", "03 Outer World", "04 Assets", "05 Databases", "06 Planner"]
-check("schema: the folders are the seven, in stage order", list(schema.get("folders", {})) == NEW, list(schema.get("folders", {})))
+# The Workbench layout (Tom, 2026-11-28): Inner World's folders on top, a Workbench to work in, an AI folder for Refine.
+NEW = ["00 Daily Notes", "01 Inbox", "02 My Life", "03 Journal", "04 Notes", "05 Contacts", "06 Sources", "07 Planner",
+       "08 Workbench", "09 AI", "10 Files", "11 Databases"]
+check("schema: the twelve folders, in number order", list(schema.get("folders", {})) == NEW, list(schema.get("folders", {})))
 check("schema: no rooms key any more", "rooms" not in schema)
 stages = schema.get("stages", {})
 check("schema: four stages, Input Control Output Refine", list(stages) == ["input", "control", "output", "refine"], list(stages))
-want = {"input": ("#5271FC", NEW[:2]), "control": ("#52F49A", NEW[2:6]), "output": ("#FD63FF", NEW[6:])}
+want = {"input": ("#5271FC", NEW[:2]), "control": ("#52F49A", NEW[2:7] + NEW[10:]), "output": ("#FD63FF", NEW[7:9]),
+        "refine": ("#FFB547", ["09 AI"])}
 for st, (colour, folders) in want.items():
     check(f"stage {st}: colour {colour}", stages.get(st, {}).get("color") == colour, stages.get(st))
     check(f"stage {st}: its folders", stages.get(st, {}).get("folders") == folders, stages.get(st))
-check("stage refine has no folder", stages.get("refine", {}).get("folders") == [], stages.get("refine"))
-check("schema: worlds are 02 and 03", schema.get("worlds") == {"inner": "02 Inner World", "outer": "03 Outer World"}, schema.get("worlds"))
+check("every folder is in exactly one stage", sorted(f for st in stages.values() for f in st.get("folders", [])) == sorted(NEW))
+check("schema: new types of your own go in 04 Notes (inner) or 06 Sources (outer)",
+      schema.get("worlds") == {"inner": "04 Notes", "outer": "06 Sources"}, schema.get("worlds"))
+check("the AI log and the reviews are types in 09 AI", schema["types"].get("log", {}).get("folder") == "09 AI/Log"
+      and schema["types"].get("review", {}).get("folder") == "09 AI/Reviews")
+for f in ["08 Workbench/README.md", "08 Workbench/Done", "09 AI/README.md", "09 AI/Memory.md", "09 AI/Log", "09 AI/Reviews"]:
+    check(f"ships {f}", (ROOT / f).exists())
+STALE_3 = re.compile(r"0[23] (Inner|Outer) World|04 Assets|05 Databases|06 Planner")
 dn = json.loads((ROOT / ".obsidian/daily-notes.json").read_text())
 check("Daily notes opens 00 Daily Notes", dn.get("folder") == "00 Daily Notes", dn)
 app = json.loads((ROOT / ".obsidian/app.json").read_text())
-check("attachments go to 04 Assets/Images", app.get("attachmentFolderPath") == "04 Assets/Images", app)
+check("attachments go to 10 Files/Images", app.get("attachmentFolderPath") == "10 Files/Images", app)
 OLD = re.compile(r"00 Daily Scratchpad|02 Planner|04 Inner World|05 Assets|06 Outer World|07 Databases")
 tracked = subprocess.check_output(["git", "-C", str(ROOT), "ls-files"], text=True).splitlines()
 stale = []
@@ -70,7 +79,8 @@ for f in tracked:
     if f in (".icor-for-life/CHANGELOG.md", "tests/test-vault.py") or "migrate" in f or not p.is_file():
         continue
     try:
-        if OLD.search(p.read_text(encoding="utf-8")) or OLD.search(f):
+        text = p.read_text(encoding="utf-8")
+        if OLD.search(text) or OLD.search(f) or STALE_3.search(text) or STALE_3.search(f):
             stale.append(f)
     except UnicodeDecodeError:
         pass
@@ -153,7 +163,7 @@ for f in shipped:
         if target and target not in names and not target.startswith("<"):
             broken.append(f"{f} -> {link}")
 check("every link in the notes goes to a note or file that exists", not broken, broken[:10])
-untagged = [f for f in shipped if f.endswith(".md") and f.startswith(("02 Inner World/", "03 Outer World/"))
+untagged = [f for f in shipped if f.endswith(".md") and f.startswith(("02 My Life/", "03 Journal/", "04 Notes/", "05 Contacts/", "06 Sources/"))
             and not f.endswith("README.md") and "example" not in (ROOT / f).read_text(encoding="utf-8")]
 check("every example note is tagged example, so a member knows what to delete", not untagged, untagged)
 

@@ -14,7 +14,12 @@
 
 
 # Live personal data syncs into these paths - never tracked, never shipped
-06 Planner/*/
+07 Planner/*/
+# The AI's record and the work in progress are personal: only the READMEs, Memory.md and the empty folders ship
+09 AI/Log/[0-9][0-9][0-9][0-9]/
+09 AI/Reviews/[0-9][0-9][0-9][0-9]/
+08 Workbench/[0-9][0-9][0-9][0-9]-*/
+08 Workbench/Done/[0-9][0-9][0-9][0-9]-*/
 00 Daily Notes/2026-*.md
 00 Daily Notes/2027-*.md
 # ... and the same notes in the YYYY/MM/ shape the scratchpad actually uses

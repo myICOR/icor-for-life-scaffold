@@ -1,5 +1,5 @@
 {
-  "$comment": "What ships in ICOR for Life and what each piece is for: the core keeps the folder working; every optional piece can be removed on its own, and nothing else depends on it. README.md, AGENTS.md and 05 Databases/README.md say the same in words; tests/test-parts.py keeps them in step.",
+  "$comment": "What ships in ICOR for Life and what each piece is for: the core keeps the folder working; every optional piece can be removed on its own, and nothing else depends on it. README.md, AGENTS.md and 11 Databases/README.md say the same in words; tests/test-parts.py keeps them in step.",
   "core": [
     {
       "name": "The numbered folders, AGENTS.md and _System",
@@ -9,7 +9,7 @@
     {
       "name": "Obsidian's own Daily notes, Templates, Properties and Bases",
       "kind": "obsidian",
-      "what": "today's note, new notes from templates, properties, the tables in 05 Databases"
+      "what": "today's note, new notes from templates, properties, the tables in 11 Databases"
     },
     {
       "name": "ICOR Objects",
@@ -27,7 +27,7 @@
       "name": "ICOR Planner",
       "kind": "plugin",
       "id": "icor-for-life-planner",
-      "what": "your week and your tasks in 06 Planner (the Output stage)"
+      "what": "your week and your tasks in 07 Planner (the Output stage)"
     },
     {
       "name": "ICOR Interface",
@@ -110,24 +110,24 @@
       "name": "ICOR SQLite Viewer",
       "kind": "plugin",
       "id": "icor-for-life-sqlite-viewer",
-      "what": "opens the SQLite databases in 05 Databases: tables, queries, dashboards",
+      "what": "opens the SQLite databases in 11 Databases: tables, queries, dashboards",
       "remove": "Settings, Community plugins: turn off ICOR SQLite Viewer, then delete its folder .obsidian/plugins/icor-for-life-sqlite-viewer/.",
       "stops": "opening the databases in Obsidian; any SQLite tool and your AI still read them"
     },
     {
       "name": "Health.sqlite",
       "kind": "database",
-      "path": "05 Databases/Health.sqlite",
+      "path": "11 Databases/Health.sqlite",
       "what": "your health data: measurements, workouts, medication, symptoms, mood",
-      "remove": "Delete 05 Databases/Health.sqlite. To have it again, empty: python3 _System/Tools/new-database.py health.",
+      "remove": "Delete 11 Databases/Health.sqlite. To have it again, empty: python3 _System/Tools/new-database.py health.",
       "stops": "nothing else; only what you put in it is gone"
     },
     {
       "name": "Finance.sqlite",
       "kind": "database",
-      "path": "05 Databases/Finance.sqlite",
+      "path": "11 Databases/Finance.sqlite",
       "what": "your money: accounts, transactions, categories, budgets",
-      "remove": "Delete 05 Databases/Finance.sqlite. To have it again, empty: python3 _System/Tools/new-database.py finance.",
+      "remove": "Delete 11 Databases/Finance.sqlite. To have it again, empty: python3 _System/Tools/new-database.py finance.",
       "stops": "nothing else; only what you put in it is gone"
     }
   ]

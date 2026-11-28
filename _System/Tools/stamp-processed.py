@@ -9,7 +9,7 @@ Usage:
       --into "[[2026-08-27_entry]]" --into "[[Some Topic]]" [--archive]
 
   # BINARY capture: the wrapper note carries the stamp,
-  # and the shelf in 04 Assets/ IS the archive (GL-1002 ruling 2026-09-04)
+  # and the shelf in 10 Files/ IS the archive (GL-1002 ruling 2026-09-04)
   stamp-processed.py <wrapper-note.md> --summary "scanned invoice filed" \
       --into "[[Acme Corp]]" --capture "01 Inbox/Scanner Inbox/thing.pdf"
 
@@ -30,7 +30,7 @@ Rules enforced here, not in prose:
     to archive anything that is not inside 01 Inbox/Outer World/
   - --capture names a binary inside 01 Inbox/ (a .md is told to use
     --archive); the wrapper note must carry a source_file wikilink that
-    resolves to exactly one file under 04 Assets/; that shelf copy must
+    resolves to exactly one file under 10 Files/; that shelf copy must
     match the inbox original byte for byte (sha256) BEFORE the original is
     removed. A mismatch fails loudly and removes nothing, stamps nothing.
   - --archive and --capture are mutually exclusive: two shapes of capture,
@@ -93,7 +93,7 @@ if any(p.name == "00 Daily Notes" for p in note.parents):
              "wrote it. Carry a piece on (skill process-scratchpad) and leave the note as it is.")
 if note.suffix.lower() != ".md":
     sys.exit(f"FAIL {note.name} is not a markdown note and a binary cannot carry the stamp; "
-             "stamp its wrapper note in 02 Inner World/Notes/ and pass the binary as --capture")
+             "stamp its wrapper note in 04 Notes/ and pass the binary as --capture")
 if not a.summary.strip():
     sys.exit("FAIL empty --summary")
 if not a.into:
@@ -106,7 +106,7 @@ try:
     text, eol = noteio.read_note(note)
 except UnicodeDecodeError:
     sys.exit(f"FAIL {note.name} is not UTF-8 text and a binary cannot carry the stamp; "
-             "stamp its wrapper note in 02 Inner World/Notes/ and pass the binary as --capture")
+             "stamp its wrapper note in 04 Notes/ and pass the binary as --capture")
 # A note with NO frontmatter block gets one. The daily note ships blank on
 # purpose (00 Daily Notes/README.md: "no template, no properties;
 # frontmatter appears only when the team stamps it"), so refusing that shape
@@ -231,21 +231,21 @@ if a.capture:
     if inbox is None:
         sys.exit(f"FAIL --capture must name a binary inside 01 Inbox/: {cap}")
     root = inbox.parent
-    assets = root / "04 Assets"
+    assets = root / "10 Files"
     if not assets.is_dir():
-        sys.exit(f"FAIL no 04 Assets/ beside {inbox}; the shelf must exist before a capture is filed")
+        sys.exit(f"FAIL no 10 Files/ beside {inbox}; the shelf must exist before a capture is filed")
     m = re.search(r'^source_file:\s*"?\[\[([^\]|#]+)', fm, re.M)
     if not m:
         sys.exit(f"FAIL {note.name} carries no source_file wikilink; a wrapper note must link "
-                 "its binary on the shelf in 04 Assets/ (the schema)")
+                 "its binary on the shelf in 10 Files/ (the schema)")
     target = m.group(1).strip()
-    if target.startswith("04 Assets/"):
-        target = target[len("04 Assets/"):]
+    if target.startswith("10 Files/"):
+        target = target[len("10 Files/"):]
     hits = [p for p in assets.rglob("*")
             if p.is_file() and p.name == Path(target).name
             and p.relative_to(assets).as_posix().endswith(target)]
     if len(hits) != 1:
-        sys.exit(f"FAIL source_file [[{target}]] resolves to {len(hits)} files under 04 Assets/, "
+        sys.exit(f"FAIL source_file [[{target}]] resolves to {len(hits)} files under 10 Files/, "
                  "need exactly one")
     shelf = hits[0]
     if sha256(shelf) != sha256(cap):

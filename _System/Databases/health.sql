@@ -1,4 +1,4 @@
--- Health.sqlite: your own health data, kept on this computer, in 05 Databases. Optional: delete the file if you do
+-- Health.sqlite: your own health data, kept on this computer, in 11 Databases. Optional: delete the file if you do
 -- not track your health here. Read it with ICOR SQLite Viewer or any SQLite tool; your AI reads it through
 -- SQL and never copies it into notes. Made from this file by `python3 _System/Tools/new-database.py health`.
 
@@ -6,7 +6,7 @@ CREATE TABLE about (key TEXT PRIMARY KEY, value TEXT NOT NULL);
 INSERT INTO about (key, value) VALUES
   ('what', 'Your health data: measurements, workouts, medication, symptoms and mood. Yours only, never in a note.'),
   ('schema', '1'),
-  ('docs', '05 Databases/README.md');
+  ('docs', '11 Databases/README.md');
 
 -- One measurement per row, from Apple Health, a scale, a watch or typed by hand. The shape ICOR for Life - Health
 -- Tracker reads. metric_name is snake_case: weight_body_mass, body_fat_percentage, lean_body_mass, body_mass_index,

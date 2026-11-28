@@ -9,7 +9,7 @@ Usage:
   planner-week.py mark-highlight Y|N|_    [--date YYYY-MM-DD] [--week] [--root]
   planner-week.py show              [--week] [--root]
 
-One note per ISO week at `06 Planner/Weeks/YYYY-Www.md`, `type: planner-week`,
+One note per ISO week at `07 Planner/Weeks/YYYY-Www.md`, `type: planner-week`,
 per GL-1002 "Planner weeks: weekly priorities and the daily highlight".
 The concept lives in the guideline; this file is only the deterministic
 writer, because filing is code's job and judgement is not (GL-1005).
@@ -50,7 +50,7 @@ sys.dont_write_bytecode = True
 HERE = Path(__file__).resolve().parent
 DEFAULT_ROOT = HERE.parents[1]
 
-WEEKS_DIR = "06 Planner/Weeks"
+WEEKS_DIR = "07 Planner/Weeks"
 
 PRIORITIES_HEADING = "## Weekly priorities"
 PRIORITIES_SENTINEL = "<!-- weekly-priorities: schema=checklist -->"
@@ -454,8 +454,8 @@ def main():
     a = ap.parse_args()
 
     root = Path(a.root).resolve() if a.root else DEFAULT_ROOT
-    if not (root / "02 Inner World").is_dir():
-        sys.exit("FAIL %s is not a scaffold root (no `02 Inner World`)" % root)
+    if not (root / "02 My Life").is_dir():
+        sys.exit("FAIL %s is not a scaffold root (no `02 My Life`)" % root)
 
     today = datetime.date.today()
     date = a.date or today.isoformat()
